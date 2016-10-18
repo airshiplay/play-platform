@@ -1,0 +1,152 @@
+
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.3/css/fileinput.min.css">
+<style>
+.kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	text-align: center;
+}
+
+.kv-avatar .file-input {
+	display: table-cell;
+	max-width: 220px;
+}
+</style>
+
+<section class="content-header">
+	<h1>
+		我的书籍 <small>开始管理你的书籍</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="javascript:;">
+				<i class="fa fa-dashboard"></i> 工作台
+			</a></li>
+		<li><a href="#/page/book">
+				<i class="fa fa-safari"></i>我的书籍
+			</a></li>
+		<li class="active">新增书籍</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">新增书籍</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="book-form" action="/center/book/save">
+					<input type="hidden" name="id" value="" />
+					<input type="hidden" name="kind" value="" />
+					<input type="hidden" name="type" value="Book" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="titleInput">标题</label>
+							<input type="text" name="title" class="form-control" id="titleInput" placeholder="请填写标题" data-bv-notempty="true"
+								data-bv-notempty-message="请填写标题" value="">
+						</div>
+						<div class="form-group">
+							<label for="fileInput">本地文件</label>
+							<input type="hidden" name="filePath" value="" />
+							<input type="file" id="fileInput" class="file-loading" name="file">
+							<p class="help-block">请上传后缀为.pdf、.epub、.ibooks的文件。</p>
+						</div>
+						<div class="form-group">
+							<label for="versionInput">版本</label>
+							<input type="text" name="version" class="form-control" id="versionInput" placeholder="请填写版本" value="">
+						</div>
+						<div class="form-group">
+							<label for="authorInput">作者</label>
+							<input type="text" name="author" class="form-control" id="authorInput" placeholder="请填写作者" value="">
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/book'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady", "fileinputzh" ], function(domReady) {
+		domReady(function() {
+			activeMenu("book");
+
+			var $form = $(".book-form");
+			
+			var getFileExt = function(filepath) {
+	            if (filepath != "") {
+	                var pos = "." + filepath.replace(/.+\./, "");
+	                return pos;
+	            }
+	        }
+			
+			var bookFile = null;
+			var $fileInput = $("#fileInput");
+			$fileInput.fileinput({
+				language : "zh",
+				uploadUrl : base + "/center/multipart/upload",
+				initialCaption : $form.find("input[name=filePath]").val(),
+				showPreview : false,
+				multiple : false,
+				showUpload : false, // hide upload button
+				showRemove : false, // hide remove button
+				minFileCount : 1,
+				maxFileCount : 1,
+				allowedFileExtensions : [ "pdf", "epub", "ibooks" ],
+				maxFileSize : 100 * 1024 * 1024
+			}).on("filebatchselected", function(event, files) {
+				$fileInput.fileinput("upload");
+			}).on('fileuploaded', function(event, data, previewId, index) {
+				response = data.response;
+				if (response.success) {
+					
+					$form.find("input[name=filePath]").val(response.urls);
+					
+					var ext = getFileExt(response.urls);
+					if(ext&&ext[0]=='.') {
+						ext = ext.substring(1);
+					}
+					$form.find("input[name=kind]").val(ext);
+				}
+			});
+
+			$(".book-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var $form = $(e.target);
+
+				var bv = $form.data('bootstrapValidator');
+
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/book";
+							}
+						});
+
+					} else {
+
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

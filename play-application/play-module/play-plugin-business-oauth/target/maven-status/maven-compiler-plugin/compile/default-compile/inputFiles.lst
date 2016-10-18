@@ -1,0 +1,9 @@
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/target/generated-sources/java/com/airshiplay/play/plugin/oauth/model/QOauthUserEntity.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/repo/OauthUserRepository.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/service/OauthUserService.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/model/GithubOauthPlugin.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/model/QQOauthPlugin.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/model/OauthPlugin.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/model/WeiboOauthPlugin.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/model/OauthUserEntity.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-plugin-business-oauth/src/main/java/com/airshiplay/play/plugin/oauth/service/OauthPluginService.java

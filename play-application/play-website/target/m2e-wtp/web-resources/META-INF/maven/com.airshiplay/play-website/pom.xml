@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.airshiplay</groupId>
+		<artifactId>play-platform</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>play-website</artifactId>
+
+	<packaging>war</packaging>
+	<name>play-website</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-integration-webapp</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-template-thymeleaf</artifactId>
+			<version>1.0.0.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>play-cache</artifactId>
+					<groupId>com.airshiplay</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-admin-webapp-requirejs</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-app-webapp-requirejs</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+
+					<!-- 把class打包jar作为附件 -->
+					<!-- <attachClasses>true</attachClasses> -->
+					<!-- 将项目的类文件打成jar放到lib目录中 <archiveClasses>true</archiveClasses> -->
+				</configuration>
+
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<httpConnector>
+						<port>8080</port>
+					</httpConnector>
+					<webAppSourceDirectory>src\main\webapp</webAppSourceDirectory>
+					<classesDirectory>target\classes</classesDirectory>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>play-website</finalName>
+	</build>
+
+</project>

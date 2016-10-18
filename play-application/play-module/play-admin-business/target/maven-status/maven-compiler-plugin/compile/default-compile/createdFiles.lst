@@ -1,0 +1,8 @@
+com/airshiplay/play/main/entity/QRoleEntity.class
+com/airshiplay/play/main/entity/QAreaEntity.class
+com/airshiplay/play/main/entity/QUserCredentialsEntity.class
+com/airshiplay/play/main/entity/QSettingEntity.class
+com/airshiplay/play/main/entity/QUserRoleEntity.class
+com/airshiplay/play/main/entity/QUserEntity.class
+com/airshiplay/play/main/entity/QMenuEntity.class
+com/airshiplay/play/main/entity/QOrganizationEntity.class

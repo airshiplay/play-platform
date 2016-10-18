@@ -1,0 +1,5 @@
+com/airshiplay/play/plugin/oauth/QQOauthController.class
+com/airshiplay/play/plugin/oauth/GithubOauthController.class
+com/airshiplay/play/plugin/oauth/OauthController.class
+com/airshiplay/play/plugin/oauth/WeiboOauthController.class
+com/airshiplay/play/plugin/oauth/OauthPluginController.class
