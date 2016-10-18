@@ -25,11 +25,13 @@ public class FreeMarkerConfigBean {
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
 		resolver.setSuffix(".ftl");
 		resolver.setViewNames(new String[] { "/views/*" });
-		// resolver.setTemplateEngine(templateEngine());
 		resolver.setContentType("text/html;charset=UTF-8");
 		resolver.setOrder(0);
 		resolver.setCache(false);
-
+		resolver.setRequestContextAttribute("request");
+		resolver.setExposeRequestAttributes(true);
+		resolver.setExposeSessionAttributes(true);
+		resolver.setExposeSpringMacroHelpers(true);
 		return resolver;
 	}
 
@@ -40,8 +42,7 @@ public class FreeMarkerConfigBean {
 		configurer.setDefaultEncoding("utf-8");
 		Properties settings = new Properties();
 		configurer.setFreemarkerSettings(settings);
-		configurer.setPreferFileSystemAccess(false);
-		
+		configurer.setPreferFileSystemAccess(false);	
 		return configurer;
 	}
 
