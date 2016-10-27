@@ -10,10 +10,11 @@ import com.airshiplay.play.main.entity.OrganizationEntity.OrgType;
 import com.airshiplay.play.main.entity.RoleEntity;
 import com.airshiplay.play.main.entity.UserEntity;
 import com.airshiplay.play.main.init.InitDataTools;
-import com.airshiplay.play.main.security.PasswordService;
+//import com.airshiplay.play.main.security.PasswordService;
 import com.airshiplay.play.main.service.OrganizationEntityService;
 import com.airshiplay.play.main.service.RoleEntityService;
 import com.airshiplay.play.main.service.UserEntityService;
+import com.airshiplay.play.security.PlayPasswordService;
 import com.google.common.collect.Sets;
 
 @Component
@@ -23,7 +24,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 	private UserEntityService userEntityService;
 
 	@Autowired
-	private PasswordService passwordService;
+	private PlayPasswordService passwordService;
 
 	@Autowired
 	private OrganizationEntityService organizationEntityService;
@@ -50,7 +51,10 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			organizationEntityService.save(org);
 
 			UserEntity admin = userEntityService.newEntity();
-			passwordService.changeUserPassword(admin, null, "123456");
+			String salt = passwordService.generatorSalt();
+			admin.setSalt(salt);
+			admin.setPassword(passwordService.encryptPassword("123456", salt));
+//			passwordService.changeUserPassword(admin, null, "123456");
 			admin.setUsername("admin");
 			admin.setMobile("13655177723");
 			admin.setEmail("airshiplay@163.com");

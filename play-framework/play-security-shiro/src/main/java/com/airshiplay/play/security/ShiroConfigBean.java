@@ -32,7 +32,6 @@ import com.airshiplay.play.security.shiro.realm.UserRealm;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ShiroConfigBean {
 
-	
 	@Bean
 	public EhCacheManager getEhCacheManager() {
 		EhCacheManager em = new EhCacheManager();
@@ -70,15 +69,15 @@ public class ShiroConfigBean {
 	}
 
 	@Bean(name = "credentialsMatcher")
-	public PasswordMatcher credentialsMatcher() {
-		final PasswordMatcher credentialsMatcher = new PasswordMatcher();
-		credentialsMatcher.setPasswordService(passwordService());
+	public PlayHashedCredentialsMatcher credentialsMatcher() {
+		final PlayHashedCredentialsMatcher credentialsMatcher = new PlayHashedCredentialsMatcher();
+//		credentialsMatcher.setPasswordService(passwordService());
 		return credentialsMatcher;
 	}
 
-//	@Bean(name = "passwordService")
-	public DefaultPasswordService passwordService() {
-		return new DefaultPasswordService();
+	@Bean
+	public PlayPasswordService passwordService() {
+		return new PlayPasswordService();
 	}
 
 	/**
@@ -155,8 +154,6 @@ public class ShiroConfigBean {
 		authorizationAdvisor.setSecurityManager(securityManager());
 		return authorizationAdvisor;
 	}
-
-
 
 	@Bean
 	public MethodInvokingFactoryBean methodInvokingFactoryBean() {

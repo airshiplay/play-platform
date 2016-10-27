@@ -6,12 +6,9 @@ import java.util.Set;
 import com.airshiplay.play.security.CustomUserDetails;
 
 /**
- * <p>
- * User: Zhang Kaitao
- * <p>
- * Date: 14-1-28
- * <p>
- * Version: 1.0
+ * 
+ * @author lig
+ *
  */
 public interface PlayShiroUserDetailsService {
 
@@ -23,8 +20,8 @@ public interface PlayShiroUserDetailsService {
 	 */
 	public CustomUserDetails<?, ?> findByUsername(String username);
 
-	public Set<String> findRoles(String username,Serializable uid);
-	
-	public Set<String> findPermissions(String username,Serializable uid);
-	
+	public Set<String> findRoles(String username, Serializable uid);
+
+	public Set<String> findPermissions(String username, Serializable uid);
+
 }

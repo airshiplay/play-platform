@@ -53,7 +53,7 @@ public class UserEntity extends DataEntity<UserEntity, Long> implements Lockedab
 	@Column(length = 500)
 	private String photo;
 
-	@Column(length = 8)
+	@Column(length = 64)
 	private String salt;
 	
 	private Integer age;

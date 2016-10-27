@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 //
 import com.airshiplay.play.main.entity.UserEntity;
 import com.airshiplay.play.main.repo.UserEntityRepository;
-import com.airshiplay.play.security.CustomUserDetails;
 import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
 //import com.airshiplay.play.security.CustomUserDetails;
 //
@@ -29,13 +28,14 @@ import com.google.common.collect.Sets;
 @Service()
 public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 
+
 	@Override
-	public EntityUserDetails findByUsername(String username) {
+	public AadminUserDetails findByUsername(String username) {
 		UserEntity userEntity = userEntityRepository.findByUsername(username);
 		if (userEntity == null) {
 			return null;
 		}
-		return new EntityUserDetails(userEntity.getId(),
+		return new AadminUserDetails(userEntity.getId(),
 				userEntity.getUsername(),userEntity.getUsername(), userEntity.getPassword(),
 				userEntity.getSalt(), userEntity.isEnabled(),
 				!userEntity.isAccountExpired(),
@@ -46,24 +46,25 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 	@Autowired
 	private UserEntityRepository userEntityRepository;
 
-	public class EntityUserDetails extends CustomUserDetails<Long, UserEntity> {
-
-		public EntityUserDetails(Long id, String username,String realname, String password,
-				String credentialsSalt, boolean enabled,
-				boolean accountNonExpired, boolean credentialsNonExpired,
-				boolean accountNonLocked) {
-			super(id, username,realname, password, credentialsSalt, enabled,
-					accountNonExpired, credentialsNonExpired, accountNonLocked);
-		}
-
-		private static final long serialVersionUID = 8220061317304759492L;
-
-		@Override
-		public UserEntity getCustomUser() {
-			return userEntityRepository.findOne(getId());
-		}
-
-	}
+//	public class EntityUserDetails extends CustomUserDetails<Long, UserEntity> {
+//		private static final long serialVersionUID = 8220061317304759492L;
+//
+//		public EntityUserDetails(Long id, String username,String realname, String password,
+//				String credentialsSalt, boolean enabled,
+//				boolean accountNonExpired, boolean credentialsNonExpired,
+//				boolean accountNonLocked) {
+//			super(id, username,realname, password, credentialsSalt, enabled,
+//					accountNonExpired, credentialsNonExpired, accountNonLocked);
+//		}
+//
+//
+//		@Override
+//		public UserEntity getCustomUser() {
+//			UserEntityRepository userEntityRepository =	SpringContext.getBean(UserEntityRepository.class);
+//			return userEntityRepository.findOne(getId());
+//		}
+//
+//	}
 
 	@Override
 	public Set<String> findRoles(String username, Serializable uid) {

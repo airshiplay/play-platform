@@ -11,7 +11,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.UserEntity;
-import com.airshiplay.play.main.security.PasswordService;
+//import com.airshiplay.play.main.security.PasswordService;
 //import com.airshiplay.play.main.security.UserCredentialsDetailsService.EntityUserDetails;
 import com.airshiplay.play.main.service.MenuEntityService;
 import com.airshiplay.play.main.service.SettingEntityService;
@@ -40,6 +39,7 @@ import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.repo.domain.Tree;
 import com.airshiplay.play.security.CurrentUser;
 import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.PlayPasswordService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.octo.captcha.service.CaptchaService;
 //import com.airshiplay.play.security.CustomUserDetails;
@@ -61,7 +61,7 @@ public class IndexController {
 //	@Autowired
 //	UserDetailsService userDetailsService;
 	@Autowired
-	private PasswordService passwordService;
+	private PlayPasswordService passwordService;
 	@Autowired
 	private  CaptchaService captchaService;
 	
@@ -72,8 +72,8 @@ public class IndexController {
 		try {
 		UserEntity en=	user.getCustomUser();
 			model.addAttribute("currentUser",
-					BeanUtils.getProperty((user).getCustomUser(), "name"));
-			model.addAttribute("user", (user).getCustomUser());
+					BeanUtils.getProperty(en, "name"));
+			model.addAttribute("user", en);
 		} catch (IllegalAccessException | InvocationTargetException
 				| NoSuchMethodException e) {
 			e.printStackTrace();

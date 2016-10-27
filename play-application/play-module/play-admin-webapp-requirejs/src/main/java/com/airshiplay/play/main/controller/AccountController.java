@@ -14,6 +14,7 @@ import com.airshiplay.play.main.entity.UserEntity;
 import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.PlayPasswordService;
 
 @Controller
 @RequestMapping("/center/account")
@@ -21,6 +22,9 @@ public class AccountController {
 
 	@Autowired
 	UserEntityService userEntityService;
+	
+	@Autowired
+	PlayPasswordService password;
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String get(Model model) {
 		Subject subject=	SecurityUtils.getSubject();;
@@ -39,6 +43,8 @@ public class AccountController {
 	@RequestMapping(value = "/password", method = RequestMethod.POST)
 	@ResponseBody
 	public Result postPassword(Model model) {
+		
+		//password.encryptPassword(plaintextPassword, salt)
 		// {"success":false,"code":"failure","msg":"原密码错误"}
 		// "{\"success\":true,\"code\":\"success\",\"msg\":\"操作成功\"}";
 		return Result.success();
