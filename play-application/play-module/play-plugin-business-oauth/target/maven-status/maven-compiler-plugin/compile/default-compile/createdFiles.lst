@@ -1,9 +1,0 @@
-com/airshiplay/play/plugin/oauth/model/OauthUserEntity.class
-com/airshiplay/play/plugin/oauth/model/GithubOauthPlugin.class
-com/airshiplay/play/plugin/oauth/model/QOauthUserEntity.class
-com/airshiplay/play/plugin/oauth/model/OauthPlugin.class
-com/airshiplay/play/plugin/oauth/model/WeiboOauthPlugin.class
-com/airshiplay/play/plugin/oauth/repo/OauthUserRepository.class
-com/airshiplay/play/plugin/oauth/model/QQOauthPlugin.class
-com/airshiplay/play/plugin/oauth/service/OauthPluginService.class
-com/airshiplay/play/plugin/oauth/service/OauthUserService.class

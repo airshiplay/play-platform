@@ -1,5 +1,0 @@
-com/airshiplay/play/plugin/entity/Plugin.class
-com/airshiplay/play/plugin/entity/PluginConfigEntity.class
-com/airshiplay/play/plugin/repo/PluginConfigEntityRepository.class
-com/airshiplay/play/plugin/entity/QPluginConfigEntity.class
-com/airshiplay/play/plugin/service/PluginConfigEntityService.class

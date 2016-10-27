@@ -1,4 +1,0 @@
-com/airshiplay/play/oauth2/entity/QAccessTokenEntity.class
-com/airshiplay/play/oauth2/entity/AccessTokenEntity.class
-com/airshiplay/play/oauth2/service/AccessTokenEntityService.class
-com/airshiplay/play/oauth2/repo/AccessTokenEntityRepository.class
