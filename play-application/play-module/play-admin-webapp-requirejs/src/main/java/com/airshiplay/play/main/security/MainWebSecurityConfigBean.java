@@ -18,8 +18,8 @@ public class MainWebSecurityConfigBean {
 
 	@Value("${security.skip_auth_urls?:/assets/**,/extjs/**,/requirejs/**,/,/index,/app_info,/captcha**}")
 	private String[] skipAuthUrls;
-	 @Value("#{conf['security.filterChain.[<custom name>]']}")
-	    private final HashMap<String, String> filterChain = new HashMap<String, String>();
+//	@Value("#{conf['security.filterChain.[<custom name>]']}")
+//	private final HashMap<String, String> filterChain = new HashMap<String, String>();
 	@Autowired
 	WebSecurityManager securityManager;
 

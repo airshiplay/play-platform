@@ -26,6 +26,8 @@
 		<module>play-admin-webapp-requirejs</module>
 		<module>play-app-business</module>
 		<module>play-app-webapp-requirejs</module>
+        <module>play-cms-business</module>
+        <module>play-cms-webapp-requirejs</module>
 		<module>play-oauth2-business</module>
 		<module>play-oauth2-webapp-requirejs</module>
 		<module>play-plugin-business</module>

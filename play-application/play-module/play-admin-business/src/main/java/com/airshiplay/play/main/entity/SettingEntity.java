@@ -46,6 +46,9 @@ public class SettingEntity extends DataEntity<UserEntity, Long> {
 	@Column(length = 500)
 	private String address;
 
+	/** 联系人 */
+	@Column(length = 100)
+	private String contact;
 	/** 联系电话1 */
 	@Column(length = 50)
 	private String phone1;
@@ -121,6 +124,12 @@ public class SettingEntity extends DataEntity<UserEntity, Long> {
 		this.address = address;
 	}
 
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 	public String getPhone1() {
 		return phone1;
 	}

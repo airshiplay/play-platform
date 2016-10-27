@@ -30,6 +30,8 @@ public class QSettingEntity extends EntityPathBase<SettingEntity> {
 
     public final StringPath certtext = createString("certtext");
 
+    public final StringPath contact = createString("contact");
+
     public final QUserEntity createdBy;
 
     //inherited

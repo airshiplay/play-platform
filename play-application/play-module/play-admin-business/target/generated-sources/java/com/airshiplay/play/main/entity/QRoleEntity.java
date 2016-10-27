@@ -46,7 +46,7 @@ public class QRoleEntity extends EntityPathBase<RoleEntity> {
 
     public final StringPath name = createString("name");
 
-    public final SetPath<UserRoleEntity, QUserRoleEntity> userRoles = this.<UserRoleEntity, QUserRoleEntity>createSet("userRoles", UserRoleEntity.class, QUserRoleEntity.class, PathInits.DIRECT2);
+    public final SetPath<UserEntity, QUserEntity> users = this.<UserEntity, QUserEntity>createSet("users", UserEntity.class, QUserEntity.class, PathInits.DIRECT2);
 
     public QRoleEntity(String variable) {
         this(RoleEntity.class, forVariable(variable), INITS);

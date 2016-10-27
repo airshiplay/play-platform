@@ -11,7 +11,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
-			<artifactId>play-admin-business</artifactId>
+			<artifactId>play-main-business</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

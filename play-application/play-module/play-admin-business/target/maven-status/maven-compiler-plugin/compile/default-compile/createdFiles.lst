@@ -1,6 +1,4 @@
-com/airshiplay/play/main/service/UserRoleEntityService.class
 com/airshiplay/play/main/service/DictEntityService.class
-com/airshiplay/play/main/entity/UserRoleEntity.class
 com/airshiplay/play/main/service/RoleEntityService.class
 com/airshiplay/play/main/service/SettingEntityService.class
 com/airshiplay/play/main/repo/AreaEntityRepository.class
@@ -14,7 +12,6 @@ com/airshiplay/play/main/service/AreaEntityService.class
 com/airshiplay/play/main/entity/MenuEntity.class
 com/airshiplay/play/main/entity/QSettingEntity.class
 com/airshiplay/play/main/repo/SettingEntityRepository.class
-com/airshiplay/play/main/entity/QUserRoleEntity.class
 com/airshiplay/play/main/entity/AreaEntity.class
 com/airshiplay/play/main/entity/QUserEntity.class
 com/airshiplay/play/main/service/OrganizationEntityService.class
@@ -33,7 +30,6 @@ com/airshiplay/play/main/entity/QOrganizationEntity.class
 com/airshiplay/play/main/service/MenuEntityService.class
 com/airshiplay/play/main/entity/OrganizationEntity$OrgType.class
 com/airshiplay/play/main/service/ServiceSelector.class
-com/airshiplay/play/main/repo/ManagerRoleEntityRepository.class
 com/airshiplay/play/main/entity/OrganizationEntity.class
 com/airshiplay/play/main/repo/MenuEntityRepository.class
 com/airshiplay/play/main/repo/UserEntityRepository.class

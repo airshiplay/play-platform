@@ -9,13 +9,12 @@ import com.airshiplay.play.main.entity.OrganizationEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity.OrgType;
 import com.airshiplay.play.main.entity.RoleEntity;
 import com.airshiplay.play.main.entity.UserEntity;
-import com.airshiplay.play.main.entity.UserRoleEntity;
 import com.airshiplay.play.main.init.InitDataTools;
 import com.airshiplay.play.main.security.PasswordService;
 import com.airshiplay.play.main.service.OrganizationEntityService;
 import com.airshiplay.play.main.service.RoleEntityService;
 import com.airshiplay.play.main.service.UserEntityService;
-import com.airshiplay.play.main.service.UserRoleEntityService;
+import com.google.common.collect.Sets;
 
 @Component
 public class PlayApplicationInitializer extends ApplicationInitializer {
@@ -31,9 +30,6 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 
 	@Autowired
 	private RoleEntityService roleEntityService;
-
-	@Autowired
-	private UserRoleEntityService userRoleEntityService;
 
 	@Autowired
 	private InitDataTools tools;
@@ -60,15 +56,14 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			admin.setEmail("airshiplay@163.com");
 			admin.setName("airshiplay");
 			admin.setOrg(org);
+			admin.setRoles(Sets.newHashSet(role));
 			userEntityService.save(admin);
 
 			org.setPrimaryLeader(admin);
 			organizationEntityService.save(org);
 
-			UserRoleEntity userRole = userRoleEntityService.newEntity();
-			userRole.setRole(role);
-			userRole.setUser(admin);
-			userRoleEntityService.save(userRole);
+			
+			 
 
 		}
 

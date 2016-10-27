@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.airshiplay.play.security.ResultAuthenticationFailureHanlder;
 import com.airshiplay.play.security.ResultAuthenticationSuccessHandler;
 
-@Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MainWebSecurityConfigBean extends WebSecurityConfigurerAdapter {
 

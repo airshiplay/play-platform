@@ -70,13 +70,13 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final StringPath realname = createString("realname");
 
+    public final SetPath<RoleEntity, QRoleEntity> roles = this.<RoleEntity, QRoleEntity>createSet("roles", RoleEntity.class, QRoleEntity.class, PathInits.DIRECT2);
+
     public final StringPath salt = createString("salt");
 
     public final StringPath sex = createString("sex");
 
     public final StringPath username = createString("username");
-
-    public final SetPath<UserRoleEntity, QUserRoleEntity> userRoles = this.<UserRoleEntity, QUserRoleEntity>createSet("userRoles", UserRoleEntity.class, QUserRoleEntity.class, PathInits.DIRECT2);
 
     public QUserEntity(String variable) {
         this(UserEntity.class, forVariable(variable), INITS);

@@ -41,8 +41,8 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 
 	private boolean locked = false;
 
-	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-	private Set<UserRoleEntity> userRoles = new HashSet<>();
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+	private Set<UserEntity> users = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "sys_role_menu", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "menu_id"))
@@ -69,16 +69,16 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 		this.code = code;
 	}
 
-	public Set<UserRoleEntity> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(Set<UserRoleEntity> userRoles) {
-		this.userRoles = userRoles;
-	}
-
 	public Set<MenuEntity> getMenus() {
 		return menus;
+	}
+
+	public Set<UserEntity> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<UserEntity> users) {
+		this.users = users;
 	}
 
 	public void setMenus(Set<MenuEntity> menus) {
