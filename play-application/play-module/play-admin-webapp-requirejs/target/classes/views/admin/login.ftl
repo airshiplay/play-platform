@@ -26,11 +26,28 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style type="text/css">
+  	.btn-qq {
+    	color: #ffffff;
+    	background-color: #0073c0;
+   	 	border-color: rgba(0, 0, 0, 0.2);
+	}
+	.btn-weibo {
+    	color: #ffffff;
+    	background-color: #da1700;
+    	border-color: rgba(0, 0, 0, 0.2);
+	}
+	.btn-github {
+    	color: #ffffff;
+    	background-color: #444444;
+    	border-color: rgba(0, 0, 0, 0.2);
+	}
+  </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="#"><b>Admin</b>LTE</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -86,6 +103,13 @@
 
     <div class="social-auth-links text-center">
       <p>- OR -</p>
+      <a href="${base}/oauth/authorization/qqOauthPlugin" class="btn btn-block btn-social btn-qq btn-flat"><i class="fa fa-qq"></i>使用QQ登录</a>
+      <a href="${base}/oauth/authorization/weiboOauthPlugin" class="btn btn-block btn-social btn-weibo btn-flat">
+					<i class="fa fa-weibo"></i> 使用微博登录
+				</a>
+	  <a href="${base}/oauth/authorization/githubOauthPlugin" class="btn btn-block btn-social btn-github btn-flat">
+					<i class="fa fa-github"></i> 使用Github登录
+				</a>
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
         Facebook</a>
       <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using

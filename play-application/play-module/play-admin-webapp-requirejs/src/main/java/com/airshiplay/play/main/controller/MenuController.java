@@ -1,5 +1,7 @@
 package com.airshiplay.play.main.controller;
 
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,28 +27,36 @@ public class MenuController {
 
 	@Autowired
 	private RoleEntityService roleEntityService;
-	@RequestMapping(value="/list", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String get(Model model) {
 		return "/views/admin/menu/list";
 	}
-	@RequestMapping(value="/add", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getMenuAdd(Model model) {
 		return "/views/admin/menu/add";
 	}
-	@RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
-	public String getMenuEdit(Model model,@PathVariable Long id) {
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String getMenuEdit(Model model, @PathVariable Long id) {
 		return "/views/admin/menu/edit";
 	}
-	@RequestMapping(value="/dialog/tree", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/dialog/tree", method = RequestMethod.GET)
 	public String getMenuTree(Model model) {
 		return "/views/admin/menu/dialog/tree";
 	}
+
+	@RequiresAuthentication
+	@RequiresPermissions("menu:view")
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
 	@ResponseBody
 	public Tree<MenuEntity> tree(Predicate predicate) {
 		Tree<MenuEntity> tree = menuEntityService.findTree(predicate);
 		tree.setIconClsProperty("iconCls");
 		tree.setTextProperty("text");
+		// SecurityUtils.getSubject().checkPermission("menu:view");
 		return tree;
 	}
 

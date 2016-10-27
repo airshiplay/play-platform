@@ -3,6 +3,7 @@ package com.airshiplay.play.integration.webapp;
 import org.springframework.beans.factory.config.PlaceholderConfigurerSupport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import com.airshiplay.play.web.ServletSupport;
 @ComponentScan(basePackages = { "com.airshiplay" }, useDefaultFilters = false, includeFilters = {
 		@Filter({ Controller.class }), @Filter({ ServletSupport.class }) }, nameGenerator = FullBeanNameGenerator.class)
 @EnableWebMvc
+@EnableAspectJAutoProxy(proxyTargetClass=true)
+
 public class ServletConfigBean {
 
 	@Bean

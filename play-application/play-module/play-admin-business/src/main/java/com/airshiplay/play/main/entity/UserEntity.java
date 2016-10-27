@@ -34,6 +34,9 @@ public class UserEntity extends DataEntity<UserEntity, Long> implements Lockedab
 	@Column(unique = true, length = 100)
 	private String username;
 
+	@Column(length = 10)
+	private String realname;
+	
 	@Column(length = 225)
 	private String password;
 
@@ -48,6 +51,9 @@ public class UserEntity extends DataEntity<UserEntity, Long> implements Lockedab
 	@Column(length = 500)
 	private String photo;
 
+	@Column(length = 8)
+	private String salt;
+	
 	private Integer age;
 
 	private String sex;
@@ -241,6 +247,22 @@ public class UserEntity extends DataEntity<UserEntity, Long> implements Lockedab
 	@Override
 	public void setAreaName(String areaName) {
 		this.areaName = areaName;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 
 }

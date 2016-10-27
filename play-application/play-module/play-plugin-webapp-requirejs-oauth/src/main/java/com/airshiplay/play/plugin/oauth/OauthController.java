@@ -2,7 +2,10 @@ package com.airshiplay.play.plugin.oauth;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +19,14 @@ import com.airshiplay.play.plugin.oauth.model.OauthPlugin;
 import com.airshiplay.play.plugin.oauth.model.OauthUserEntity;
 import com.airshiplay.play.plugin.oauth.service.OauthPluginService;
 import com.airshiplay.play.plugin.oauth.service.OauthUserService;
+import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.shiro.authc.PlayPluginOauthToken;
 
 @Controller
 @RequestMapping("/oauth")
 public class OauthController {
-
+	@Value("${path.admin?:index}")
+	private String adminHomeUrl;
 	@Autowired
 	private OauthPluginService oauthService;
 
@@ -31,14 +37,20 @@ public class OauthController {
 	private UserEntityService userEntityService;
 
 	@RequestMapping(value = "/authorization/{oauthPluginId}", method = RequestMethod.GET)
-	public String redirectUsersToRequestAccess(@PathVariable("oauthPluginId") String oauthPluginId, RedirectAttributes redirectAttributes) {
+	public String redirectUsersToRequestAccess(
+			@PathVariable("oauthPluginId") String oauthPluginId,
+			RedirectAttributes redirectAttributes) {
 		OauthPlugin oauthPlugin = oauthService.getOauthPlugin(oauthPluginId);
-		redirectAttributes.addAllAttributes(oauthPlugin.getAuthorizationParameterMap());
+		redirectAttributes.addAllAttributes(oauthPlugin
+				.getAuthorizationParameterMap());
 		return "redirect:" + oauthPlugin.getAuthorizationUrl();
 	}
 
-	@RequestMapping(value = "/api/{oauthPluginId}", method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
-	public String getAccessTokenAndProcess(@PathVariable("oauthPluginId") String oauthPluginId, String code, HttpServletRequest request) {
+	@RequestMapping(value = "/api/{oauthPluginId}", method = {
+			RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
+	public String getAccessTokenAndProcess(
+			@PathVariable("oauthPluginId") String oauthPluginId, String code,
+			HttpServletRequest request) {
 		Assert.notNull(oauthPluginId);
 		Assert.notNull(code);
 
@@ -57,21 +69,43 @@ public class OauthController {
 			oauthUser.setOwner(user);
 			oauthUserService.save(oauthUser);
 
-			// authenticationManager.authenticate(authentication)
-
-			// login(oauthUser, request);
-			return "redirect:/center/user/account";
+			login(oauthUser, request);
+			return "redirect:" + adminHomeUrl + "#page/center/account/info";
 		} else {
-			// login(oauthUser, request);
-			return "redirect:/center";
+			login(oauthUser, request);
+			return "redirect:" + adminHomeUrl;
 		}
 	}
 
-	// private void login(OauthUser oauthUser, HttpServletRequest request) {
-	// OauthUserToken token = new OauthUserToken(oauthUser,
-	// request.getRemoteHost(), true);
-	// Subject subject = SecurityUtils.getSubject();
-	// subject.login(token);
-	// }
+	private void login(OauthUserEntity oauthUser, HttpServletRequest request) {
+		UserEntity userEntity = oauthUser.getOwner();
+		PlayPluginOauthToken<CustomUserDetails<?,?>> token = new PlayPluginOauthToken<CustomUserDetails<?,?>>(
+				new OauthUserDetails(userEntity.getId(),
+						userEntity.getUsername(), userEntity.getPassword(),
+						userEntity.getSalt(), userEntity.isEnabled(),
+						!userEntity.isAccountExpired(),
+						!userEntity.isCredentialsExpired(),
+						!userEntity.isLocked()));
+		Subject subject = SecurityUtils.getSubject();
+		subject.login(token);
+	}
 
+	public class OauthUserDetails extends CustomUserDetails<Long, UserEntity> {
+		
+		public OauthUserDetails(Long id, String username, String password,
+				String credentialsSalt, boolean enabled,
+				boolean accountNonExpired, boolean credentialsNonExpired,
+				boolean accountNonLocked) {
+			super(id, username, password,username, credentialsSalt, enabled,
+					accountNonExpired, credentialsNonExpired, accountNonLocked);
+		}
+
+		private static final long serialVersionUID = 8220061317304759492L;
+
+		@Override
+		public UserEntity getCustomUser() {
+			return userEntityService.findOne(getId());
+		}
+
+	}
 }

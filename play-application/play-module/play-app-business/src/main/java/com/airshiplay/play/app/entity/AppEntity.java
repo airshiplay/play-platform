@@ -35,7 +35,7 @@ public class AppEntity extends DataEntity<UserEntity, Long> {
 	private String version;
 	
 	@NotNull
-	@Column(length = 45)
+	@Column(length = 100)
 	private String name;
 
 	@NotNull

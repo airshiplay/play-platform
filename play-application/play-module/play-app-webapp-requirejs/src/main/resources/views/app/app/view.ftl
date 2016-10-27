@@ -7,7 +7,7 @@
 		<li><a href="javascript:;">
 				<i class="fa fa-dashboard"></i> 工作台
 			</a></li>
-		<li><a href="#/page/device">
+		<li><a href="#/page/app/app/list">
 				<i class="fa fa-cloud"></i>我的应用
 			</a></li>
 		<li class="active">${app.name}</li>

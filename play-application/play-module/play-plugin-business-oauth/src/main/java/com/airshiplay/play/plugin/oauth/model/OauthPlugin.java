@@ -58,7 +58,7 @@ public abstract class OauthPlugin extends Plugin {
 	}
 
 	public String getRedirectUri() {
-		return getSiteUrl() + "/oauth/" + getId();
+		return getSiteUrl() + "/oauth/api/" + getId();
 	}
 
 	public abstract String getAuthorizationUrl();

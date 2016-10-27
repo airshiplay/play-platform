@@ -26,10 +26,6 @@
 			<artifactId>play-web-requirejs</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
-			<artifactId>play-security</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>

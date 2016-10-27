@@ -17,7 +17,7 @@ import com.airshiplay.play.web.ServletSupport;
 		@ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION),
 		@ComponentScan.Filter(value = EnableWebMvc.class, type = FilterType.ANNOTATION),
 		@ComponentScan.Filter(value = ServletSupport.class, type = FilterType.ANNOTATION) })
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class RootConfigBean {
 
 	@Bean

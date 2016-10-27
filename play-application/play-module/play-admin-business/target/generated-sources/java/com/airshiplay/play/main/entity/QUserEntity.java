@@ -68,6 +68,10 @@ public class QUserEntity extends EntityPathBase<UserEntity> {
 
     public final StringPath photo = createString("photo");
 
+    public final StringPath realname = createString("realname");
+
+    public final StringPath salt = createString("salt");
+
     public final StringPath sex = createString("sex");
 
     public final StringPath username = createString("username");

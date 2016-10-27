@@ -1,0 +1,6 @@
+com/airshiplay/play/app/entity/AppEntity$AppSource.class
+com/airshiplay/play/app/entity/AppEntity$Platform.class
+com/airshiplay/play/app/repo/AppEntityRepository.class
+com/airshiplay/play/app/entity/AppEntity.class
+com/airshiplay/play/app/entity/QAppEntity.class
+com/airshiplay/play/app/service/AppEntityService.class

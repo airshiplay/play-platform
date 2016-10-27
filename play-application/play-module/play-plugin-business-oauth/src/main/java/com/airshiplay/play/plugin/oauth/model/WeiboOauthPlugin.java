@@ -32,7 +32,7 @@ public class WeiboOauthPlugin extends OauthPlugin {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@Value("${info.siteUrl?:http://mdm.whenling.com}")
+	@Value("${info.siteUrl?:http://www.airshiplay.com}")
 	private String siteUrl;
 
 	@Override

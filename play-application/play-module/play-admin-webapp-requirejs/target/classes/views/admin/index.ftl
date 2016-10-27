@@ -8,26 +8,26 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="requirejs/app/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="requirejs/app/assets/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="requirejs/app/assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/dist/css/skins/_all-skins.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="requirejs/app/assets/plugins/iCheck/flat/blue.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="requirejs/app/assets/plugins/morris/morris.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/plugins/morris/morris.css">
   <!-- jvectormap -->
-  <link rel="stylesheet" href="requirejs/app/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Date Picker -->
-  <link rel="stylesheet" href="requirejs/app/assets/plugins/datepicker/datepicker3.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/plugins/datepicker/datepicker3.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="requirejs/app/assets/plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="${base}/requirejs/app/assets/plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="requirejs/app/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
@@ -276,7 +276,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="requirejs/app/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">${currentUser}</span>
+              <span class="hidden-xs">${currentUser!''}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -332,7 +332,7 @@
           <img src="/requirejs/app/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>${currentUser}</p>
+          <p>${currentUser!""}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -607,8 +607,8 @@
 
 		requirejs.config({
 			paths : {
-				text : base + "/requirejs/app//assets/vendor/requirejs/text",
-				domReady : base + "/requirejs/app/assets/vendor/requirejs/domReady",
+				text : base + "${base}/requirejs/app//assets/vendor/requirejs/text",
+				domReady : base + "${base}/requirejs/app/assets/vendor/requirejs/domReady",
 				jquery : "//cdn.bootcss.com/jquery/2.2.4/jquery.min",
 				bootstrap : "//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min",
 				slimscroll : "//cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.min",
@@ -634,7 +634,7 @@
 				datepicker : "//cdn.bootcss.com/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min",
 				datepickerzh : "//cdn.bootcss.com/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.zh-CN.min",
 
-				app : base + "/requirejs/app/assets/js/app"
+				app : base + "${base}/requirejs/app/assets/js/app"
 			},
 			shim : {
 				slimscroll : [ "jquery" ],

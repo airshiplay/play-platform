@@ -27,7 +27,7 @@ import com.airshiplay.play.plugin.oauth.service.OauthUserService;
 @Component("githubOauthPlugin")
 public class GithubOauthPlugin extends OauthPlugin {
 
-	@Value("${info.siteUrl?:http://mdm.whenling.com}")
+	@Value("${info.siteUrl?:http://www.airshiplay.com}")
 	private String siteUrl;
 
 	@Autowired

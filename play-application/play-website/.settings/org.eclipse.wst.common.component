@@ -4,7 +4,44 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="play-integration-webapp-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-integration-webapp/play-integration-webapp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-core-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-core/play-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="play-repo-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-repo/play-repo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-admin-webapp-requirejs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-admin-webapp-requirejs/play-admin-webapp-requirejs">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-admin-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-admin-business/play-admin-business">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-template-freemarker-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-template-freemarker/play-template-freemarker">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-security-shiro-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-security-shiro/play-security-shiro">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-app-webapp-requirejs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-app-webapp-requirejs/play-app-webapp-requirejs">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-app-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-app-business/play-app-business">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-plugin-webapp-requirejs-oauth-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-plugin-webapp-requirejs-oauth/play-plugin-webapp-requirejs-oauth">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-plugin-webapp-requirejs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-plugin-webapp-requirejs/play-plugin-webapp-requirejs">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-plugin-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-plugin-business/play-plugin-business">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="play-plugin-business-oauth-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-plugin-business-oauth/play-plugin-business-oauth">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="play-website"/>

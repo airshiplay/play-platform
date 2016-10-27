@@ -19,7 +19,8 @@
   	<module>play-repo</module>
   	<module>play-repo-jpa</module>
   	<module>play-repo-mongo</module>
-  	<module>play-security</module>
+    <module>play-security</module>
+  	<module>play-security-shiro</module>
   	<module>play-template-groovy</module>
   	<module>play-template-thymeleaf</module>
     <module>play-template-freemarker</module>

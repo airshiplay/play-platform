@@ -105,7 +105,7 @@
 					$('#org_tree').jstree({
 					    'core' : {
 					      'data' : {
-					        "url" : "http://127.0.0.1:8080/center/org/tree",
+					        "url" : base+"/center/org/tree",
 					        "dataType" : "json" // needed only if you do not supply JSON headers
 					      }
 					    },

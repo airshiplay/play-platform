@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,8 +27,7 @@ public class UserController {
 	@Autowired
 	private UserEntityService userEntityService;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+ 
 
 	@RequestMapping(value="/list",method = RequestMethod.GET)
 	public String getUsrList(){
@@ -56,7 +55,7 @@ public class UserController {
 			if(Strings.isNullOrEmpty(newPassword)) {
 				return Result.validateError();
 			}
-			user.setPassword(passwordEncoder.encode(newPassword));
+			//user.setPassword(passwordEncoder.encode(newPassword));
 		}
 		userEntityService.save(user);
 		return Result.success();

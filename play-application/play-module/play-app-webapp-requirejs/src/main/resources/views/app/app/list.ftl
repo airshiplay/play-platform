@@ -77,6 +77,7 @@
 						<thead>
 							<tr>
 								<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
+								<th data-formatter="image">图标</th>
 								<th data-column-id="name">名称</th>
 								<th data-column-id="platform" data-css-class="hidden-xs" data-header-css-class="hidden-xs">平台</th>
 								<th data-column-id="identifier" data-sortable="true" data-css-class="hidden-xs" data-header-css-class="hidden-xs">标识</th>
@@ -106,6 +107,9 @@
 									{
 										url : base + "/app/app/page",
 										formatters : {
+											"image" :function(column,row){
+												return "<img src=\""+row.iconPath+"\" width=\"30\" height=\"30\" \/>";
+											},
 											"commands" : function(column, row) {
 												return "\
 								<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\

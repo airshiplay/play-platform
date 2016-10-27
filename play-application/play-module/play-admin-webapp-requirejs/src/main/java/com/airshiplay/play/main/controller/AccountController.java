@@ -1,7 +1,8 @@
 package com.airshiplay.play.main.controller;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.security.CustomUserDetails;
 
@@ -16,11 +19,14 @@ import com.airshiplay.play.security.CustomUserDetails;
 @RequestMapping("/center/account")
 public class AccountController {
 
+	@Autowired
+	UserEntityService userEntityService;
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String get(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-		model.addAttribute("user", ((CustomUserDetails<?, ?>) authentication
+		Subject subject=	SecurityUtils.getSubject();;
+		SecurityUtils.getSubject().getPrincipals();
+
+		model.addAttribute("user", ((CustomUserDetails<?, ?>) subject
 				.getPrincipal()).getCustomUser());
 		return "/views/admin/account/info";
 	}
@@ -43,6 +49,10 @@ public class AccountController {
 	public Result postSave(Model model, @RequestParam Long id,
 			@RequestParam String name, @RequestParam String avatar,
 			@RequestParam String birthday) {
-		return Result.success();
+		UserEntity user=userEntityService.getOne(id);
+		user.setName(name);
+		user.setPhoto(avatar);
+		user =userEntityService.save(user);
+		return Result.success();//.addProperties("content", user);
 	}
 }

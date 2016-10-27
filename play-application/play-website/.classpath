@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/classes" path="src/main/java">
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
@@ -30,7 +30,10 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-business"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp-requirejs"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-app-business"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-app-webapp-requirejs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-business"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-business-oauth"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-webapp-requirejs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-webapp-requirejs-oauth"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-security-shiro"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

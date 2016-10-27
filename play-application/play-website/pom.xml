@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.airshiplay</groupId>
-		<artifactId>play-platform</artifactId>
+		<artifactId>play-application</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
@@ -18,13 +18,11 @@
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-integration-webapp</artifactId>
-			<version>1.0.0.RELEASE</version>
-		</dependency>
+ 		</dependency>
 
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-template-thymeleaf</artifactId>
-			<version>1.0.0.RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>play-cache</artifactId>
@@ -35,12 +33,16 @@
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-admin-webapp-requirejs</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-app-webapp-requirejs</artifactId>
-			<version>${project.version}</version>
+			<version>${play.module.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-plugin-webapp-requirejs-oauth</artifactId>
+			<version>${play.module.version}</version>
 		</dependency>
 	</dependencies>
 

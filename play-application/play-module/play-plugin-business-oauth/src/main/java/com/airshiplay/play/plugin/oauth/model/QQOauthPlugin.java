@@ -28,7 +28,7 @@ import com.airshiplay.play.plugin.oauth.service.OauthUserService;
 @Component("qqOauthPlugin")
 public class QQOauthPlugin extends OauthPlugin {
 
-	@Value("${info.siteUrl?:http://mdm.whenling.com}")
+	@Value("${info.siteUrl?:http://www.airshiplay.com}")
 	private String siteUrl;
 
 	@Autowired

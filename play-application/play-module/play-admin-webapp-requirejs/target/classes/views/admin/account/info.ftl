@@ -19,7 +19,7 @@
 
 <section class="content-header">
 	<h1>
-		个人信息 <small>${user.name}</small>
+		个人信息 <small>${user.name!''}</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="javascript:;">
@@ -45,12 +45,12 @@
 						<div class="form-group">
 							<label for="nameInput">姓名</label>
 							<input type="text" name="name" class="form-control" id="nameInput" placeholder="请填写姓名" data-bv-notempty="true" data-bv-notempty-message="请填写姓名"
-								value="${user.name}">
+								value="${user.name!''}">
 						</div>
 						<div class="form-group">
 							<label for="avatarInput">头像</label>
 							<div class="kv-avatar">
-								<input name="avatar" type="hidden" value="http://q.qlogo.cn/qqapp/101312453/F4F1854A872AC1B2AC58AF619797A8F1/100">
+								<input name="avatar" type="hidden" value="${user.photo!''}">
 								<input id="avatarInput" name="file" type="file" class="file-loading">
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 		      language: 'zh-CN'
 		    });
 			 
-			var userAvatar = "http://q.qlogo.cn/qqapp/101312453/F4F1854A872AC1B2AC58AF619797A8F1/100";
+			var userAvatar = "${user.photo!''}";
 			
 			var $avatarInput = $("#avatarInput");
 			$avatarInput.fileinput({

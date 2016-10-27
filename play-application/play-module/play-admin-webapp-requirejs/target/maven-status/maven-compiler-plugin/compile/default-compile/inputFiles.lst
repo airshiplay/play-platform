@@ -1,3 +1,4 @@
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/security/ShiroUserDetailsService.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/OrganizationController.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/SettingController.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/mvc/EntityModelAttributeMethodProcessor.java
@@ -10,7 +11,6 @@
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/security/AuthenticationAuditorAware.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/MemberController.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/AccountController.java
-/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/security/UserCredentialsDetailsService.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/security/PasswordService.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/FileUploadController.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/PlayApplicationInitializer.java
@@ -18,3 +18,4 @@
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/security/AuthenticationSuccessListener.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/UserController.java
 /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/controller/InfoController.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-admin-webapp-requirejs/src/main/java/com/airshiplay/play/main/security/DefaultExceptionHandler.java
