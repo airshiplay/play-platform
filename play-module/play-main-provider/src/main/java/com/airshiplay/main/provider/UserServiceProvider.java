@@ -16,20 +16,20 @@ public class UserServiceProvider implements UserService {
 
 	@Autowired
 	private UserEntityService userEntityService;
-
+	
 	@Override
 	public User findByUsername(String username) {
-		return toUser(userEntityService.findByUsername(username));
+		return toDomain(userEntityService.findByUsername(username));
 	}
 
 	@Override
 	public User findByEmail(String email) {
-		return toUser(userEntityService.findByEmail(email));
+		return toDomain(userEntityService.findByEmail(email));
 	}
 
 	@Override
 	public User findByMobile(String mobile) {
-		return toUser(userEntityService.findByMobile(mobile));
+		return toDomain(userEntityService.findByMobile(mobile));
 	}
 
 	@Override
@@ -48,13 +48,14 @@ public class UserServiceProvider implements UserService {
 
 		UserEntity userEntity = userEntityService.newEntity();
 		userEntity.setName(user.getName());
+		userEntity.setUsername(user.getUsername());
 		userEntity.setMobile(user.getMobile());
 		userEntity.setEmail(user.getEmail());
 		userEntity.setPassword(encodedPassword);
-		return toUser(userEntityService.save(userEntity));
+		return toDomain(userEntityService.save(userEntity));
 	}
 
-	protected User toUser(UserEntity entity) {
+	public User toDomain(UserEntity entity) {
 		if (entity == null) {
 			return null;
 		}
@@ -78,7 +79,7 @@ public class UserServiceProvider implements UserService {
 
 	@Override
 	public User findOne(Long id) {
-		return toUser(userEntityService.findOne(id));
+		return toDomain(userEntityService.findOne(id));
 	}
 
 	@Override
@@ -92,8 +93,11 @@ public class UserServiceProvider implements UserService {
 		userEntity.setAge(user.getAge());
 		userEntity.setBirthday(user.getBirthday());
 		userEntity.setSex(user.getSex());
+		userEntity.setLastLoginDate(user.getLastLoginDate());
+		userEntity.setLastLoginIp(user.getLastLoginIp());
+		userEntity.setSex(user.getSex());
 
-		return toUser(userEntityService.save(userEntity));
+		return toDomain(userEntityService.save(userEntity));
 	}
 
 	@Override

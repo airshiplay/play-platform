@@ -5,4 +5,6 @@ import com.airshiplay.play.repo.jpa.BaseJpaRepository;
 
 public interface TabEntityRepository extends BaseJpaRepository<TabEntity, Long> {
 
+	TabEntity findByCode(String code);
+	
 }
