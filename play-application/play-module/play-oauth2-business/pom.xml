@@ -16,6 +16,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
+			<artifactId>play-security-shiro</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
 			<artifactId>play-json</artifactId>
 		</dependency>
 		<dependency>

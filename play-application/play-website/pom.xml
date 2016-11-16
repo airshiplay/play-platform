@@ -41,6 +41,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
+			<artifactId>play-cms-webapp-requirejs</artifactId>
+			<version>${play.module.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
 			<artifactId>play-plugin-webapp-requirejs-oauth</artifactId>
 			<version>${play.module.version}</version>
 		</dependency>

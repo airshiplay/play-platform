@@ -68,4 +68,8 @@ public abstract class OauthPlugin extends Plugin {
 	public abstract String getAccessToken(String code);
 
 	public abstract OauthUserEntity getOauthUser(String accessToken);
+
+	public String getAuthorizationFrag() {
+		return "";
+	}
 }

@@ -28,7 +28,7 @@ public class FreeMarkerConfigBean {
 	public FreeMarkerViewResolver freeMarkerViewResolver() {
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
 		resolver.setSuffix(".ftl");
-		resolver.setViewNames(new String[] { "/views/*" });
+		resolver.setViewNames(new String[] { "/views/freemarker/*" });
 		resolver.setContentType("text/html;charset=UTF-8");
 		resolver.setOrder(0);
 		resolver.setCache(false);

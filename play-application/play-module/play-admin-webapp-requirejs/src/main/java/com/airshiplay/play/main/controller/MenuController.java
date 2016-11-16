@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.controller;
 
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,41 +28,45 @@ public class MenuController {
 	@Autowired
 	private RoleEntityService roleEntityService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequiresPermissions("page:sys:menu:read")
+	@RequestMapping(value = "/list.view", method = RequestMethod.GET)
 	public String get(Model model) {
-		return "/views/admin/menu/list";
+		Tree<MenuEntity> tree = menuEntityService.findTree(null);
+		tree.setIconClsProperty("iconCls");
+		tree.setTextProperty("text");
+		model.addAttribute("allMenuTree", tree.getRoots());
+		return "/views/freemarker/admin/menu/list";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add.view", method = RequestMethod.GET)
 	public String getMenuAdd(Model model) {
-		return "/views/admin/menu/add";
+		return "/views/freemarker/admin/menu/add";
 	}
 
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}.view", method = RequestMethod.GET)
 	public String getMenuEdit(Model model, @PathVariable Long id) {
-		return "/views/admin/menu/edit";
+		return "/views/freemarker/admin/menu/edit";
 	}
 
-	@RequestMapping(value = "/dialog/tree", method = RequestMethod.GET)
+	@RequestMapping(value = "/dialog/tree.view", method = RequestMethod.GET)
 	public String getMenuTree(Model model) {
-		return "/views/admin/menu/dialog/tree";
+		return "/views/freemarker/admin/menu/dialog/tree";
 	}
-
-	@RequiresAuthentication
-	@RequiresPermissions("menu:view")
+	@RequiresUser
+	@RequiresPermissions("data:sys:menu:read")
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
 	@ResponseBody
 	public Tree<MenuEntity> tree(Predicate predicate) {
 		Tree<MenuEntity> tree = menuEntityService.findTree(predicate);
 		tree.setIconClsProperty("iconCls");
 		tree.setTextProperty("text");
-		// SecurityUtils.getSubject().checkPermission("menu:view");
 		return tree;
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)
 	@ResponseBody
 	public Page<MenuEntity> page(Predicate predicate, Pageable pageable) {
+
 		return menuEntityService.findAll(predicate, pageable);
 	}
 

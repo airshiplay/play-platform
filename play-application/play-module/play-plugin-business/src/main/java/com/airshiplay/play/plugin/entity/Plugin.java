@@ -100,7 +100,12 @@ public abstract class Plugin implements Comparable<Plugin> {
 	 * @return 设置URL
 	 */
 	public abstract String getSettingUrl();
-
+	
+	/**
+	 * 获取更新URL
+	 * @return 更新属性URL
+	 */
+	public abstract String getUpdateUrl();
 	/**
 	 * 获取是否已安装
 	 * 

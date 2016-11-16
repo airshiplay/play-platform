@@ -64,7 +64,7 @@ public class PluginController<T extends Plugin> {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody Result update(@ModelAttribute("pluginConfig") @Valid PluginConfigEntity pluginConfig, BindingResult result, Model model) {
-
+		
 		preUpdate(pluginConfig, result, model);
 
 		if (result.hasErrors()) {

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.airshiplay</groupId>
 		<artifactId>play-module</artifactId>
-		<version>1.0.0.RELEASE</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>play-cms-webapp-requirejs</artifactId>
 

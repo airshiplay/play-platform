@@ -2,13 +2,10 @@ package com.airshiplay.play.security;
 
 import java.util.Arrays;
 
-import org.apache.shiro.authc.credential.DefaultPasswordService;
-import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.mgt.WebSecurityManager;
@@ -27,6 +24,7 @@ import com.airshiplay.play.security.shiro.authc.PlayHashedCredentialsMatcher;
 import com.airshiplay.play.security.shiro.authc.PlayOauthCredentialsMatcher;
 import com.airshiplay.play.security.shiro.realm.OauthRealm;
 import com.airshiplay.play.security.shiro.realm.UserRealm;
+import com.airshiplay.play.security.spring.AuthorizationAttributeSourceAdvisor;
 
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -55,6 +53,7 @@ public class ShiroConfigBean {
 		return webSecurityManager;
 	}
 
+	@Bean
 	public Realm oauthRealm() {
 		OauthRealm realm = new OauthRealm();
 		realm.setCredentialsMatcher(new PlayOauthCredentialsMatcher());

@@ -6,26 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.querydsl.core.types.Predicate;
 import com.airshiplay.play.cms.entity.AdEntity;
 import com.airshiplay.play.cms.service.AdEntityService;
 import com.airshiplay.play.repo.domain.Result;
+import com.querydsl.core.types.Predicate;
 
 @Controller
-@RequestMapping("/ad")
+@RequestMapping("/cms/ad")
 public class AdController {
 
 	@Autowired
 	private AdEntityService adEntityService;
 
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/adList.view", method = RequestMethod.GET)
+	public String getAdList() {
+		return "/views/freemarker/cms/ad/adList";
+	}
+
+	@RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
+	public String getAdCreate(Model model) {
+		return "/views/freemarker/cms/ad/adForm";
+	}
+	
+	@RequestMapping(value = {"/edit/{id}.view"}, method = RequestMethod.GET)
+	public String getAdEdit(@PathVariable(value = "id") AdEntity entity,Model model) {
+		model.addAttribute("ad", entity);
+		return "/views/freemarker/cms/ad/adForm";
+	}
+
+	@RequestMapping(value = "/page", method = RequestMethod.POST)
 	@ResponseBody
 	public Page<AdEntity> doPage(Predicate predicate, Pageable pageable) {
 		return adEntityService.findAll(predicate, pageable);
@@ -33,7 +51,8 @@ public class AdController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public Result doSave(@ModelAttribute @Valid AdEntity ad, BindingResult bindingResult) {
+	public Result doSave(@ModelAttribute @Valid AdEntity ad,
+			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return Result.validateError();
 		}

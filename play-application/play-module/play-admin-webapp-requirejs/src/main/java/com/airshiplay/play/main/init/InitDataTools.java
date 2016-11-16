@@ -1,20 +1,20 @@
 package com.airshiplay.play.main.init;
 
-import java.beans.PropertyDescriptor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.airshiplay.play.main.entity.AreaEntity;
 import com.airshiplay.play.main.entity.AreaEntity.AreaType;
-import com.airshiplay.play.main.entity.DictEntity;
+import com.airshiplay.play.main.entity.AuthorityEntity;
+import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.SettingEntity;
 import com.airshiplay.play.main.service.AreaEntityService;
+import com.airshiplay.play.main.service.AuthorityEntityService;
 import com.airshiplay.play.main.service.DictEntityService;
 import com.airshiplay.play.main.service.MenuEntityService;
 import com.airshiplay.play.main.service.SettingEntityService;
@@ -35,6 +35,9 @@ public class InitDataTools {
 	@Autowired
 	private DictEntityService dictEntityService;
 
+	@Autowired 
+	private AuthorityEntityService authorityEntityService;
+	
 	public void setting(String siteName, String logo, String adminLoginBanner,
 			String phone1, String phone2, String email, String address) {
 		SettingEntity settingEntity = settingEntityService.get();
@@ -75,6 +78,15 @@ public class InitDataTools {
 		return menu;
 	}
 
+	public void createPemission(MenuEntity menu,PermissionType type,String name,String permission){
+		AuthorityEntity entity = new AuthorityEntity();
+		entity.setName(name);
+		entity.setMenu(menu);
+		entity.setType(type);
+		entity.setPermission(permission);
+		authorityEntityService.save(entity);
+	}
+	
 	public MenuEntity createMenuByParentCode(String label, String code,
 			String iconCls, String view, String config, Integer sortNo,
 			String parentCode) {

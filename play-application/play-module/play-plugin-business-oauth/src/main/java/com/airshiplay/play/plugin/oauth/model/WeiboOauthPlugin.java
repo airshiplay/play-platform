@@ -149,4 +149,8 @@ public class WeiboOauthPlugin extends OauthPlugin {
 		return "/oauth/weibo/setting";
 	}
 
+	@Override
+	public String getUpdateUrl() {
+		return "/oauth/weibo/update";
+	}
 }

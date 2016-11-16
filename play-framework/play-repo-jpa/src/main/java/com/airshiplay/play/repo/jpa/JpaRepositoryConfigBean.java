@@ -38,7 +38,7 @@ public class JpaRepositoryConfigBean {
 	@Value("${jdbc.username?:root}")
 	private String jdbcUsername;
 
-	@Value("${jdbc.password?:asd123}")
+	@Value("${jdbc.password?:123456}")
 	private String jdbcPassword;
 
 	@Value("${hibernate.hbm2ddl.auto?:update}")

@@ -32,12 +32,12 @@ public class AccountController {
 
 		model.addAttribute("user", ((CustomUserDetails<?, ?>) subject
 				.getPrincipal()).getCustomUser());
-		return "/views/admin/account/info";
+		return "/views/freemarker/admin/account/info";
 	}
 
 	@RequestMapping(value = "/password", method = RequestMethod.GET)
 	public String getPassword(Model model) {
-		return "/views/admin/account/password";
+		return "/views/freemarker/admin/account/password";
 	}
 
 	@RequestMapping(value = "/password", method = RequestMethod.POST)

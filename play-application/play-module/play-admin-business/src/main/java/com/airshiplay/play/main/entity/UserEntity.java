@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -37,7 +36,7 @@ public class UserEntity extends DataEntity<UserEntity, Long> implements Lockedab
 	private String username;
 
 	@Column(length = 10)
-	private String realname;
+	private String realname="";
 	
 	@Column(length = 225)
 	private String password;

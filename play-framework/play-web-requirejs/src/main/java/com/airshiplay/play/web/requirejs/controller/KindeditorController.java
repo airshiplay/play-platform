@@ -25,7 +25,7 @@ import com.google.common.base.Strings;
 import com.airshiplay.play.filestorage.FileStorageService;
 
 @Controller
-@RequestMapping("/extjs/kindeditor")
+@RequestMapping("/requirejs/kindeditor")
 public class KindeditorController {
 
 	@Autowired

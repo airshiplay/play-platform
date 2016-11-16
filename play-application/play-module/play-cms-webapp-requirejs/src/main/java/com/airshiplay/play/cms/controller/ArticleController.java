@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +20,23 @@ import com.airshiplay.play.cms.service.ArticleEntityService;
 import com.airshiplay.play.repo.domain.Result;
 
 @Controller
-@RequestMapping("/article")
+@RequestMapping("/cms/article")
 public class ArticleController {
 
 	@Autowired
 	private ArticleEntityService articleEntityService;
-
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/articleList.view", method = RequestMethod.GET)
+	public String getArticleCategoryList() {
+		return "/views/freemarker/cms/article/articleList";
+	}
+	
+	@RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
+	public String getArticleCategoryCreate(Model model) {
+		return "/views/freemarker/cms/article/articleForm";
+	}
+	
+	@RequestMapping(value = "/page", method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Page<ArticleEntity> doPage(Predicate predicate, Pageable pageable) {
 		return articleEntityService.findAll(predicate, pageable);
@@ -56,7 +67,6 @@ public class ArticleController {
 		for (ArticleEntity entity : entities) {
 			articleEntityService.delete(entity);
 		}
-
 		return Result.success();
 	}
 }

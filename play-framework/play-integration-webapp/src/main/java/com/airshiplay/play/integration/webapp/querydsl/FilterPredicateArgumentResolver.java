@@ -85,6 +85,24 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 			for (Entry<String, String[]> entry : webRequest.getParameterMap().entrySet()) {
 				parameters.put(entry.getKey(), Arrays.asList(entry.getValue()));
 			}
+			String searchPhraseString = webRequest.getParameter("searchPhrase");
+			if(!Strings.isNullOrEmpty(searchPhraseString)){
+				searchPhraseString = URLDecoder.decode(searchPhraseString, "UTF-8");
+				try {
+					List<Map<String, Object>> filters = objectMapper.readValue(searchPhraseString,
+							CollectionType.construct(List.class, MapType.construct(Map.class, SimpleType.construct(String.class), SimpleType.construct(Object.class))));
+					for (Map<String, Object> filter : filters) {
+						String property = (String) filter.get("property");
+						Object value = filter.get("value");
+
+						Object convertedValue = conversionService.convert(value, TypeDescriptor.forObject(value),
+								TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(String.class)));
+						parameters.put(property, (List<String>) convertedValue);
+					}
+				} catch (Exception e) {
+					parameters.put("name", Arrays.asList(searchPhraseString));
+				}
+			}
 		}
 
 		QuerydslPredicate annotation = parameter.getParameterAnnotation(QuerydslPredicate.class);

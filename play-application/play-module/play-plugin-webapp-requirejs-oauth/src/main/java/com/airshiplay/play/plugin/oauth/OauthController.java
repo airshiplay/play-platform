@@ -20,12 +20,13 @@ import com.airshiplay.play.plugin.oauth.model.OauthUserEntity;
 import com.airshiplay.play.plugin.oauth.service.OauthPluginService;
 import com.airshiplay.play.plugin.oauth.service.OauthUserService;
 import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.PlayPasswordService;
 import com.airshiplay.play.security.shiro.authc.PlayPluginOauthToken;
 
 @Controller
 @RequestMapping("/oauth")
 public class OauthController {
-	@Value("${path.admin?:index}")
+	@Value("${path.admin?:/admin}")
 	private String adminHomeUrl;
 	@Autowired
 	private OauthPluginService oauthService;
@@ -33,6 +34,9 @@ public class OauthController {
 	@Autowired
 	private OauthUserService oauthUserService;
 
+	@Autowired
+	private PlayPasswordService passwordService;
+	
 	@Autowired
 	private UserEntityService userEntityService;
 
@@ -43,7 +47,7 @@ public class OauthController {
 		OauthPlugin oauthPlugin = oauthService.getOauthPlugin(oauthPluginId);
 		redirectAttributes.addAllAttributes(oauthPlugin
 				.getAuthorizationParameterMap());
-		return "redirect:" + oauthPlugin.getAuthorizationUrl();
+		return "redirect:" + oauthPlugin.getAuthorizationUrl() +oauthPlugin.getAuthorizationFrag();
 	}
 
 	@RequestMapping(value = "/api/{oauthPluginId}", method = {
@@ -65,6 +69,8 @@ public class OauthController {
 			UserEntity user = userEntityService.newEntity();
 			user.setName(oauthUser.getName());
 			user.setPhoto(oauthUser.getAvatarUrl());
+			user.setSalt(passwordService.generatorSalt());
+			user.setRealname("");
 			userEntityService.save(user);
 			oauthUser.setOwner(user);
 			oauthUserService.save(oauthUser);
@@ -81,7 +87,7 @@ public class OauthController {
 		UserEntity userEntity = oauthUser.getOwner();
 		PlayPluginOauthToken<CustomUserDetails<?,?>> token = new PlayPluginOauthToken<CustomUserDetails<?,?>>(
 				new OauthUserDetails(userEntity.getId(),
-						userEntity.getUsername(), userEntity.getPassword(),
+						userEntity.getUsername(),userEntity.getRealname(), userEntity.getPassword(),
 						userEntity.getSalt(), userEntity.isEnabled(),
 						!userEntity.isAccountExpired(),
 						!userEntity.isCredentialsExpired(),
@@ -92,11 +98,11 @@ public class OauthController {
 
 	public class OauthUserDetails extends CustomUserDetails<Long, UserEntity> {
 		
-		public OauthUserDetails(Long id, String username, String password,
+		public OauthUserDetails(Long id, String username,String realname, String password,
 				String credentialsSalt, boolean enabled,
 				boolean accountNonExpired, boolean credentialsNonExpired,
 				boolean accountNonLocked) {
-			super(id, username, password,username, credentialsSalt, enabled,
+			super(id, username, realname,password, credentialsSalt, enabled,
 					accountNonExpired, credentialsNonExpired, accountNonLocked);
 		}
 
@@ -106,6 +112,5 @@ public class OauthController {
 		public UserEntity getCustomUser() {
 			return userEntityService.findOne(getId());
 		}
-
 	}
 }

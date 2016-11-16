@@ -5,15 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,7 +33,8 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 
 	@NotNull
 	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 50,unique=true)
+	
 	private String code;
 
 	private boolean locked = false;
@@ -49,9 +47,13 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 	@OrderBy("sortNo asc")
 	private Set<MenuEntity> menus = new HashSet<>();
 
-	@ElementCollection
-	@CollectionTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"))
-	private List<String> authorities = new ArrayList<String>();
+//	@ElementCollection
+//	@CollectionTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"))
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "sys_role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+	@OrderBy("sortNo asc")
+	private List<AuthorityEntity> authorities = new ArrayList<AuthorityEntity>();
 
 	public String getName() {
 		return name;
@@ -85,11 +87,11 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 		this.menus = menus;
 	}
 
-	public List<String> getAuthorities() {
+	public List<AuthorityEntity> getAuthorities() {
 		return authorities;
 	}
 
-	public void setAuthorities(List<String> authorities) {
+	public void setAuthorities(List<AuthorityEntity> authorities) {
 		this.authorities = authorities;
 	}
 

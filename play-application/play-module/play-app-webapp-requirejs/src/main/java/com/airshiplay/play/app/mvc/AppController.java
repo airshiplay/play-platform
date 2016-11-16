@@ -28,33 +28,33 @@ public class AppController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String getList() {
-		return "/views/app/app/list";
+		return "/views/freemarker/app/app/list";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAdd() {
-		return "/views/app/app/add";
+		return "/views/freemarker/app/app/add";
 	}
 	@RequestMapping(value = "/addstore", method = RequestMethod.GET)
 	public String getAddstore() {
-		return "/views/app/app/addstore";
+		return "/views/freemarker/app/app/addstore";
 	}
 	
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Long id,Model model) {
 		model.addAttribute("app", appService.findOne(id));
-		return "/views/app/app/view";
+		return "/views/freemarker/app/app/view";
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getEdit(@PathVariable Long id,Model model) {
 		model.addAttribute("app", appService.findOne(id));
-		return "/views/app/app/edit";
+		return "/views/freemarker/app/app/edit";
 	}
 	
 	@RequestMapping(value = "/dialog/storeAppList", method = RequestMethod.GET)
 	public String getDialogStoreAppList() {
-		return "/views/app/app/dialog/storeAppList";
+		return "/views/freemarker/app/app/dialog/storeAppList";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

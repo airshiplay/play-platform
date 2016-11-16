@@ -10,7 +10,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +64,12 @@ public class IndexController {
 	@Autowired
 	private  CaptchaService captchaService;
 	
-	@RequiresAuthentication
 	@RequestMapping(value = { "${path.admin}", "${path.admin}/",
 			"${path.admin}/index" }, method = RequestMethod.GET)
 	public String get(Model model,@CurrentUser CustomUserDetails<?,UserEntity> user) {
-		try {
 		UserEntity en=	user.getCustomUser();
+		try {
+		
 			model.addAttribute("currentUser",
 					BeanUtils.getProperty(en, "name"));
 			model.addAttribute("user", en);
@@ -83,16 +82,16 @@ public class IndexController {
 //						new AntPathPropertyFilter(new String[] { "*", "*.id",
 //								"*.name" })));
 		model.addAttribute("setting", (settingEntityService.get()));
-		Tree<MenuEntity> tree = menuEntityService.findTree(null);
+		Tree<MenuEntity> tree = menuEntityService.getMenuTreeByUserId(en.getId());
 		tree.setIconClsProperty("iconCls");
 		tree.setTextProperty("text");
 		model.addAttribute("allMenuTree", tree.getRoots());	
-		return "/views/admin/index";
+		return "/views/freemarker/admin/index";
 	}
 
 	@RequestMapping(value = { "${path.admin}/login" }, method = RequestMethod.GET)
 	public String getLogin(Model model) {
-		return "/views/admin/login";
+		return "/views/freemarker/admin/login";
 	}
 
 	@RequestMapping(value = { "${path.admin}/login" }, method = RequestMethod.POST)
@@ -130,7 +129,7 @@ public class IndexController {
 
 	@RequestMapping(value = { "/center/home" }, method = RequestMethod.GET)
 	public String getHome(Model model) {
-		return "/views/admin/home";
+		return "/views/freemarker/admin/home";
 	}
 
 }

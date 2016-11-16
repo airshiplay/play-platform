@@ -65,11 +65,11 @@ public class AdEntity extends SortEntity<UserEntity, Long> {
 	private String path;
 
 	/** 起始日期 */
-	@DateTimeFormat(pattern = "yyyy年MM月dd日 HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy年MM月dd日 HH:mm")
 	private Date beginDate;
 
 	/** 结束日期 */
-	@DateTimeFormat(pattern = "yyyy年MM月dd日 HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy年MM月dd日 HH:mm")
 	private Date endDate;
 
 	/** 链接地址 */

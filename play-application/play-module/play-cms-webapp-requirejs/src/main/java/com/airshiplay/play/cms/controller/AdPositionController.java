@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +20,23 @@ import com.airshiplay.play.cms.service.AdPositionEntityService;
 import com.airshiplay.play.repo.domain.Result;
 
 @Controller
-@RequestMapping("/adPosition")
+@RequestMapping("/cms/adPosition")
 public class AdPositionController {
 
 	@Autowired
 	private AdPositionEntityService adPositionEntityService;
 
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/adPositionList.view", method = RequestMethod.GET)
+	public String getAdList() {
+		return "/views/freemarker/cms/adPosition/adPositionList";
+	}
+	
+	@RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
+	public String getAdCreate(Model model) {
+		return "/views/freemarker/cms/adPosition/adPositionForm";
+	}
+	
+	@RequestMapping(value = "/page", method ={ RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public Page<AdPositionEntity> doPage(Predicate predicate, Pageable pageable) {
 		return adPositionEntityService.findAll(predicate, pageable);

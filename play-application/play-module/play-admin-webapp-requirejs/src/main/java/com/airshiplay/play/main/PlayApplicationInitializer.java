@@ -4,17 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.airshiplay.play.integration.ApplicationInitializer;
+import com.airshiplay.play.main.entity.AuthorityEntity;
+import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity.OrgType;
 import com.airshiplay.play.main.entity.RoleEntity;
 import com.airshiplay.play.main.entity.UserEntity;
 import com.airshiplay.play.main.init.InitDataTools;
+import com.airshiplay.play.main.service.AuthorityEntityService;
 //import com.airshiplay.play.main.security.PasswordService;
 import com.airshiplay.play.main.service.OrganizationEntityService;
 import com.airshiplay.play.main.service.RoleEntityService;
 import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.security.PlayPasswordService;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 @Component
@@ -33,15 +37,25 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 	private RoleEntityService roleEntityService;
 
 	@Autowired
+	private AuthorityEntityService authorityEntityService;
+	
+	@Autowired
 	private InitDataTools tools;
 
 	@Override
 	public void onRootContextRefreshed() {
 		if (roleEntityService.count() == 0) {
+			AuthorityEntity authorityEntity = new AuthorityEntity();
+			authorityEntity.setMenu(null);
+			authorityEntity.setPermission("*");
+			authorityEntity.setName("超级权限");
+			authorityEntityService.save(authorityEntity);
+			
 			RoleEntity role = roleEntityService.newEntity();
 			role.setName("管理员");
 			role.setCode("admin");
-			role.setLocked(true);
+			role.setLocked(true);		
+			role.setAuthorities(Lists.newArrayList(authorityEntity));
 			roleEntityService.save(role);
 
 			OrganizationEntity org = organizationEntityService.newEntity();
@@ -75,21 +89,31 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			int sortNo = 0;
 
 			MenuEntity systemManagement = tools.createMenuByParent("系统管理", "center_system_management", "fa fa-desktop", null, null, sortNo++, null);
-			tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cogs", "page/center/setting/info", null, sortNo++, systemManagement);
-			tools.createMenuByParent("菜单管理", "center_menu_management", "fa fa-navicon", "page/center/menu/list", null, sortNo++, systemManagement);
+			
+			MenuEntity paramSetting=tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cogs", "page/center/setting/info", null, sortNo++, systemManagement);
+			tools.createPemission(paramSetting,PermissionType.page, "参数查询", "page:sys:param:read" );
+			tools.createPemission(paramSetting,PermissionType.page,"参数更新", "page:sys:param:update");
+			
+			MenuEntity menuSetting=tools.createMenuByParent("菜单管理", "center_menu_management", "fa fa-navicon", "page/center/menu/list", null, sortNo++, systemManagement);
+			tools.createPemission(menuSetting,PermissionType.page, "菜单列表", "page:sys:menu:read");
+			
 			tools.createMenuByParent("区域管理", "center_area_management", "fa fa-map", "page/center/area/list", null, sortNo++, systemManagement);
 			tools.createMenuByParent("字典管理", "center_dict_management", "fa fa-book", "page/center/dict/list", null, sortNo++, systemManagement);
 			tools.createMenuByParent("系统日志", "center_system_log", "fa fa-building", "page/center/log/list", null, sortNo++, systemManagement);
 
+////////////////////
 			MenuEntity userManagement = tools.createMenuByParent("用户管理", "center_user_management", "fa fa-users", null, null, sortNo++, null);
 			tools.createMenuByParent("用户列表", "center_member_list", "fa fa-user", "page/center/user/list", null, sortNo++, userManagement);
 			tools.createMenuByParent("组织机构列表 ", "center_org_list", "fa fa-object-group", "page/center/org/list", null, sortNo++, userManagement);
-			tools.createMenuByParent("角色权限", "center_role_list", "fa fa-gavel", "page/center/role/list", null, sortNo++, userManagement);
-			
+			MenuEntity roleSetting=tools.createMenuByParent("角色权限", "center_role_list", "fa fa-gavel", "page/center/role/list", null, sortNo++, userManagement);
+			tools.createPemission(roleSetting,PermissionType.page, "角色列表", "page:sys:role:read");
+			//
+////////////////////
 			MenuEntity pluginManagement = tools.createMenuByParent("插件管理", "plugin_management", "fa fa-plug", null, null, sortNo++, null);
 			tools.createMenuByParent("oauth认证", "plugin_oauth", "fa fa-cogs", "page/plugin/oauth/list", null, sortNo++, pluginManagement);
 			tools.createMenuByParent("支付方式", "plugin_payment", "fa fa-credit-card", "page/plugin/payment/list", null, sortNo++, pluginManagement);
 
+////////////////////
 			MenuEntity accountManagement = tools.createMenuByParent("账户管理", "center_account_management", "fa fa-user", null, null, sortNo++, null);
 			tools.createMenuByParent("个人信息", "center_account_info", "fa fa-user", "page/center/account/info", null, sortNo++, accountManagement);
 			tools.createMenuByParent("修改密码", "center_account_password", "fa fa-key", "page/center/account/password", null, sortNo++, accountManagement);

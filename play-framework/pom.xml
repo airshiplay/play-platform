@@ -19,6 +19,7 @@
   	<module>play-repo</module>
   	<module>play-repo-jpa</module>
   	<module>play-repo-mongo</module>
+    <module>play-repo-mybatis</module>
     <module>play-security</module>
   	<module>play-security-shiro</module>
   	<module>play-template-groovy</module>

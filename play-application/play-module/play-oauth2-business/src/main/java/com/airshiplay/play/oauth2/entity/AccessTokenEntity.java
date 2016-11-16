@@ -2,7 +2,10 @@ package com.airshiplay.play.oauth2.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 import com.airshiplay.play.main.entity.UserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
@@ -24,12 +27,13 @@ public class AccessTokenEntity extends DataEntity<UserEntity, Long> {
 	 */
 	public final static int ACCESS_TOKEN_VALIDITY_SECONDS = 60 * 60 * 12;
 
-	protected static long THOUSAND = 1000L;
+	protected static int THOUSAND = 1000;
 
 	@Column(name = "token_id")
 	private String tokenId;
 	@Column
-	private String username;
+	@ManyToOne
+	private UserEntity user;
 
 	@Column(name = "client_id")
 	private String clientId;
@@ -48,5 +52,103 @@ public class AccessTokenEntity extends DataEntity<UserEntity, Long> {
 
 	@Column(name = "refresh_token_expired_seconds")
 	private int refreshTokenExpiredSeconds = REFRESH_TOKEN_VALIDITY_SECONDS;
+
+	public String getTokenId() {
+		return tokenId;
+	}
+
+	public void setTokenId(String tokenId) {
+		this.tokenId = tokenId;
+	}
+
+ 
+
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	public String getAuthenticationId() {
+		return authenticationId;
+	}
+
+	public void setAuthenticationId(String authenticationId) {
+		this.authenticationId = authenticationId;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
+	public String getTokenType() {
+		return tokenType;
+	}
+
+	public void setTokenType(String tokenType) {
+		this.tokenType = tokenType;
+	}
+
+	public int getTokenExpiredSeconds() {
+		return tokenExpiredSeconds;
+	}
+
+	public void setTokenExpiredSeconds(int tokenExpiredSeconds) {
+		this.tokenExpiredSeconds = tokenExpiredSeconds;
+	}
+
+	public int getRefreshTokenExpiredSeconds() {
+		return refreshTokenExpiredSeconds;
+	}
+
+	public void setRefreshTokenExpiredSeconds(int refreshTokenExpiredSeconds) {
+		this.refreshTokenExpiredSeconds = refreshTokenExpiredSeconds;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+	public boolean tokenExpired() {
+
+		// final long time = getCreatedDate().getTime() +
+		// (this.tokenExpiredSeconds * THOUSAND);
+		// return time < DateUtils.now().getTime();
+		return getCreatedDate()
+				.plusSeconds(this.tokenExpiredSeconds * THOUSAND).isBeforeNow();
+	}
+
+	public boolean refreshTokenExpired() {
+		// final long time = getCreatedDate().getTime() +
+		// (this.refreshTokenExpiredSeconds * THOUSAND);
+		// return time < DateUtils.now().getTime();
+
+		return getCreatedDate().plusSeconds(
+				this.refreshTokenExpiredSeconds * THOUSAND).isBeforeNow();
+	}
+
+	public long currentTokenExpiredSeconds() {
+		if (tokenExpired()) {
+			return -1;
+		}
+		// final long time = createTime.getTime() + (this.tokenExpiredSeconds *
+		// THOUSAND);
+		// return (time - DateUtils.now().getTime()) / THOUSAND;
+		return getCreatedDate()
+				.plusSeconds(this.tokenExpiredSeconds * THOUSAND)
+				.getSecondOfMinute()
+				- new DateTime().getSecondOfMinute();
+
+	}
+
 
 }

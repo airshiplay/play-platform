@@ -20,4 +20,8 @@ public class AccessTokenEntityService extends EntityService<AccessTokenEntity, L
 	public AccessTokenEntity save(AccessTokenEntity entity) {
 		return super.save(entity);
 	}
+	
+	public AccessTokenEntity findOneByTokenId(String accesstoken){
+		return appEntityRepository.findOneByTokenId(accesstoken);
+	}
 }

@@ -23,7 +23,7 @@ public class OauthPluginController {
 	@Autowired
 	private OauthPluginService oauthService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method={RequestMethod.POST,RequestMethod.GET} )
 	@ResponseBody
 	public Page<OauthPlugin> list(Pageable pageable) {
 		Iterable<OauthPlugin> it = oauthService.getOauthPlugins();

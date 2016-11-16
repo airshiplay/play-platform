@@ -21,7 +21,7 @@ public class AreaController {
 	
 	@RequestMapping(value="/list",method = RequestMethod.GET)
 	public String getUsrList(){
-		return "/views/admin/area/list";
+		return "/views/freemarker/admin/area/list";
 	}
 	
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

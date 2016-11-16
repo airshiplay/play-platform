@@ -26,7 +26,7 @@ public class SettingController {
 	public String getList(Model model) {
 		SettingEntity setting = settingEntityService.get();
 		model.addAttribute("setting", setting);
-		return "/views/admin/setting/info";
+		return "/views/freemarker/admin/setting/info";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

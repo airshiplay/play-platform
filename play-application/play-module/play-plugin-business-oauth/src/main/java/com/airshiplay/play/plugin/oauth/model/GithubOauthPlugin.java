@@ -130,4 +130,8 @@ public class GithubOauthPlugin extends OauthPlugin {
 		return "/oauth/github/setting";
 	}
 
+	@Override
+	public String getUpdateUrl() {
+		return "/oauth/github/update";
+	}
 }

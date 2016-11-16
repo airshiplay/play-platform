@@ -156,4 +156,9 @@ public class QQOauthPlugin extends OauthPlugin {
 		return "/oauth/qq/setting";
 	}
 
+	@Override
+	public String getUpdateUrl() {
+		return "/oauth/qq/update";
+	}
+
 }

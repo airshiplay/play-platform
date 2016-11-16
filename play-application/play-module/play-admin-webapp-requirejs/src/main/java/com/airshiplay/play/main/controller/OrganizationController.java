@@ -22,7 +22,13 @@ public class OrganizationController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String get(Model model) {
-		return "/views/admin/org/list";
+		Tree<OrganizationEntity> tree = organizationEntityService
+				.findTree(null);
+//		tree.setIconClsProperty("iconCls");
+		tree.setTextProperty("name");
+		model.addAttribute("allOrgTree", tree.getRoots());
+
+		return "/views/freemarker/admin/org/list";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)
@@ -30,12 +36,13 @@ public class OrganizationController {
 	public Page<OrganizationEntity> page(Predicate predicate, Pageable pageable) {
 		return organizationEntityService.findAll(predicate, pageable);
 	}
-	
+
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
 	@ResponseBody
 	public Tree<OrganizationEntity> tree(Predicate predicate) {
-		Tree<OrganizationEntity> tree = organizationEntityService.findTree(predicate);
-//		tree.setIconClsProperty("icon");
+		Tree<OrganizationEntity> tree = organizationEntityService
+				.findTree(predicate);
+		// tree.setIconClsProperty("icon");
 		tree.setTextProperty("name");
 		return tree;
 	}

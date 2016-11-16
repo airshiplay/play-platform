@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,23 @@ import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.repo.domain.Tree;
 
 @Controller
-@RequestMapping("/articleCategory")
+@RequestMapping("/cms/articleCategory")
 public class ArticleCategoryController {
 
 	@Autowired
 	private ArticleCategoryEntityService articleCategoryEntityService;
-
+	
+	@RequestMapping(value = "/articleCategoryList.view", method = RequestMethod.GET)
+	public String getArticleCategoryList() {
+		return "/views/freemarker/cms/articleCategory/articleCategoryList";
+	}
+	
+	@RequestMapping(value = {"/create.view"}, method = RequestMethod.GET)
+	public String getArticleCategoryCreate(Model model) {
+		return "/views/freemarker/cms/articleCategory/articleCategoryForm";
+	}
+	
+	
 	@RequestMapping(value = "/tree", method = RequestMethod.GET)
 	@ResponseBody
 	public Tree<ArticleCategoryEntity> tree(Predicate predicate) {
@@ -34,7 +46,7 @@ public class ArticleCategoryController {
 		return tree;
 	}
 
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/page", method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
 	public Page<ArticleCategoryEntity> page(Predicate predicate, Pageable pageable) {
 		return articleCategoryEntityService.findAll(predicate, pageable);
