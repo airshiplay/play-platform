@@ -876,7 +876,7 @@
 		 * @for defaults
 		 * @since 1.1.0
 		 */
-		keepSelection : true,
+		keepSelection : false,
 
 		highlightRows : true, // highlights new rows (find the page of the
 		// first new row)

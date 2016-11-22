@@ -73,50 +73,28 @@
 									data-identifier="true" data-visible="false">ID</th>
 								<th data-column-id="name" data-sortable="false">名称</th>
 								<th data-column-id="code">标识</th>
-								<th data-column-id="fullName">全称</th>
+								<th data-column-id="type">类型</th>
+								<th data-column-id="phone">电话</th>
+								<th data-column-id="email">邮箱</th>
+								<th data-column-id="email">传真</th>
 								<th data-formatter="commands" data-css-class="command-column"
 									data-width="150px" data-sortable="false" data-align="center"
 									data-header-align="center">操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<#list allOrgTree as orgTree>
-
-							<tr class="treegrid-${orgTree.data.id}">
-								<td></td>
-								<td>${orgTree.text}</td>
-								<td>${orgTree.data.code}</td>
-								<td><i class="${orgTree.iconCls!}"></i></td>
-								<td>
-									<div class="btn-group btn-group-sm" data-row-id="1">
-										<a type="button" class="btn btn-primary"
-											href="#/page/menu/edit/1"> <i
-											class="glyphicon glyphicon-edit"></i>
-										</a> <a aria-expanded="false" aria-haspopup="true"
-											data-toggle="dropdown"
-											class="btn btn-primary dropdown-toggle" type="button"> <i
-											class="fa fa-cog"></i> <span class="ion-arrow-down-b"></span>
-										</a>
-										<ul class="dropdown-menu pull-right">
-											<li><a href="javascript:;"
-												class="command-installAppLock"><i
-													class="glyphicon glyphicon-send"></i>安装/更新到设备</a></li>
-											<li><a href="javascript:;" class="command-removeAppLock"><i
-													class="glyphicon glyphicon-erase"></i>从设备移除</a></li>
-											<li class="divider" role="separator"></li>
-											<li><a href="javascript:;" class="command-delete"><i
-													class="glyphicon glyphicon-remove"></i>移除</a></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
-							<#list orgTree.children as menu>
+						<#macro orgTree childrenList parent_id>
+							<#list childrenList as group>
 							<tr
-								class="treegrid-${menu.data.id} treegrid-parent-${orgTree.data.id}">
+								class="treegrid-${group.data.id} ${(parent_id==-1)?string('','treegrid-parent-${parent_id}')}  ">
 								<td></td>
-								<td>${menu.text}</td>
-								<td>${menu.data.code}</td>
-								<td><i class="${menu.iconCls!}"></i></td>
+								<td>${group.text}</td>
+								<td>${group.data.code}</td>
+								<td>${(group.data.type=='company')?string('公司',(group.data.type=='department')?string('部门','组'))}</td>
+								<td>${(group.data.phone)!}</td>
+								<td>${(group.data.email)!}</td>
+								<td>${(group.data.fax)!}</td>
+								<td><i class="${group.iconCls!}"></i></td>
 								<td>
 									<div class="btn-group btn-group-sm" data-row-id="1">
 										<a type="button" class="btn btn-primary"
@@ -140,8 +118,10 @@
 									</div>
 								</td>
 							</tr>
-							</#list> </#list>
-
+							<@orgTree childrenList=group.children parent_id=group.data.id />
+							</#list>
+						</#macro>
+						<@orgTree childrenList=allOrgTree parent_id=-1 />
 						</tbody>
 					</table>
 				</div>

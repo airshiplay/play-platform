@@ -16,7 +16,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="${base}/requirejs/assets/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${base}/requirejs/assets/AdminLTE-2.3.6/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="${base}/requirejs/assets/plugins/iCheck/square/blue.css">
 

@@ -30,10 +30,5 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-business"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp-requirejs"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-business"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-business-oauth"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-webapp-requirejs"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-webapp-requirejs-oauth"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-security-shiro"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

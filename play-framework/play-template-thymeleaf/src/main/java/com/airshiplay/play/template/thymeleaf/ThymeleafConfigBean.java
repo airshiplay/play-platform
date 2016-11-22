@@ -10,8 +10,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import com.airshiplay.play.core.PlayConstants;
 import com.airshiplay.play.core.ConfigWrapper;
+import com.airshiplay.play.core.PlayConstants;
 import com.airshiplay.play.core.StaticConfigSupplier;
 import com.airshiplay.play.web.WebSpringContext;
 
@@ -31,9 +31,9 @@ public class ThymeleafConfigBean {
 		resolver.setOrder(1);
 		resolver.setCharacterEncoding(PlayConstants.characterEncoding);
 		resolver.addStaticVariable("base", WebSpringContext.getContextPath());
-		resolver.addStaticVariable("staticConfig", new ConfigWrapper(StaticConfigSupplier.getConfiguration()));
+		resolver.addStaticVariable("staticConfig", new ConfigWrapper(
+				StaticConfigSupplier.getConfiguration()));
 		resolver.setExcludedViewNames(new String[] { "/views/*" });
-
 		// resolver.addStaticVariable("auth", AuthVariable.getInstance());
 		return resolver;
 	}
@@ -41,7 +41,8 @@ public class ThymeleafConfigBean {
 	// SpringResourceTemplateResolver:classpath
 	@Bean
 	public ServletContextTemplateResolver templateResolver() {
-		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
+		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(
+				servletContext);
 		templateResolver.setPrefix("/WEB-INF/templates/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML");

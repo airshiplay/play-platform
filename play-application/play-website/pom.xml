@@ -18,8 +18,11 @@
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-integration-webapp</artifactId>
- 		</dependency>
-
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-i18n</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-template-thymeleaf</artifactId>
@@ -48,6 +51,12 @@
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-plugin-webapp-requirejs-oauth</artifactId>
 			<version>${play.module.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-website-webapp-requirejs</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

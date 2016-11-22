@@ -40,6 +40,16 @@
 			<artifactId>org.apache.oltu.oauth2.common</artifactId>
 			<version>${oltu.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.oltu.oauth2</groupId>
+			<artifactId>org.apache.oltu.oauth2.resourceserver-filter</artifactId>
+			<version>${oltu.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

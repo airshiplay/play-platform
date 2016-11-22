@@ -121,7 +121,7 @@
 							content : "保存成功",
 							confirmButton : "返回列表",
 							confirm : function() {
-								location.href = "#/page/cms/adPosistion/adPositionList";
+								location.href = "#/page/cms/adPosition/adPositionList";
 							}
 						});
 

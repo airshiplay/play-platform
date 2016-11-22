@@ -14,10 +14,10 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="${base}/requirejs/assets/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${base}/requirejs/assets/AdminLTE-2.3.6/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="${base}/requirejs/assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="${base}/requirejs/assets/AdminLTE-2.3.6/css/skins/_all-skins.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="${base}/requirejs/assets/plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
@@ -101,7 +101,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="requirejs/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="requirejs/assets/AdminLTE-2.3.6/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -114,7 +114,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="requirejs/assets/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="requirejs/assets/AdminLTE-2.3.6/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -126,7 +126,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="requirejs/assets/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="requirejs/assets/AdminLTE-2.3.6/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -138,7 +138,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="requirejs/assets/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="requirejs/assets/AdminLTE-2.3.6/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -150,7 +150,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="requirejs/assets/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="requirejs/assets/AdminLTE-2.3.6/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -283,13 +283,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="requirejs/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="requirejs/assets/AdminLTE-2.3.6/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">${currentUser!''}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="requirejs/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="requirejs/assets/AdminLTE-2.3.6/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -337,7 +337,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/requirejs/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/requirejs/assets/AdminLTE-2.3.6/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>${currentUser!""}</p>

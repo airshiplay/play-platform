@@ -152,7 +152,7 @@
 							confirmButtonClass : 'btn-warning',
 							animation : 'zoom',
 							confirm : function() {
-								$.post(base + "/center/applock/delete", {
+								$.post(base + "/cms/adPosition/delete", {
 									ids : ids
 								}, function(resp) {
 									if (resp.success) {
@@ -287,8 +287,7 @@
 						});
 						
 						$table.find(".command-delete").on("click", function(e) {
-							var app_id = $(this).closest(".btn-group").data("row-id");
-
+							var app_id = $(this).closest(".btn-group").data("row-id");						
 							deleteRow($table, [ app_id ]);
 						});
 					});

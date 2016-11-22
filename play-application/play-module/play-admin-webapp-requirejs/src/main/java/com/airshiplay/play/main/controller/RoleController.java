@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ import com.airshiplay.play.main.service.RoleEntityService;
 import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.repo.domain.Tree;
+import com.airshiplay.play.util.ConvertUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.querydsl.core.types.Predicate;
@@ -54,6 +56,7 @@ public class RoleController {
 
 	@Autowired
 	private UserEntityService userEntityService;
+
 	@RequiresPermissions(value = { "page:sys:role:read" })
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String getList() {
@@ -87,12 +90,11 @@ public class RoleController {
 		return "/views/freemarker/admin/role/user/list";
 	}
 
-
 	@RequiresPermissions("page:sys:role:read")
 	@RequestMapping(value = "/{roleId}/user/add", method = RequestMethod.GET)
 	public String doAddRoleUserList(Model model, @PathVariable Long roleId) {
 		model.addAttribute("role", roleEntityService.findOne(roleId));
-		
+
 		return "/views/freemarker/admin/role/user/add";
 	}
 
@@ -125,8 +127,10 @@ public class RoleController {
 			@PathVariable Long roleId) {
 		return roleEntityService.findUserPageByRoleId(roleId, pageable);
 	}
+
 	/**
 	 * 角色添加用户
+	 * 
 	 * @param pageable
 	 * @param roleId
 	 * @param entities
@@ -134,12 +138,11 @@ public class RoleController {
 	 */
 	@RequestMapping(value = "/{roleId}/user/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Result roleAddUser(Pageable pageable,
-			@PathVariable Long roleId,
+	public Result roleAddUser(Pageable pageable, @PathVariable Long roleId,
 			@RequestParam(value = "ids[]") UserEntity[] entities) {
 		RoleEntity roleEntity = roleEntityService.findOne(roleId);
-				
-		for(UserEntity userEntity:entities){
+
+		for (UserEntity userEntity : entities) {
 			userEntity.getRoles().add(roleEntity);
 		}
 		userEntityService.save(Sets.newHashSet(entities));
@@ -148,17 +151,16 @@ public class RoleController {
 
 	@RequestMapping(value = "/{roleId}/user/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public Result roleRemoveUser(Pageable pageable,
-			@PathVariable Long roleId,
+	public Result roleRemoveUser(Pageable pageable, @PathVariable Long roleId,
 			@RequestParam(value = "ids[]") UserEntity[] entities) {
-		RoleEntity roleEntity = roleEntityService.findOne(roleId);				
-		for(UserEntity userEntity:entities){
+		RoleEntity roleEntity = roleEntityService.findOne(roleId);
+		for (UserEntity userEntity : entities) {
 			userEntity.getRoles().remove(roleEntity);
 		}
 		userEntityService.save(Sets.newHashSet(entities));
 		return Result.success();
 	}
-	
+
 	@RequiresPermissions(value = { "page:sys:role:read", "data:sys:role:read" }, logical = Logical.OR)
 	@RequestMapping(value = "/page", method = RequestMethod.POST)
 	@ResponseBody
@@ -173,7 +175,7 @@ public class RoleController {
 		if (bindingResult.hasErrors()) {
 			return Result.validateError();
 		}
-		if(manager.isLocked()){
+		if (manager.isLocked()) {
 			return Result.locked();
 		}
 		roleEntityService.save(manager);
@@ -255,25 +257,23 @@ public class RoleController {
 	@RequestMapping(value = "/{roleId}/menu/{menuId}/auth/{type}", method = RequestMethod.GET)
 	@ResponseBody
 	public Result getRoleMenuAuthority(@PathVariable Long roleId,
-			@PathVariable Long menuId, @PathVariable PermissionType type)
-			throws IllegalAccessException, InvocationTargetException {
-		// roleId;
-
+			@PathVariable Long menuId, @PathVariable PermissionType type) {
 		Iterator<AuthorityEntity> itr = authorityEntityService
 				.findAuthoritiesByMenuIdAndType(menuId, type).iterator();
 		List<AuthorityEntity> checkedList = authorityEntityService
 				.findAuthoritiesByRoleId(roleId);
-		List<Authority> result = new ArrayList<Authority>();
-		while (itr.hasNext()) {
-			AuthorityEntity entity = (AuthorityEntity) itr.next();
-			Authority auth = new Authority(entity);
-			if (checkedList.indexOf(entity) != -1) {
-				auth.setChecked(true);
-			}
-			result.add(auth);
-		}
-
-		return Result.success().addContent(result);
+		List<Authority> content = ConvertUtil.map(itr,
+				new Converter<AuthorityEntity, Authority>() {
+					@Override
+					public Authority convert(AuthorityEntity source) {
+						Authority auth = new Authority(source);
+						if (checkedList.indexOf(source) != -1) {
+							auth.setChecked(true);
+						}
+						return auth;
+					}
+				});
+		return Result.success().addContent(content);
 	}
 
 	/**

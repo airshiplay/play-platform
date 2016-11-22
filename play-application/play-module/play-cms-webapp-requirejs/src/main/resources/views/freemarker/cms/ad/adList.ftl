@@ -151,7 +151,7 @@
 							confirmButtonClass : 'btn-warning',
 							animation : 'zoom',
 							confirm : function() {
-								$.post(base + "/center/applock/delete", {
+								$.post(base + "/cms/ad/delete", {
 									ids : ids
 								}, function(resp) {
 									if (resp.success) {

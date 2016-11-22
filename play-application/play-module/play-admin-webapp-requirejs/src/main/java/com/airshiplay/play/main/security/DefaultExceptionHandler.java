@@ -72,8 +72,7 @@ public class DefaultExceptionHandler {
 		return Result.accessDenide().addProperties("exception", e.getMessage());
 	}
 
-	@SuppressWarnings("resource")
-	@ExceptionHandler({ Exception.class })
+	@ExceptionHandler({ Exception.class})
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public ModelAndView processException(HttpServletRequest request,
@@ -101,8 +100,8 @@ public class DefaultExceptionHandler {
 		    	  if(httpMessageConverter.canRead(returnValueType, acceptedMediaType)){
 		    		  httpMessageConverter.write(result, acceptedMediaType, outputMessage); 
 		    		  outputMessage.getBody().close();
-		    		  return new ModelAndView();  
-		    	  }  
+		    		  return mv;  
+		    	  }
 		      }
 		} else {
 			mv.addObject("errorMessage", e.getMessage());

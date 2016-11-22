@@ -18,7 +18,9 @@
 
 	<modules>
 		<module>play-website</module>
-    </modules>
+		<module>play-website-business</module>
+		<module>play-website-webapp-requirejs</module>
+	</modules>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -57,7 +59,11 @@
 				<artifactId>validation-api</artifactId>
 				<version>${validator-api.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-i18n</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-integration</artifactId>

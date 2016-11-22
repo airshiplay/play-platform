@@ -26,14 +26,18 @@
 		<module>play-admin-webapp-requirejs</module>
 		<module>play-app-business</module>
 		<module>play-app-webapp-requirejs</module>
-        <module>play-cms-business</module>
-        <module>play-cms-webapp-requirejs</module>
+		<module>play-cms-business</module>
+		<module>play-cms-webapp-requirejs</module>
+		<module>play-shop-business</module>
+		<module>play-shop-webapp-requirejs</module>
 		<module>play-oauth2-business</module>
 		<module>play-oauth2-webapp-requirejs</module>
 		<module>play-plugin-business</module>
 		<module>play-plugin-webapp-requirejs</module>
 		<module>play-plugin-business-oauth</module>
 		<module>play-plugin-webapp-requirejs-oauth</module>
+		<module>play-customer-business</module>
+		<module>play-customer-webapp-requirejs</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -136,7 +140,11 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-util</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>

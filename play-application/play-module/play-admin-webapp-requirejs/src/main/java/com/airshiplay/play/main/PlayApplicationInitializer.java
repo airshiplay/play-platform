@@ -104,7 +104,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 ////////////////////
 			MenuEntity userManagement = tools.createMenuByParent("用户管理", "center_user_management", "fa fa-users", null, null, sortNo++, null);
 			tools.createMenuByParent("用户列表", "center_member_list", "fa fa-user", "page/center/user/list", null, sortNo++, userManagement);
-			tools.createMenuByParent("组织机构列表 ", "center_org_list", "fa fa-object-group", "page/center/org/list", null, sortNo++, userManagement);
+			tools.createMenuByParent("组织机构列表 ", "center_org_list", "fa fa-sitemap", "page/center/org/list", null, sortNo++, userManagement);
 			MenuEntity roleSetting=tools.createMenuByParent("角色权限", "center_role_list", "fa fa-gavel", "page/center/role/list", null, sortNo++, userManagement);
 			tools.createPemission(roleSetting,PermissionType.page, "角色列表", "page:sys:role:read");
 			//

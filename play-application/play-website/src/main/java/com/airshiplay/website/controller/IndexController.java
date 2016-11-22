@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping()
-public class IndexController {
+public class IndexController extends BaseController {
 
 	@RequestMapping(value = { "", "/", "/index" }, method = RequestMethod.GET)
 	public String get() {
 		return "/index";
+	}
+
+	@RequestMapping(value = { "/template" }, method = RequestMethod.GET)
+	public String template() {
+		return "/template";
 	}
 }

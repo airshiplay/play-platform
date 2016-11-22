@@ -21,10 +21,13 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-integration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-util</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -6,7 +6,7 @@ import org.thymeleaf.dialect.IProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
 public class PlayDialect implements IProcessorDialect {
-	public static final String PREFIX = "cl";
+	public static final String PREFIX = "pl";
 	public static final String NAME = "PlayDialect";
 	public static final int PRECEDENCE = 1000;
 
