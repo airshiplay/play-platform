@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.BaseEntity;
 
 @Entity
@@ -32,7 +32,7 @@ public class OauthUserEntity extends BaseEntity<Long> {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "owner_id", nullable = false)
-	private UserEntity owner;
+	private AdminUserEntity owner;
 
 	public String getOauthPluginId() {
 		return oauthPluginId;
@@ -74,11 +74,11 @@ public class OauthUserEntity extends BaseEntity<Long> {
 		this.avatarUrl = avatarUrl;
 	}
 
-	public UserEntity getOwner() {
+	public AdminUserEntity getOwner() {
 		return owner;
 	}
 
-	public void setOwner(UserEntity owner) {
+	public void setOwner(AdminUserEntity owner) {
 		this.owner = owner;
 	}
 

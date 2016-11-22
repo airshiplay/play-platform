@@ -9,7 +9,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.oauth2.entity.AccessTokenEntity;
 import com.airshiplay.play.oauth2.service.AccessTokenEntityService;
 import com.airshiplay.play.oauth2.shiro.Oauth2UserDetails;
@@ -44,7 +44,7 @@ public class Oauth2Realm extends AuthorizingRealm {
 		if(entity.tokenExpired()){
 			 throw new TokenExpiredAccountException();//没找到帐号
 		}
-		UserEntity userEntity =entity.getUser();
+		AdminUserEntity userEntity =entity.getUser();
 		if(userEntity==null){
 			throw new UnknownAccountException();//没找到帐号
 		}

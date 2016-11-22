@@ -28,7 +28,7 @@ public class UserCredentialsEntity extends BaseEntity<Long> {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	private UserEntity user;
+	private AdminUserEntity user;
 
 	public String getAccount() {
 		return account;
@@ -46,11 +46,11 @@ public class UserCredentialsEntity extends BaseEntity<Long> {
 		this.secret = secret;
 	}
 
-	public UserEntity getUser() {
+	public AdminUserEntity getUser() {
 		return user;
 	}
 
-	public void setUser(UserEntity user) {
+	public void setUser(AdminUserEntity user) {
 		this.user = user;
 	}
 

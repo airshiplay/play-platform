@@ -12,7 +12,7 @@ import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "sys_log")
-public class LogEntity extends DataEntity<UserEntity, Long> {
+public class LogEntity extends DataEntity<AdminUserEntity, Long> {
 
 	/**
 	 * 

@@ -1,11 +1,11 @@
 package com.airshiplay.play.main.security;
 
 import com.airshiplay.play.core.SpringContext;
-import com.airshiplay.play.main.entity.UserEntity;
-import com.airshiplay.play.main.repo.UserEntityRepository;
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.repo.AdminUserEntityRepository;
 import com.airshiplay.play.security.CustomUserDetails;
 
-public class AdminUserDetails extends CustomUserDetails<Long, UserEntity> {
+public class AdminUserDetails extends CustomUserDetails<Long, AdminUserEntity> {
 	private static final long serialVersionUID = 8220061317304759492L;
 
 	public AdminUserDetails(Long id, String username,String realname, String password,
@@ -18,8 +18,8 @@ public class AdminUserDetails extends CustomUserDetails<Long, UserEntity> {
 
 
 	@Override
-	public UserEntity getCustomUser() {
-		UserEntityRepository userEntityRepository =	SpringContext.getBean(UserEntityRepository.class);
+	public AdminUserEntity getCustomUser() {
+		AdminUserEntityRepository userEntityRepository =	SpringContext.getBean(AdminUserEntityRepository.class);
 		return userEntityRepository.findOne(getId());
 	}
 

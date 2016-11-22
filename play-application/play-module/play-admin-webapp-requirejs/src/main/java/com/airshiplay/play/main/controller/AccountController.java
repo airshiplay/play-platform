@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.security.CustomUserDetails;
@@ -55,7 +55,7 @@ public class AccountController {
 	public Result postSave(Model model, @RequestParam Long id,
 			@RequestParam String name, @RequestParam String avatar,
 			@RequestParam String birthday) {
-		UserEntity user=userEntityService.getOne(id);
+		AdminUserEntity user=userEntityService.getOne(id);
 		user.setName(name);
 		user.setPhoto(avatar);
 		user =userEntityService.save(user);

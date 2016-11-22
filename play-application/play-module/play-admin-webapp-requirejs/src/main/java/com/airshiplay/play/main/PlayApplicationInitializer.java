@@ -10,7 +10,7 @@ import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity.OrgType;
 import com.airshiplay.play.main.entity.RoleEntity;
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.init.InitDataTools;
 import com.airshiplay.play.main.service.AuthorityEntityService;
 //import com.airshiplay.play.main.security.PasswordService;
@@ -64,7 +64,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			org.setType(OrgType.company);
 			organizationEntityService.save(org);
 
-			UserEntity admin = userEntityService.newEntity();
+			AdminUserEntity admin = userEntityService.newEntity();
 			String salt = passwordService.generatorSalt();
 			admin.setSalt(salt);
 			admin.setPassword(passwordService.encryptPassword("123456", salt));

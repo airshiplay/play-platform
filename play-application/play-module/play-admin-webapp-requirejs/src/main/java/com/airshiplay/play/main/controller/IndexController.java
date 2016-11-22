@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.airshiplay.play.main.entity.MenuEntity;
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 //import com.airshiplay.play.main.security.PasswordService;
 //import com.airshiplay.play.main.security.UserCredentialsDetailsService.EntityUserDetails;
 import com.airshiplay.play.main.service.MenuEntityService;
@@ -66,8 +66,8 @@ public class IndexController {
 	
 	@RequestMapping(value = { "${path.admin}", "${path.admin}/",
 			"${path.admin}/index" }, method = RequestMethod.GET)
-	public String get(Model model,@CurrentUser CustomUserDetails<?,UserEntity> user) {
-		UserEntity en=	user.getCustomUser();
+	public String get(Model model,@CurrentUser CustomUserDetails<?,AdminUserEntity> user) {
+		AdminUserEntity en=	user.getCustomUser();
 		try {
 		
 			model.addAttribute("currentUser",

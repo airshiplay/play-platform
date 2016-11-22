@@ -28,10 +28,10 @@ import com.airshiplay.play.main.entity.RoleEntity;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.stereotype.Service;
 //
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.repo.AuthorityEntityRespository;
 import com.airshiplay.play.main.repo.RoleEntityRepository;
-import com.airshiplay.play.main.repo.UserEntityRepository;
+import com.airshiplay.play.main.repo.AdminUserEntityRepository;
 import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
 //import com.airshiplay.play.security.CustomUserDetails;
 //
@@ -42,7 +42,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 
 	@Autowired
-	private UserEntityRepository userEntityRepository;
+	private AdminUserEntityRepository userEntityRepository;
 	@Autowired
 	private RoleEntityRepository roleEntityRepository;
 	@Autowired
@@ -53,7 +53,7 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public AdminUserDetails findByUsername(String username) {
-		UserEntity userEntity = userEntityRepository.findByUsername(username);
+		AdminUserEntity userEntity = userEntityRepository.findByUsername(username);
 		if (userEntity == null) {
 			return null;
 		}

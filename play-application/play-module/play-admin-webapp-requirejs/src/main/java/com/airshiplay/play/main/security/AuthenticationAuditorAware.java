@@ -5,14 +5,14 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.security.CustomUserDetails;
 
 @Component
-public class AuthenticationAuditorAware implements AuditorAware<UserEntity> {
+public class AuthenticationAuditorAware implements AuditorAware<AdminUserEntity> {
 
 	@Override
-	public UserEntity getCurrentAuditor() {
+	public AdminUserEntity getCurrentAuditor() {
 		Subject authentication = SecurityUtils.getSubject();
 		if (authentication == null) {
 			return null;
@@ -21,7 +21,7 @@ public class AuthenticationAuditorAware implements AuditorAware<UserEntity> {
 		if(principal==null)
 			return null;
 		@SuppressWarnings("unchecked")
-		CustomUserDetails<?, UserEntity> user = (CustomUserDetails<?, UserEntity>) principal;
+		CustomUserDetails<?, AdminUserEntity> user = (CustomUserDetails<?, AdminUserEntity>) principal;
 		return user.getCustomUser();
 	}
 

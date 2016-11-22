@@ -16,12 +16,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.SortEntity;
 
 @Entity
 @Table(name = "shop_product")
-public class ProductEntity extends SortEntity<UserEntity, Long> {
+public class ProductEntity extends SortEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = -2460002220316825755L;
 

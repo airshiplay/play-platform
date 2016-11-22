@@ -14,12 +14,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.SortEntity;
 
 @Entity
 @Table(name = "cms_ad")
-public class AdEntity extends SortEntity<UserEntity, Long> {
+public class AdEntity extends SortEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = -7067117077980949498L;
 

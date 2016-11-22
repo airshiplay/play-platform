@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.repo.domain.Result;
 import com.google.common.base.Strings;
@@ -41,19 +41,19 @@ public class UserController {
 	}
 	@RequestMapping(value="/edit/{userId}",method = RequestMethod.GET)
 	public String getUsrEdit(@PathVariable Long userId,Model model){
-		UserEntity userEntity= userEntityService.findOne(userId);
+		AdminUserEntity userEntity= userEntityService.findOne(userId);
 		model.addAttribute("user", userEntity);
 		return "/views/freemarker/admin/user/edit";
 	}
 	@RequestMapping(value = "/page", method = RequestMethod.POST)
 	@ResponseBody
-	public Page<UserEntity> doPage(Predicate predicate, Pageable pageable) {
+	public Page<AdminUserEntity> doPage(Predicate predicate, Pageable pageable) {
 		return userEntityService.findAll(predicate, pageable);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public Result doSave(@ModelAttribute @Valid UserEntity user, BindingResult bindingResult, String newPassword) {
+	public Result doSave(@ModelAttribute @Valid AdminUserEntity user, BindingResult bindingResult, String newPassword) {
 		if (bindingResult.hasErrors()) {
 			return Result.validateError();
 		}
@@ -70,15 +70,15 @@ public class UserController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "id")
 	@ResponseBody
-	public Result delete(@RequestParam(value = "id") UserEntity entity) {
+	public Result delete(@RequestParam(value = "id") AdminUserEntity entity) {
 		userEntityService.delete(entity);
 		return Result.success();
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "ids")
 	@ResponseBody
-	public Result batchDelete(@RequestParam(value = "ids") UserEntity[] entities) {
-		for (UserEntity entity : entities) {
+	public Result batchDelete(@RequestParam(value = "ids") AdminUserEntity[] entities) {
+		for (AdminUserEntity entity : entities) {
 			userEntityService.delete(entity);
 		}
 

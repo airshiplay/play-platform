@@ -3,6 +3,8 @@ package com.airshiplay.play.main.security;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.Filter;
+
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class MainWebSecurityConfigBean {
 	public ShiroFilterFactoryBean shiroFilter() {
 		ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
 		shiroFilter.setSecurityManager(securityManager);
-		shiroFilter.setLoginUrl("/admin/login");
+		shiroFilter.setLoginUrl("/login");
 		// shiroFilter.setSuccessUrl("/admin");
 		// shiroFilter.setUnauthorizedUrl("login");
 		Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
@@ -40,10 +42,14 @@ public class MainWebSecurityConfigBean {
 		filterChainDefinitionMap.put("/requirejs/**", "anon");
 		filterChainDefinitionMap.put("/captcha**", "anon");
 		filterChainDefinitionMap.put("/oauth/**", "anon");
-		filterChainDefinitionMap.put("/admin", "user");
+		filterChainDefinitionMap.put("/admin", "admin");
 		// filterChainDefinitionMap.put("/**", "user");
 		shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMap);
-		// shiroFilter.setFilters(filters);
+		 Map<String, Filter> filters = new HashMap<String, Filter>();
+		 AdminUserFilter adminUserFilter= new AdminUserFilter();
+		 adminUserFilter.setLoginUrl("/admin/login");
+		 filters.put("admin",adminUserFilter );
+		shiroFilter.setFilters(filters );
 		return shiroFilter;
 	}
 

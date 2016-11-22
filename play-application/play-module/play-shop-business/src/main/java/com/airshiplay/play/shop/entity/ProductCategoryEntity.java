@@ -12,12 +12,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.HierarchicalEntity;
 
 @Entity
 @Table(name = "shop_product_category")
-public class ProductCategoryEntity extends HierarchicalEntity<UserEntity, Long, ProductCategoryEntity> {
+public class ProductCategoryEntity extends HierarchicalEntity<AdminUserEntity, Long, ProductCategoryEntity> {
 
 	private static final long serialVersionUID = -7029182796544449909L;
 

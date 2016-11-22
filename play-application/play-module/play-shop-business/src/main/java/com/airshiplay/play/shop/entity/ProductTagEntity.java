@@ -10,12 +10,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.SortEntity;
 
 @Entity
 @Table(name = "shop_product_tag")
-public class ProductTagEntity extends SortEntity<UserEntity, Long> {
+public class ProductTagEntity extends SortEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = 825612513500826162L;
 

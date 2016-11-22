@@ -29,7 +29,7 @@ import com.airshiplay.play.main.entity.AuthorityEntity;
 import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.RoleEntity;
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.service.AuthorityEntityService;
 import com.airshiplay.play.main.service.MenuEntityService;
 import com.airshiplay.play.main.service.RoleEntityService;
@@ -108,7 +108,7 @@ public class RoleController {
 	@RequiresPermissions(value = { "page:sys:role:read", "data:sys:role:read" }, logical = Logical.OR)
 	@RequestMapping(value = "/{roleId}/user/unexist/page", method = RequestMethod.POST)
 	@ResponseBody
-	public Page<UserEntity> doRoleUnExistUserPage(Predicate predicate,
+	public Page<AdminUserEntity> doRoleUnExistUserPage(Predicate predicate,
 			Pageable pageable, @PathVariable Long roleId) {
 		return roleEntityService.findUnExistUserPageByRoleId(roleId, predicate,
 				pageable);
@@ -123,7 +123,7 @@ public class RoleController {
 	 */
 	@RequestMapping(value = "/{roleId}/user/page", method = RequestMethod.POST)
 	@ResponseBody
-	public Page<UserEntity> doRoleUserPage(Pageable pageable,
+	public Page<AdminUserEntity> doRoleUserPage(Pageable pageable,
 			@PathVariable Long roleId) {
 		return roleEntityService.findUserPageByRoleId(roleId, pageable);
 	}
@@ -139,10 +139,10 @@ public class RoleController {
 	@RequestMapping(value = "/{roleId}/user/add", method = RequestMethod.POST)
 	@ResponseBody
 	public Result roleAddUser(Pageable pageable, @PathVariable Long roleId,
-			@RequestParam(value = "ids[]") UserEntity[] entities) {
+			@RequestParam(value = "ids[]") AdminUserEntity[] entities) {
 		RoleEntity roleEntity = roleEntityService.findOne(roleId);
 
-		for (UserEntity userEntity : entities) {
+		for (AdminUserEntity userEntity : entities) {
 			userEntity.getRoles().add(roleEntity);
 		}
 		userEntityService.save(Sets.newHashSet(entities));
@@ -152,9 +152,9 @@ public class RoleController {
 	@RequestMapping(value = "/{roleId}/user/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public Result roleRemoveUser(Pageable pageable, @PathVariable Long roleId,
-			@RequestParam(value = "ids[]") UserEntity[] entities) {
+			@RequestParam(value = "ids[]") AdminUserEntity[] entities) {
 		RoleEntity roleEntity = roleEntityService.findOne(roleId);
-		for (UserEntity userEntity : entities) {
+		for (AdminUserEntity userEntity : entities) {
 			userEntity.getRoles().remove(roleEntity);
 		}
 		userEntityService.save(Sets.newHashSet(entities));

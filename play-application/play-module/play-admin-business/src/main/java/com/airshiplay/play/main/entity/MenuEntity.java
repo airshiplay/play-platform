@@ -10,7 +10,7 @@ import com.airshiplay.play.repo.jpa.HierarchicalEntity;
 
 @Entity
 @Table(name = "sys_menu")
-public class MenuEntity extends HierarchicalEntity<UserEntity, Long, MenuEntity> {
+public class MenuEntity extends HierarchicalEntity<AdminUserEntity, Long, MenuEntity> {
 
 	private static final long serialVersionUID = 2487374581329950331L;
 

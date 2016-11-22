@@ -12,12 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "app_app")
-public class AppEntity extends DataEntity<UserEntity, Long> {
+public class AppEntity extends DataEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = 1L;
 

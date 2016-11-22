@@ -15,12 +15,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "cms_ad_position")
-public class AdPositionEntity extends DataEntity<UserEntity, Long> {
+public class AdPositionEntity extends DataEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = -3174643793695808162L;
 

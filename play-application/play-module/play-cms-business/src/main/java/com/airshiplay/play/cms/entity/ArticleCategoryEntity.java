@@ -9,12 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.HierarchicalEntity;
 
 @Entity
 @Table(name = "cms_article_category")
-public class ArticleCategoryEntity extends HierarchicalEntity<UserEntity, Long, ArticleCategoryEntity> {
+public class ArticleCategoryEntity extends HierarchicalEntity<AdminUserEntity, Long, ArticleCategoryEntity> {
 
 	private static final long serialVersionUID = -7029182796544449909L;
 

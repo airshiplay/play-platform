@@ -24,14 +24,14 @@ public class QWebsiteConfig extends EntityPathBase<WebsiteConfig> {
 
     public final com.airshiplay.play.repo.jpa.QDataEntity _super = new com.airshiplay.play.repo.jpa.QDataEntity(this);
 
-    public final com.airshiplay.play.main.entity.QUserEntity createdBy;
+    public final com.airshiplay.play.main.entity.QAdminUserEntity createdBy;
 
     //inherited
     public final DateTimePath<java.util.Date> createdDate = _super.createdDate;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final com.airshiplay.play.main.entity.QUserEntity lastModifiedBy;
+    public final com.airshiplay.play.main.entity.QAdminUserEntity lastModifiedBy;
 
     //inherited
     public final DateTimePath<java.util.Date> lastModifiedDate = _super.lastModifiedDate;
@@ -54,8 +54,8 @@ public class QWebsiteConfig extends EntityPathBase<WebsiteConfig> {
 
     public QWebsiteConfig(Class<? extends WebsiteConfig> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.createdBy = inits.isInitialized("createdBy") ? new com.airshiplay.play.main.entity.QUserEntity(forProperty("createdBy"), inits.get("createdBy")) : null;
-        this.lastModifiedBy = inits.isInitialized("lastModifiedBy") ? new com.airshiplay.play.main.entity.QUserEntity(forProperty("lastModifiedBy"), inits.get("lastModifiedBy")) : null;
+        this.createdBy = inits.isInitialized("createdBy") ? new com.airshiplay.play.main.entity.QAdminUserEntity(forProperty("createdBy"), inits.get("createdBy")) : null;
+        this.lastModifiedBy = inits.isInitialized("lastModifiedBy") ? new com.airshiplay.play.main.entity.QAdminUserEntity(forProperty("lastModifiedBy"), inits.get("lastModifiedBy")) : null;
     }
 
 }

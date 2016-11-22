@@ -11,7 +11,7 @@ import com.airshiplay.play.repo.jpa.HierarchicalEntity;
 @Entity
 @Table(name = "sys_dict")
 public class DictEntity extends
-		HierarchicalEntity<UserEntity, Long, DictEntity> {
+		HierarchicalEntity<AdminUserEntity, Long, DictEntity> {
 
 	/**
 	 * 

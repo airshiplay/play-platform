@@ -14,12 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "cms_article")
-public class ArticleEntity extends DataEntity<UserEntity, Long> {
+public class ArticleEntity extends DataEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = 2104934209123741347L;
 

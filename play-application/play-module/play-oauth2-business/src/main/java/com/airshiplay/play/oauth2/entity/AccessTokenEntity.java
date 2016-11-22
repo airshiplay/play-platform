@@ -7,12 +7,12 @@ import javax.persistence.Table;
 
 import org.joda.time.DateTime;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "oauth2_access_token")
-public class AccessTokenEntity extends DataEntity<UserEntity, Long> {
+public class AccessTokenEntity extends DataEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = 1L;
 	public static final String BEARER_TYPE = "Bearer";
@@ -33,7 +33,7 @@ public class AccessTokenEntity extends DataEntity<UserEntity, Long> {
 	private String tokenId;
 	@Column
 	@ManyToOne
-	private UserEntity user;
+	private AdminUserEntity user;
 
 	@Column(name = "client_id")
 	private String clientId;
@@ -111,11 +111,11 @@ public class AccessTokenEntity extends DataEntity<UserEntity, Long> {
 		this.refreshTokenExpiredSeconds = refreshTokenExpiredSeconds;
 	}
 
-	public UserEntity getUser() {
+	public AdminUserEntity getUser() {
 		return user;
 	}
 
-	public void setUser(UserEntity user) {
+	public void setUser(AdminUserEntity user) {
 		this.user = user;
 	}
 	public boolean tokenExpired() {

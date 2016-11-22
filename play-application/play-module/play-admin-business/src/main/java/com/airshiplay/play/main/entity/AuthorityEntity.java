@@ -18,7 +18,7 @@ import com.airshiplay.play.repo.jpa.SortEntity;
 
 @Entity
 @Table(name = "sys_authority")
-public class AuthorityEntity extends SortEntity<UserEntity, Long> {
+public class AuthorityEntity extends SortEntity<AdminUserEntity, Long> {
 
 	/**
 	 * 

@@ -11,7 +11,7 @@ import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "sys_setting")
-public class SettingEntity extends DataEntity<UserEntity, Long> {
+public class SettingEntity extends DataEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = -7311556460000491508L;
 

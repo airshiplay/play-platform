@@ -7,7 +7,7 @@ import com.airshiplay.play.app.entity.AppEntity;
 import com.airshiplay.play.app.entity.AppEntity.Platform;
 import com.airshiplay.play.app.entity.QAppEntity;
 import com.airshiplay.play.app.repo.AppEntityRepository;
-import com.airshiplay.play.main.entity.QUserEntity;
+import com.airshiplay.play.main.entity.QAdminUserEntity;
 import com.airshiplay.play.main.service.EntityService;
 
 @Service
@@ -17,7 +17,7 @@ public class AppEntityService extends EntityService<AppEntity, Long> {
 
 	public void test() {
 		QAppEntity appEntity = QAppEntity.appEntity;
-		QUserEntity.userEntity.area.name.eq("");
+		QAdminUserEntity.adminUserEntity.area.name.eq("");
 
 		appEntityRepository.findAll(appEntity.platform.eq(Platform.android));
 

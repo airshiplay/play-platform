@@ -1,2 +1,4 @@
-/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-buser-business/src/main/java/com/airshiplay/play/buser/repo/BUserEntityRepository.java
-/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-buser-business/src/main/java/com/airshiplay/play/buser/entity/BUserEntity.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-customer-business/target/generated-sources/java/com/airshiplay/play/customer/entity/QCustomerEntity.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-customer-business/src/main/java/com/airshiplay/play/customer/repo/CustomerEntityRepository.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-customer-business/src/main/java/com/airshiplay/play/customer/entity/CustomerEntity.java
+/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-customer-business/src/main/java/com/airshiplay/play/customer/service/CustomerEntityService.java

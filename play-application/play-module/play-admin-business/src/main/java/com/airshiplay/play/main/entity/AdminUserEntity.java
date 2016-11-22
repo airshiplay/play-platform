@@ -22,7 +22,7 @@ import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "sys_user")
-public class UserEntity extends DataEntity<UserEntity, Long> implements Lockedable, AreaSupport {
+public class AdminUserEntity extends DataEntity<AdminUserEntity, Long> implements Lockedable, AreaSupport {
 
 	private static final long serialVersionUID = -3554902892978919213L;
 

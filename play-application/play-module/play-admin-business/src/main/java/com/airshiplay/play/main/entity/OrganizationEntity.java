@@ -15,7 +15,7 @@ import com.airshiplay.play.repo.jpa.HierarchicalEntity;
 
 @Entity
 @Table(name = "sys_organization")
-public class OrganizationEntity extends HierarchicalEntity<UserEntity, Long, OrganizationEntity> {
+public class OrganizationEntity extends HierarchicalEntity<AdminUserEntity, Long, OrganizationEntity> {
 
 	private static final long serialVersionUID = -7362271235798217688L;
 
@@ -59,11 +59,11 @@ public class OrganizationEntity extends HierarchicalEntity<UserEntity, Long, Org
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "primary_leader_id")
-	private UserEntity primaryLeader;
+	private AdminUserEntity primaryLeader;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "secondary_leader_id")
-	private UserEntity secondaryLeader;
+	private AdminUserEntity secondaryLeader;
 
 	public String getCode() {
 		return code;
@@ -137,19 +137,19 @@ public class OrganizationEntity extends HierarchicalEntity<UserEntity, Long, Org
 		this.email = email;
 	}
 
-	public UserEntity getPrimaryLeader() {
+	public AdminUserEntity getPrimaryLeader() {
 		return primaryLeader;
 	}
 
-	public void setPrimaryLeader(UserEntity primaryLeader) {
+	public void setPrimaryLeader(AdminUserEntity primaryLeader) {
 		this.primaryLeader = primaryLeader;
 	}
 
-	public UserEntity getSecondaryLeader() {
+	public AdminUserEntity getSecondaryLeader() {
 		return secondaryLeader;
 	}
 
-	public void setSecondaryLeader(UserEntity secondaryLeader) {
+	public void setSecondaryLeader(AdminUserEntity secondaryLeader) {
 		this.secondaryLeader = secondaryLeader;
 	}
 

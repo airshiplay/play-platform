@@ -12,12 +12,12 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.SortEntity;
 
 @Entity
 @Table(name = "plugin_config")
-public class PluginConfigEntity extends SortEntity<UserEntity, Long> {
+public class PluginConfigEntity extends SortEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = 6374792677775419596L;
 

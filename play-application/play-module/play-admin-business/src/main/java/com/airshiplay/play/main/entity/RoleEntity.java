@@ -21,7 +21,7 @@ import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "sys_role")
-public class RoleEntity extends DataEntity<UserEntity, Long> implements
+public class RoleEntity extends DataEntity<AdminUserEntity, Long> implements
 		Lockedable {
 
 	private static final long serialVersionUID = 5364423002312524895L;
@@ -40,7 +40,7 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 	private boolean locked = false;
 
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-	private Set<UserEntity> users = new HashSet<>();
+	private Set<AdminUserEntity> users = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "sys_role_menu", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "menu_id"))
@@ -75,11 +75,11 @@ public class RoleEntity extends DataEntity<UserEntity, Long> implements
 		return menus;
 	}
 
-	public Set<UserEntity> getUsers() {
+	public Set<AdminUserEntity> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<UserEntity> users) {
+	public void setUsers(Set<AdminUserEntity> users) {
 		this.users = users;
 	}
 

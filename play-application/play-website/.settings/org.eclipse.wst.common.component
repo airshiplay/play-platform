@@ -4,25 +4,16 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="play-web-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-web/play-web">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="play-template-thymeleaf-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-template-thymeleaf/play-template-thymeleaf">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="play-admin-webapp-requirejs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-admin-webapp-requirejs/play-admin-webapp-requirejs">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="play-admin-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-admin-business/play-admin-business">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="play-util-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-util/play-util">
+        <dependent-module archiveName="play-app-webapp-requirejs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-app-webapp-requirejs/play-app-webapp-requirejs">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="play-web-requirejs-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-web-requirejs/play-web-requirejs">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="play-security-shiro-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-security-shiro/play-security-shiro">
+        <dependent-module archiveName="play-app-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-app-business/play-app-business">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="play-cms-webapp-requirejs-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-cms-webapp-requirejs/play-cms-webapp-requirejs">

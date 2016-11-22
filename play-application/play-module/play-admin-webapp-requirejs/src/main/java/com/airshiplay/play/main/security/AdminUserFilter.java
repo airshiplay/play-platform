@@ -7,10 +7,10 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.security.CustomUserDetails;
 
-public class AdminAuthFilter extends UserFilter implements InitializingBean {
+public class AdminUserFilter extends UserFilter implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -24,7 +24,7 @@ public class AdminAuthFilter extends UserFilter implements InitializingBean {
 		} else {
 			Subject subject = getSubject(request, response);
 			 @SuppressWarnings("unchecked")
-			CustomUserDetails<?, UserEntity>  object=	( CustomUserDetails<?, UserEntity>)subject.getPrincipal();
+			CustomUserDetails<?, AdminUserEntity>  object=	( CustomUserDetails<?, AdminUserEntity>)subject.getPrincipal();
 			return subject.getPrincipal() != null;
 		}
 	}

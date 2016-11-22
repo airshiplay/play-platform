@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.airshiplay.play.main.entity.UserEntity;
-import com.airshiplay.play.main.repo.UserEntityRepository;
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.repo.AdminUserEntityRepository;
 
 @Service
-public class UserEntityService extends EntityService<UserEntity, Long> {
+public class UserEntityService extends EntityService<AdminUserEntity, Long> {
 
 	@Autowired
-	private UserEntityRepository userEntityRepository;
+	private AdminUserEntityRepository userEntityRepository;
 
 	@Transactional(readOnly = true)
-	public UserEntity findByUsername(String username) {
+	public AdminUserEntity findByUsername(String username) {
 		return userEntityRepository.findByUsername(username);
 	}
 
 	@Transactional(readOnly = true)
-	public UserEntity findByEmail(String email) {
+	public AdminUserEntity findByEmail(String email) {
 		return userEntityRepository.findByEmail(email);
 	}
 
 	@Transactional(readOnly = true)
-	public UserEntity findByMobile(String mobile) {
+	public AdminUserEntity findByMobile(String mobile) {
 		return userEntityRepository.findByMobile(mobile);
 	}
 

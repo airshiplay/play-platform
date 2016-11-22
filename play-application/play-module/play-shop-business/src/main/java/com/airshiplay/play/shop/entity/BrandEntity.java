@@ -15,12 +15,12 @@ import javax.persistence.OrderBy;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "shop_brand")
-public class BrandEntity extends DataEntity<UserEntity, Long> {
+public class BrandEntity extends DataEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = -2460002220316825755L;
 

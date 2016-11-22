@@ -7,12 +7,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.SortEntity;
 
 @Entity
 @Table(name = "cms_question")
-public class QuestionEntity extends SortEntity<UserEntity, Long> {
+public class QuestionEntity extends SortEntity<AdminUserEntity, Long> {
 
 	private static final long serialVersionUID = -6205570576129073122L;
 

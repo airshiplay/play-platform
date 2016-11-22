@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.airshiplay.play.main.entity.UserEntity;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.service.UserEntityService;
 import com.airshiplay.play.plugin.oauth.model.OauthPlugin;
 import com.airshiplay.play.plugin.oauth.model.OauthUserEntity;
@@ -66,7 +66,7 @@ public class OauthController {
 		Assert.notNull(oauthUser);
 
 		if (oauthUser.isNew() || oauthUser.getOwner() == null) {
-			UserEntity user = userEntityService.newEntity();
+			AdminUserEntity user = userEntityService.newEntity();
 			user.setName(oauthUser.getName());
 			user.setPhoto(oauthUser.getAvatarUrl());
 			user.setSalt(passwordService.generatorSalt());
@@ -84,7 +84,7 @@ public class OauthController {
 	}
 
 	private void login(OauthUserEntity oauthUser, HttpServletRequest request) {
-		UserEntity userEntity = oauthUser.getOwner();
+		AdminUserEntity userEntity = oauthUser.getOwner();
 		PlayPluginOauthToken<CustomUserDetails<?,?>> token = new PlayPluginOauthToken<CustomUserDetails<?,?>>(
 				new OauthUserDetails(userEntity.getId(),
 						userEntity.getUsername(),userEntity.getRealname(), userEntity.getPassword(),
@@ -96,7 +96,7 @@ public class OauthController {
 		subject.login(token);
 	}
 
-	public class OauthUserDetails extends CustomUserDetails<Long, UserEntity> {
+	public class OauthUserDetails extends CustomUserDetails<Long, AdminUserEntity> {
 		
 		public OauthUserDetails(Long id, String username,String realname, String password,
 				String credentialsSalt, boolean enabled,
@@ -109,7 +109,7 @@ public class OauthController {
 		private static final long serialVersionUID = 8220061317304759492L;
 
 		@Override
-		public UserEntity getCustomUser() {
+		public AdminUserEntity getCustomUser() {
 			return userEntityService.findOne(getId());
 		}
 	}
