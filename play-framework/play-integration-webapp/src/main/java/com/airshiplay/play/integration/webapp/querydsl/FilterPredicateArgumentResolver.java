@@ -104,7 +104,7 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 				}
 			}
 		}
-
+		parameters.remove("_");
 		QuerydslPredicate annotation = parameter.getParameterAnnotation(QuerydslPredicate.class);
 		TypeInformation<?> domainType = extractTypeInfo(parameter).getActualType();
 

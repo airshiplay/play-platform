@@ -1,0 +1,243 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<section class="content-header">
+	<h1>
+		文章列表 <small>开始管理文章信息</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/cms/article/articleList"><i class="fa fa-file-text"></i> 文章列表</a></li>
+		<li class="active" th:text="${article==null?'新建文章':'编辑文章'}"></li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${article==null?'新建文章':'编辑文章'}">新建文章</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="book-form" action="/cms/article/save">
+					<input type="hidden" name="id" th:value="${article==null?'':article.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="titleInput">标题</label>
+							<input type="text" name="title" class="form-control" id="titleInput" placeholder="请填写标题" data-bv-notempty="true"
+								data-bv-notempty-message="请填写标题" th:value="${article==null?'':article.title}">
+						</div>
+						<div class="form-group">
+		                  <label for="articleCategoryInput">文章分类</label>
+		                  <select id="articleCategoryInput" name="articleCategory" class="form-control">
+		                   <option th:if="${article!=null}" th:value="${article==null?'':article.articleCategory.id}" th:text="${article==null?'':article.articleCategory.name}"></option>
+		                  </select>
+		                </div>
+						<div class="form-group">
+							<label for="coverImageInput">封面图片</label>
+							<div class="kv-coverImage">
+								<input id="coverImageInput" name="coverImage" type="text" class="file-loading" th:value="${article==null?'':article.coverImage}">
+								<input type="button" id="uploadButton" value="上传" />
+							</div>
+						</div>	
+						<div class="form-group">
+							<label for="authorInput">作者</label>
+							<input type="text" name="author" class="form-control" id="authorInput" placeholder="请填写作者" data-bv-notempty="true"
+								data-bv-notempty-message="请填写作者" th:value="${article==null?'':article.author}">
+						</div>
+						<div class="form-group">
+							<label for="tagsInput">标签</label>
+								<select id="tagsInput" name="tags" class="form-control" multiple="multiple">
+									<optgroup th:if="${article!=null and article.tags!=null}">
+									<option  th:each="tag,tagStat:${article.tags}" th:value="${tag.id}" th:text="${tag.name}"></option>		                   
+		                  			</optgroup>
+		                  		</select>			                 
+                		</div>
+                		<div class="form-group">
+							<label for="settingInput">设置</label>
+							 <div class="checkbox">
+			                    <label>
+			                      <input type="checkbox" name="publication" th:checked="${(article!=null and article.publication)}">
+			                      是否发布
+			                    </label>
+			                    <label>
+			                      <input type="checkbox" name="stick" th:checked="${(article!=null and article.stick)}">
+			                      是否置顶
+			                    </label>
+			                   </div>
+                		</div>
+		                <div class="form-group">
+		                  <label for="summaryInput">摘要</label>
+		                  <textarea name=summary class="form-control" id="summaryInput" rows="3" placeholder="Enter ..."></textarea>
+		                </div>
+		                <div class="form-group">
+		                  <label for="contentInput">内容</label>
+		                  <textarea name=content class="form-control" id="contentInput" rows="3" style="height:140px;" placeholder="Enter ..."></textarea>
+		                </div>
+						<div class="form-group">
+							<label for="seoTitleInput">SEO标题</label>
+							<input type="text" name="seoTitle" class="form-control" id="seoTitleInput" placeholder="请填写SEO标题" data-bv-notempty="true"
+								data-bv-notempty-message="请填写SEO标题" th:value="${article==null?'':article.seoTitle}">
+						</div>
+						<div class="form-group">
+							<label for="seoKeywordsInput">SEO关键字</label>
+							<input type="text" name="seoKeywords" class="form-control" id="seoKeywordsInput" placeholder="请填写SEO关键字" data-bv-notempty="true"
+								data-bv-notempty-message="请填写SEO关键字" th:value="${article==null?'':article.seoKeywords}">
+						</div>
+						<div class="form-group">
+							<label for="seoDescriptionInput">SEO描述</label>
+							<input type="text" name="seoDescription" class="form-control" id="seoDescriptionInput" placeholder="请填写SEO描述" data-bv-notempty="true"
+								data-bv-notempty-message="请填写SEO描述" th:value="${article==null?'':article.seoDescription}">
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/cms/article/articleList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","kindeditor","icheck" ], function(domReady) {
+		domReady(function() {
+			activeMenu("cms_article_list");			 
+				$('input[type="checkbox"]').iCheck({
+				      checkboxClass: 'icheckbox_minimal-blue',
+				      radioClass: 'iradio_minimal-blue'
+				});
+			
+			var $form = $(".book-form");			
+			$("#tagsInput").select2({
+		    	  placeholder: '---请选择文章标签---',
+		    	  initSelection: function(element, callback) { // 初始化时设置默认值  	
+		    		  console.log(element);
+			    		var data = [];	    	  	 
+			    	  	$(element.find("option")).each(function () {
+			    	            data.push({id: $(this).val(), text: $(this).text()});
+			    	     });
+						callback(data);
+			      },
+		    	  ajax: {
+		    	    url: base+"/cms/articleTag/page",
+		    	    dataType: 'json',
+		    	    data: function (params) {
+		    	        return {
+		    	          searchPhrase: params.term, // search term
+		    	          page: params.page
+		    	        };
+		    	      },
+		    	    processResults: function (data, params) {
+		    	    	
+		    	    	 params.page = params.page || 1;
+		    	    	 $.each(data.rows, function(i,val){      
+		    	    		 val.text=val.name;
+		    	    	  });
+		    	      return {
+		    	        results: data.rows,
+		    	        pagination: {
+		    	            more: (params.page * 20) < data.total
+		    	          }    	       
+		    	      };
+		    	    },
+		    	    cache: true
+		    	  }
+		    });
+		    
+		   	$("#articleCategoryInput").select2({
+		    	  placeholder: '---请选择文章分类---',
+		    	  initSelection: function(element, callback) { // 初始化时设置默认值  	    		 
+		    		var data = [];	    	  	 
+		    	  	$(element.find("option")).each(function () {
+		    	            data.push({id: $(this).val(), text: $(this).text()});
+		    	     });
+					callback(data);
+		    	  },
+		    	  ajax: {
+		    	    url: base+"/cms/articleCategory/page",
+		    	    dataType: 'json',
+		    	    data: function (params) {
+		    	        return {
+		    	          searchPhrase: params.term, // search term
+		    	          page: params.page
+		    	        };
+		    	      },
+		    	    processResults: function (data, params) {
+		    	    	
+		    	    	 params.page = params.page || 1;
+		    	    	 $.each(data.rows, function(i,val){      
+		    	    		 val.text=val.name;
+		    	    	  });
+		    	      return {
+		    	        results: data.rows,
+		    	        pagination: {
+		    	            more: (params.page * 20) < data.total
+		    	          }    	       
+		    	      };
+		    	    },
+		    	    cache: true
+		    	  }
+		    });
+		    var uploadbutton = KindEditor.uploadbutton({
+					button : $('#uploadButton')[0],
+					fieldName : 'imgFile',
+					url : base+'/kindeditor/upload?dir=image',
+					afterUpload : function(data) {
+						if (data.error === 0) {
+							var url = KindEditor.formatUrl(data.url, 'absolute');
+							$('#coverImageInput').val(url);
+						} else {
+							alert(data.message);
+						}
+					},
+					afterError : function(str) {
+						alert('自定义错误信息: ' + str);
+					}
+				});
+			uploadbutton.fileBox.change(function(e) {
+				uploadbutton.submit();
+			});
+			window.editor = KindEditor.create('#contentInput',{
+				uploadJson : base+'/kindeditor/upload',
+				fileManagerJson : base+'/kindeditor/list',
+				allowFileManager : true,
+			});	
+			$(".book-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var $form = $(e.target);
+
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.fixedSerialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/cms/article/articleList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							
+							
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

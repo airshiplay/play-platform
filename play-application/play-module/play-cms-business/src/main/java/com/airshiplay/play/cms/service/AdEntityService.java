@@ -23,7 +23,7 @@ public class AdEntityService extends EntityService<AdEntity, Long> {
 		return Lists.newArrayList( adEntityRepository.findAll(
 				QAdEntity.adEntity.type.eq(Type.image).and(
 						QAdEntity.adEntity.adPosition.code.eq(positionCode)),
-				new PageRequest(0, 3, new QSort(QAdEntity.adEntity.createdDate
+				new PageRequest(0, 3, new QSort(QAdEntity.adEntity.sortNo.asc(),QAdEntity.adEntity.createdDate
 						.desc()))).getContent());
 	}
 }

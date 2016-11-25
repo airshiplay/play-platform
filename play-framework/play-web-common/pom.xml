@@ -6,37 +6,17 @@
 		<artifactId>play-framework</artifactId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
-	<artifactId>play-web</artifactId>
-
+	<artifactId>play-web-common</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
-			<artifactId>play-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.airshiplay</groupId>
-			<artifactId>play-json</artifactId>
+			<artifactId>play-web</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-file-storage</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 </project>

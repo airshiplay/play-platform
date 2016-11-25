@@ -29,10 +29,10 @@
     <module>play-template-velocity</module>
   	<module>play-web</module>
   	<module>play-web-extjs</module>
-    <module>play-web-requirejs</module>
   	<module>play-repo-redis</module>
   	<module>play-util</module>
   	<module>play-file-storage</module>
   	<module>play-websocket</module>
+  	<module>play-web-common</module>
   </modules>
 </project>
