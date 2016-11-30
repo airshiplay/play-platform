@@ -16,10 +16,18 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.airshiplay.play.core.helper.Patterns;
 import com.airshiplay.play.repo.domain.Lockedable;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
+/**
+ * 管理员、内部员工
+ * 
+ * @author lig
+ *
+ */
 @Entity
 @Table(name = "sys_user")
 public class AdminUserEntity extends DataEntity<AdminUserEntity, Long> implements Lockedable, AreaSupport {
@@ -29,15 +37,15 @@ public class AdminUserEntity extends DataEntity<AdminUserEntity, Long> implement
 	@NotNull
 	@Size(min = 2, max = 50)
 	@Column(length = 100)
-	private String name;
+	private String nickname;
 
 	@Size(min = 4, max = 50)
 	@Column(unique = true, length = 100)
 	private String username;
 
 	@Column(length = 10)
-	private String realname="";
-	
+	private String realname ;
+
 	@Column(length = 225)
 	private String password;
 
@@ -54,11 +62,12 @@ public class AdminUserEntity extends DataEntity<AdminUserEntity, Long> implement
 
 	@Column(length = 64)
 	private String salt;
-	
+
 	private Integer age;
 
 	private String sex;
 
+	@DateTimeFormat(pattern = "yyyy年MM月dd日")
 	private Date birthday;
 
 	private Date lastLoginDate;
@@ -88,12 +97,12 @@ public class AdminUserEntity extends DataEntity<AdminUserEntity, Long> implement
 	@JoinTable(name = "sys_user_to_role")
 	private Set<RoleEntity> roles = new HashSet<>();
 
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNickname(String name) {
+		this.nickname = name;
 	}
 
 	public String getUsername() {

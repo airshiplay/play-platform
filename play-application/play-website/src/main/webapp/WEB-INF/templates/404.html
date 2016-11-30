@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<base href="../../" th:href="@{/}" />
+<base href="../../" th:href="@{${#httpServletRequest.getContextPath()}}" />
 
 <link rel="icon" href="../../favicon.ico">
 
@@ -50,7 +50,7 @@
 					</h3>
 
 					<p>
-						We could not find the page you were looking for. Meanwhile, you may <a href="@{/}">返回首页</a> or try using the search form.
+						We could not find the page you were looking for. Meanwhile, you may <a th:href="@{${#httpServletRequest.getContextPath()}}">返回首页</a> or try using the search form.
 					</p>
 
 				</div>

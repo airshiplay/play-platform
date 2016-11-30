@@ -57,15 +57,15 @@ public abstract class OauthPlugin extends Plugin {
 		return pluginConfig != null ? pluginConfig.getAttribute(DESCRIPTION_ATTRIBUTE_NAME) : null;
 	}
 
-	public String getRedirectUri() {
-		return getSiteUrl() + "/oauth/api/" + getId();
+	public String getRedirectUri(String type) {
+		return getSiteUrl() + "/oauth/api/"+type+"/" + getId();
 	}
 
 	public abstract String getAuthorizationUrl();
 
-	public abstract Map<String, Object> getAuthorizationParameterMap();
+	public abstract Map<String, Object> getAuthorizationParameterMap(String source);
 
-	public abstract String getAccessToken(String code);
+	public abstract String getAccessToken(String code, String source);
 
 	public abstract OauthUserEntity getOauthUser(String accessToken);
 

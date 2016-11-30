@@ -11,7 +11,7 @@ public class Oauth2UserDetails extends CustomUserDetails<Long, AdminUserEntity> 
 	private UserEntityService userEntityService;
 
 	public Oauth2UserDetails(Long id, AdminUserEntity user) {
-		super(id, user.getUsername(), user.getRealname(), user.getPassword(),
+		super(id, Type.AdminOauth2,user.getUsername(), user.getRealname(), user.getPassword(),
 				user.getSalt(), true, true, true, true);
 	}
 

@@ -1,0 +1,97 @@
+<section class="content-header">
+	<h1>
+		车辆 <small>车辆</small>
+		<input type="hidden" value="" id="vehicleIdInput" th:value="${vehicle==null?'':vehicle.id}" />
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/obd/vehicle/vehicleList"><i class="glyphicon glyphicon-list"></i> 车辆列表</a></li>
+		<li class="active" >查看车辆</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content" th:inline="text">
+	<div class="mailbox-controls">
+		<div class="btn-group btn-group-sm">
+			<button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+				操作
+				<span class="ion-arrow-down-b"></span>
+			</button>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="javascript:;" id="deleteButton">
+						<i class="glyphicon glyphicon-remove"></i>移除
+					</a></li>
+			</ul>
+		</div>
+		<!-- /.btn-group -->
+		<button type="button" class="btn btn-warning btn-sm" onclick="history.back(-1)">
+			<i class="fa fa-reply"></i>
+		</button>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+
+			<!-- Profile Image -->
+			<div class="box box-primary">
+				<div class="box-body box-profile">
+					<h3 class="profile-username text-center">车辆信息</h3>
+					<dl>
+						<dt>车辆品牌</dt>
+						<dd th:text="${vehicle==null?'':vehicle.brand}"></dd>
+						<dt>车辆型号</dt>
+						<dd th:text="${vehicle==null?'':vehicle.model}"></dd>
+						<dt>车牌号</dt>
+						<dd th:text="${vehicle==null?'':vehicle.licenseNo}"></dd>
+					</dl>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady" ], function(domReady) {
+		domReady(function() {
+			activeMenu("obd_vehicle_list");
+
+			var [[vehicle]]Id = $("#[[vehicle]]IdInput").val();
+
+			//删除
+			$("#deleteButton").on("click", function() {
+				$.confirm({
+					title : "提示",
+					content : "确定删除车辆?",
+					confirmButton : "确定",
+					cancelButton : "关闭",
+					icon : 'fa fa-warning',
+					confirmButtonClass : 'btn-warning',
+					animation : 'zoom',
+					confirm : function() {
+						$.post(base + "/obd/vehicle/delete", {
+							ids : [ [[vehicle]]Id ]
+						}, function(resp) {
+							if (resp.success) {
+								$.alert({
+									title : false,
+									content : "操作成功",
+									confirmButton : "关闭"
+								});
+								location.href = "#page/obd/vehicle/vehicleList";
+							} else {
+								$.alert({
+									title : false,
+									content : resp.msg,
+									confirmButton : "关闭"
+								});
+							}
+						}, "json");
+					}
+				});
+			});
+
+		});
+	});
+</script>

@@ -1,6 +1,9 @@
 package com.airshiplay.play.plugin.oauth.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,17 @@ public class OauthPluginService {
 
 	public OauthPlugin getOauthPlugin(String oauthPluginId) {
 		return oauthPluginMap.get(oauthPluginId);
+	}
+
+	public List<OauthPlugin> getAvailableOauthPlugins() {
+		List<OauthPlugin> result = new ArrayList<OauthPlugin>();
+		for (Iterator<OauthPlugin> iterator = oauthPluginMap.values().iterator(); iterator.hasNext();) {
+			OauthPlugin plugin = (OauthPlugin) iterator.next();
+			if (plugin.getIsEnabled() && plugin.getIsInstalled()) {
+				result.add(plugin);
+			}
+		}
+		return result;
 	}
 
 }

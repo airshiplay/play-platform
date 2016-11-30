@@ -29,6 +29,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-business"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp-requirejs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp-bootstrap"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cn"  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MZUI</title>
+
+<!-- MZUI CSS file -->
+<link href="assets/mzui/css/mzui.min.css" rel="stylesheet">
+
+<style>
+.profile-haeder {position: relative; overflow: hidden; min-height: 8rem;z-index:0}
+.profile-haeder > .back {top: -2rem; left: -2rem; right: -2rem; bottom: -2rem; background-position: center; background-size: cover}
+.profile-haeder > .front {background: rgba(0,0,0,.1); text-align: center; padding: 1.5rem}
+.heading.affix{background: rgba(0,0,0,0);}
+</style>
+
+</head>
+<body>
+	<header class="heading affix dock-top">
+		<nav class="nav">
+			<a><i class="icon-bars"></i></a>
+		</nav>
+		<div class="title text-center">
+			<!-- <strong>个人</strong> -->
+		</div>
+		<nav class="nav">
+			<a><i class="icon-search"></i></a>
+		</nav>
+	</header>
+
+<div class="profile-haeder space shadow">
+
+  <div class="red dock blur-lg back" style="background-image: url(doc/img/img2.jpg)"></div>
+  <div class="front dock text-white">
+    <div class="avatar avatar-xl circle space-sm">
+      <img src="assets/img/avatar.png" alt="">
+    </div>
+    <h4 class="lead text-shadow-black">Catouse</h4>
+  </div>
+</div>
+
+<div class="section">
+  <div class="list with-divider">
+    <a class="item with-avatar">
+      <div class="avatar text-gray"><i class="icon-list-ul"></i></div>
+      <div class="title">订单列表</div>
+      <i class="icon icon-chevron-right muted"></i>
+    </a>
+    <a class="item with-avatar">
+      <div class="avatar text-gray"><i class="icon icon-comments"></i></div>
+      <div class="title">我的消息</div>
+      <i class="icon icon-chevron-right muted"></i>
+    </a>
+    <a class="item with-avatar">
+      <div class="avatar text-gray"><i class="icon icon-lock"></i></div>
+      <div class="title">安全中心</div>
+      <i class="icon icon-chevron-right muted"></i>
+    </a>
+    <a class="item with-avatar">
+      <div class="avatar text-gray"><i class="icon-cog"></i></div>
+      <div class="title">个人设置</div>
+      <i class="icon icon-chevron-right muted"></i>
+    </a>
+    <a class="item with-avatar">
+      <div class="avatar text-gray"><i class="icon-qrcode"></i></div>
+      <div class="title">我的二维码</div>
+      <i class="icon icon-chevron-right muted"></i>
+    </a>
+  </div>
+</div>
+<nav class="nav nav-auto affix dock-bottom justified">
+  <a href="/">首页</a>
+  <a href="/store4s">4S店</a>
+  <a href="/my" class="success strong">我的</a>
+</nav>
+
+	<!-- MZUI JS file -->
+	<script src="assets/mzui/js/mzui.min.js"></script>
+</body>
+</html>

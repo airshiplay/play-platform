@@ -5,17 +5,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.airshiplay.play.main.entity.LogEntity;
 import com.airshiplay.play.main.entity.LogEntity.LogLevel;
-import com.airshiplay.play.main.entity.LogEntity.LogType;
-import com.airshiplay.play.main.util.LogUtil;
+import com.airshiplay.play.main.entity.LogEntity.OperateType;
+
 @Service
-public class LogEntityService extends EntityService<LogEntity, Long>{
+public class LogEntityService extends EntityService<LogEntity, Long> {
 
 	@Transactional
-	public LogEntity save(Throwable ex){
+	public LogEntity addLog(String broswer, OperateType operateType, LogLevel level, String ip, String content) {
 		LogEntity entity = new LogEntity();
-		entity.setLevel(LogLevel.ERROR);
-		entity.setText(LogUtil.getThrowableString(ex));
-		entity.setType(LogType.Chrome);
+		entity.setLevel(level);
+		entity.setText(content);
+		entity.setBrowser(broswer);
+		entity.setIp(ip);
+		entity.setOperateType(operateType);
 		return save(entity);
 	}
+
 }

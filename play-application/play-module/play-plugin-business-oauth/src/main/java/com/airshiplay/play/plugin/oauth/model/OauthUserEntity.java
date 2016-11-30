@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.entity.MemberUserEntity;
 import com.airshiplay.play.repo.jpa.BaseEntity;
 
 @Entity
@@ -30,9 +31,29 @@ public class OauthUserEntity extends BaseEntity<Long> {
 	@Column(length = 500)
 	private String avatarUrl;
 
+	public MemberUserEntity getMemberOwner() {
+		return memberOwner;
+	}
+
+	public void setMemberOwner(MemberUserEntity memberOwner) {
+		this.memberOwner = memberOwner;
+	}
+
+	public AdminUserEntity getAdminOwner() {
+		return adminOwner;
+	}
+
+	public void setAdminOwner(AdminUserEntity adminOwner) {
+		this.adminOwner = adminOwner;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "owner_id", nullable = false)
-	private AdminUserEntity owner;
+	@JoinColumn(name = "owner_member_user_id")
+	private MemberUserEntity memberOwner;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "owner_admin_user_id")
+	private AdminUserEntity adminOwner;
 
 	public String getOauthPluginId() {
 		return oauthPluginId;
@@ -72,14 +93,6 @@ public class OauthUserEntity extends BaseEntity<Long> {
 
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
-	}
-
-	public AdminUserEntity getOwner() {
-		return owner;
-	}
-
-	public void setOwner(AdminUserEntity owner) {
-		this.owner = owner;
 	}
 
 }

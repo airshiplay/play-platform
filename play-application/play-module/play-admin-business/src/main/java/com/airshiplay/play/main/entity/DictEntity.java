@@ -28,7 +28,7 @@ public class DictEntity extends
 	 */
 	@NotNull
 	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 50)
+	@Column(length = 50)
 	private String label;
 
 	private String name;

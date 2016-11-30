@@ -3,10 +3,8 @@ package com.airshiplay.play.oauth2.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.airshiplay.play.main.entity.QAdminUserEntity;
 import com.airshiplay.play.main.service.EntityService;
 import com.airshiplay.play.oauth2.entity.AccessTokenEntity;
-
 import com.airshiplay.play.oauth2.repo.AccessTokenEntityRepository;
 
 @Service

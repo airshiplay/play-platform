@@ -6,7 +6,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.airshiplay.play.repo.jpa.DataEntity;
 
@@ -20,9 +19,7 @@ public class LogEntity extends DataEntity<AdminUserEntity, Long> {
 	private static final long serialVersionUID = 799104163303606659L;
 
 	@Column
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private LogType type;
+	private String browser;
 
 	@Lob
 	private String text;
@@ -32,22 +29,18 @@ public class LogEntity extends DataEntity<AdminUserEntity, Long> {
 	private LogLevel level;
 
 	@Column
-	private Long ip;
+	private String ip;
+
+	@Column
+	@Enumerated(EnumType.ORDINAL)
+	private OperateType operateType;
 
 	public enum LogLevel {
 		TRACE, DEBUG, INFO, WARN, ERROR, FATAL
 	}
 
-	public enum LogType {
-		Other, IE11, IE10, IE9, IE8, IE7, IE6, Android, IOS, Chrome, QQ, Maxthon, Green, Firefox, Opera, Safari
-	}
-
-	public LogType getType() {
-		return type;
-	}
-
-	public void setType(LogType type) {
-		this.type = type;
+	public enum OperateType {
+		LOGIN, EXIT, INSERT, DEL, UPDATE, UPLOAD, OTHER
 	}
 
 	public String getText() {
@@ -66,12 +59,28 @@ public class LogEntity extends DataEntity<AdminUserEntity, Long> {
 		this.level = level;
 	}
 
-	public Long getIp() {
+	public String getIp() {
 		return ip;
 	}
 
-	public void setIp(Long ip) {
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
+
+	public String getBrowser() {
+		return browser;
+	}
+
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
+
+	public OperateType getOperateType() {
+		return operateType;
+	}
+
+	public void setOperateType(OperateType operateType) {
+		this.operateType = operateType;
+	}
+
 }

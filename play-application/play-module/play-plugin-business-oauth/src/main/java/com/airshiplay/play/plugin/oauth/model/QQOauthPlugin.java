@@ -43,24 +43,24 @@ public class QQOauthPlugin extends OauthPlugin {
 	}
 
 	@Override
-	public Map<String, Object> getAuthorizationParameterMap() {
+	public Map<String, Object> getAuthorizationParameterMap(String type) {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("response_type", "code");
 		parameters.put("client_id", getClientId());
-		parameters.put("redirect_uri", getRedirectUri());
+		parameters.put("redirect_uri", getRedirectUri(type));
 		parameters.put("state", "test");
 		return parameters;
 	}
 
 	@Override
-	public String getAccessToken(String code) {
+	public String getAccessToken(String code,String type) {
 		Assert.hasText(code);
 		Map<String, Object> parameterMap = new HashMap<>();
 		parameterMap.put("grant_type", "authorization_code");
 		parameterMap.put("client_id", getClientId());
 		parameterMap.put("client_secret", getClientSecret());
 		parameterMap.put("code", code);
-		parameterMap.put("redirect_uri", getRedirectUri());
+		parameterMap.put("redirect_uri", getRedirectUri(type));
 		String responseString = get("https://graph.qq.com/oauth2.0/token", parameterMap);
 
 		List<NameValuePair> nameValuePairs = URLEncodedUtils.parse(responseString, Charset.forName("utf-8"));

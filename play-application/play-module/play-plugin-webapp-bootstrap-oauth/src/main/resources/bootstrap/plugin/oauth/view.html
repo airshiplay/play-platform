@@ -1,0 +1,70 @@
+<section class="content-header">
+	<h1>
+		OAuth认证 <small>开始管理OAuth认证</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li class="active">OAuth认证</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="mailbox-controls">
+		<button type="button" class="btn btn-warning btn-sm" onclick="history.back(-1)">
+			<i class="fa fa-reply"></i>
+		</button>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">查看OAuth插件</h3>
+				</div>
+				<div role="form" class="box-body">
+					<div class="form-group">
+						<label for="nameInput">OAuth插件名称</label> <input type="text" name="name" class="form-control" id="nameInput" data-bv-notempty="true"
+							readonly="readonly" data-bv-notempty-message="" placeholder="client_id" th:value="${plugin?.name}">
+					</div>
+					<div class="form-group">
+						<label for="avatarInput">插件图标</label>
+						<div class="kv-avatar">
+							<img alt="插件图标" th:src="${plugin_config?.attributes==null?'':plugin_config?.attributes['icon']}">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label>状态</label>
+						<div class="input-group radio">
+							<label> <input type="radio" value="true" readonly="readonly" disabled="disabled" name="isEnabled"
+								th:checked="${plugin_config==null}">未安装
+							</label> &nbsp; &nbsp; 
+							<label> <input type="radio" value="false" disabled="disabled" readonly="readonly" name="isEnabled">禁用
+							</label> &nbsp; &nbsp; <label> <input type="radio" value="true" readonly="readonly" disabled="disabled" name="isEnabled"
+								th:checked="${plugin_config?.isEnabled}">启用
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="client_idInput">client_id</label> <input type="text" name="attributes['client_id']" class="form-control" id="client_idInput"
+							data-bv-notempty="true" readonly="readonly" placeholder="未填写client_id"
+							th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['client_id']}">
+					</div>
+					<div class="form-group">
+						<label for="client_secretInput">client_secret</label> <input type="text" name="attributes['client_secret']" class="form-control"
+							id="client_secretInput" placeholder="未填写client_secret" readonly="readonly"
+							th:value="${plugin_config?.attributes==null?'':plugin_config?.attributes['client_secret']}">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady", "fileinputzh" ], function(domReady) {
+		domReady(function() {
+			activeMenu("plugin_oauth");
+		});
+	});
+</script>

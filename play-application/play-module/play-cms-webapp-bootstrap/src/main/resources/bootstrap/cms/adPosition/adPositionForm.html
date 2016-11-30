@@ -26,26 +26,46 @@
 						<div class="form-group">
 							<label for="nameInput">名称</label>
 							<input type="text" name="name" class="form-control" id="nameInput" placeholder="请填写广告位名称" data-bv-notempty="true"
-								data-bv-notempty-message="请填写广告位名称" th:value="${adPosition==null?'':adPosition.name}">
+								data-bv-notempty-message="请填写广告位名称" 
+		                  		data-bv-stringlength="true"
+				                data-bv-stringlength-min="1"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在1和200之间"th:value="${adPosition==null?'':adPosition.name}">
 						</div>
 						<div class="form-group">
 							<label for="codeInput">代号</label>
 							<input type="text" name="code" class="form-control" id="codeInput" placeholder="请填写广告位代号" data-bv-notempty="true"
-								data-bv-notempty-message="请填写广告位代号" th:value="${adPosition==null?'':adPosition.code}">
+								data-bv-notempty-message="请填写广告位代号" 
+		                  		data-bv-stringlength="true"
+				                data-bv-stringlength-min="1"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在1和200之间" th:value="${adPosition==null?'':adPosition.code}">
 						</div>
 						<div class="form-group">
 							<label for="widthInput">宽度</label>
 							<input type="text" name="width" class="form-control" id="widthInput" placeholder="请填写广告位宽度" data-bv-notempty="true"
-								data-bv-notempty-message="请填写广告位宽度" th:value="${adPosition==null?'':adPosition.width}">
+								data-bv-notempty-message="请填写广告位宽度"
+								data-bv-regexp="true"
+                				data-bv-regexp-regexp="^-?\d+$"
+                				data-bv-regexp-message="必须是整数" th:value="${adPosition==null?'':adPosition.width}">
 						</div>
 						<div class="form-group">
 							<label for="heightInput">高度</label>
 							<input type="text" name="height" class="form-control" id="heightInput" placeholder="请填写广告位高度" data-bv-notempty="true"
-								data-bv-notempty-message="请填写广告位高度" th:value="${adPosition==null?'':adPosition.height}">
+								data-bv-notempty-message="请填写广告位高度" data-bv-regexp="true"
+                				data-bv-regexp-regexp="^-?\d+$"
+                				data-bv-regexp-message="必须是整数" th:value="${adPosition==null?'':adPosition.height}">
 						</div>
 		                <div class="form-group">
 		                  <label for="descriptionInput">描述</label>
-		                  <textarea name=description class="form-control" id="descriptionInput" rows="3" placeholder="Enter ..." th:text="${adPosition==null?'':adPosition.description}"></textarea>
+		                  <textarea name=description class="form-control" id="descriptionInput" rows="3" placeholder="Enter ..." 
+		                  		data-bv-notempty="true"
+		                  		data-bv-notempty-message="请填写描述"
+		                  		data-bv-stringlength="true"
+				                data-bv-stringlength-min="1"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在1和200之间"
+		                  		th:text="${adPosition==null?'':adPosition.description}"></textarea>
 		                </div>
 						<div class="form-group">
 		                  <label for="templateInput">模板</label>

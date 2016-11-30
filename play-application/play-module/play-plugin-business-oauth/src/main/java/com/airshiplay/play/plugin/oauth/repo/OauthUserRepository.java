@@ -6,5 +6,5 @@ import com.airshiplay.play.repo.jpa.BaseJpaRepository;
 public interface OauthUserRepository extends BaseJpaRepository<OauthUserEntity, Long> {
 
 	OauthUserEntity findByOauthPluginIdAndUserId(String oauthPluginId, String userId);
-
+	
 }

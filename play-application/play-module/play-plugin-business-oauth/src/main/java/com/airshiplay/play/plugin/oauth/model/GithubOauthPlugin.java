@@ -42,15 +42,15 @@ public class GithubOauthPlugin extends OauthPlugin {
 	}
 
 	@Override
-	public Map<String, Object> getAuthorizationParameterMap() {
+	public Map<String, Object> getAuthorizationParameterMap(String type) {
 		Map<String, Object> parameterMap = new HashMap<>();
 		parameterMap.put("client_id", getClientId());
-		parameterMap.put("redirect_uri", getRedirectUri());
+		parameterMap.put("redirect_uri", getRedirectUri(type));
 		return parameterMap;
 	}
 
 	@Override
-	public String getAccessToken(String code) {
+	public String getAccessToken(String code,String type) {
 		Assert.hasText(code);
 		Map<String, Object> parameterMap = new HashMap<>();
 		parameterMap.put("client_id", getClientId());

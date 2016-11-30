@@ -1,0 +1,95 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<section class="content-header">
+	<h1>
+		OBD设备列表 <small>开始管理OBD设备</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/obd/obdDevice/obdDeviceList"><i class="glyphicon glyphicon-list"></i> OBD设备列表</a></li>
+		<li class="active" th:text="${obdDevice==null?'新建OBD设备':'编辑OBD设备'}">新建OBD设备</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${obdDevice==null?'新建OBD设备':'编辑OBD设备'}">新建OBD设备</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="obddevice-form" action="/obd/obdDevice/save">
+					<input type="hidden" name="id" th:value="${obdDevice==null?'':obdDevice.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="deviveNoInput">设备编号</label>
+							<input type="text" name="deviveNo" class="form-control" id="deviveNoInput" placeholder="请填写设备编号"
+								data-bv-stringlength="true" data-bv-stringlength-min="1" data-bv-stringlength-max="64" data-bv-stringlength-message="个数必须在1和64之间"
+		                  		th:value="${obdDevice==null?'':obdDevice.deviveNo}"/>
+						</div>
+						<div class="form-group">
+							<label for="typeInput">设备类型</label>
+							<input type="text" name="type" class="form-control" id="typeInput" placeholder="请填写设备类型"
+								data-bv-stringlength="true" data-bv-stringlength-min="1" data-bv-stringlength-max="64" data-bv-stringlength-message="个数必须在1和64之间"		                  		th:value="${obdDevice==null?'':obdDevice.type}"/>
+						</div>
+						<div class="form-group">
+							<label for="descriptionInput">描述</label>
+							<input type="text" name="description" class="form-control" id="descriptionInput" placeholder="请填写描述"
+								data-bv-stringlength="true" data-bv-stringlength-min="1" data-bv-stringlength-max="100" data-bv-stringlength-message="个数必须在1和100之间"
+		                  		th:value="${obdDevice==null?'':obdDevice.description}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/obd/obdDevice/obdDeviceList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh" ], function(domReady) {
+		domReady(function() {
+			activeMenu("obd_obddevice_list");
+			
+
+			var $form = $(".obddevice-form");		  
+			$(".obddevice-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/obd/obdDevice/obdDeviceList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

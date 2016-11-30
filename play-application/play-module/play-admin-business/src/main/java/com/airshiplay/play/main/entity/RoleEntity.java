@@ -33,8 +33,7 @@ public class RoleEntity extends DataEntity<AdminUserEntity, Long> implements
 
 	@NotNull
 	@Size(min = 1, max = 50)
-	@Column(nullable = false, length = 50,unique=true)
-	
+	@Column(nullable = false, length = 50,unique=true)	
 	private String code;
 
 	private boolean locked = false;

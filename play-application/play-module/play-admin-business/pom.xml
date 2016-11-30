@@ -25,9 +25,11 @@
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-integration</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>com.airshiplay</groupId>
-			<artifactId>play-util</artifactId>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

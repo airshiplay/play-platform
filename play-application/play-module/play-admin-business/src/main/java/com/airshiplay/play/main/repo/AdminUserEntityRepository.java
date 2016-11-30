@@ -18,7 +18,7 @@ public interface AdminUserEntityRepository extends BaseJpaRepository<AdminUserEn
 	@Override
 	default void customize(QuerydslBindings bindings, QAdminUserEntity root) {
 		bindings.bind(root.username).first((path, value) -> path.contains(value));
-		bindings.bind(root.name).first((path, value) -> path.contains(value));
+		bindings.bind(root.nickname).first((path, value) -> path.contains(value));
 		bindings.bind(root.email).first((path, value) -> path.contains(value));
 		bindings.bind(root.mobile).first((path, value) -> path.contains(value));
 	}

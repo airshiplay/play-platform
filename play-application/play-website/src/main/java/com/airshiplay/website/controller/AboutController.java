@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/about")
-public class AboutController {
+public class AboutController extends BaseController {
 	
 	@RequestMapping
 	public String get() {

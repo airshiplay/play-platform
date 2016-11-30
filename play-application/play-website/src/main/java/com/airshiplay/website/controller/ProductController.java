@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController extends BaseController {
 
 	@RequestMapping
 	public String get(@RequestParam(defaultValue = "0") int page,

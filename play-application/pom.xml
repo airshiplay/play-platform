@@ -19,7 +19,13 @@
 	<modules>
 		<module>play-website</module>
 		<module>play-website-business</module>
-		<module>play-website-webapp-requirejs</module>
+		<module>play-website-webapp-bootstrap</module>
+		<module>play-wechat-website</module>
+		<module>play-obd-business</module>
+		<module>play-obd-website</module>
+		<module>play-obd-webapp-bootstrap</module>
+		<module>play-wechat-business</module>
+		<module>play-wechat-webapp-bootstrap</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -30,7 +36,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
-				<artifactId>play-admin-webapp-requirejs</artifactId>
+				<artifactId>play-admin-webapp-bootstrap</artifactId>
+				<version>${play.module.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-admin-webapp-bootstrap</artifactId>
 				<version>${play.module.version}</version>
 			</dependency>
 			<dependency>
@@ -72,11 +83,6 @@
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-template-groovy</artifactId>
-				<version>${play.framework.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.airshiplay</groupId>
-				<artifactId>play-web-requirejs</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>

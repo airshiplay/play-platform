@@ -42,7 +42,7 @@ public class ProductCategoryEntity extends HierarchicalEntity<AdminUserEntity, L
 	
 	/** 筛选品牌 */
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "shop_product_category_brand")
+	@JoinTable(name = "shop_product_category_to_brand")
 	@OrderBy("sortNo asc")
 	private Set<BrandEntity> brands = new HashSet<BrandEntity>();
 

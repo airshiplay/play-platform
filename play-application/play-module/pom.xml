@@ -23,21 +23,22 @@
 
 	<modules>
 		<module>play-admin-business</module>
-		<module>play-admin-webapp-requirejs</module>
+		<module>play-admin-webapp</module>
+		<module>play-admin-api</module>
+		<module>play-admin-webapp-bootstrap</module>
 		<module>play-app-business</module>
-		<module>play-app-webapp-requirejs</module>
+		<module>play-app-webapp-bootstrap</module>
 		<module>play-cms-business</module>
-		<module>play-cms-webapp-requirejs</module>
+		<module>play-cms-webapp-bootstrap</module>
 		<module>play-shop-business</module>
-		<module>play-shop-webapp-requirejs</module>
+		<module>play-shop-webapp-bootstrap</module>
 		<module>play-oauth2-business</module>
-		<module>play-oauth2-webapp-requirejs</module>
+		<module>play-oauth2-webapp-bootstrap</module>
 		<module>play-plugin-business</module>
-		<module>play-plugin-webapp-requirejs</module>
+		<module>play-plugin-webapp</module>
 		<module>play-plugin-business-oauth</module>
-		<module>play-plugin-webapp-requirejs-oauth</module>
-		<module>play-customer-business</module>
-		<module>play-customer-webapp-requirejs</module>
+		<module>play-plugin-webapp-bootstrap-oauth</module>
+		
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -48,12 +49,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
-				<artifactId>play-admin-webapp-requirejs</artifactId>
+				<artifactId>play-admin-webapp-bootstrap</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
-				<artifactId>play-oauth2-webapp-requirejs</artifactId>
+				<artifactId>play-oauth2-webapp-bootstrap</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -71,7 +72,16 @@
 				<artifactId>play-integration-webapp</artifactId>
 				<version>${play.framework.version} </version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-web-common</artifactId>
+				<version>${play.framework.version} </version>
+			</dependency>
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-repo</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-repo-jpa</artifactId>
@@ -96,11 +106,6 @@
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-template-groovy</artifactId>
-				<version>${play.framework.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.airshiplay</groupId>
-				<artifactId>play-web-requirejs</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>

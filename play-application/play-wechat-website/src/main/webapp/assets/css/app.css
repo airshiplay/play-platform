@@ -1,0 +1,38 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+body {
+	min-height: 800px;
+	padding-bottom: 40px;
+	color: #5a5a5a;
+	padding-top: 0px;
+}
+
+.main-content {
+	min-height: 500px;
+}
+/* footer */
+#footer {
+	padding: 15px 0;
+	background: #fff;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+#footer .footerNav a {
+	padding: 0 5px;
+}
+
+#footer .copyRight {
+	font-family: Arial;
+}
+
+.error-page .headline {
+	float: none;
+	text-align: center;
+}
+
+.error-page .error-content {
+	float: none;
+	text-align: center;
+}

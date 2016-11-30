@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import com.airshiplay.play.web.bind.BinderDateFormatter;
+import com.airshiplay.play.web.bind.BinderDateFormatter;
 
 @Controller
 @RequestMapping("/news")
-public class NewsController {
+public class NewsController extends BaseController {
 
 	@RequestMapping
 	
@@ -26,7 +26,7 @@ public class NewsController {
 
 	@InitBinder
 	public void binder(WebDataBinder binder) {
-//		binder.addCustomFormatter(new BinderDateFormatter());
+		binder.addCustomFormatter(new BinderDateFormatter());
 	}
 
 	@RequestMapping("/{date}/{id}")

@@ -1,0 +1,108 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<section class="content-header">
+	<h1>
+		系统告警列表 <small>开始管理系统告警</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/obd/vehicleAlarm/vehicleAlarmList"><i class="glyphicon glyphicon-list"></i> 系统告警列表</a></li>
+		<li class="active" th:text="${vehicleAlarm==null?'新建系统告警':'编辑系统告警'}">新建系统告警</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${vehicleAlarm==null?'新建系统告警':'编辑系统告警'}">新建系统告警</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="vehiclealarm-form" action="/obd/vehicleAlarm/save">
+					<input type="hidden" name="id" th:value="${vehicleAlarm==null?'':vehicleAlarm.id}" />
+					<div class="box-body">
+						<div class="form-group">
+		                  <label for="typeInput">告警类型</label>
+		                  <select id="typeInput" name="type" class="form-control" 
+								data-bv-notempty-message="请选择告警类型" >
+		                  </select>
+		                </div>
+						<div class="form-group">
+		                  <label for="statusInput">状态</label>
+		                  <select id="statusInput" name="status" class="form-control" 
+								data-bv-notempty-message="请选择状态" >
+		                  </select>
+		                </div>
+						<div class="form-group">
+							<label for="descriptionInput">描述</label>
+							<input type="text" name="description" class="form-control" id="descriptionInput" placeholder="请填写描述"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="255" data-bv-stringlength-message="个数必须在0和255之间"
+		                  		th:value="${vehicleAlarm==null?'':vehicleAlarm.description}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/obd/vehicleAlarm/vehicleAlarmList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh" ], function(domReady) {
+		domReady(function() {
+			activeMenu("obd_vehiclealarm_list");
+			
+		    $typeSelect=$("#typeInput").select2({
+		    	placeholder: '---请选择类型---',
+		    	data:[{id:'Error1',text:'故障状态灯异常'},{id:'Error2',text:'行驶里程超出阈值'},]
+		    });
+		    $typeSelect.val("[[${vehicleAlarm==null?'':vehicleAlarm.type}]]").trigger("change");
+		    
+		    $statusSelect=$("#statusInput").select2({
+		    	placeholder: '---请选择类型---',
+		    	data:[{id:'init',text:'新建'},{id:'processing',text:'处理中'},{id:'solved',text:'已解决'},{id:'ignore',text:'忽略'},]
+		    });
+		    $statusSelect.val("[[${vehicleAlarm==null?'':vehicleAlarm.status}]]").trigger("change");
+			
+		    var $form = $(".vehiclealarm-form");
+		  
+			$(".vehiclealarm-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/obd/vehicleAlarm/vehicleAlarmList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

@@ -28,7 +28,8 @@
 					<div class="box-body">
 						<div class="form-group">
 		                  <label for="adPostionInput">广告位选择</label>
-		                  <select id="adPostionInput" name="adPosition" class="form-control">
+		                  <select id="adPostionInput" name="adPosition" class="form-control" data-bv-notempty="true"
+								data-bv-notempty-message="请选择广告位">
 		                  <option th:if="${ad!=null}" th:value="${ad==null?'':ad.adPosition.id}" th:text="${ad==null?'':ad.adPosition.name}"></option>
 		                   <!--  <option value="1">option 1</option>
 		                    <option>option 2</option>
@@ -40,11 +41,16 @@
 						<div class="form-group">
 							<label for="titleInput">标题</label>
 							<input type="text" name="title" class="form-control" id="titleInput" placeholder="请填写广告标题" data-bv-notempty="true"
-								data-bv-notempty-message="请填写广告标题" th:value="${ad==null?'':ad.title}">
+								data-bv-notempty-message="请填写广告标题"
+		                  		data-bv-stringlength="true"
+				                data-bv-stringlength-min="1"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在1和200之间" th:value="${ad==null?'':ad.title}">
 						</div>
 						<div class="form-group">
 		                  <label for="typeInput">类型</label>
-		                  <select id="typeInput" name="type" class="form-control">
+		                  <select id="typeInput" name="type" class="form-control" data-bv-notempty="true"
+								data-bv-notempty-message="请选择类型" >
 		                    <!-- <option value="text">文本</option>
 		                    <option value="code">代码</option>
 		                    <option value="image">图片</option>
@@ -52,16 +58,28 @@
 		                    <option value="video">视频</option> -->
 		                  </select>
 		                </div>
-		                <div class="form-group">
+						<div class="form-group">
+							<label for="pathInput">路径</label>
+							<div class="kv-path">
+								<input id="pathInput" name="path" type="text" class="form-control file-loading" 
+		                  		data-bv-stringlength="true"
+				                data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间"  th:value="${ad==null?'':ad.path}">
+								<input type="button" id="uploadButton" value="上传" />
+							</div>
+						</div>
+						<div class="form-group">
 		                  <label for="contentInput">内容</label>
 		                  <textarea name="content" class="form-control" rows="3" placeholder="Enter ..." th:text="${ad==null?'':ad.content}"></textarea>
 		                </div>
 						<div class="form-group">
-							<label for="pathInput">路径</label>
-							<div class="kv-path">
-								<input id="pathInput" name="path" type="text" class="file-loading" th:value="${ad==null?'':ad.path}">
-								<input type="button" id="uploadButton" value="上传" />
-							</div>
+							<label for="urlInput">链接地址</label>
+							<input type="text" name="url" class="form-control" id="urlInput" 
+		                  		data-bv-stringlength="true"
+				                data-bv-stringlength-min="1"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${ad==null?'':ad.url}">
 						</div>		                
 						<div class="form-group">
 			                <label>开始时间</label>
@@ -79,13 +97,16 @@
 			                  <div class="input-group-addon">
 			                    <i class="fa fa-calendar"></i>
 			                  </div>
-			                  <input type="text" class="form-control pull-right" id="datepicker" name="endDate" th:value="${ad==null||ad.endDate==null?'': #dates.format(ad.endDate, 'yyyy年MM月dd日 HH:mm')}">
+			                  <input type="text" class="form-control pull-right" name="endDate" th:value="${ad==null||ad.endDate==null?'': #dates.format(ad.endDate, 'yyyy年MM月dd日 HH:mm')}">
 			                </div>
 			                <!-- /.input group -->
 			            </div>
 			            <div class="form-group">
 							<label for="sortNoInput">排序</label>
-							<input type="text" name="sortNo" class="form-control" id="sortNoInput" th:value="${ad==null?'':ad.sortNo}">
+							<input type="text" name="sortNo" class="form-control" id="sortNoInput" 
+							data-bv-regexp="true"
+                				data-bv-regexp-regexp="^-?\d+$"
+                				data-bv-regexp-message="必须是整数"  th:value="${ad==null?'':ad.sortNo}">
 						</div>
 					</div>
 					<!-- /.box-body -->
@@ -151,6 +172,7 @@
 		    	    cache: true
 		    	  }
 		    });
+		    
 		    $type=$("#typeInput").select2({
 		    	placeholder: '---请选择类型---',
 		    	data:[{id:'text',text:'文本'},

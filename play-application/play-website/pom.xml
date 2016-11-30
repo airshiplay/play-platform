@@ -35,27 +35,21 @@
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
-			<artifactId>play-admin-webapp-requirejs</artifactId>
+			<artifactId>play-admin-webapp-bootstrap</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
-			<artifactId>play-app-webapp-requirejs</artifactId>
+			<artifactId>play-cms-webapp-bootstrap</artifactId>
 			<version>${play.module.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
-			<artifactId>play-cms-webapp-requirejs</artifactId>
+			<artifactId>play-app-webapp-bootstrap</artifactId>
 			<version>${play.module.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
-			<artifactId>play-plugin-webapp-requirejs-oauth</artifactId>
-			<version>${play.module.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.airshiplay</groupId>
-			<artifactId>play-website-webapp-requirejs</artifactId>
+			<artifactId>play-website-webapp-bootstrap</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

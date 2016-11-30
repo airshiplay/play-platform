@@ -28,7 +28,10 @@
 						<div class="form-group">
 							<label for="titleInput">标题</label>
 							<input type="text" name="title" class="form-control" id="titleInput" placeholder="请填写标题" data-bv-notempty="true"
-								data-bv-notempty-message="请填写标题" th:value="${article==null?'':article.title}">
+								data-bv-notempty-message="请填写标题" data-bv-stringlength="true"
+				                data-bv-stringlength-min="1"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在1和200之间" th:value="${article==null?'':article.title}">
 						</div>
 						<div class="form-group">
 		                  <label for="articleCategoryInput">文章分类</label>
@@ -39,14 +42,21 @@
 						<div class="form-group">
 							<label for="coverImageInput">封面图片</label>
 							<div class="kv-coverImage">
-								<input id="coverImageInput" name="coverImage" type="text" class="file-loading" th:value="${article==null?'':article.coverImage}">
+								<input id="coverImageInput" name="coverImage" type="text" class="file-loading"
+								data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间"  th:value="${article==null?'':article.coverImage}">
 								<input type="button" id="uploadButton" value="上传" />
 							</div>
 						</div>	
 						<div class="form-group">
 							<label for="authorInput">作者</label>
 							<input type="text" name="author" class="form-control" id="authorInput" placeholder="请填写作者" data-bv-notempty="true"
-								data-bv-notempty-message="请填写作者" th:value="${article==null?'':article.author}">
+								data-bv-notempty-message="请填写作者" data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${article==null?'':article.author}">
 						</div>
 						<div class="form-group">
 							<label for="tagsInput">标签</label>
@@ -71,7 +81,11 @@
                 		</div>
 		                <div class="form-group">
 		                  <label for="summaryInput">摘要</label>
-		                  <textarea name=summary class="form-control" id="summaryInput" rows="3" placeholder="Enter ..."></textarea>
+		                  <textarea name=summary class="form-control" id="summaryInput" rows="3" placeholder="Enter ..."
+		                  	data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="500"
+				                data-bv-stringlength-message="个数必须在0和500之间"></textarea>
 		                </div>
 		                <div class="form-group">
 		                  <label for="contentInput">内容</label>
@@ -79,18 +93,26 @@
 		                </div>
 						<div class="form-group">
 							<label for="seoTitleInput">SEO标题</label>
-							<input type="text" name="seoTitle" class="form-control" id="seoTitleInput" placeholder="请填写SEO标题" data-bv-notempty="true"
-								data-bv-notempty-message="请填写SEO标题" th:value="${article==null?'':article.seoTitle}">
+							<input type="text" name="seoTitle" class="form-control" id="seoTitleInput" placeholder="请填写SEO标题" 
+								data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${article==null?'':article.seoTitle}">
 						</div>
 						<div class="form-group">
 							<label for="seoKeywordsInput">SEO关键字</label>
-							<input type="text" name="seoKeywords" class="form-control" id="seoKeywordsInput" placeholder="请填写SEO关键字" data-bv-notempty="true"
-								data-bv-notempty-message="请填写SEO关键字" th:value="${article==null?'':article.seoKeywords}">
+							<input type="text" name="seoKeywords" class="form-control" id="seoKeywordsInput" placeholder="请填写SEO关键字"
+								data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${article==null?'':article.seoKeywords}">
 						</div>
 						<div class="form-group">
 							<label for="seoDescriptionInput">SEO描述</label>
-							<input type="text" name="seoDescription" class="form-control" id="seoDescriptionInput" placeholder="请填写SEO描述" data-bv-notempty="true"
-								data-bv-notempty-message="请填写SEO描述" th:value="${article==null?'':article.seoDescription}">
+							<input type="text" name="seoDescription" class="form-control" id="seoDescriptionInput" placeholder="请填写SEO描述"  data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${article==null?'':article.seoDescription}">
 						</div>
 					</div>
 					<!-- /.box-body -->

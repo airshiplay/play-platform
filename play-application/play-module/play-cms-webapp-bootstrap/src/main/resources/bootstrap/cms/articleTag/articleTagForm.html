@@ -27,18 +27,28 @@
 						<div class="form-group">
 							<label for="nameInput">名称</label>
 							<input type="text" name="name" class="form-control" id="nameInput" placeholder="请填写名称" data-bv-notempty="true"
-								data-bv-notempty-message="请填写名称" th:value="${articleTag==null?'':articleTag.name}">
+								data-bv-notempty-message="请填写名称"
+								data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${articleTag==null?'':articleTag.name}">
 						</div>
 						<div class="form-group">
 							<label for="iconImageInput">图标</label>
 							<div class="kv-icon">
-								<input id="iconInput" name="icon" type="text" class="file-loading" th:value="${articleTag==null?'':articleTag.icon}" >
+								<input id="iconInput" name="icon" type="text" class="file-loading" data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${articleTag==null?'':articleTag.icon}" >
 								<input type="button" id="iconInputButton" value="上传" />
 							</div>
 						</div>							
 						<div class="form-group">
 							<label for="memoInput">备注</label>
-							<input type="text" name="memo" class="form-control" id="memoInput" th:value="${articleTag==null?'':articleTag.memo}">
+							<input type="text" name="memo" class="form-control" id="memoInput" data-bv-stringlength="true"
+								data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${articleTag==null?'':articleTag.memo}">
 						</div>
 					</div>
 					<!-- /.box-body -->

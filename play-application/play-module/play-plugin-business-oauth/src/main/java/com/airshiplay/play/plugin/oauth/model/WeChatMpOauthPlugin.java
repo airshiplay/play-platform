@@ -39,10 +39,10 @@ public class WeChatMpOauthPlugin extends OauthPlugin {
 	}
 
 	@Override
-	public Map<String, Object> getAuthorizationParameterMap() {
+	public Map<String, Object> getAuthorizationParameterMap(String type) {
 		Map<String, Object> parameterMap = new HashMap<>();
 		parameterMap.put("appid", getClientId());
-		parameterMap.put("redirect_uri", getRedirectUri());
+		parameterMap.put("redirect_uri", getRedirectUri(type));
 		parameterMap.put("response_type", "code");
 		parameterMap.put("scope", "snsapi_userinfo");
 		parameterMap.put("state", RandomStringUtils.randomAscii(4));
@@ -52,7 +52,7 @@ public class WeChatMpOauthPlugin extends OauthPlugin {
 		return "#wechat_redirect";
 	}
 	@Override
-	public String getAccessToken(String code) {
+	public String getAccessToken(String code,String type) {
 		Assert.hasText(code);
 		Map<String, Object> parameterMap = new HashMap<>();
 		parameterMap.put("appid", getClientId());

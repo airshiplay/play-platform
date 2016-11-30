@@ -185,8 +185,7 @@
 					$("#refreshButton").on("click", function() {
 						refreshGrid();
 					});
-					$("#searchButton").on("click", function() {
-						
+					$("#searchButton").on("click", function() {					
 						var arr=new Array();
 						var search=new Object();
 						search.property="title";
@@ -196,9 +195,7 @@
 							grid.bootgrid("search", '');
 						}else{
 							grid.bootgrid("search", JSON.stringify(arr));
-						}
-						
-						
+						}						
 					});
 
 				});
