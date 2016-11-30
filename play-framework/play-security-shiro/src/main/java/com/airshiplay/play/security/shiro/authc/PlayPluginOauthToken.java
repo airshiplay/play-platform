@@ -1,10 +1,11 @@
 package com.airshiplay.play.security.shiro.authc;
 
+import org.apache.shiro.authc.HostAuthenticationToken;
 import org.apache.shiro.authc.RememberMeAuthenticationToken;
 
 import com.airshiplay.play.security.CustomUserDetails;
 
-public class PlayPluginOauthToken<U extends CustomUserDetails<?,?>> implements
+public class PlayPluginOauthToken<U extends CustomUserDetails<?,?>> implements HostAuthenticationToken,
 		RememberMeAuthenticationToken {
 
 	/**
@@ -12,9 +13,10 @@ public class PlayPluginOauthToken<U extends CustomUserDetails<?,?>> implements
 	 */
 	private static final long serialVersionUID = 1424880846034478481L;
 	private U customUserDetails;
-
-	public PlayPluginOauthToken(U u) {
+	private final String host;
+	public PlayPluginOauthToken(U u,String host) {
 		this.customUserDetails = u;
+		this.host = host;
 	}
 
 	@Override
@@ -34,5 +36,10 @@ public class PlayPluginOauthToken<U extends CustomUserDetails<?,?>> implements
 
 	public U getCustomUserDetails() {
 		return this.customUserDetails;
+	}
+
+	@Override
+	public String getHost() {
+		return this.host;
 	}
 }

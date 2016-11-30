@@ -2,18 +2,19 @@ package com.airshiplay.play.security.shiro.authc;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
-public class UsernameMobilePasswordToken extends UsernamePasswordToken {
+public class AdminUserToken extends UsernamePasswordToken {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4272417052179851393L;
 	private String mobile;
+	private String email;
 
-	public UsernameMobilePasswordToken(String username, String mobile,
-			String password, boolean rememberMe, String host) {
+	public AdminUserToken(String username, String mobile, String email, String password, boolean rememberMe, String host) {
 		super(username, password, rememberMe, host);
-		this.setMobile(mobile);
+		this.mobile = mobile;
+		this.email = email;
 	}
 
 	public String getMobile() {
@@ -22,6 +23,14 @@ public class UsernameMobilePasswordToken extends UsernamePasswordToken {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.lang.annotation.Annotation;
 
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.aop.AuthorizingAnnotationHandler;
 import org.apache.shiro.subject.Subject;
 

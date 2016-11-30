@@ -4,26 +4,26 @@ import java.io.Serializable;
 
 import com.airshiplay.play.security.shiro.PlayShiroUserDetails;
 
-public abstract class CustomUserDetails<I extends Serializable, U> implements
-		PlayShiroUserDetails {
+public abstract class CustomUserDetails<I extends Serializable, U> implements PlayShiroUserDetails {
 
 	private static final long serialVersionUID = 8063484673226426535L;
 
 	private final I id;
-	private String password;
 	private final String username;
-	private final String realname;
+	private final String nickname;
+	private final Type type;
+	private String password;
 	private final String credentialsSalt;
 	private boolean enabled;
 	private final boolean accountNonExpired;
 	private final boolean accountNonLocked;
 	private final boolean credentialsNonExpired;
 
-	public CustomUserDetails(I id, String username,String realname, String password,String credentialsSalt,
-			boolean enabled, boolean accountNonExpired,
-			boolean credentialsNonExpired, boolean accountNonLocked) {
+	public CustomUserDetails(I id, Type type, String username, String nickname, String password, String credentialsSalt, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired,
+			boolean accountNonLocked) {
+		this.type = type;
 		this.username = username;
-		this.realname =realname;
+		this.nickname = nickname;
 		this.password = password;
 		this.credentialsSalt = credentialsSalt;
 		this.enabled = enabled;
@@ -42,6 +42,10 @@ public abstract class CustomUserDetails<I extends Serializable, U> implements
 		return this.username;
 	}
 
+	public Type getType() {
+		return type;
+	}
+
 	@Override
 	public String getCredentialsSalt() {
 		return this.credentialsSalt;
@@ -56,9 +60,11 @@ public abstract class CustomUserDetails<I extends Serializable, U> implements
 	public String getPassword() {
 		return this.password;
 	}
-	public String getRealname() {
-		return this.realname;
+
+	public String getNickname() {
+		return this.nickname;
 	}
+
 	public boolean isAccountNonExpired() {
 		return accountNonExpired;
 	}
@@ -77,5 +83,13 @@ public abstract class CustomUserDetails<I extends Serializable, U> implements
 
 	public abstract U getCustomUser();
 
-
+	public static enum Type {
+		/** 管理员 */
+		Admin, /** 会员 */
+		Member, /** oauth管理员 */
+		AdminOauth2, /** oauth2会员 */
+		MemberOauth2, /** 第三方Oauth */
+		AdminThirdPartyOauth,
+		MemberThirdPartyOauth
+	}
 }

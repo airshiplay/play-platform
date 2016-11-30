@@ -20,8 +20,23 @@ public interface PlayShiroUserDetailsService {
 	 */
 	public CustomUserDetails<?, ?> findByUsername(String username);
 
+	public CustomUserDetails<?, ?> findAdminUserByUsername(String username);
+
+	public CustomUserDetails<?, ?> findMemberUserByUsername(String username);
+
+	
 	public Set<String> findRoles(String username, Serializable uid);
 
+	public Set<String> findAdminRoles(String username, Serializable uid);
+
+	public Set<String> findMemberRoles(String username, Serializable uid);
+
+	
+	
 	public Set<String> findPermissions(String username, Serializable uid);
+
+	public Set<String> findAdminPermissions(String username, Serializable uid);
+
+	public Set<String> findMemberPermissions(String username, Serializable uid);
 
 }

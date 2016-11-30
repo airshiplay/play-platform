@@ -12,6 +12,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.CustomUserDetails.Type;
 import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
 import com.airshiplay.play.security.shiro.authc.PlayPluginOauthToken;
 
@@ -25,29 +26,32 @@ public class OauthRealm extends AuthorizingRealm {
 	}
 
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(
-			PrincipalCollection principals) {
-		CustomUserDetails<?, ?> user = (CustomUserDetails<?, ?>) principals
-				.getPrimaryPrincipal();
-		String username = user.getUsername().toString();
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		CustomUserDetails<?, ?> user = (CustomUserDetails<?, ?>) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		authorizationInfo
-				.setRoles(userService.findRoles(username, user.getId()));
-		authorizationInfo.setStringPermissions(userService.findPermissions(
-				username, user.getId()));
+		String username = user.getUsername();
+		if (user.getType() == Type.AdminThirdPartyOauth) {
+			authorizationInfo.setRoles(userService.findAdminRoles(username, user.getId()));
+			authorizationInfo.setStringPermissions(userService.findAdminPermissions(username, user.getId()));
+		} else if (user.getType() == Type.MemberThirdPartyOauth) {
+			authorizationInfo.setRoles(userService.findMemberRoles(username, user.getId()));
+			authorizationInfo.setStringPermissions(userService.findMemberPermissions(username, user.getId()));
+		} else {
+			authorizationInfo.setRoles(userService.findRoles(username, user.getId()));
+			authorizationInfo.setStringPermissions(userService.findPermissions(username, user.getId()));
+		}
+
 		return authorizationInfo;
 	}
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken token) throws AuthenticationException {
-		CustomUserDetails<?, ?> userDetails = (CustomUserDetails<?, ?>) token
-				.getPrincipal();
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		CustomUserDetails<?, ?> userDetails = (CustomUserDetails<?, ?>) token.getPrincipal();
 		// new SimpleAuthenticationInfo();
 		return new SimpleAuthenticationInfo(userDetails, // 用户名
 				userDetails.getPassword(), // 密码
 				ByteSource.Util.bytes(userDetails.getCredentialsSalt()),// salt=username+salt
-				userDetails.getRealname() // realm name
+				userDetails.getNickname() // realm name
 		);
 	}
 }

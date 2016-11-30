@@ -14,69 +14,91 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.CustomUserDetails.Type;
 import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
+import com.airshiplay.play.security.shiro.authc.AdminUserToken;
+import com.airshiplay.play.security.shiro.authc.MemberUserToken;
 
 public class UserRealm extends AuthorizingRealm {
-    @Autowired
-    private PlayShiroUserDetailsService userService;
+	@Autowired
+	private PlayShiroUserDetailsService userService;
 
-    @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    	CustomUserDetails<?,?> user = (CustomUserDetails<?,?> )principals.getPrimaryPrincipal();
-    	String username=user.getUsername().toString();
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(userService.findRoles( username,user.getId()));
-        authorizationInfo.setStringPermissions(userService.findPermissions( username,user.getId()));
-        return authorizationInfo;
-    }
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		CustomUserDetails<?, ?> user = (CustomUserDetails<?, ?>) principals.getPrimaryPrincipal();
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		String username = user.getUsername();
 
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String username = (String)token.getPrincipal();
-        CustomUserDetails<?,?> user = userService.findByUsername(username);
-        if(user == null) {
-            throw new UnknownAccountException();//没找到帐号
-        }
-        if(Boolean.TRUE.equals(user.getLocked())) {
-            throw new LockedAccountException(); //帐号锁定
-        }
-        //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user, //用户名
-                user.getPassword(), //密码
-                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
-                user.getRealname()  //realm name
-        );
-     
-        return authenticationInfo;
-    }
+		if (user.getType() == Type.Admin) {
+			authorizationInfo.setRoles(userService.findAdminRoles(username, user.getId()));
+			authorizationInfo.setStringPermissions(userService.findAdminPermissions(username, user.getId()));
+		} else if (user.getType() == Type.Member) {
+			authorizationInfo.setRoles(userService.findMemberRoles(username, user.getId()));
+			authorizationInfo.setStringPermissions(userService.findMemberPermissions(username, user.getId()));
+		}else{
+			authorizationInfo.setRoles(userService.findRoles(username, user.getId()));
+			authorizationInfo.setStringPermissions(userService.findPermissions(username, user.getId()));
+		}
 
-    @Override
-    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
-        super.clearCachedAuthorizationInfo(principals);
-    }
+		return authorizationInfo;
+	}
 
-    @Override
-    public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
-        super.clearCachedAuthenticationInfo(principals);
-    }
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		CustomUserDetails<?, ?> user;
+		if (token instanceof AdminUserToken) {
+			AdminUserToken adminToken = (AdminUserToken) token;
+			user = userService.findAdminUserByUsername(adminToken.getUsername());
+		} else if (token instanceof MemberUserToken) {
+			MemberUserToken memberToken = (MemberUserToken) token;
+			user = userService.findMemberUserByUsername(memberToken.getUsername());
+		} else {
+			String username = (String) token.getPrincipal();
+			user = userService.findByUsername(username);
+		}
 
-    @Override
-    public void clearCache(PrincipalCollection principals) {
-        super.clearCache(principals);
-    }
+		if (user == null) {
+			throw new UnknownAccountException();// 没找到帐号
+		}
+		if (Boolean.TRUE.equals(user.getLocked())) {
+			throw new LockedAccountException(); // 帐号锁定
+		}
+		// 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user, // 用户名
+				user.getPassword(), // 密码
+				ByteSource.Util.bytes(user.getCredentialsSalt()),// salt=username+salt
+				user.getNickname() // realm name
+		);
 
-    public void clearAllCachedAuthorizationInfo() {
-        getAuthorizationCache().clear();
-    }
+		return authenticationInfo;
+	}
 
-    public void clearAllCachedAuthenticationInfo() {
-        getAuthenticationCache().clear();
-    }
+	@Override
+	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthorizationInfo(principals);
+	}
 
-    public void clearAllCache() {
-        clearAllCachedAuthenticationInfo();
-        clearAllCachedAuthorizationInfo();
-    }
+	@Override
+	public void clearCachedAuthenticationInfo(PrincipalCollection principals) {
+		super.clearCachedAuthenticationInfo(principals);
+	}
+
+	@Override
+	public void clearCache(PrincipalCollection principals) {
+		super.clearCache(principals);
+	}
+
+	public void clearAllCachedAuthorizationInfo() {
+		getAuthorizationCache().clear();
+	}
+
+	public void clearAllCachedAuthenticationInfo() {
+		getAuthenticationCache().clear();
+	}
+
+	public void clearAllCache() {
+		clearAllCachedAuthenticationInfo();
+		clearAllCachedAuthorizationInfo();
+	}
 
 }

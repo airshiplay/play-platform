@@ -1,11 +1,8 @@
 package com.airshiplay.play.security.shiro.authc;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.Cache;
 import org.apache.shiro.crypto.hash.Md5Hash;
 
 /**
