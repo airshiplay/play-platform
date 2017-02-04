@@ -6,42 +6,20 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.airshiplay.play.security.CustomUserDetails;
-import com.airshiplay.play.security.CustomUserDetails.Type;
 import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
 import com.airshiplay.play.security.shiro.authc.AdminUserToken;
 import com.airshiplay.play.security.shiro.authc.MemberUserToken;
 
-public class UserRealm extends AuthorizingRealm {
+public class UserRealm extends PlayRealm {
 	@Autowired
 	private PlayShiroUserDetailsService userService;
 
-	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		CustomUserDetails<?, ?> user = (CustomUserDetails<?, ?>) principals.getPrimaryPrincipal();
-		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		String username = user.getUsername();
-
-		if (user.getType() == Type.Admin) {
-			authorizationInfo.setRoles(userService.findAdminRoles(username, user.getId()));
-			authorizationInfo.setStringPermissions(userService.findAdminPermissions(username, user.getId()));
-		} else if (user.getType() == Type.Member) {
-			authorizationInfo.setRoles(userService.findMemberRoles(username, user.getId()));
-			authorizationInfo.setStringPermissions(userService.findMemberPermissions(username, user.getId()));
-		}else{
-			authorizationInfo.setRoles(userService.findRoles(username, user.getId()));
-			authorizationInfo.setStringPermissions(userService.findPermissions(username, user.getId()));
-		}
-
-		return authorizationInfo;
-	}
+	 
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {

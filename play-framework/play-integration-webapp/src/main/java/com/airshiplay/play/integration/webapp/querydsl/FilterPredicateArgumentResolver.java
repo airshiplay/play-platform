@@ -71,6 +71,7 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 		String filterString = webRequest.getParameter("filter");
 		if (!Strings.isNullOrEmpty(filterString)) {
 			filterString = URLDecoder.decode(filterString, "UTF-8");
+			@SuppressWarnings("deprecation")
 			List<Map<String, Object>> filters = objectMapper.readValue(filterString,
 					CollectionType.construct(List.class, MapType.construct(Map.class, SimpleType.construct(String.class), SimpleType.construct(Object.class))));
 			for (Map<String, Object> filter : filters) {
@@ -89,6 +90,7 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 			if(!Strings.isNullOrEmpty(searchPhraseString)){
 				searchPhraseString = URLDecoder.decode(searchPhraseString, "UTF-8");
 				try {
+					@SuppressWarnings("deprecation")
 					List<Map<String, Object>> filters = objectMapper.readValue(searchPhraseString,
 							CollectionType.construct(List.class, MapType.construct(Map.class, SimpleType.construct(String.class), SimpleType.construct(Object.class))));
 					for (Map<String, Object> filter : filters) {

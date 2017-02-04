@@ -1,10 +1,8 @@
 package com.airshiplay.play.repo.jpa;
 
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
-import javax.sql.DataSource;
-
+import com.airshiplay.play.cache.CacheConfigBean;
+import com.airshiplay.play.repo.jpa.json.JpaModule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -13,15 +11,13 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 import org.springframework.orm.hibernate5.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import com.jolbox.bonecp.BoneCPDataSource;
-import com.airshiplay.play.cache.CacheConfigBean;
-import com.airshiplay.play.repo.jpa.json.JpaModule;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "com.airshiplay", includeFilters = {
@@ -92,6 +88,8 @@ public class JpaRepositoryConfigBean {
 	@Value("${hibernate.cache.use_query_cache?:false}")
 	private String hibernateCacheUseQueryCache;
 
+	@Autowired
+	private DataSource dataSource;
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -100,7 +98,7 @@ public class JpaRepositoryConfigBean {
 		vendorAdapter.setGenerateDdl(Boolean.TRUE);
 		vendorAdapter.setShowSql(Boolean.TRUE);
 
-		factory.setDataSource(dataSource());
+		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan("com.airshiplay");
 		factory.setJpaDialect(new HibernateJpaDialect());
@@ -138,27 +136,7 @@ public class JpaRepositoryConfigBean {
 		return new HibernateExceptionTranslator();
 	}
 
-	@Bean
-	public DataSource dataSource() {
-		return new LazyConnectionDataSourceProxy(mainDataSource());
-	}
 
-	@Bean(destroyMethod = "close")
-	public DataSource mainDataSource() {
-		BoneCPDataSource dataSource = new BoneCPDataSource();
-		dataSource.setDriverClass(jdbcDriverClass);
-		dataSource.setJdbcUrl(jdbcUrl);
-		dataSource.setUsername(jdbcUsername);
-		dataSource.setPassword(jdbcPassword);
-		dataSource.setIdleConnectionTestPeriodInMinutes(2);
-		dataSource.setIdleMaxAge(2, TimeUnit.HOURS);
-		dataSource.setMaxConnectionsPerPartition(60);
-		dataSource.setMinConnectionsPerPartition(20);
-		dataSource.setPartitionCount(3);
-		dataSource.setAcquireIncrement(10);
-		dataSource.setStatementsCacheSize(50);
-		return dataSource;
-	}
 
 	@Bean
 	@Lazy
@@ -166,4 +144,25 @@ public class JpaRepositoryConfigBean {
 		return new JpaModule();
 	}
 
+//	@Bean
+//	public DataSource dataSource() {
+//		return new LazyConnectionDataSourceProxy(mainDataSource());
+//	}
+//
+//	@Bean(destroyMethod = "close")
+//	public DataSource mainDataSource() {
+//		BoneCPDataSource dataSource = new BoneCPDataSource();
+//		dataSource.setDriverClass(jdbcDriverClass);
+//		dataSource.setJdbcUrl(jdbcUrl);
+//		dataSource.setUsername(jdbcUsername);
+//		dataSource.setPassword(jdbcPassword);
+//		dataSource.setIdleConnectionTestPeriodInMinutes(2);
+//		dataSource.setIdleMaxAge(2, TimeUnit.HOURS);
+//		dataSource.setMaxConnectionsPerPartition(60);
+//		dataSource.setMinConnectionsPerPartition(20);
+//		dataSource.setPartitionCount(3);
+//		dataSource.setAcquireIncrement(10);
+//		dataSource.setStatementsCacheSize(50);
+//		return dataSource;
+//	}
 }

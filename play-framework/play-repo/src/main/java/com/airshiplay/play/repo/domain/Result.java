@@ -15,6 +15,11 @@ public class Result {
 				ResultCode.failure.getMessage());
 	}
 
+	public static Result error() {
+		return new Result().code(ResultCode.error).message(
+				ResultCode.error.getMessage());
+	}
+	
 	public static Result validateError() {
 		return new Result().code(ResultCode.validateError).message(
 				ResultCode.validateError.getMessage());
@@ -93,7 +98,7 @@ public class Result {
 	public enum ResultCode {
 		success("操作成功"), failure("操作失败"), validateError("验证错误"), accessDenide(
 				"无权限访问"), notLogin("未登录"), captchaError("验证码错误"), exception(
-				"系统异常"), locked("数据锁定"), unknown("未知情况");
+				"系统异常"), locked("数据锁定"),error("错误"), unknown("未知情况");
 
 		private final String message;
 
