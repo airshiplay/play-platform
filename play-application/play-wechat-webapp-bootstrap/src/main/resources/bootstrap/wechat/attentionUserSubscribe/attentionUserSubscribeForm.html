@@ -1,0 +1,98 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-fileinput/css/fileinput.min.css">
+
+<section class="content-header">
+	<h1>
+		关注用户 时间列表 <small>开始管理关注用户 时间</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/wechat/attentionUserSubscribe/attentionUserSubscribeList"><i class="glyphicon glyphicon-list"></i> 关注用户 时间列表</a></li>
+		<li class="active" th:text="${attentionUserSubscribe==null?'新建关注用户 时间':'编辑关注用户 时间'}">新建关注用户 时间</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${attentionUserSubscribe==null?'新建关注用户 时间':'编辑关注用户 时间'}">新建关注用户 时间</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="attentionusersubscribe-form" action="/wechat/attentionUserSubscribe/save">
+					<input type="hidden" name="id" th:value="${attentionUserSubscribe==null?'':attentionUserSubscribe.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="attentionUserInput">attentionUser</label>
+							<input type="text" name="attentionUser" class="form-control" id="attentionUserInput" placeholder="请填写attentionUser"
+								
+		                  		th:value="${attentionUserSubscribe==null?'':attentionUserSubscribe.attentionUser}"/>
+						</div>
+						<div class="form-group">
+							<label for="subscribeTimeInput">subscribeTime</label>
+							<input type="text" name="subscribeTime" class="form-control" id="subscribeTimeInput" placeholder="请填写subscribeTime"
+								
+		                  		th:value="${attentionUserSubscribe==null?'':attentionUserSubscribe.subscribeTime}"/>
+						</div>
+						<div class="form-group">
+							<label for="statusInput">1关注，2取消关注</label>
+							<input type="text" name="status" class="form-control" id="statusInput" placeholder="请填写status"
+								
+		                  		th:value="${attentionUserSubscribe==null?'':attentionUserSubscribe.status}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/wechat/attentionUserSubscribe/attentionUserSubscribeList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("wechat_attentionusersubscribe_list");
+			
+
+			var $form = $(".attentionusersubscribe-form");		  
+			$(".attentionusersubscribe-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/wechat/attentionUserSubscribe/attentionUserSubscribeList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

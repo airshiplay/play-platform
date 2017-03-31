@@ -18,6 +18,12 @@ import com.airshiplay.play.core.helper.Patterns;
 import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
+/**
+ * obd盒子
+ * 
+ * @author lig
+ *
+ */
 @Entity
 @Table(name = "obd_device")
 @Getter
@@ -51,8 +57,8 @@ public class ObdDeviceEntity extends DataEntity<AdminUserEntity, Long> {
 	private String description;
 
 	@OneToOne(mappedBy = "obdDevice")
-	private VehicleEntity car;
+	private CarEntity car;
 
 	@OneToMany(mappedBy = "obdDevice")
-	private Set<VehicleAlarmEntity> alarm;
+	private Set<CarAlarmEntity> alarm;
 }

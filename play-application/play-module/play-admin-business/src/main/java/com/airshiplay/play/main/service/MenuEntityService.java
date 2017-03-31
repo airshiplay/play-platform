@@ -35,9 +35,10 @@ public class MenuEntityService extends HierarchicalEntityService<MenuEntity, Lon
 	@Transactional(readOnly = true)
 	public Tree<MenuEntity> getMenuTreeByUserId(Long userId) {
 		RoleEntity roleEntity = roleEntityRepository.findOne(QRoleEntity.roleEntity.users.any().id.eq(userId));
+		if (roleEntity.getCode().equals("superadmin")) {
+			return findTree(null);
+		}
 		Tree<MenuEntity> tree = toTree(null, Lists.newArrayList(roleEntity.getMenus()));
-		tree.setIconClsProperty("iconCls");
-		tree.setTextProperty("text");
 		return tree;
 	}
 }

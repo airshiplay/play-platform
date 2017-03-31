@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>WeUI</title>
+<link rel="stylesheet" th:href="@{/assets/plugins/mui/css/mui.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/plugins/weui/style/weui.css}" />
+<link rel="stylesheet" th:href="@{/assets/plugins/weui/style/example.css}" />
+
+<style type="text/css">
+.mui-slider {
+	height: 10.0rem;
+	background-color: black;
+}
+
+.mui-slider-indicator {
+	bottom: 0rem
+}
+
+.mui-slider-indicator .mui-indicator {
+	background: #ffffff;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: 0.5;
+	width: 0.6rem;
+	height: 0.6rem;
+	margin: 1px 2px;
+}
+
+.mui-slider-indicator .mui-active.mui-indicator {
+	background: #e84c3d;
+	opacity: 1;
+}
+.mui-table-view-chevron .mui-table-view-cell{
+	padding-right:50px;
+}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+    margin-right: -50px;
+}
+/* .mui-pull-bottom-pocket {
+	height:53px;
+} */
+</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<h1 id="title" class="mui-title">4S店</h1>
+	</header>
+	<div class="mui-content">
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="top: 50px;">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+				
+				 <!-- <li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+					 <img class="mui-media-object mui-pull-left" data-lazyload-id="0" src="http://www.dcloud.io/hellomui/images/1.jpg?version=779.4818077236414">
+					 	<div class="mui-media-body" >
+					 	<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-10">
+			                    <h4 class="mui-ellipsis-2">信息化推进办公室张彦合同付款</h4>
+			                    
+			                    <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
+			                </div>
+			                <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+			                	<p class="mui-ellipsis-2">sss</p>
+			                    <span class="mui-h5">12:25</span>
+			              	</div>
+			            </div>
+						</div>
+					</a>
+				 </li> -->
+				 
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="weui-tabbar">
+		<a th:href="@{/obdsite}" class="weui-tabbar__item"> <img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt=""
+			class="weui-tabbar__icon">
+			<p class="weui-tabbar__label">首页</p>
+		</a> <a th:href="@{/obdsite/store4s}" class="weui-tabbar__item weui-bar__item_on"> <span style="display: inline-block; position: relative;">
+				<img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt="" class="weui-tabbar__icon">
+		</span>
+			<p class="weui-tabbar__label">4S店</p>
+		</a> <a th:href="@{/obdsite/account/my}" class="weui-tabbar__item"> <img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt=""
+			class="weui-tabbar__icon">
+			<p class="weui-tabbar__label">我</p>
+		</a>
+	</div>
+
+
+	<script th:src="@{/assets/plugins/weui/style/zepto.min.js}"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script th:src="@{/assets/plugins/weui/style/weui.min.js}"></script>
+	<script th:src="@{/assets/plugins/mui/js/mui.min.js}"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init({
+			pullRefresh : {
+				container : '#pullrefresh',
+				down : {
+					callback : pulldownRefresh
+				},
+				up : {
+					contentrefresh : '正在加载...',
+					callback : pullupRefresh
+				}
+			}
+		});
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			var table = document.body.querySelector('.mui-table-view');
+			table.innerHTML='';
+			var cells = document.body
+					.querySelectorAll('.mui-table-view-cell');
+			$.post('/obd/store4S/page', {
+				page: 1,
+				limit:20
+			}, function(response) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body
+						.querySelectorAll('.mui-table-view-cell');
+				for (var i = cells.length, len = i + response.rows.length; i < len; i++) {
+					var row=response.rows[i-cells.length];
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell mui-media';
+					li.innerHTML = '<a class="mui-navigate-right">\
+						 <img class="mui-media-object mui-pull-left" data-lazyload-id="0" src="'+row.logo+'">\
+					 	<div class="mui-media-body" >\
+					 	<div class="mui-table">\
+							<div class="mui-table-cell mui-col-xs-10">\
+			                    <h4 class="mui-ellipsis-2">'+row.name+'</h4>\
+			                    <p class="mui-h6 mui-ellipsis">'+row.address+'</p>\
+			                </div>\
+			                <div class="mui-table-cell mui-col-xs-2 mui-text-right">\
+			                	<p class="mui-ellipsis-2">8.0折起</p>\
+			                    <span class="mui-h5">12:25</span>\
+			              	</div>\
+			            </div>\
+						</div>\
+					</a>';
+					table.appendChild(li);
+				}
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+			}, "json");
+		}
+		var count = 0;
+		/**
+		 * 上拉加载具体业务实现
+		 */
+		function pullupRefresh() {
+			
+			$.post('/obd/store4S/page', {
+				page: 1,
+				limit:20
+			}, function(response) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body
+						.querySelectorAll('.mui-table-view-cell');
+				for (var i = cells.length, len = i + response.rows.length; i < len; i++) {
+					var row=response.rows[i-cells.length];
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell mui-media';
+					li.innerHTML = '<a class="mui-navigate-right">\
+						 <img class="mui-media-object mui-pull-left" data-lazyload-id="0" src="'+row.logo+'">\
+					 	<div class="mui-media-body" >\
+					 	<div class="mui-table">\
+							<div class="mui-table-cell mui-col-xs-10">\
+			                    <h4 class="mui-ellipsis-2">'+row.name+'</h4>\
+			                    <p class="mui-h6 mui-ellipsis">'+row.address+'</p>\
+			                </div>\
+			                <div class="mui-table-cell mui-col-xs-2 mui-text-right">\
+			                	<p class="mui-ellipsis-2">8.0折起</p>\
+			                    <span class="mui-h5">12:25</span>\
+			              	</div>\
+			            </div>\
+						</div>\
+					</a>';
+					table.appendChild(li);
+				}
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(response.current*response.rowCount>=response.total);
+			}, "json");
+			
+			
+			/* setTimeout(function() {
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(
+						(++count > 2)); //参数为true代表没有更多数据了。
+				
+				for (var i = cells.length, len = i + 20; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell mui-media';
+					li.innerHTML = '<a class="mui-navigate-right">\
+						 <img class="mui-media-object mui-pull-left" data-lazyload-id="0" src="http://www.dcloud.io/hellomui/images/1.jpg?version=779.4818077236414">\
+					 	<div class="mui-media-body" >\
+					 	<div class="mui-table">\
+							<div class="mui-table-cell mui-col-xs-10">\
+			                    <h4 class="mui-ellipsis-2">南京奥迪金牌1号4S店'+ (i + 1) +'</h4>\
+			                    <p class="mui-h6 mui-ellipsis">江苏省南京市玄武区xx路100号</p>\
+			                </div>\
+			                <div class="mui-table-cell mui-col-xs-2 mui-text-right">\
+			                	<p class="mui-ellipsis-2">8.0折起</p>\
+			                    <span class="mui-h5">12:25</span>\
+			              	</div>\
+			            </div>\
+						</div>\
+					</a>';
+					table.appendChild(li);
+				}
+			}, 1500); */
+		}
+		if (mui.os.plus) {
+			mui.plusReady(function() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				}, 1000);
+
+			});
+		} else {
+			mui.ready(function() {
+				mui('#pullrefresh').pullRefresh().pullupLoading();
+			});
+		}
+	</script>
+</body>
+</html>

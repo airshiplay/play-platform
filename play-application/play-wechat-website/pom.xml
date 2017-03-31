@@ -72,6 +72,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>play-webchat-website</finalName>
+		<finalName>play-wechat-website</finalName>
 	</build>
 </project>

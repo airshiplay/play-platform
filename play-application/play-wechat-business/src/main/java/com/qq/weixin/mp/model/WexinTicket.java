@@ -1,5 +1,8 @@
 package com.qq.weixin.mp.model;
 
+import lombok.ToString;
+
+@ToString
 public class WexinTicket {
 	private int errcode;
 	private String errmsg;

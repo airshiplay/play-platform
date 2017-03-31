@@ -55,6 +55,7 @@
 								<th data-column-id="brand" data-sortable="false" >车辆品牌</th>
 								<th data-column-id="model" data-sortable="false" >车辆型号</th>
 								<th data-column-id="licenseNo" data-sortable="false" >车牌号</th>
+								<th data-formatter="username" data-sortable="false" >会员名</th>
 								<th data-formatter="commands" data-css-class="command-column" data-width="150px" data-sortable="false" data-align="center"
 									data-header-align="center">操作</th>
 							</tr>
@@ -79,6 +80,9 @@
 									{
 										url : base + "/obd/vehicle/page",
 										formatters : {
+											"username": function(column,row){
+												return row.user==null?'':row.user.username;
+											},
 											"commands" : function(column, row) {
 												return "\
 								<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\

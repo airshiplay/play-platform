@@ -31,5 +31,14 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-business"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/play-admin-webapp-bootstrap"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-website-business"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-website-webapp-bootstrap"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-wechat-business"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-wechat-webapp-bootstrap"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-business-oauth"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-plugin-webapp-bootstrap-oauth"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-repo"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-repo-jpa"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/play-security-shiro"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

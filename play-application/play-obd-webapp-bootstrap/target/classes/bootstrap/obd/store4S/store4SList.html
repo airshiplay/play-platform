@@ -52,6 +52,7 @@
 						<thead>
 							<tr>
 								<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
+								<th data-formatter="logo" data-sortable="false" >LOGO</th>
 								<th data-column-id="name" data-sortable="false" >名称</th>
 								<th data-column-id="phone" data-sortable="false" >电话号码</th>
 								<th data-column-id="address" data-sortable="false" >地址</th>
@@ -79,6 +80,9 @@
 									{
 										url : base + "/obd/store4S/page",
 										formatters : {
+											"logo":function(column,row){
+												return "<img src=\""+(row.logo==undefined?'':row.logo)+"\" style=\"width:30px;height:30px\" data-src=\"holder.js/30x30/auto\" />";
+											},
 											"commands" : function(column, row) {
 												return "\
 								<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\

@@ -6,8 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping()
 public class IndexController {
-	@RequestMapping(path = { "", "/" })
-	public String get() {
-		return "index";
-	}
+    @RequestMapping(path = {"", "/", "/index"})
+    public String get() {
+        return "index";
+    }
+
+    @RequestMapping("/my")
+    public String getMy() {
+        return "/my";
+    }
+
+    @RequestMapping("/order")
+    public String getOrder() {
+        return "/order";
+    }
 }

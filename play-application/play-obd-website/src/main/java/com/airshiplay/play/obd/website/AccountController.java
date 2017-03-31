@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AccountController {
 
-	@RequestMapping("/my")
-	public String getMy() {
-		return "my";
-	}
+
 	@RequestMapping("/profile")
 	public String getProfile() {
 		return "profile";

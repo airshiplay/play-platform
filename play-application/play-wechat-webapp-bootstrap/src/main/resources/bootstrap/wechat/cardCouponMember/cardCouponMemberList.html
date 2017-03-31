@@ -1,0 +1,279 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		会员卡券列表 <small>开始管理会员卡券</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li class="active">会员卡券管理</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="mailbox-controls">
+				<div class="btn-group btn-group-sm">
+					<a type="button" class="btn btn-primary" href="#/page/wechat/cardCouponMember/create">
+						<i class="fa fa-plus"></i> 添加
+					</a>
+					<a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button">
+						批量
+						<span class="ion-arrow-down-b"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" id="batchDeleteButton">
+								<i class="glyphicon glyphicon-remove"></i>移除
+							</a></li>
+					</ul>
+				</div>
+				<!-- /.btn-group -->
+				<a type="button" class="btn btn-warning btn-sm" id="refreshButton">
+					<i class="fa fa-refresh"></i>
+				</a>
+				<div class="pull-right">
+					<div class="input-group input-group-sm" style="width: 120px;">
+						<input type="text" id="searchInput" class="form-control pull-right" placeholder="搜索">
+						<div class="input-group-btn">
+							<button id="searchButton" type="button" class="btn btn-default">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.btn-group -->
+				</div>
+				<!-- /.pull-right -->
+			</div>
+			<div class="box box-primary">
+				<div class="box-body no-padding">
+					<table id="grid-cardcouponmember" class="table table-hover">
+						<thead>
+							<tr>
+								<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false">ID</th>
+								<th  data-column-id="brandName" data-sortable="false" >商户名字</th>
+								<th  data-column-id="title" data-sortable="false" >卡券名</th>
+								<th  data-formatter="logoUrl" data-sortable="false" >商户logo</th>
+								<!-- <th  data-formatter="backgroudUrl" data-sortable="false" >会员卡背景图</th> -->
+								<!-- <th  data-column-id="servicePhone" data-sortable="false" >服务电话</th> -->
+								<th  data-column-id="notice" data-sortable="false" >卡券使用提醒</th>
+								<!-- <th  data-column-id="color" data-sortable="false" >券颜色</th> -->
+								<th  data-column-id="description" data-sortable="false" >卡券使用说明</th>
+								<th  data-column-id="skuQuantity" data-sortable="false" >会员卡数量</th>
+								<th  data-column-id="prerogative" data-sortable="false" >会员卡特权说明</th>
+								<th  data-formatter="status" data-sortable="false" >会员卡状态</th>
+								<!-- <th  data-column-id="init_increase_bonus" data-sortable="false" >初始积分</th>
+								<th  data-column-id="cost_money_unit" data-sortable="false" >消费金额(单位/分)</th>
+								<th  data-column-id="increase_bonus" data-sortable="false" >增加的积分</th>
+								<th  data-column-id="max_increase_bonus" data-sortable="false" >单次获取积分上限</th>
+								<th  data-column-id="cost_bonus_unit" data-sortable="false" >每使用积分</th>
+								<th  data-column-id="reduce_money" data-sortable="false" >抵扣xx元（单位/分)</th>
+								<th  data-column-id="least_money_to_use_bonus" data-sortable="false" >抵扣条件，满xx元（单位/分）可用</th>
+								<th  data-column-id="max_reduce_bonus" data-sortable="false" >抵扣条件，单笔最多使用xx积分</th>
+								<th  data-column-id="discount" data-sortable="false" >折扣，该会员卡享受的折扣优惠,填10就是九折。</th>
+								<th  data-column-id="cardId" data-sortable="false" >卡券ID</th> -->
+								<th data-formatter="commands" data-css-class="command-column" data-width="150px" data-sortable="false" data-align="center"
+									data-header-align="center">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	require(
+			[ "domReady" ],
+			function(domReady) {
+				domReady(function() {
+					activeMenu("wechat_cardcouponmember_list");
+
+					var grid = $("#grid-cardcouponmember")
+							.bootgrid(
+									{
+										url : base + "/wechat/cardCouponMember/page",
+										formatters : {
+											"status":function(column,row){
+												return row.cardCoupon.status;
+											},
+											"logoUrl" : function(column,row){
+												return "<img src=\""+row.logoUrl+"\"  alt=\"图标\" width=\"50\" height=\"50\"/>";
+											},
+											"backgroudUrl" : function(column,row){
+												return "<img src=\""+row.backgroudUrl+"\"  alt=\"图标\" width=\"50\" height=\"50\"/>";
+											},
+											"commands" : function(column, row) {
+												return "\
+								<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\
+									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/wechat/cardCouponMember/view/"+row.id+"\">\
+										<i class=\"fa fa-eye\"></i>\
+									</a>\
+									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/wechat/cardCouponMember/edit/"+row.id+"\">\
+										<i class=\"glyphicon glyphicon-edit\"></i>\
+									</a>\
+									<a aria-expanded=\"false\" aria-haspopup=\"true\" data-toggle=\"dropdown\" \
+										class=\"btn btn-primary dropdown-toggle\" type=\"button\">\
+										<i class=\"fa fa-cog\"></i>\
+										<span class=\"ion-arrow-down-b\"></span>\
+									</a>\
+									<ul class=\"dropdown-menu pull-right\">\
+										"+(row.cardId==null?'<li><a href=\"javascript:;\" class=\"command-uploadWechat\"><i class=\"fa fa-random\"></i>同步到微信</a></li>':'')+"\
+										<li><a href=\"javascript:;\" class=\"command-downloadWechat\"><i class=\"fa fa-random\"></i>更新状态</a></li>\
+										<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i>移除</a></li>\
+									</ul>\
+								</div>";
+											}
+										},
+										templates:{search:"<div class=\"{{css.search}}\"><div class=\"input-group\"><span class=\"{{css.icon}} input-group-addon {{css.iconSearch}}\"></span> <input type=\"text\" class=\"{{css.searchField}}\" placeholder=\"11111\" /></div></div>"}
+									});
+
+					var refreshGrid = function() {
+						grid.bootgrid("reload")
+					}
+
+					var actionWithSelectedRows = function(action) {
+						var selectedRows = grid.bootgrid("getSelectedRows");
+						if (selectedRows && selectedRows.length > 0) {
+							action(grid, selectedRows);
+						} else {
+							$.alert({
+								title : false,
+								content : "请至少选择一个",
+								confirmButton : "关闭"
+							});
+						}
+					}
+
+					var deleteRow = function(grid, ids) {
+						$.confirm({
+							title : "提示",
+							content : "确定删除会员卡券?",
+							confirmButton : "确定",
+							cancelButton : "关闭",
+							icon : 'fa fa-warning',
+							confirmButtonClass : 'btn-warning',
+							animation : 'zoom',
+							confirm : function() {
+								$.post(base + "/wechat/cardCouponMember/delete", {
+									ids : ids
+								}, function(resp) {
+									if (resp.success) {
+										$.alert({
+											title : false,
+											content : "操作成功",
+											confirmButton : "关闭"
+										});
+										grid.bootgrid("reload")
+									} else {
+										$.alert({
+											title : false,
+											content : resp.msg,
+											confirmButton : "关闭"
+										});
+									}
+								}, "json");
+							}
+						});
+					};
+					
+					grid.on("loaded.rs.jquery.bootgrid", function() {
+						var $table = $(this);
+						$table.find(".dropdown-toggle").dropdown();
+	
+						$table.find(".command-uploadWechat").on("click", function(e) {
+							var cardCouponMember_id = $(this).closest(".btn-group").data("row-id");
+							$.confirm({
+								title : "提示",
+								content : "上传至微信审核?",
+								confirmButton : "确定",
+								cancelButton : "关闭",
+								icon : 'fa fa-warning',
+								confirmButtonClass : 'btn-warning',
+								animation : 'zoom',
+								confirm : function() {
+									$.post(base + "/wechat/cardCouponMember/weixin/createCard", {
+										configId : 1,
+										id:cardCouponMember_id
+									}, function(resp) {
+										if (resp.success) {
+											$.alert({
+												title : false,
+												content : "操作成功",
+												confirmButton : "关闭"
+											});
+											grid.bootgrid("reload")
+										} else {
+											$.alert({
+												title : resp.msg,
+												content : resp.exception,
+												confirmButton : "关闭"
+											});
+										}
+									}, "json");
+								}
+							});
+						});
+						$table.find(".command-downloadWechat").on("click", function(e) {
+							var cardCouponMember_id = $(this).closest(".btn-group").data("row-id");
+							$.confirm({
+								title : "提示",
+								content : "更新卡券信息?",
+								confirmButton : "确定",
+								cancelButton : "关闭",
+								icon : 'fa fa-warning',
+								confirmButtonClass : 'btn-warning',
+								animation : 'zoom',
+								confirm : function() {
+									$.post(base + "/wechat/cardCouponMember/weixin/getCard", {
+										configId : 1,
+										id:cardCouponMember_id
+									}, function(resp) {
+										if (resp.success) {
+											$.alert({
+												title : false,
+												content : "操作成功",
+												confirmButton : "关闭"
+											});
+											grid.bootgrid("reload")
+										} else {
+											$.alert({
+												title : resp.msg,
+												content : resp.exception,
+												confirmButton : "关闭"
+											});
+										}
+									}, "json");
+								}
+							});
+						});
+						$table.find(".command-delete").on("click", function(e) {
+							var app_id = $(this).closest(".btn-group").data("row-id");						
+							deleteRow($table, [ app_id ]);
+						});
+					});
+
+					$("#batchDeleteButton").on("click", function() {
+						actionWithSelectedRows(function(grid, selectedRows) {
+							deleteRow(grid, selectedRows);
+						});
+					});
+					
+					$("#refreshButton").on("click", function() {
+						refreshGrid();
+					});
+					$("#searchButton").on("click", function() {
+						var arr=new Array();
+						var search=new Object();
+						search.property="name";
+						search.value=$("#searchInput").val();
+						arr.push(search);
+						grid.bootgrid("search", JSON.stringify(arr));
+					});
+
+				});
+			});
+</script>

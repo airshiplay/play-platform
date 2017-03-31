@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.airshiplay.play.integration.ApplicationInitializer;
+import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.entity.AuthorityEntity;
 import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity;
 import com.airshiplay.play.main.entity.OrganizationEntity.OrgType;
 import com.airshiplay.play.main.entity.RoleEntity;
-import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.init.InitDataTools;
 import com.airshiplay.play.main.service.AuthorityEntityService;
 //import com.airshiplay.play.main.security.PasswordService;
@@ -52,15 +52,15 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			authorityEntityService.save(authorityEntity);
 			
 			RoleEntity role = roleEntityService.newEntity();
-			role.setName("管理员");
-			role.setCode("admin");
+			role.setName("超级管理员");
+			role.setCode("superadmin");
 			role.setLocked(true);		
 			role.setAuthorities(Lists.newArrayList(authorityEntity));
 			roleEntityService.save(role);
 
 			OrganizationEntity org = organizationEntityService.newEntity();
-			org.setName("广州当凌信息科技有限公司");
-			org.setCode("whenling_company");
+			org.setName("艾尔里信息科技有限公司");
+			org.setCode("airletnet_company");
 			org.setType(OrgType.company);
 			organizationEntityService.save(org);
 
@@ -103,9 +103,9 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			tools.createMenuByParent("系统日志", "center_system_log", "fa fa-building", "page/center/log/list", null, sortNo++, systemManagement);
 
 			
-//			MenuEntity paramSetting=tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cogs", "page/center/setting/info", null, sortNo++, systemManagement);
-//			tools.createPemission(paramSetting,PermissionType.page, "参数查询", "page:sys:param:read" );
-//			tools.createPemission(paramSetting,PermissionType.page,"参数更新", "page:sys:param:update");
+			MenuEntity paramSetting=tools.createMenuByParent("参数设置", "center_parameter_setting", "fa fa-cogs", "page/center/setting/info", null, sortNo++, systemManagement);
+			tools.createPemission(paramSetting,PermissionType.page, "参数查询", "page:sys:param:read" );
+			tools.createPemission(paramSetting,PermissionType.page,"参数更新", "page:sys:param:update");
 			
 
 			MenuEntity businessManagement= tools.createMenuByParent("业务管理", "business_management", "fa fa-plug", null, null, sortNo++, null);
@@ -120,7 +120,7 @@ public class PlayApplicationInitializer extends ApplicationInitializer {
 			MenuEntity accountManagement = tools.createMenuByParent("账户管理", "center_account_management", "fa fa-user", null, null, sortNo++, null);
 			tools.createMenuByParent("个人信息", "center_account_info", "fa fa-user", "page/center/account/info", null, sortNo++, accountManagement);
 			tools.createMenuByParent("修改密码", "center_account_password", "fa fa-key", "page/center/account/password", null, sortNo++, accountManagement);
-			tools.createMenuByParent("会员级别", "", "fa fa-star", "", "", sortNo++, accountManagement);
+//			tools.createMenuByParent("会员级别", "", "fa fa-star", "", "", sortNo++, accountManagement);
 		}
 		if(!tools.existArea()){
 			tools.createArea();

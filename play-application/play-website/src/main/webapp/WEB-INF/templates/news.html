@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="keywords" th:content="${website.seoKeywords}">
+<meta name="description" th:content="${website.seoDescription}">
 <base href="../../" th:href="@{${#httpServletRequest.getContextPath()}}" />
 <link rel="icon" href="../../favicon.ico">
 
-<title>Play Website</title>
+<title th:text="${website.seoTitle}">艾尔里信息科技</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="assets/plugins/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/plugins/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -26,9 +26,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- Custom styles for this template -->
-<link href="assets/css/navbar-fixed-top.css" rel="stylesheet">
-<link href="assets/css/app.css" rel="stylesheet">
-<link href="assets/css/carousel.css" rel="stylesheet">
+<link th:href="@{/assets/css/navbar-fixed-top.css}" rel="stylesheet">
+<link th:href="@{/assets/css/app.css}" rel="stylesheet">
+<link th:href="@{/assets/css/carousel.css}" rel="stylesheet">
 
 </head>
 
@@ -191,9 +191,9 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="assets/jquery/3.1.1/jquery.min.js"></script>
-	<script src="assets/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="assets/holder/holder.min.js"></script>
+	<script src="assets/plugins/jquery/3.1.1/jquery.min.js"></script>
+	<script src="assets/plugins/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="assets/plugins/holder/holder.min.js"></script>
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="assets/js/ie10-viewport-bug-workaround.js"></script>

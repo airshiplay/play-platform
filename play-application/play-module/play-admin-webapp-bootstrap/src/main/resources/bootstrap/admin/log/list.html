@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		日志列表 <small>开始管理地区信息</small>
+		日志列表 <small>开始管理日志</small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
@@ -22,13 +22,6 @@
 						<span class="ion-arrow-down-b"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:;" id="batchInstallButton">
-								<i class="glyphicon glyphicon-send"></i>安装/更新到设备
-							</a></li>
-						<li><a href="javascript:;" id="batchRemoveButton">
-								<i class="glyphicon glyphicon-erase"></i>从设备移除
-							</a></li>
-						<li class="divider" role="separator"></li>
 						<li><a href="javascript:;" id="batchDeleteButton">
 								<i class="glyphicon glyphicon-remove"></i>移除
 							</a></li>
@@ -60,6 +53,7 @@
 								<th data-column-id="browser" data-formatter="browser" >终端</th>
 								<th data-column-id="level" data-sortable="false" >等级</th>
 								<th data-column-id="ip">IP</th>
+								<th data-formatter="createdByUser">操作人</th>
 								<th data-column-id="text" data-formatter="text">日志</th>
 								<th data-formatter="commands" data-css-class="command-column" data-width="150px" data-sortable="false" data-align="center"
 									data-header-align="center">操作</th>
@@ -85,14 +79,17 @@
 									{
 										url : base + "/center/log/page",
 										formatters : {
-											"text":function(column,row){
-												return row.text.substring(0,100)+"...";
+											"createdByUser":function(column,row){
+												return row.createdBy==null?'':row.createdBy.nickname;
+											},
+											"text":function(column,row){												
+												return "<span style=\"display:inline-block;width:150px!important; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\">"+row.text+"</span>";
 											},
 											"commands" : function(column, row) {
 												return "\
 								<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\
-									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/area/edit/"+row.id+"\">\
-										<i class=\"glyphicon glyphicon-edit\"></i>\
+									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/center/log/view/"+row.id+"\">\
+										<i class=\"fa fa-eye\"></i>\
 									</a>\
 									<a aria-expanded=\"false\" aria-haspopup=\"true\" data-toggle=\"dropdown\" \
 										class=\"btn btn-primary dropdown-toggle\" type=\"button\">\
@@ -100,9 +97,6 @@
 										<span class=\"ion-arrow-down-b\"></span>\
 									</a>\
 									<ul class=\"dropdown-menu pull-right\">\
-										<li><a href=\"javascript:;\" class=\"command-installAppLock\"><i class=\"glyphicon glyphicon-send\"></i>安装/更新到设备</a></li>\
-										<li><a href=\"javascript:;\" class=\"command-removeAppLock\"><i class=\"glyphicon glyphicon-erase\"></i>从设备移除</a></li>\
-										<li class=\"divider\" role=\"separator\"></li>\
 										<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i>移除</a></li>\
 									</ul>\
 								</div>";
@@ -122,7 +116,7 @@
 						} else {
 							$.alert({
 								title : false,
-								content : "请至少选择一个应用锁定",
+								content : "请至少选择一个",
 								confirmButton : "关闭"
 							});
 						}
@@ -131,14 +125,14 @@
 					var deleteRow = function(grid, ids) {
 						$.confirm({
 							title : "提示",
-							content : "确定删除应用锁定?",
+							content : "确定删除日志?",
 							confirmButton : "确定",
 							cancelButton : "关闭",
 							icon : 'fa fa-warning',
 							confirmButtonClass : 'btn-warning',
 							animation : 'zoom',
 							confirm : function() {
-								$.post(base + "/center/applock/delete", {
+								$.post(base + "/center/log/delete", {
 									ids : ids
 								}, function(resp) {
 									if (resp.success) {
@@ -160,118 +154,12 @@
 						});
 					};
 					
-					var installToDevice = function(grid, ids) {
-						$.confirm({
-							title : "推送应用锁定",
-							content : "url:" + base + "/center/dialog/deviceList",
-							columnClass : "col-md-8 col-md-offset-2",
-							confirmButton : "确定",
-							cancelButton : "取消",
-							confirmButtonClass : 'btn-primary',
-							cancelButtonClass : 'btn-danger',
-							confirm : function() {
-								var me = this;
-								var $table = me.$b.find("table");
-
-								var selectedRows = $table.bootgrid("getSelectedRows");
-								if (selectedRows && selectedRows.length > 0) {
-									$.post(base + "/mdmcommand/installAppLock", {
-										appLockIds : ids.join(),
-										deviceIds : selectedRows.join()
-									}, function(resp) {
-										if (resp.success) {
-											$.alert({
-												title : false,
-												content : "操作成功",
-												confirmButton : "关闭"
-											});
-										} else {
-											$.alert({
-												title : false,
-												content : resp.msg,
-												confirmButton : "关闭"
-											});
-										}
-									}, "json");
-
-									return true;
-								} else {
-									$.alert({
-										title : false,
-										content : "请至少选择一个设备",
-										confirmButton : "关闭"
-									});
-								}
-
-								return false;
-							}
-						});
-					}
-					
-					var removeToDevice = function(grid, ids) {
-						$.confirm({
-							title : "移除应用锁定",
-							content : "url:" + base + "/center/dialog/deviceList",
-							columnClass : "col-md-8 col-md-offset-2",
-							confirmButton : "确定",
-							cancelButton : "取消",
-							confirmButtonClass : 'btn-primary',
-							cancelButtonClass : 'btn-danger',
-							confirm : function() {
-								var me = this;
-								var $table = me.$b.find("table");
-
-								var selectedRows = $table.bootgrid("getSelectedRows");
-								if (selectedRows && selectedRows.length > 0) {
-									$.post(base + "/mdmcommand/removeAppLock", {
-										appLockIds : ids.join(),
-										ids : selectedRows.join()
-									}, function(resp) {
-										if (resp.success) {
-											$.alert({
-												title : false,
-												content : "操作成功",
-												confirmButton : "关闭"
-											});
-										} else {
-											$.alert({
-												title : false,
-												content : resp.msg,
-												confirmButton : "关闭"
-											});
-										}
-									}, "json");
-
-									return true;
-								} else {
-									$.alert({
-										title : false,
-										content : "请至少选择一个设备",
-										confirmButton : "关闭"
-									});
-								}
-
-								return false;
-							}
-						});
-					}
+				
 
 					grid.on("loaded.rs.jquery.bootgrid", function() {
 						var $table = $(this);
 						$table.find(".dropdown-toggle").dropdown();
 
-						$table.find(".command-installAppLock").on("click", function() {
-							var appLock_id = $(this).closest(".btn-group").data("row-id");
-
-							installToDevice($table, [ appLock_id ]);
-						});
-						
-						$table.find(".command-removeAppLock").on("click", function() {
-							var appLock_id = $(this).closest(".btn-group").data("row-id");
-
-							removeToDevice($table, [ appLock_id ]);
-						});
-						
 						$table.find(".command-delete").on("click", function(e) {
 							var app_id = $(this).closest(".btn-group").data("row-id");
 
@@ -285,28 +173,21 @@
 						});
 					});
 					
-					$("#batchInstallButton").on("click", function() {
-						actionWithSelectedRows(function(grid, selectedRows) {
-							installToDevice(grid, selectedRows);
-						});
-					});
-					
-					$("#batchRemoveButton").on("click", function() {
-						actionWithSelectedRows(function(grid, selectedRows) {
-							removeToDevice(grid, selectedRows);
-						});
-					});
 
 					$("#refreshButton").on("click", function() {
 						refreshGrid();
 					});
 					$("#searchButton").on("click", function() {
 						var arr=new Array();
-						var fullName=new Object();
-						fullName.property="fullName";
-						fullName.value=$("#searchInput").val();
-						arr.push(fullName);
-						grid.bootgrid("search", JSON.stringify(arr));
+						var search=new Object();
+						search.property="text";
+						search.value=$("#searchInput").val();
+						arr.push(search);
+						if(search.value==''){
+							grid.bootgrid("search", '');
+						}else{
+							grid.bootgrid("search", JSON.stringify(arr));
+						}
 					});
 
 				});

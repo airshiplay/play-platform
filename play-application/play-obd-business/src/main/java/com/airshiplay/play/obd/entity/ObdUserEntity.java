@@ -17,6 +17,12 @@ import lombok.Setter;
 
 import com.airshiplay.play.main.entity.MemberUserEntity;
 
+/**
+ * 会员
+ * 
+ * @author lig
+ *
+ */
 @Getter
 @Setter
 @Entity
@@ -28,11 +34,11 @@ public class ObdUserEntity extends MemberUserEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	@OneToMany(mappedBy = "user")
-	private Set<VehicleEntity> cars;
+	private Set<CarEntity> cars;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "obd_user_to_order")
-	private Set<OrderEntity> orders = new HashSet<>();
+	private Set<ObdOrderEntity> orders = new HashSet<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "obdrank_id")

@@ -44,11 +44,15 @@ public class QStore4SEntity extends EntityPathBase<Store4SEntity> {
 
     public final StringPath lng = createString("lng");
 
+    public final StringPath logo = createString("logo");
+
     public final StringPath name = createString("name");
 
     public final StringPath phone = createString("phone");
 
     public final com.airshiplay.play.main.entity.QAdminUserEntity primaryLeader;
+
+    public final ListPath<Store4SServiceEntity, QStore4SServiceEntity> store4SServices = this.<Store4SServiceEntity, QStore4SServiceEntity>createList("store4SServices", Store4SServiceEntity.class, QStore4SServiceEntity.class, PathInits.DIRECT2);
 
     public QStore4SEntity(String variable) {
         this(Store4SEntity.class, forVariable(variable), INITS);

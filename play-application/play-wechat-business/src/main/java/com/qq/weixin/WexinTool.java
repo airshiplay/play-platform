@@ -6,11 +6,13 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -19,8 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WexinTool {
-	private static final Logger logger = LoggerFactory
-			.getLogger(WexinTool.class);
+	private static final Logger logger = LoggerFactory.getLogger(WexinTool.class);
 	static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 	static {
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
@@ -35,8 +36,7 @@ public class WexinTool {
 	 * @param token
 	 * @return
 	 */
-	public static boolean checkSignature(String signature, String timestamp,
-			String nonce, String token) {
+	public static boolean checkSignature(String signature, String timestamp, String nonce, String token) {
 		String[] strs = new String[] { timestamp, nonce, token };
 		Arrays.sort(strs);
 		String str = strs[0] + strs[1] + strs[2];
@@ -65,8 +65,7 @@ public class WexinTool {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	public static String sign(Object obj, String key)
-			throws IllegalArgumentException, IllegalAccessException {
+	public static String sign(Object obj, String key) throws IllegalArgumentException, IllegalAccessException {
 		Field[] fields = obj.getClass().getDeclaredFields();
 
 		Arrays.sort(fields, new Comparator<Field>() {
@@ -143,8 +142,7 @@ public class WexinTool {
 	 * @return
 	 */
 	public static String getNonceStr(int count) {
-		return org.apache.commons.lang3.RandomStringUtils
-				.randomAlphabetic(count);
+		return org.apache.commons.lang3.RandomStringUtils.randomAlphabetic(count);
 	}
 
 	public static String getTimestamp() {
@@ -159,8 +157,7 @@ public class WexinTool {
 		String signature = "";
 
 		// 注意这里参数名必须全部小写，且必须有序
-		string1 = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonce_str
-				+ "&timestamp=" + timestamp + "&url=" + url;
+		string1 = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonce_str + "&timestamp=" + timestamp + "&url=" + url;
 		logger.debug("js api sign={}", string1);
 
 		try {
@@ -183,6 +180,83 @@ public class WexinTool {
 		return ret;
 	}
 
+	/**
+	 * 卡券 api_ticket 签名
+	 * 
+	 * @param api_ticket
+	 * @param card_id
+	 * @param code
+	 * @param openid
+	 * @param balance
+	 * @return
+	 */
+	public Map<String, String> apiTicketSign(String api_ticket, String card_id, String code, String openid, String balance) {
+		Map<String, String> ret = new HashMap<String, String>();
+		String nonce_str = create_nonce_str();
+		String timestamp = getTimestamp();
+		StringBuffer buffer = new StringBuffer();
+		String signature = "";
+
+		List<String> list = new ArrayList<String>();
+		list.add(api_ticket);
+		list.add(timestamp);
+		list.add(nonce_str);
+		list.add(card_id);
+		if (code != null) {
+			list.add(code);
+		}
+		if (openid != null) {
+			list.add(openid);
+		}
+		if (balance != null) {
+			list.add(balance);
+		}
+		String[] strs = list.toArray(new String[] {});
+
+		Arrays.sort(strs, new Comparator<String>() {
+			public int compare(String o1, String o2) {
+				char[] char1 = o1.toCharArray();
+				char[] char2 = o2.toCharArray();
+				for (int i = 0; i < char1.length && i < char2.length; i++) {
+					if (char1[i] - char2[i] != 0) {
+						return char1[i] - char2[i];
+					}
+				}
+				return char1.length - char2.length;
+			}
+		});
+		for (String str : strs) {
+			buffer.append(str);
+		}
+		try {
+			MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+			crypt.reset();
+			crypt.update(buffer.toString().getBytes("UTF-8"));
+			signature = byteToHex(crypt.digest());
+		} catch (NoSuchAlgorithmException e) {
+			logger.error("WeChat", e);
+		} catch (UnsupportedEncodingException e) {
+			logger.error("WeChat", e);
+		}
+
+		ret.put("api_ticket", api_ticket);
+		ret.put("card_id", card_id);
+		ret.put("nonceStr", nonce_str);
+		ret.put("timestamp", timestamp);
+		ret.put("signature", signature);
+		if (code != null) {
+			ret.put("code", code);
+		}
+		if (openid != null) {
+			ret.put("openid", openid);
+		}
+		if (balance != null) {
+			ret.put("balance", balance);
+		}
+
+		return ret;
+	}
+
 	private static String byteToHex(final byte[] hash) {
 		Formatter formatter = new Formatter();
 		for (byte b : hash) {
@@ -198,11 +272,9 @@ public class WexinTool {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String getWebCodeUrl(String APPID, String REDIRECT_URI,
-			String SCOPE, String STATE) {
-		return String
-				.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s#wechat_redirect",
-						APPID, URLEncoder.encode(REDIRECT_URI), SCOPE, STATE);
+	public static String getWebCodeUrl(String APPID, String REDIRECT_URI, String SCOPE, String STATE) {
+		return String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s#wechat_redirect", APPID,
+				URLEncoder.encode(REDIRECT_URI), SCOPE, STATE);
 	}
 
 }

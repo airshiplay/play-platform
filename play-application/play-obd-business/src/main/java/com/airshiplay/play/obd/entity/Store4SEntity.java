@@ -1,11 +1,6 @@
 package com.airshiplay.play.obd.entity;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,6 +11,14 @@ import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.entity.AreaEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
+import java.util.List;
+
+/**
+ * 4S店
+ * 
+ * @author lig
+ *
+ */
 @Entity
 @Table(name = "obd_4store")
 @Getter
@@ -40,6 +43,14 @@ public class Store4SEntity extends DataEntity<AdminUserEntity, Long> {
 
 	@Column(length = 200)
 	private String address;
+
+	/**
+	 * logo
+	 * 
+	 * formtype image
+	 */
+	@Column(length = 500)
+	private String logo;
 	/**
 	 * 经度
 	 */
@@ -54,4 +65,8 @@ public class Store4SEntity extends DataEntity<AdminUserEntity, Long> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "primary_leader_id")
 	private AdminUserEntity primaryLeader;
+
+
+	@OneToMany(mappedBy = "store4S")
+	private List<Store4SServiceEntity> store4SServices;
 }

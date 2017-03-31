@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="keywords" th:content="${website.seoKeywords}">
+<meta name="description" th:content="${website.seoDescription}">
 <base href="../../" th:href="@{${#httpServletRequest.getContextPath()}}" />
 <link rel="icon" href="../../favicon.ico">
 
-<title>Play Website</title>
+<title th:text="${'联系我们-'+website.seoTitle}">艾尔里信息科技</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/plugins/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
 
 
@@ -26,9 +26,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- Custom styles for this template -->
-<link href="assets/css/navbar-fixed-top.css" rel="stylesheet">
-<link href="assets/css/app.css" rel="stylesheet">
-<link href="assets/css/carousel.css" rel="stylesheet">
+<link th:href="@{/assets/css/navbar-fixed-top.css}" rel="stylesheet">
+<link th:href="@{/assets/css/app.css}" rel="stylesheet">
+<link th:href="@{/assets/css/carousel.css}" rel="stylesheet">
 
 </head>
 
@@ -55,7 +55,7 @@
 				<div class="row">
 					<div id="email-us" class="col-sm-4 pad-xs text-center">
 						<h2>
-							<a href="mailto:support@linode.com">
+							<a href="mailto:support@airlenet.com">
 								<div class="fa fa-envelope"></div>
 								<div class="contact-label">
 									Email Us <span class="caret-right"></span>
@@ -86,9 +86,9 @@
 						</h2>
 						<p>Phone support is available day and night for existing customers, account support, and general inquiries.</p>
 						<ul class="call-us">
-							<li>U.S.: <a href="tel:+18554546633">855-454-6633</a></li>
-							<li>Intl.: <a href="tel:+16093807100">+1-609-380-7100</a></li>
-							<li>Fax: <a href="tel:+16093807200">609-380-7200</a></li>
+							<li>U.S.: <a href="tel:+*******">***-***-***</a></li>
+							<li>Intl.: <a href="tel:+*******">+***-***-***</a></li>
+							<li>Fax: <a href="tel:+*******">***-***-***</a></li>
 						</ul>
 					</div>
 				</div>
@@ -106,7 +106,7 @@
 					</div>
 					<div id="report-abuse" class="col-sm-4 pad-xs text-center">
 						<h2>
-							<a href="mailto:abuse@linode.com">
+							<a href="mailto:abuse@airlenet.com">
 								<div class="fa fa-warning"></div>
 								<div class="contact-label">
 									Report Abuse <span class="caret-right"></span>
@@ -117,7 +117,7 @@
 					</div>
 					<div id="report-abuse" class="col-sm-4 pad-xs text-center">
 						<h2>
-							<a href="mailto:disclosure@linode.com">
+							<a href="mailto:disclosure@airlenet.com">
 								<div class="fa fa-lock"></div>
 								<div class="contact-label">
 									Report a Security Issue <span class="caret-right"></span>
@@ -139,7 +139,7 @@
 						</p>
 						<address id="contact-address" class="text-center">
 							<ul style="list-style-type: none">
-								<li>329 E. Jimmie Leeds Rd, Ste. A</li>
+								<li>******</li>
 								<li>Galloway, NJ 08205</li>
 							</ul>
 						</address>
@@ -155,9 +155,9 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="assets/jquery/3.1.1/jquery.min.js"></script>
-	<script src="assets/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="assets/holder/holder.min.js"></script>
+	<script src="assets/plugins/jquery/3.1.1/jquery.min.js"></script>
+	<script src="assets/plugins/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="assets/plugins/holder/holder.min.js"></script>
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="assets/js/ie10-viewport-bug-workaround.js"></script>

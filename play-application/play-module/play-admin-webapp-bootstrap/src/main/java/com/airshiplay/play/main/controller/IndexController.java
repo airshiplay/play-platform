@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.airshiplay.play.main.api.LogService;
+import com.airshiplay.play.main.api.LogService.LogLevel;
+import com.airshiplay.play.main.api.LogService.OperateType;
 import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.service.MenuEntityService;
@@ -52,17 +55,22 @@ public class IndexController {
 	@Autowired
 	private CaptchaService captchaService;
 	@Autowired
-	OauthPluginService oauthPluginService;
+	private OauthPluginService oauthPluginService;
+
+	@Autowired
+	private LogService logService;
+
 	@RequestMapping(value = { "${path.admin}", "${path.admin}/", "${path.admin}/index" }, method = RequestMethod.GET)
 	public String get(Model model, @CurrentUser CustomUserDetails<?, AdminUserEntity> user) {
+		logService.addLog(OperateType.VIEW, LogLevel.INFO, "进入管理平台");
 		AdminUserEntity en = user.getCustomUser();
 		model.addAttribute("currentUser", en);
 
 		model.addAttribute("setting", (settingEntityService.get()));
-		Tree<MenuEntity> tree = menuEntityService.getAllMenuTree();// menuEntityService.getMenuTreeByUserId(en.getId());
+		Tree<MenuEntity> tree = menuEntityService.getMenuTreeByUserId(en.getId());
 		tree.setIconClsProperty("iconCls");
 		tree.setTextProperty("text");
-		model.addAttribute("allMenuTree", tree.getRoots());	
+		model.addAttribute("allMenuTree", tree.getRoots());
 		return "/bootstrap/admin/index";
 	}
 
@@ -70,7 +78,7 @@ public class IndexController {
 	public String getLogin(Model model, HttpServletRequest request) {
 		List<OauthPlugin> oauthPlugins = oauthPluginService.getAvailableOauthPlugins();
 		List<String> oauthPluginIds = new ArrayList<String>();
-		oauthPlugins.forEach((node) -> { 
+		oauthPlugins.forEach((node) -> {
 			oauthPluginIds.add(node.getId());
 		});
 		model.addAttribute("oauthPluginIds", oauthPluginIds);
@@ -86,11 +94,14 @@ public class IndexController {
 			SecurityUtils.getSubject().login(token);
 		} catch (AuthenticationException e) {
 			logger.error("admin", e);
+			logService.addLog(OperateType.LOGIN, LogLevel.ERROR, "登录失败,用户名:" + username, e);
 			return Result.validateError();
 		} catch (Exception e) {
 			logger.error("admin", e);
+			logService.addLog(OperateType.LOGIN, LogLevel.ERROR, "登录失败,用户名:" + username, e);
 			return Result.validateError();
 		}
+		logService.addLog(OperateType.LOGIN, LogLevel.INFO, "登录成功");
 		return Result.success();
 
 	}

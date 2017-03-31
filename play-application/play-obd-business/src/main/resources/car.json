@@ -1,0 +1,560 @@
+{
+  "message": "ok",
+  "details": {
+    "D": [
+      {
+        "CAR_ID": "ds",
+        "NODE_TEXT": "DS"
+      },
+      {
+        "CAR_ID": "dongnan",
+        "NODE_TEXT": "东南"
+      },
+      {
+        "CAR_ID": "dongfengxiaokang",
+        "NODE_TEXT": "东风小康"
+      },
+      {
+        "CAR_ID": "dazhong",
+        "NODE_TEXT": "大众"
+      },
+      {
+        "CAR_ID": "dadi",
+        "NODE_TEXT": "大迪"
+      },
+      {
+        "CAR_ID": "daoqi",
+        "NODE_TEXT": "道奇"
+      }
+    ],
+    "F": [
+      {
+        "CAR_ID": "fengtian",
+        "NODE_TEXT": "丰田"
+      },
+      {
+        "CAR_ID": "fuqi",
+        "NODE_TEXT": "富奇"
+      },
+      {
+        "CAR_ID": "falali",
+        "NODE_TEXT": "法拉利"
+      },
+      {
+        "CAR_ID": "fute",
+        "NODE_TEXT": "福特"
+      },
+      {
+        "CAR_ID": "futian",
+        "NODE_TEXT": "福田"
+      },
+      {
+        "CAR_ID": "fudi",
+        "NODE_TEXT": "福迪"
+      },
+      {
+        "CAR_ID": "feiyate",
+        "NODE_TEXT": "菲亚特"
+      },
+      {
+        "CAR_ID": "fengdu",
+        "NODE_TEXT": "风度"
+      },
+      {
+        "CAR_ID": "fengshen",
+        "NODE_TEXT": "风神"
+      },
+      {
+        "CAR_ID": "fengxing",
+        "NODE_TEXT": "风行"
+      }
+    ],
+    "G": [
+      {
+        "CAR_ID": "guanggang",
+        "NODE_TEXT": "光冈"
+      },
+      {
+        "CAR_ID": "guanzhi",
+        "NODE_TEXT": "观致"
+      }
+    ],
+    "A": [
+      {
+        "CAR_ID": "aodi",
+        "NODE_TEXT": "奥迪"
+      },
+      {
+        "CAR_ID": "asidunmading",
+        "NODE_TEXT": "阿斯顿马丁"
+      }
+    ],
+    "B": [
+      {
+        "CAR_ID": "baoshijie",
+        "NODE_TEXT": "保时捷"
+      },
+      {
+        "CAR_ID": "bieke",
+        "NODE_TEXT": "别克"
+      },
+      {
+        "CAR_ID": "beiqi",
+        "NODE_TEXT": "北汽"
+      },
+      {
+        "CAR_ID": "beiqizhizao",
+        "NODE_TEXT": "北汽制造"
+      },
+      {
+        "CAR_ID": "beiqixinnengyuan",
+        "NODE_TEXT": "北汽新能源"
+      },
+      {
+        "CAR_ID": "benteng",
+        "NODE_TEXT": "奔腾"
+      },
+      {
+        "CAR_ID": "benchi",
+        "NODE_TEXT": "奔驰"
+      },
+      {
+        "CAR_ID": "baowo",
+        "NODE_TEXT": "宝沃"
+      },
+      {
+        "CAR_ID": "baoma",
+        "NODE_TEXT": "宝马"
+      },
+      {
+        "CAR_ID": "baojun",
+        "NODE_TEXT": "宝骏"
+      },
+      {
+        "CAR_ID": "binli",
+        "NODE_TEXT": "宾利"
+      },
+      {
+        "CAR_ID": "babosi",
+        "NODE_TEXT": "巴博斯"
+      },
+      {
+        "CAR_ID": "bujiadi",
+        "NODE_TEXT": "布加迪"
+      },
+      {
+        "CAR_ID": "bentian",
+        "NODE_TEXT": "本田"
+      },
+      {
+        "CAR_ID": "biaozhi",
+        "NODE_TEXT": "标致"
+      },
+      {
+        "CAR_ID": "biyadi",
+        "NODE_TEXT": "比亚迪"
+      }
+    ],
+    "C": [
+      {
+        "CAR_ID": "chuanqi",
+        "NODE_TEXT": "传祺"
+      },
+      {
+        "CAR_ID": "changhe",
+        "NODE_TEXT": "昌河"
+      },
+      {
+        "CAR_ID": "zhangfeng",
+        "NODE_TEXT": "长丰"
+      },
+      {
+        "CAR_ID": "zhangcheng",
+        "NODE_TEXT": "长城"
+      },
+      {
+        "CAR_ID": "zhangan",
+        "NODE_TEXT": "长安"
+      }
+    ],
+    "L": [
+      {
+        "CAR_ID": "localmotors",
+        "NODE_TEXT": "LOCAL MOTORS"
+      },
+      {
+        "CAR_ID": "lanbojini",
+        "NODE_TEXT": "兰博基尼"
+      },
+      {
+        "CAR_ID": "lifan",
+        "NODE_TEXT": "力帆"
+      },
+      {
+        "CAR_ID": "laosilaisi",
+        "NODE_TEXT": "劳斯莱斯"
+      },
+      {
+        "CAR_ID": "linken",
+        "NODE_TEXT": "林肯"
+      },
+      {
+        "CAR_ID": "linian",
+        "NODE_TEXT": "理念"
+      },
+      {
+        "CAR_ID": "lianhua",
+        "NODE_TEXT": "莲花"
+      },
+      {
+        "CAR_ID": "lutesi",
+        "NODE_TEXT": "路特斯"
+      },
+      {
+        "CAR_ID": "luhu",
+        "NODE_TEXT": "路虎"
+      },
+      {
+        "CAR_ID": "lingmu",
+        "NODE_TEXT": "铃木"
+      },
+      {
+        "CAR_ID": "ludifangzhou",
+        "NODE_TEXT": "陆地方舟"
+      },
+      {
+        "CAR_ID": "lufeng",
+        "NODE_TEXT": "陆风"
+      },
+      {
+        "CAR_ID": "leiding",
+        "NODE_TEXT": "雷丁"
+      },
+      {
+        "CAR_ID": "leikesasi",
+        "NODE_TEXT": "雷克萨斯"
+      },
+      {
+        "CAR_ID": "leinuo",
+        "NODE_TEXT": "雷诺"
+      }
+    ],
+    "M": [
+      {
+        "CAR_ID": "mg",
+        "NODE_TEXT": "MG"
+      },
+      {
+        "CAR_ID": "mini",
+        "NODE_TEXT": "MINI"
+      },
+      {
+        "CAR_ID": "mashaladi",
+        "NODE_TEXT": "玛莎拉蒂"
+      },
+      {
+        "CAR_ID": "maikailun",
+        "NODE_TEXT": "迈凯伦"
+      },
+      {
+        "CAR_ID": "maibahe",
+        "NODE_TEXT": "迈巴赫"
+      },
+      {
+        "CAR_ID": "mazida",
+        "NODE_TEXT": "马自达"
+      }
+    ],
+    "N": [
+      {
+        "CAR_ID": "nazhijie",
+        "NODE_TEXT": "纳智捷"
+      }
+    ],
+    "O": [
+      {
+        "CAR_ID": "oubao",
+        "NODE_TEXT": "欧宝"
+      },
+      {
+        "CAR_ID": "oulang",
+        "NODE_TEXT": "欧朗"
+      },
+      {
+        "CAR_ID": "ouge",
+        "NODE_TEXT": "讴歌"
+      }
+    ],
+    "H": [
+      {
+        "CAR_ID": "huatai",
+        "NODE_TEXT": "华泰"
+      },
+      {
+        "CAR_ID": "huasong",
+        "NODE_TEXT": "华颂"
+      },
+      {
+        "CAR_ID": "hafu",
+        "NODE_TEXT": "哈弗"
+      },
+      {
+        "CAR_ID": "hafei",
+        "NODE_TEXT": "哈飞"
+      },
+      {
+        "CAR_ID": "huansu",
+        "NODE_TEXT": "幻速"
+      },
+      {
+        "CAR_ID": "hanma",
+        "NODE_TEXT": "悍马"
+      },
+      {
+        "CAR_ID": "haima",
+        "NODE_TEXT": "海马"
+      },
+      {
+        "CAR_ID": "hongqi",
+        "NODE_TEXT": "红旗"
+      },
+      {
+        "CAR_ID": "huanghai",
+        "NODE_TEXT": "黄海"
+      }
+    ],
+    "J": [
+      {
+        "CAR_ID": "jiulong",
+        "NODE_TEXT": "九龙"
+      },
+      {
+        "CAR_ID": "jili",
+        "NODE_TEXT": "吉利"
+      },
+      {
+        "CAR_ID": "jiao",
+        "NODE_TEXT": "吉奥"
+      },
+      {
+        "CAR_ID": "jimuxi",
+        "NODE_TEXT": "吉姆西"
+      },
+      {
+        "CAR_ID": "jipu",
+        "NODE_TEXT": "吉普"
+      },
+      {
+        "CAR_ID": "jiebao",
+        "NODE_TEXT": "捷豹"
+      },
+      {
+        "CAR_ID": "jiangnan",
+        "NODE_TEXT": "江南"
+      },
+      {
+        "CAR_ID": "jianghuai",
+        "NODE_TEXT": "江淮"
+      },
+      {
+        "CAR_ID": "jiangling",
+        "NODE_TEXT": "江铃"
+      },
+      {
+        "CAR_ID": "jinbei",
+        "NODE_TEXT": "金杯"
+      }
+    ],
+    "K": [
+      {
+        "CAR_ID": "kelaisile",
+        "NODE_TEXT": "克莱斯勒"
+      },
+      {
+        "CAR_ID": "kaiyi",
+        "NODE_TEXT": "凯翼"
+      },
+      {
+        "CAR_ID": "kaidilake",
+        "NODE_TEXT": "凯迪拉克"
+      },
+      {
+        "CAR_ID": "kawei",
+        "NODE_TEXT": "卡威"
+      },
+      {
+        "CAR_ID": "kangdi",
+        "NODE_TEXT": "康迪"
+      },
+      {
+        "CAR_ID": "kairui",
+        "NODE_TEXT": "开瑞"
+      }
+    ],
+    "T": [
+      {
+        "CAR_ID": "tianma",
+        "NODE_TEXT": "天马"
+      },
+      {
+        "CAR_ID": "tesila",
+        "NODE_TEXT": "特斯拉"
+      },
+      {
+        "CAR_ID": "tengshi",
+        "NODE_TEXT": "腾势"
+      }
+    ],
+    "W": [
+      {
+        "CAR_ID": "wushiling",
+        "NODE_TEXT": "五十铃"
+      },
+      {
+        "CAR_ID": "weiziman",
+        "NODE_TEXT": "威兹曼"
+      },
+      {
+        "CAR_ID": "weiwang",
+        "NODE_TEXT": "威旺"
+      },
+      {
+        "CAR_ID": "weilin",
+        "NODE_TEXT": "威麟"
+      },
+      {
+        "CAR_ID": "woerwo",
+        "NODE_TEXT": "沃尔沃"
+      }
+    ],
+    "Q": [
+      {
+        "CAR_ID": "qichen",
+        "NODE_TEXT": "启辰"
+      },
+      {
+        "CAR_ID": "qirui",
+        "NODE_TEXT": "奇瑞"
+      },
+      {
+        "CAR_ID": "qiya",
+        "NODE_TEXT": "起亚"
+      }
+    ],
+    "S": [
+      {
+        "CAR_ID": "smart",
+        "NODE_TEXT": "Smart"
+      },
+      {
+        "CAR_ID": "sanling",
+        "NODE_TEXT": "三菱"
+      },
+      {
+        "CAR_ID": "shangqidatong",
+        "NODE_TEXT": "上汽大通"
+      },
+      {
+        "CAR_ID": "shijue",
+        "NODE_TEXT": "世爵"
+      },
+      {
+        "CAR_ID": "shuanghuan",
+        "NODE_TEXT": "双环"
+      },
+      {
+        "CAR_ID": "shuanglong",
+        "NODE_TEXT": "双龙"
+      },
+      {
+        "CAR_ID": "sibalu",
+        "NODE_TEXT": "斯巴鲁"
+      },
+      {
+        "CAR_ID": "sikeda",
+        "NODE_TEXT": "斯柯达"
+      },
+      {
+        "CAR_ID": "sabo",
+        "NODE_TEXT": "萨博"
+      }
+    ],
+    "R": [
+      {
+        "CAR_ID": "richan",
+        "NODE_TEXT": "日产"
+      },
+      {
+        "CAR_ID": "ruiqi",
+        "NODE_TEXT": "瑞麒"
+      },
+      {
+        "CAR_ID": "rongwei",
+        "NODE_TEXT": "荣威"
+      }
+    ],
+    "Y": [
+      {
+        "CAR_ID": "yiqi",
+        "NODE_TEXT": "一汽"
+      },
+      {
+        "CAR_ID": "yongyuan",
+        "NODE_TEXT": "永源"
+      },
+      {
+        "CAR_ID": "yingzhi",
+        "NODE_TEXT": "英致"
+      },
+      {
+        "CAR_ID": "yingfeinidi",
+        "NODE_TEXT": "英菲尼迪"
+      },
+      {
+        "CAR_ID": "yema",
+        "NODE_TEXT": "野马"
+      }
+    ],
+    "X": [
+      {
+        "CAR_ID": "xinkai",
+        "NODE_TEXT": "新凯"
+      },
+      {
+        "CAR_ID": "xiandai",
+        "NODE_TEXT": "现代"
+      },
+      {
+        "CAR_ID": "xiyate",
+        "NODE_TEXT": "西雅特"
+      },
+      {
+        "CAR_ID": "xuefolan",
+        "NODE_TEXT": "雪佛兰"
+      },
+      {
+        "CAR_ID": "xuetielong",
+        "NODE_TEXT": "雪铁龙"
+      }
+    ],
+    "Z": [
+      {
+        "CAR_ID": "zhongxing",
+        "NODE_TEXT": "中兴"
+      },
+      {
+        "CAR_ID": "zhonghua",
+        "NODE_TEXT": "中华"
+      },
+      {
+        "CAR_ID": "zhongtai",
+        "NODE_TEXT": "众泰"
+      },
+      {
+        "CAR_ID": "zhidou",
+        "NODE_TEXT": "知豆"
+      }
+    ]
+  },
+  "code": 0
+}

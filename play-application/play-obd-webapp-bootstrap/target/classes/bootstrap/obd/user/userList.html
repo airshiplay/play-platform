@@ -60,6 +60,8 @@
 								<th data-column-id="nickname">昵称</th>
 								<th data-column-id="username">用户名</th>
 								<th data-column-id="realname">真实姓名</th>
+								<th data-formatter="rank" data-sortable="false">等级</th>
+								<th data-column-id="createdDate" data-type="datetime" data-sortable="false">创建时间</th>
 								<th data-formatter="status" data-sortable="false">状态</th>
 								<th data-formatter="commands" data-css-class="command-column" data-width="150px" data-sortable="false" data-align="center"
 									data-header-align="center">操作</th>
@@ -85,6 +87,9 @@
 									{
 										url : base + "/obd/user/page",
 										formatters : {
+											"rank":function(column,row){
+												return row.obdrank==null?'':row.obdrank.name
+											},
 											"rolename":function(column,row){
 												var result="";
 												$(row.roles).each(function(index,element){
@@ -112,7 +117,7 @@
 											"commands" : function(column, row) {
 												return "\
 								<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\
-									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/center/user/edit/"+row.id+"\">\
+									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/obd/user/edit/"+row.id+"\">\
 										<i class=\"glyphicon glyphicon-edit\"></i>\
 									</a>\
 									<a aria-expanded=\"false\" aria-haspopup=\"true\" data-toggle=\"dropdown\" \
@@ -121,7 +126,7 @@
 										<span class=\"ion-arrow-down-b\"></span>\
 									</a>\
 									<ul class=\"dropdown-menu pull-right\">\
-									<li><a href=\"javascript:;\" class=\"command-setRole\"><i class=\"fa fa-gavel\"></i>角色设置</a></li>\
+									<li><a href=\"javascript:;\" class=\"command-setRank\"><i class=\"fa fa-gavel\"></i>会员设置</a></li>\
 										<li class=\"divider\" role=\"separator\"></li>\
 										<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i>移除</a></li>\
 									</ul>\
@@ -183,7 +188,25 @@
 					grid.on("loaded.rs.jquery.bootgrid", function() {
 						var $table = $(this);
 						$table.find(".dropdown-toggle").dropdown();
+						$table.find(".command-setRank").on("click", function(e) {
+							var member_id = $(this).closest(".btn-group").data("row-id");
+							console.log("");
+							$.confirm({
+								title : "会员等级列表",
+								content : "url:" + base + "/obd/user/"+member_id+"/rank/update",
+								columnClass : "col-md-10 col-md-offset-1",
+								confirmButton : "确定",
+								cancelButton : "取消",
+								confirmButtonClass : 'btn-primary',
+								cancelButtonClass : 'btn-danger',
+								confirm : function() {
+									refreshGrid();
+									return true;
+								}
+							});
+							
 
+						});
 						$table.find(".command-delete").on("click", function(e) {
 							var app_id = $(this).closest(".btn-group").data("row-id");
 

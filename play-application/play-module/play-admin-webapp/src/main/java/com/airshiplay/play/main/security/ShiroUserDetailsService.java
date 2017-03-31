@@ -3,6 +3,7 @@ package com.airshiplay.play.main.security;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -90,7 +91,6 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 	@Transactional(readOnly = true)
 	@Override
 	public Set<String> findRoles(String username, Serializable uid) {
-
 		Iterator<RoleEntity> result = roleEntityRepository.findAll(QRoleEntity.roleEntity.users.any().id.eq((Long) uid)).iterator();
 		Set<String> sets = new HashSet<String>();
 		while (result.hasNext()) {
@@ -125,6 +125,11 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 
 	@Override
 	public Set<String> findAdminPermissions(String username, Serializable uid) {
+		// ////superadmin 角色用户，拥有超级权限
+		Iterable<RoleEntity> roles = roleEntityRepository.findAll(QRoleEntity.roleEntity.users.any().id.eq((Long) uid).and(QRoleEntity.roleEntity.code.eq("superadmin")));
+		if (roles.iterator().hasNext()) {
+			return Sets.newHashSet("*");
+		}
 		Iterator<AuthorityEntity> result = authorityEntityRespository.findAll(QAuthorityEntity.authorityEntity.roles.any().users.any().id.eq((Long) uid)).iterator();
 		Set<String> sets = new HashSet<String>();
 		while (result.hasNext()) {
@@ -143,7 +148,8 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 			RoleEntity roleEntity = (RoleEntity) result.next();
 			sets.add(roleEntity.getCode());
 		}
-		return Sets.newHashSet("admin");
+		sets.add("admin");
+		return sets;
 	}
 
 	@Override
@@ -153,7 +159,7 @@ public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
 
 	@Override
 	public Set<String> findMemberRoles(String username, Serializable uid) {
-		return Sets.newHashSet();
+		return Sets.newHashSet("user");
 	}
 
 }

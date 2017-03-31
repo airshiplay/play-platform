@@ -49,6 +49,12 @@
 				<artifactId>play-app-business</artifactId>
 				<version>${play.module.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-http-client</artifactId>
+				<version>${play.module.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-integration-webapp</artifactId>

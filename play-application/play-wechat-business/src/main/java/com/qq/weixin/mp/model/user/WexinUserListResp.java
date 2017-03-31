@@ -3,6 +3,8 @@ package com.qq.weixin.mp.model.user;
 import java.util.List;
 
 public class WexinUserListResp {
+	private int errcode;
+	private String errmsg;
 	private Long total;
 	private int count;
 	private OpenId data;
@@ -51,6 +53,22 @@ public class WexinUserListResp {
 
 	public void setNext_openid(String next_openid) {
 		this.next_openid = next_openid;
+	}
+
+	public String getErrmsg() {
+		return errmsg;
+	}
+
+	public void setErrmsg(String errmsg) {
+		this.errmsg = errmsg;
+	}
+
+	public int getErrcode() {
+		return errcode;
+	}
+
+	public void setErrcode(int errcode) {
+		this.errcode = errcode;
 	}
 
 }

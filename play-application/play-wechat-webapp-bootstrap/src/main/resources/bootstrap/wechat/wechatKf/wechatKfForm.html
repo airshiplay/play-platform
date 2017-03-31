@@ -1,0 +1,117 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-fileinput/css/fileinput.min.css">
+
+<style>
+.kv-kfHeadImageUrl .file-preview-frame, .kv-kfHeadImageUrl .file-preview-frame:hover {
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	text-align: center;
+}
+.kv-kfHeadImageUrl .file-input {
+	display: table-cell;
+	max-width: 220px;
+}
+</style>
+<section class="content-header">
+	<h1>
+		微信客服列表 <small>开始管理微信客服</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/wechat/wechatKf/wechatKfList"><i class="glyphicon glyphicon-list"></i> 微信客服列表</a></li>
+		<li class="active" th:text="${wechatKf==null?'新建微信客服':'编辑微信客服'}">新建微信客服</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${wechatKf==null?'新建微信客服':'编辑微信客服'}">新建微信客服</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="wechatkf-form" action="/wechat/wechatKf/save">
+					<input type="hidden" name="id" th:value="${wechatKf==null?'':wechatKf.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="kfAccountInput">kfAccount</label>
+							<input type="text" name="kfAccount" class="form-control" id="kfAccountInput" placeholder="请填写kfAccount"
+								
+		                  		th:value="${wechatKf==null?'':wechatKf.kfAccount}"/>
+						</div>
+						<div class="form-group">
+							<label for="kfNickInput">kfNick</label>
+							<input type="text" name="kfNick" class="form-control" id="kfNickInput" placeholder="请填写kfNick"
+								
+		                  		th:value="${wechatKf==null?'':wechatKf.kfNick}"/>
+						</div>
+						<div class="form-group">
+							<label for="kfIdInput">kfId</label>
+							<input type="text" name="kfId" class="form-control" id="kfIdInput" placeholder="请填写kfId"
+								
+		                  		th:value="${wechatKf==null?'':wechatKf.kfId}"/>
+						</div>
+						<div class="form-group">
+							<label for="kfHeadImageUrlInput">kfHeadImageUrl</label>
+							<input type="text" name="kfHeadImageUrl" class="form-control" id="kfHeadImageUrlInput" placeholder="请填写kfHeadImageUrl"
+								
+		                  		th:value="${wechatKf==null?'':wechatKf.kfHeadImageUrl}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/wechat/wechatKf/wechatKfList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("wechat_wechatkf_list");
+			
+
+			var $form = $(".wechatkf-form");		  
+			$(".wechatkf-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/wechat/wechatKf/wechatKfList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

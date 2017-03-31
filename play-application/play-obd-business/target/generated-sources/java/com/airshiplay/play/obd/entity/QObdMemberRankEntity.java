@@ -22,38 +22,29 @@ public class QObdMemberRankEntity extends EntityPathBase<ObdMemberRankEntity> {
 
     public static final QObdMemberRankEntity obdMemberRankEntity = new QObdMemberRankEntity("obdMemberRankEntity");
 
-    public final com.airshiplay.play.main.entity.QMemberRankEntity _super;
+    public final com.airshiplay.play.repo.jpa.QDataEntity _super = new com.airshiplay.play.repo.jpa.QDataEntity(this);
 
-    //inherited
-    public final StringPath code;
+    public final StringPath code = createString("code");
 
-    // inherited
     public final com.airshiplay.play.main.entity.QAdminUserEntity createdBy;
 
     //inherited
-    public final DateTimePath<java.util.Date> createdDate;
+    public final DateTimePath<java.util.Date> createdDate = _super.createdDate;
 
     public final StringPath description = createString("description");
 
-    //inherited
-    public final StringPath icon;
+    public final StringPath icon = createString("icon");
 
-    //inherited
-    public final NumberPath<Long> id;
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    // inherited
     public final com.airshiplay.play.main.entity.QAdminUserEntity lastModifiedBy;
 
     //inherited
-    public final DateTimePath<java.util.Date> lastModifiedDate;
+    public final DateTimePath<java.util.Date> lastModifiedDate = _super.lastModifiedDate;
 
-    //inherited
-    public final StringPath name;
+    public final StringPath name = createString("name");
 
     public final SetPath<ObdUserEntity, QObdUserEntity> obdusers = this.<ObdUserEntity, QObdUserEntity>createSet("obdusers", ObdUserEntity.class, QObdUserEntity.class, PathInits.DIRECT2);
-
-    //inherited
-    public final SetPath<com.airshiplay.play.main.entity.MemberUserEntity, com.airshiplay.play.main.entity.QMemberUserEntity> users;
 
     public QObdMemberRankEntity(String variable) {
         this(ObdMemberRankEntity.class, forVariable(variable), INITS);
@@ -73,16 +64,8 @@ public class QObdMemberRankEntity extends EntityPathBase<ObdMemberRankEntity> {
 
     public QObdMemberRankEntity(Class<? extends ObdMemberRankEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this._super = new com.airshiplay.play.main.entity.QMemberRankEntity(type, metadata, inits);
-        this.code = _super.code;
-        this.createdBy = _super.createdBy;
-        this.createdDate = _super.createdDate;
-        this.icon = _super.icon;
-        this.id = _super.id;
-        this.lastModifiedBy = _super.lastModifiedBy;
-        this.lastModifiedDate = _super.lastModifiedDate;
-        this.name = _super.name;
-        this.users = _super.users;
+        this.createdBy = inits.isInitialized("createdBy") ? new com.airshiplay.play.main.entity.QAdminUserEntity(forProperty("createdBy"), inits.get("createdBy")) : null;
+        this.lastModifiedBy = inits.isInitialized("lastModifiedBy") ? new com.airshiplay.play.main.entity.QAdminUserEntity(forProperty("lastModifiedBy"), inits.get("lastModifiedBy")) : null;
     }
 
 }

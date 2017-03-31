@@ -86,10 +86,12 @@ public class MemberController {
 				return Result.validateError();
 			}
 			String salt= StringUtils.isEmpty(user.getSalt())?passwordService.generatorSalt():user.getSalt();
+			user.setSalt(salt);
 			user.setPassword(passwordService.encryptPassword(newPassword, salt));
 		}else{
 			if(!Strings.isNullOrEmpty(newPassword)) {
 				String salt= StringUtils.isEmpty(user.getSalt())?passwordService.generatorSalt():user.getSalt();
+				user.setSalt(salt);
 				user.setPassword(passwordService.encryptPassword(newPassword, salt));
 			}
 		}

@@ -1,81 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh-cn"  xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MZUI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="../../META-INF/" th:href="@{/}"/>
+    <title>我的</title>
 
-<!-- MZUI CSS file -->
-<link href="assets/mzui/css/mzui.min.css" rel="stylesheet">
-
-<style>
-.profile-haeder {position: relative; overflow: hidden; min-height: 8rem;z-index:0}
-.profile-haeder > .back {top: -2rem; left: -2rem; right: -2rem; bottom: -2rem; background-position: center; background-size: cover}
-.profile-haeder > .front {background: rgba(0,0,0,.1); text-align: center; padding: 1.5rem}
-.heading.affix{background: rgba(0,0,0,0);}
-</style>
-
+    <link href="assets/plugins/mui/css/mui.min.css" rel="stylesheet">
 </head>
 <body>
-	<header class="heading affix dock-top">
-		<nav class="nav">
-			<a><i class="icon-bars"></i></a>
-		</nav>
-		<div class="title text-center">
-			<!-- <strong>个人</strong> -->
-		</div>
-		<nav class="nav">
-			<a><i class="icon-search"></i></a>
-		</nav>
-	</header>
-
-<div class="profile-haeder space shadow">
-
-  <div class="red dock blur-lg back" style="background-image: url(doc/img/img2.jpg)"></div>
-  <div class="front dock text-white">
-    <div class="avatar avatar-xl circle space-sm">
-      <img src="assets/img/avatar.png" alt="">
+<section class="my-messge borderb">
+    <div class="my-messge-box">
+        <div class="mes-top"><span class="circle"><span><img src="images/nologin.png"></span></span></div>
+        <div class="mes-bottom"><p class="font15"></p>
+            <p class="font12 light-color">13655177723</p></div>
     </div>
-    <h4 class="lead text-shadow-black">Catouse</h4>
-  </div>
+</section>
+<div class="mui-content">
+    <div class="title">
+        这是webview模式选项卡中的第4个子页面，该页面展示一个常见的设置示例
+    </div>
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">
+                新消息通知
+            </a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">
+                隐私
+            </a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">
+                通用
+            </a>
+        </li>
+    </ul>
+    <ul class="mui-table-view" style="margin-top: 25px;">
+        <li class="mui-table-view-cell">
+            <a id="about" class="mui-navigate-right">
+                关于mui
+            </a>
+        </li>
+    </ul>
+    <ul class="mui-table-view" style="margin-top: 25px;">
+        <li class="mui-table-view-cell">
+            <a style="text-align: center;color: #FF3B30;" class="">
+                退出登录
+            </a>
+        </li>
+    </ul>
 </div>
-
-<div class="section">
-  <div class="list with-divider">
-    <a class="item with-avatar">
-      <div class="avatar text-gray"><i class="icon-list-ul"></i></div>
-      <div class="title">订单列表</div>
-      <i class="icon icon-chevron-right muted"></i>
+<nav class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item " href="/index">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">首页</span>
     </a>
-    <a class="item with-avatar">
-      <div class="avatar text-gray"><i class="icon icon-comments"></i></div>
-      <div class="title">我的消息</div>
-      <i class="icon icon-chevron-right muted"></i>
+    <a class="mui-tab-item" href="#tabbar-with-chat">
+        <span class="mui-icon mui-icon-order"><span class="mui-badge">9</span></span>
+        <span class="mui-tab-label">消息</span>
     </a>
-    <a class="item with-avatar">
-      <div class="avatar text-gray"><i class="icon icon-lock"></i></div>
-      <div class="title">安全中心</div>
-      <i class="icon icon-chevron-right muted"></i>
+    <a class="mui-tab-item" href="#tabbar-with-contact">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">通讯录</span>
     </a>
-    <a class="item with-avatar">
-      <div class="avatar text-gray"><i class="icon-cog"></i></div>
-      <div class="title">个人设置</div>
-      <i class="icon icon-chevron-right muted"></i>
+    <a class="mui-tab-item mui-active" href="#/my">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">设置</span>
     </a>
-    <a class="item with-avatar">
-      <div class="avatar text-gray"><i class="icon-qrcode"></i></div>
-      <div class="title">我的二维码</div>
-      <i class="icon icon-chevron-right muted"></i>
-    </a>
-  </div>
-</div>
-<nav class="nav nav-auto affix dock-bottom justified">
-  <a href="/">首页</a>
-  <a href="/store4s">4S店</a>
-  <a href="/my" class="success strong">我的</a>
 </nav>
-
-	<!-- MZUI JS file -->
-	<script src="assets/mzui/js/mzui.min.js"></script>
+<script>
+    mui.init();
+</script>
 </body>
 </html>

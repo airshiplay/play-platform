@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.airshiplay.play.main.entity.MemberRankEntity;
+import com.airshiplay.play.main.entity.SettingEntity;
 
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
@@ -37,7 +38,7 @@ public class WebTemplate {
 		System.out.println(resourcesFile.getAbsolutePath());
 		cfg.setDirectoryForTemplateLoading(resourcesFile);
 
-		for (Class<?> cls : new Class[] {MemberRankEntity.class }) {
+		for (Class<?> cls : new Class[] {SettingEntity.class }) {
 			controller(cfg, cls);
 			htmlList(cfg, cls);
 			htmlForm(cfg, cls);

@@ -81,7 +81,7 @@
 										url : base + "/center/memberRank/page",
 										formatters : {
 											"memberCount":function(column,row){
-												return row.users==null?'0':row.users.length;
+												return row.members==null?'0':row.members.length;
 											},
 											"icon" : function(column,row){
 												return "<img src=\""+row.icon+"\"  alt=\"图标\" width=\"50\" height=\"50\"/>";
@@ -201,7 +201,11 @@
 						search.property="name";
 						search.value=$("#searchInput").val();
 						arr.push(search);
-						grid.bootgrid("search", JSON.stringify(arr));
+						if(search.value==''){
+							grid.bootgrid("search", '');
+						}else{
+							grid.bootgrid("search", JSON.stringify(arr));
+						}
 					});
 
 				});

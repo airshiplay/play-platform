@@ -116,6 +116,7 @@
 										<span class=\"ion-arrow-down-b\"></span>\
 									</a>\
 									<ul class=\"dropdown-menu pull-right\">\
+										<li><a href=\"javascript:;\" class=\"command-vehicleInfo\"><i class=\"glyphicon glyphicon-info\"></i>车辆信息</a></li>\
 										<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i>移除</a></li>\
 									</ul>\
 								</div>";
@@ -177,6 +178,23 @@
 						var $table = $(this);
 						$table.find(".dropdown-toggle").dropdown();
 
+						$table.find(".command-vehicleInfo").on("click", function(e) {
+							var alarm_id = $(this).closest(".btn-group").data("row-id");						
+							$.confirm({
+								title : "车辆信息",
+								content : "url:" + base + "/obd/vehicleAlarm/"+alarm_id+"/vehicle.view",
+								columnClass : "col-md-10 col-md-offset-1",
+								confirmButton : "确定",
+								cancelButton : "取消",
+								confirmButtonClass : 'btn-primary',
+								cancelButtonClass : 'btn-danger',
+								confirm : function() {
+									refreshGrid();
+									return true;
+								}
+							});
+
+						});
 						$table.find(".command-delete").on("click", function(e) {
 							var app_id = $(this).closest(".btn-group").data("row-id");						
 							deleteRow($table, [ app_id ]);

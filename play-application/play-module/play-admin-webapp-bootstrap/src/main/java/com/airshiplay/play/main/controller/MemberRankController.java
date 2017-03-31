@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.airshiplay.play.main.entity.MemberRankEntity;
 import com.airshiplay.play.main.entity.MemberUserEntity;
+import com.airshiplay.play.main.entity.QMemberUserEntity;
 import com.airshiplay.play.main.service.MemberRankEntityService;
 import com.airshiplay.play.main.service.MemberUserEntityService;
 import com.airshiplay.play.repo.domain.Result;
@@ -63,7 +64,7 @@ public class MemberRankController {
 	@RequestMapping(value = "/{id}/member/page", method = RequestMethod.POST)
 	@ResponseBody
 	public Page<MemberUserEntity> doMemberPage(@PathVariable Long id,Predicate predicate, Pageable pageable) {
-		return memberUserEntityService.findAll(predicate, pageable);
+		return memberUserEntityService.findAll(QMemberUserEntity.memberUserEntity.rank.id.eq(id).and(predicate), pageable);
 	}
 	@RequestMapping(value = "/page", method = RequestMethod.POST)
 	@ResponseBody

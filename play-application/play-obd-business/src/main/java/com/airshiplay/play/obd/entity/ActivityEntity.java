@@ -16,6 +16,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
+/**
+ * 活动推广
+ * 
+ * @author lig
+ *
+ */
 @Entity
 @Table(name = "obd_activity")
 @Getter

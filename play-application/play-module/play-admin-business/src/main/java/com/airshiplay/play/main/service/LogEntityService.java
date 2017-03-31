@@ -3,9 +3,9 @@ package com.airshiplay.play.main.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.airshiplay.play.main.api.LogService.LogLevel;
+import com.airshiplay.play.main.api.LogService.OperateType;
 import com.airshiplay.play.main.entity.LogEntity;
-import com.airshiplay.play.main.entity.LogEntity.LogLevel;
-import com.airshiplay.play.main.entity.LogEntity.OperateType;
 
 @Service
 public class LogEntityService extends EntityService<LogEntity, Long> {

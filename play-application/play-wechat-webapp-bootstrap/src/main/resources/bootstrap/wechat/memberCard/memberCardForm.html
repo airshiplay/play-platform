@@ -1,0 +1,110 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.3/css/fileinput.min.css">
+
+<section class="content-header">
+	<h1>
+		会员卡列表 <small>开始管理会员卡</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/wechat/memberCard/memberCardList"><i class="glyphicon glyphicon-list"></i> 会员卡列表</a></li>
+		<li class="active" th:text="${memberCard==null?'新建会员卡':'编辑会员卡'}">新建会员卡</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${memberCard==null?'新建会员卡':'编辑会员卡'}">新建会员卡</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="membercard-form" action="/wechat/memberCard/save">
+					<input type="hidden" name="id" th:value="${memberCard==null?'':memberCard.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="cardCouponInput">卡券</label>
+							<input type="text" name="cardCoupon" class="form-control" id="cardCouponInput" placeholder="请填写cardCoupon"
+								
+		                  		th:value="${memberCard==null?'':memberCard.cardCoupon}"/>
+						</div>
+						<div class="form-group">
+							<label for="memberUserInput">会员</label>
+							<input type="text" name="memberUser" class="form-control" id="memberUserInput" placeholder="请填写memberUser"
+								
+		                  		th:value="${memberCard==null?'':memberCard.memberUser}"/>
+						</div>
+						<div class="form-group">
+							<label for="codeInput">卡券code</label>
+							<input type="text" name="code" class="form-control" id="codeInput" placeholder="请填写code"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写code"
+		                  		th:value="${memberCard==null?'':memberCard.code}"/>
+						</div>
+						<div class="form-group">
+							<label for="membership_numberInput">会员卡编码</label>
+							<input type="text" name="membership_number" class="form-control" id="membership_numberInput" placeholder="请填写membership_number"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写membership_number"
+		                  		th:value="${memberCard==null?'':memberCard.membership_number}"/>
+						</div>
+						<div class="form-group">
+							<label for="cardIdInput">卡券ID</label>
+							<input type="text" name="cardId" class="form-control" id="cardIdInput" placeholder="请填写cardId"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写cardId"
+		                  		th:value="${memberCard==null?'':memberCard.cardId}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/wechat/memberCard/memberCardList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("wechat_membercard_list");
+			
+
+			var $form = $(".membercard-form");		  
+			$(".membercard-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/wechat/memberCard/memberCardList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

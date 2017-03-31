@@ -5,14 +5,18 @@ import java.util.Date;
 
 import javax.validation.constraints.Size;
 
-public class Authority implements Serializable{
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Authority implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2793020115205927883L;
 	private Boolean checked;
 
-	 
 	/**
 	 * 菜单读权限
 	 */
@@ -23,14 +27,12 @@ public class Authority implements Serializable{
 	 */
 	private String permission;
 
- 
 	private Integer sortNo;
 
 	private Long id;
 	private Date createdDate;
 
 	private Date lastModifiedDate;
- 
 
 	public Integer getSortNo() {
 		return sortNo;
@@ -47,8 +49,6 @@ public class Authority implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
- 
 
 	public String getPermission() {
 		return permission;
@@ -76,8 +76,5 @@ public class Authority implements Serializable{
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
-
-	 
- 
 
 }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>WeUI</title>
+<link rel="stylesheet" th:href="@{/assets/plugins/mui/css/mui.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/plugins/weui/style/weui.css}" />
+<link rel="stylesheet" th:href="@{/assets/plugins/weui/style/example.css}" />
+
+<style type="text/css">
+.mui-slider {
+	height: 10.0rem;
+	background-color: black;
+}
+
+.mui-slider-indicator {
+	bottom: 0rem
+}
+
+.mui-slider-indicator .mui-indicator {
+	background: #ffffff;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: 0.5;
+	width: 0.6rem;
+	height: 0.6rem;
+	margin: 1px 2px;
+}
+
+.mui-slider-indicator .mui-active.mui-indicator {
+	background: #e84c3d;
+	opacity: 1;
+}
+</style>
+</head>
+<body>
+	<div style="height: 100%;">
+		<div class="weui-tab">
+			<div class="weui-tab__panel">
+
+				<div class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop">
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate" th:each="carousel,carouselStat:${carouseList}" th:if="${not#lists.isEmpty(carouseList) and carouselStat.last}">
+							<a href="#"><img th:src="${carousel.path}" /></a>
+						</div>
+						<div class="mui-slider-item" th:each="carousel,carouselStat:${carouseList}">
+							<a href="#"><img th:src="${carousel.path}" /></a>
+						</div>
+						<!--支持循环，需要重复图片节点-->
+						<div class="mui-slider-item mui-slider-item-duplicate" th:each="carousel,carouselStat:${carouseList}" th:if="${not#lists.isEmpty(carouseList) and carouselStat.first}">
+							<a href="#"><img th:src="${carousel.path}" /></a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator mui-text-center">
+						<div th:each="carousel,carouselStat:${carouseList}" th:class="${carouselStat.index==0}? 'mui-indicator mui-active' : 'mui-indicator'"></div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="weui-tabbar">
+				<a th:href="@{/obdsite}" class="weui-tabbar__item weui-bar__item_on"> <span style="display: inline-block; position: relative;"> <img
+						th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt="" class="weui-tabbar__icon">
+				</span>
+					<p class="weui-tabbar__label">首页</p>
+				</a> <a th:href="@{/obdsite/store4s}" class="weui-tabbar__item"> <img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt=""
+					class="weui-tabbar__icon">
+					<p class="weui-tabbar__label">4S店</p>
+				</a> <a th:href="@{/obdsite/account/my}" class="weui-tabbar__item"> <img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt=""
+					class="weui-tabbar__icon">
+					<p class="weui-tabbar__label">我</p>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/assets/plugins/weui/style/zepto.min.js}"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script th:src="@{/assets/plugins/weui/style/weui.min.js}"></script>
+	<script th:src="@{/assets/plugins/mui/js/mui.min.js}"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		//获得slider插件对象
+		var gallery = mui('.mui-slider');
+		gallery.slider({
+			interval : 5000
+		//自动轮播周期，若为0则不自动播放，默认为0；
+		});
+		/* gallery.slider().gotoItem(3);//跳转到第index张图片，index从0开始 */
+	</script>
+</body>
+</html>

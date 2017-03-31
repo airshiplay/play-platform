@@ -1,0 +1,122 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-fileinput/css/fileinput.min.css">
+
+<section class="content-header">
+	<h1>
+		消息管理列表 <small>开始管理消息管理</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/wechat/wechatMessage/wechatMessageList"><i class="glyphicon glyphicon-list"></i> 消息管理列表</a></li>
+		<li class="active" th:text="${wechatMessage==null?'新建消息管理':'编辑消息管理'}">新建消息管理</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${wechatMessage==null?'新建消息管理':'编辑消息管理'}">新建消息管理</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="wechatmessage-form" action="/wechat/wechatMessage/save">
+					<input type="hidden" name="id" th:value="${wechatMessage==null?'':wechatMessage.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="msgIdInput">msgId</label>
+							<input type="text" name="msgId" class="form-control" id="msgIdInput" placeholder="请填写msgId"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.msgId}"/>
+						</div>
+						<div class="form-group">
+							<label for="msgTypeInput">msgType</label>
+							<input type="text" name="msgType" class="form-control" id="msgTypeInput" placeholder="请填写msgType"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.msgType}"/>
+						</div>
+						<div class="form-group">
+							<label for="toUsernameInput">toUsername</label>
+							<input type="text" name="toUsername" class="form-control" id="toUsernameInput" placeholder="请填写toUsername"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.toUsername}"/>
+						</div>
+						<div class="form-group">
+							<label for="fromUsernameInput">fromUsername</label>
+							<input type="text" name="fromUsername" class="form-control" id="fromUsernameInput" placeholder="请填写fromUsername"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.fromUsername}"/>
+						</div>
+						<div class="form-group">
+							<label for="createTimeInput">createTime</label>
+							<input type="text" name="createTime" class="form-control" id="createTimeInput" placeholder="请填写createTime"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.createTime}"/>
+						</div>
+						<div class="form-group">
+							<label for="timestampInput">timestamp</label>
+							<input type="text" name="timestamp" class="form-control" id="timestampInput" placeholder="请填写timestamp"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.timestamp}"/>
+						</div>
+						<div class="form-group">
+							<label for="detailInput">detail</label>
+							<input type="text" name="detail" class="form-control" id="detailInput" placeholder="请填写detail"
+								
+		                  		th:value="${wechatMessage==null?'':wechatMessage.detail}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/wechat/wechatMessage/wechatMessageList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("wechat_wechatmessage_list");
+			
+
+			var $form = $(".wechatmessage-form");		  
+			$(".wechatmessage-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/wechat/wechatMessage/wechatMessageList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

@@ -183,7 +183,7 @@
 						});
 						$table.find(".command-rank-update").on("click", function(e) {
 							var member_id = $(this).closest(".btn-group").data("row-id");
-							console.log("");
+							
 							$.confirm({
 								title : "会员等级列表",
 								content : "url:" + base + "/center/member/"+member_id+"/rank/update",

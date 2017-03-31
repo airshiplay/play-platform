@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <base href="../../META-INF/" th:href="@{/}"/>
+    <title>养车</title>
+
+    <link href="assets/plugins/mui/css/mui.min.css" rel="stylesheet">
+    <style>
+        .province {
+            padding: 0px 0.1rem;
+            display: none;
+            position: fixed;
+            bottom: -0.06rem;
+            left: 0;
+            z-index: 1112;
+            background-color: #fff;
+            width: 100%;
+        }
+
+        .province ul li {
+            width: 14.2%;
+            border-bottom: 1px solid #e0e4ed;
+            font-size: 1.17rem;
+            float: left;
+            text-align: center;
+            height: 2.48rem;
+            line-height: 2.48rem;
+        }
+
+        ul, li {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }/* 选择车型 end */
+        /* 车辆信息  */
+        .plate-group .plate-num {
+            width: 46%;
+            font-size: 0.14rem;
+            display: block;
+        }
+        .plate-group .plate-name {
+            border: 1px solid;
+            width: 0.5rem;
+            height: 0.24rem;
+            border-radius: 0.03rem;
+            color: #fc7944;
+            position: relative;
+        }
+        .plate-group .plate-name strong {
+            line-height: 0.24rem;
+            margin-left: 0.08rem
+        }
+        .plate-group .plate-name .key-icon {
+            position: absolute;
+            right: 0.05rem;
+            top: 0.04rem;
+            font-size: 0.14rem;
+            margin-right: 0px;
+            color: #fc7944;
+        }
+        .plate-group input {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            height: 0.2rem;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">车辆信息编辑</h1>
+
+</header>
+<section class="mui-content">
+
+    <ul class="mui-table-view mui-table-view-chevron">
+        <li class="mui-table-view-cell mui-media">
+
+            <img class="mui-media-object mui-pull-left" src="assets/img/carlogo/aodi.png">
+            <div class="mui-media-body" style="line-height:42px;">
+                <span style="text-align: center">大众</span>
+            </div>
+
+        </li>
+        <li class="mui-table-view-cell">
+            <label>车牌号：</label>
+            <div class="mui-media-body mui-input-row" style="line-height:42px;float: right;">
+                <a href="#popover" id="openPopover" style="float: left;" class="mui-btn mui-btn-primary">苏</a>
+                <input type="text" class="mui-input-clear" style="float: right;" placeholder="请输入完整车牌号">
+            </div>
+
+        </li>
+    </ul>
+
+    <section class="car-maint">
+        <ul class="item-list-single">
+            <li class="clearfix"><cite class="list-limg"><img src="http://bu.wedrive.com.cn/upload/carlogo/benchi.png"></cite>
+                <div class="list-middle w80  overflow"><h3 class="car-name line14 ">北京奔驰C级</h3></div><!-- --></li>
+        </ul>
+        <ul class="car-mes plate-group">
+            <li class="first"><span class="plate-num ">车牌号:</span>
+                <div class="plate-name"><strong class="fl">吉</strong><i class="iconfont key-icon"></i></div>
+            </li>
+            <li class="caridshow"><input id="carid" type="text" onfocus="this.blur();" maxlength="6" class="font12"
+                                         placeholder="请输入完整车牌号" value="">
+                <!--<div id="carid" class="car_no afb5c0" style="text-align: center;width: 100%; margin: 0 auto; ">请输入车牌号</div>-->
+            </li>
+        </ul>
+    </section>
+    <p class="font15 light-color" style="text-align: center">您的车库什么都没有哦！</p>
+    <a href="/garage/save" class="mui-btn mui-btn-link mui-pull-center"  style="width: 100%;background-color:#fc7944;"><span style="color: white">保存</span></a>
+
+</section>
+<div id="popover" class="province mui-popover">
+    <ul>
+        <li>京</li>
+        <li class="">沪</li>
+        <li>津</li>
+        <li>粤</li>
+        <li>苏</li>
+        <li>浙</li>
+        <li>鲁</li>
+        <li>辽</li>
+        <li class="">吉</li>
+        <li>黑</li>
+        <li>冀</li>
+        <li>晋</li>
+        <li>蒙</li>
+        <li>皖</li>
+        <li>闽</li>
+        <li>赣</li>
+        <li>豫</li>
+        <li>鄂</li>
+        <li>湘</li>
+        <li>桂</li>
+        <li>琼</li>
+        <li>渝</li>
+        <li>川</li>
+        <li>贵</li>
+        <li>云</li>
+        <li>藏</li>
+        <li>陕</li>
+        <li>甘</li>
+        <li>青</li>
+        <li>宁</li>
+        <li class="fc7944">新</li>
+    </ul>
+</div>
+<script src="assets/plugins/mui/js/mui.min.js"></script>
+<script>
+    mui.init();
+</script>
+</body>
+</html>

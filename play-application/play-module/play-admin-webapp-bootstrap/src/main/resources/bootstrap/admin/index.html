@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <base href="../../META-INF/" th:href="@{/admin}" />
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>艾尔里服务平台</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="shortcut icon" href="bootstrap/assets/favicon.ico">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="bootstrap/vendor/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -105,12 +106,12 @@
 				treeview_bootstrap:"//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min",
 				jstree:"//cdn.bootcss.com/jstree/3.3.2/jstree.min",
 				fancytree:"bootstrap/vendor/plugins/fancytree/jquery.fancytree-all.min",
-				fileinput : "//cdn.bootcss.com/bootstrap-fileinput/4.3.3/js/fileinput.min",
-				fileinputzh : "//cdn.bootcss.com/bootstrap-fileinput/4.3.3/js/locales/zh.min",
+				fileinput : ["bootstrap/vendor/plugins/bootstrap-fileinput/js/fileinput.min","//cdn.bootcss.com/bootstrap-fileinput/4.3.3/js/fileinput.min"],
+				fileinputzh : ["bootstrap/vendor/plugins/bootstrap-fileinput/js/locales/zh","//cdn.bootcss.com/bootstrap-fileinput/4.3.3/js/locales/zh.min"],
 
 				jquery_sidebar:"bootstrap/vendor/plugins/jquery.sidebar/jquery.sidebar.min",
-				select2 : "//cdn.bootcss.com/select2/4.0.3/js/select2.full.min",
-				select2zh : "//cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN",
+				select2 : ["bootstrap/vendor/plugins/select2/select2.full.min","//cdn.bootcss.com/select2/4.0.3/js/select2.full.min"],
+				select2zh : ["bootstrap/vendor/plugins/select2/i18n/zh-CN","//cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN"],
 				//bootstrapmultiselect : "//cdn.bootcss.com/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min",
 
 				typeahead : "//cdn.bootcss.com/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min",
@@ -122,7 +123,7 @@
 				datetimepicker : "bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min",
 				datetimepickerzh : "bootstrap/vendor/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN",
 				kindeditor:"bootstrap/vendor/plugins/kindeditor/kindeditor-all-min",
-				icheck:"//cdn.bootcss.com/iCheck/1.0.2/icheck",
+				icheck:["bootstrap/vendor/plugins/iCheck/icheck.min","//cdn.bootcss.com/iCheck/1.0.2/icheck"],
 				adminlte : "bootstrap/vendor/adminlte/js/adminlte.min",
 				app : "bootstrap/assets/js/app"
 			},

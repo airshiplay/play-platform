@@ -31,7 +31,16 @@
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-admin-business</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-file-storage</artifactId>
+			<version>${play.framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-admin-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -78,6 +87,11 @@
 			<groupId>org.simpleframework</groupId>
 			<artifactId>simple-xml</artifactId>
 			<version>2.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>3.3.0</version>
 		</dependency>
 		<!-- 微信支付使用 -->
 		<dependency>

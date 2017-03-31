@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.airshiplay.play.main.entity.MemberRankEntity;
+import com.airshiplay.play.main.entity.MemberUserEntity;
+import com.airshiplay.play.obd.entity.ObdMemberRankEntity;
 import com.airshiplay.play.obd.entity.ObdUserEntity;
 import com.airshiplay.play.obd.service.ObdUserEntityService;
 import com.airshiplay.play.repo.domain.Result;
@@ -39,16 +42,32 @@ public class ObdUserController {
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
-		model.addAttribute("car", obdUserEntityService.findOne(id));
+		model.addAttribute("user", obdUserEntityService.findOne(id));
 		return "/bootstrap/obd/user/userForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
-		model.addAttribute("uer", obdUserEntityService.findOne(id));
+		model.addAttribute("user", obdUserEntityService.findOne(id));
 		return "/bootstrap/obd/user/userView";
 	}
 
+	
+	@RequestMapping(value="/{memberId}/rank/update",method = RequestMethod.GET)
+	public String setMemberRank(Model model,@PathVariable Long memberId){
+		model.addAttribute("memberId", memberId);
+		return  "/bootstrap/obd/user/userRankDialog";
+	}
+	
+	@RequestMapping(value="/{memberId}/rank/update",method = RequestMethod.POST, params = "id")
+	@ResponseBody
+	public Result doSetRank(@PathVariable Long memberId,@RequestParam(value = "id") ObdMemberRankEntity entity){
+		ObdUserEntity userEntity= obdUserEntityService.findOne(memberId);
+		userEntity.setObdrank(entity);
+		obdUserEntityService.save(userEntity);
+		return Result.success();
+	}
+	
 	@RequestMapping(value = "/page", method = RequestMethod.POST)
 	@ResponseBody
 	public Page<ObdUserEntity> doPage(Predicate predicate, Pageable pageable) {

@@ -39,7 +39,7 @@ public class QObdUserEntity extends EntityPathBase<ObdUserEntity> {
     //inherited
     public final DateTimePath<java.util.Date> birthday;
 
-    public final SetPath<VehicleEntity, QVehicleEntity> cars = this.<VehicleEntity, QVehicleEntity>createSet("cars", VehicleEntity.class, QVehicleEntity.class, PathInits.DIRECT2);
+    public final SetPath<CarEntity, QCarEntity> cars = this.<CarEntity, QCarEntity>createSet("cars", CarEntity.class, QCarEntity.class, PathInits.DIRECT2);
 
     // inherited
     public final com.airshiplay.play.main.entity.QAdminUserEntity createdBy;
@@ -82,7 +82,7 @@ public class QObdUserEntity extends EntityPathBase<ObdUserEntity> {
 
     public final QObdMemberRankEntity obdrank;
 
-    public final SetPath<OrderEntity, QOrderEntity> orders = this.<OrderEntity, QOrderEntity>createSet("orders", OrderEntity.class, QOrderEntity.class, PathInits.DIRECT2);
+    public final SetPath<ObdOrderEntity, QObdOrderEntity> orders = this.<ObdOrderEntity, QObdOrderEntity>createSet("orders", ObdOrderEntity.class, QObdOrderEntity.class, PathInits.DIRECT2);
 
     //inherited
     public final StringPath password;

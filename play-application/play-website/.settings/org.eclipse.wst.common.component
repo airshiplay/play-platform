@@ -10,6 +10,9 @@
         <dependent-module archiveName="play-core-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-core/play-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="play-json-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-json/play-json">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="play-repo-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-repo/play-repo">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -22,28 +25,19 @@
         <dependent-module archiveName="play-admin-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-admin-business/play-admin-business">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="play-util-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-util/play-util">
+        <dependent-module archiveName="play-admin-api-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-admin-api/play-admin-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="play-security-shiro-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-security-shiro/play-security-shiro">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="play-plugin-business-oauth-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-plugin-business-oauth/play-plugin-business-oauth">
+        <dependent-module archiveName="play-cms-webapp-bootstrap-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-cms-webapp-bootstrap/play-cms-webapp-bootstrap">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="play-plugin-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-plugin-business/play-plugin-business">
+        <dependent-module archiveName="play-cms-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-cms-business/play-cms-business">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="play-app-webapp-bootstrap-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-app-webapp-bootstrap/play-app-webapp-bootstrap">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="play-app-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-app-business/play-app-business">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="play-website-webapp-bootstrap-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-website-webapp-bootstrap/play-website-webapp-bootstrap">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="play-website-business-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-website-business/play-website-business">
+        <dependent-module archiveName="play-repo-jpa-1.0.0.RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/play-repo-jpa/play-repo-jpa">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="play-website"/>

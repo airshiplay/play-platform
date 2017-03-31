@@ -24,9 +24,9 @@ public class QObdDeviceEntity extends EntityPathBase<ObdDeviceEntity> {
 
     public final com.airshiplay.play.repo.jpa.QDataEntity _super = new com.airshiplay.play.repo.jpa.QDataEntity(this);
 
-    public final SetPath<VehicleAlarmEntity, QVehicleAlarmEntity> alarm = this.<VehicleAlarmEntity, QVehicleAlarmEntity>createSet("alarm", VehicleAlarmEntity.class, QVehicleAlarmEntity.class, PathInits.DIRECT2);
+    public final SetPath<CarAlarmEntity, QCarAlarmEntity> alarm = this.<CarAlarmEntity, QCarAlarmEntity>createSet("alarm", CarAlarmEntity.class, QCarAlarmEntity.class, PathInits.DIRECT2);
 
-    public final QVehicleEntity car;
+    public final QCarEntity car;
 
     public final com.airshiplay.play.main.entity.QAdminUserEntity createdBy;
 
@@ -64,7 +64,7 @@ public class QObdDeviceEntity extends EntityPathBase<ObdDeviceEntity> {
 
     public QObdDeviceEntity(Class<? extends ObdDeviceEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.car = inits.isInitialized("car") ? new QVehicleEntity(forProperty("car"), inits.get("car")) : null;
+        this.car = inits.isInitialized("car") ? new QCarEntity(forProperty("car"), inits.get("car")) : null;
         this.createdBy = inits.isInitialized("createdBy") ? new com.airshiplay.play.main.entity.QAdminUserEntity(forProperty("createdBy"), inits.get("createdBy")) : null;
         this.lastModifiedBy = inits.isInitialized("lastModifiedBy") ? new com.airshiplay.play.main.entity.QAdminUserEntity(forProperty("lastModifiedBy"), inits.get("lastModifiedBy")) : null;
     }

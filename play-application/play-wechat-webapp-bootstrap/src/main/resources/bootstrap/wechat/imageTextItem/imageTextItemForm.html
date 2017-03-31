@@ -1,0 +1,99 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.3/css/fileinput.min.css">
+
+<section class="content-header">
+	<h1>
+		图文子集列表 <small>开始管理图文子集</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/wechat/imageTextItem/imageTextItemList"><i class="glyphicon glyphicon-list"></i> ***列表</a></li>
+		<li class="active" th:text="${imageTextItem==null?'新建图文子集':'编辑图文子集'}">新建图文子集</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${imageTextItem==null?'新建图文子集':'编辑图文子集'}">新建图文子集</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="imagetextitem-form" action="/wechat/imageTextItem/save">
+					<input type="hidden" name="id" th:value="${imageTextItem==null?'':imageTextItem.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="titleInput">模板名称</label>
+							<input type="text" name="title" class="form-control" id="titleInput" placeholder="请填写title"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写title"data-bv-stringlength="true" data-bv-stringlength-min="1" data-bv-stringlength-max="20" data-bv-stringlength-message="个数必须在1和20之间"
+								
+		                  		th:value="${imageTextItem==null?'':imageTextItem.title}"/>
+						</div>
+						<div class="form-group">
+							<label for="contentInput">模板内容</label>
+							<textarea type="text" name="content" class="form-control" id="contentInput" rows="3" placeholder="请填写content"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写content"data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="500" data-bv-stringlength-message="个数必须在0和500之间"
+		                  		th:value="${imageTextItem==null?'':imageTextItem.content}"/>
+						</div>
+						<div class="form-group">
+							<label for="parentInput">parent</label>
+							<input type="text" name="parent" class="form-control" id="parentInput" placeholder="请填写parent"
+								
+		                  		th:value="${imageTextItem==null?'':imageTextItem.parent}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/wechat/imageTextItem/imageTextItemList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("wechat_imagetextitem_list");
+			
+
+			var $form = $(".imagetextitem-form");		  
+			$(".imagetextitem-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/wechat/imageTextItem/imageTextItemList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

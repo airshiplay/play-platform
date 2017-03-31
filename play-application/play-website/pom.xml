@@ -42,16 +42,27 @@
 			<artifactId>play-cms-webapp-bootstrap</artifactId>
 			<version>${play.module.version}</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-app-webapp-bootstrap</artifactId>
 			<version>${play.module.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-wechat-webapp-bootstrap</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-website-webapp-bootstrap</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-obd-webapp-bootstrap</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

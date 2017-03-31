@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="keywords" content="${website.seoKeywords}">
+<meta name="description" content="${website.seoDescription}">
 <base href="../../" th:href="@{${#httpServletRequest.getContextPath()}}" />
 
 <link rel="icon" href="../../favicon.ico">
@@ -13,14 +13,14 @@
 <title>Play Website</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link th:href="@{/assets/plugins/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/assets/plugins/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
 
 
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src="assets/js/ie-emulation-modes-warning.js"></script>
+<script th:src="@{assets/js/ie-emulation-modes-warning.js}"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -28,9 +28,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- Custom styles for this template -->
-<link href="assets/css/navbar-fixed-top.css" rel="stylesheet">
-<link href="assets/css/app.css" rel="stylesheet">
-<link href="assets/css/carousel.css" rel="stylesheet">
+<link th:href="@{/assets/css/navbar-fixed-top.css}" rel="stylesheet">
+<link th:href="@{/assets/css/app.css}" rel="stylesheet">
+<link th:href="@{/assets/css/carousel.css}" rel="stylesheet">
 
 </head>
 
@@ -66,10 +66,10 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="assets/jquery/3.1.1/jquery.min.js"></script>
-	<script src="assets/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script th:src="@{assets/plugins/jquery/3.1.1/jquery.min.js}"></script>
+	<script th:src="@{assets/plugins/bootstrap/3.3.0/js/bootstrap.min.js}"></script>
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script th:src="@{assets/js/ie10-viewport-bug-workaround.js}"></script>
 </body>
 </html>

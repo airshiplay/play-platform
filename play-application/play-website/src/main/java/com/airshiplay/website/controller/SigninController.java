@@ -16,7 +16,7 @@ import com.airshiplay.play.repo.domain.Result;
 import com.airshiplay.play.security.shiro.authc.MemberUserToken;
 
 @Controller
-public class SigninController {
+public class SigninController extends BaseController {
 	@RequestMapping("/signin")
 	public String login() {
 		return "/signin";
@@ -24,7 +24,8 @@ public class SigninController {
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	@ResponseBody
-	public Result postLogin(Model model, HttpServletRequest request, @RequestParam String username, @RequestParam String password,@RequestParam(defaultValue = "false", required = false) Boolean remember) {
+	public Result postLogin(Model model, HttpServletRequest request, @RequestParam String username, @RequestParam String password,
+			@RequestParam(defaultValue = "false", required = false) Boolean remember) {
 		try {
 			AuthenticationToken token = new MemberUserToken(username, "", "", password, remember, request.getRemoteHost());
 			SecurityUtils.getSubject().login(token);

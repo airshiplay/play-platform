@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import com.airshiplay.play.main.api.LogService.LogLevel;
+import com.airshiplay.play.main.api.LogService.OperateType;
 import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
@@ -35,13 +37,13 @@ public class LogEntity extends DataEntity<AdminUserEntity, Long> {
 	@Enumerated(EnumType.ORDINAL)
 	private OperateType operateType;
 
-	public enum LogLevel {
-		TRACE, DEBUG, INFO, WARN, ERROR, FATAL
-	}
-
-	public enum OperateType {
-		LOGIN, EXIT, INSERT, DEL, UPDATE, UPLOAD, OTHER
-	}
+//	public enum LogLevel {
+//		TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+//	}
+//
+//	public enum OperateType {
+//		LOGIN, EXIT, INSERT, DEL, UPDATE,VIEW, UPLOAD, OTHER
+//	}
 
 	public String getText() {
 		return text;

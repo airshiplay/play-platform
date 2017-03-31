@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.type.SimpleType;
 @Component("wechatOpenOauthPlugin")
 public class WeChatOpenOauthPlugin extends OauthPlugin {
 
-	@Value("${info.siteUrl?:http://www.airshiplay.com}")
+	@Value("${info.siteUrl?:http://www.airlenet.com}")
 	private String siteUrl;
 
 	@Autowired

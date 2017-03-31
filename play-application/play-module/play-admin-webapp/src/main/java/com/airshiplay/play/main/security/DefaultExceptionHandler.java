@@ -8,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +35,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.airshiplay.play.main.entity.LogEntity.LogLevel;
-import com.airshiplay.play.main.entity.LogEntity.OperateType;
+import com.airshiplay.play.main.api.LogService.LogLevel;
+import com.airshiplay.play.main.api.LogService.OperateType;
 import com.airshiplay.play.main.service.LogEntityService;
 import com.airshiplay.play.repo.LockedableException;
 import com.airshiplay.play.repo.domain.Result;
@@ -66,7 +68,7 @@ public class DefaultExceptionHandler {
 	 * <p/>
 	 * 后续根据不同的需求定制即可
 	 */
-	@ExceptionHandler({ UnauthorizedException.class })
+	@ExceptionHandler({ UnauthorizedException.class,UnauthenticatedException.class,AuthorizationException.class })
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	@ResponseBody
 	public Result processUnauthenticatedException(NativeWebRequest request, UnauthorizedException e) {
@@ -82,7 +84,7 @@ public class DefaultExceptionHandler {
 	}
 
 	@SuppressWarnings("resource")
-	@ExceptionHandler({ Exception.class })
+	@ExceptionHandler({ Exception.class, })
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public ModelAndView processException(HttpServletRequest request, HttpServletResponse response, Exception e, HandlerMethod handlerMethod) throws HttpMessageNotWritableException, IOException {
