@@ -1,6 +1,7 @@
 package com.airshiplay.play.http;
 
-import java.lang.reflect.Field;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,12 +22,26 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class PlayHttpClient {
     private static HashMap<String, Retrofit> retrofitMap = new HashMap<String, Retrofit>();
 
+    static Proxy globalProxy =null;
+
     public synchronized static <T> T getApi(String baseUrl, Class<T> cls) {
         Retrofit retrofit = retrofitMap.get(baseUrl);
         if (retrofit == null) {
             if (!baseUrl.endsWith("/"))
                 baseUrl += "/";
-            retrofit = new Retrofit.Builder().client(getOkHttpClient()).baseUrl(baseUrl).addConverterFactory(JacksonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().client(getOkHttpClient(Proxy.NO_PROXY)).baseUrl(baseUrl).addConverterFactory(JacksonConverterFactory.create()).build();
+            retrofitMap.put(baseUrl, retrofit);
+        }
+        return retrofit.create(cls);
+    }
+
+    public synchronized static <T> T getApi(String baseUrl, Class<T> cls,Proxy.Type type,String ip,int port) {
+        Retrofit retrofit = retrofitMap.get(baseUrl);
+        if (retrofit == null) {
+            if (!baseUrl.endsWith("/"))
+                baseUrl += "/";
+            retrofit = new Retrofit.Builder().client(getOkHttpClient(new Proxy(type,
+                    new InetSocketAddress(ip,port)))).baseUrl(baseUrl).addConverterFactory(JacksonConverterFactory.create()).build();
             retrofitMap.put(baseUrl, retrofit);
         }
         return retrofit.create(cls);
@@ -37,13 +52,13 @@ public class PlayHttpClient {
         if (retrofit == null) {
             if (!baseUrl.endsWith("/"))
                 baseUrl += "/";
-            retrofit = new Retrofit.Builder().client(getOkHttpClient()).baseUrl(baseUrl).addConverterFactory(SimpleXmlConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().client(getOkHttpClient(Proxy.NO_PROXY)).baseUrl(baseUrl).addConverterFactory(SimpleXmlConverterFactory.create()).build();
             retrofitMap.put(baseUrl, retrofit);
         }
         return retrofit.create(cls);
     }
 
-    private static OkHttpClient getOkHttpClient() {
+    private static OkHttpClient getOkHttpClient(Proxy proxy) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder().cookieJar(new CookieJar() {
@@ -59,6 +74,12 @@ public class PlayHttpClient {
                 List<Cookie> cookies = cookieStore.get(url);
                 return cookies != null ? cookies : new ArrayList<Cookie>();
             }
-        }).connectTimeout(30, TimeUnit.SECONDS).addInterceptor(logging).build();
+        }).connectTimeout(30, TimeUnit.SECONDS).
+                addInterceptor(logging).
+                proxy(globalProxy==null?proxy:globalProxy).build();
+    }
+    public static void setGlobalProxy(Proxy.Type type,String ip,int port){
+        globalProxy = new Proxy(type,
+                new InetSocketAddress(ip,port));
     }
 }
