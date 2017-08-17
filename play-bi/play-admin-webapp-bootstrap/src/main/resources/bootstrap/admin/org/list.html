@@ -1,0 +1,412 @@
+<!-- Content Header (Page header) -->
+<link type="text/css" rel="stylesheet"
+	href="//cdn.bootcss.com/jstree/3.3.2/themes/default/style.min.css">
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.css">
+
+
+
+
+<section class="content-header">
+	<h1>
+		组织结构列表 <small>开始管理组织结构信息</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i>
+				Home</a></li>
+		<li class="active">组织结构管理</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="mailbox-controls">
+				<div class="btn-group btn-group-sm">
+					<a type="button" class="btn btn-primary"
+						href="#/page/center/org/add"> <i class="fa fa-plus"></i> 添加
+					</a> <a aria-expanded="false" aria-haspopup="true"
+						data-toggle="dropdown"
+						class="btn btn-primary btn-sm dropdown-toggle" type="button">
+						批量 <span class="ion-arrow-down-b"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:;" id="batchDeleteButton"> <i
+								class="glyphicon glyphicon-remove"></i>移除
+						</a></li>
+					</ul>
+				</div>
+				<!-- /.btn-group -->
+				<a type="button" class="btn btn-warning btn-sm" id="refreshButton">
+					<i class="fa fa-refresh"></i>
+				</a>
+				<div class="pull-right">
+					<div class="input-group input-group-sm" style="width: 120px;">
+						<input type="text" id="searchInput"
+							class="form-control pull-right" placeholder="搜索">
+
+						<div class="input-group-btn">
+							<button id="searchButton" type="button" class="btn btn-default">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.btn-group -->
+				</div>
+				<!-- /.pull-right -->
+			</div>
+			<div class="box box-primary">
+				<div class="box-body no-padding">
+					<table id="grid-org" class="table table-hover">
+						<colgroup>
+						    <col width="*"></col>
+						    <col width="*"></col>
+						    <col width="*"></col>
+						    <col width="*"></col>
+						    <col width="*"></col>
+						    <col width="*"></col>
+						    <col width="*"></col>
+						</colgroup>
+						<thead>
+							<tr>
+								<th data-column-id="id" data-type="numeric"
+									data-identifier="true" >ID</th>
+								<th data-column-id="name" >名称</th>
+								<th data-column-id="code">标识</th>
+								<th data-column-id="type">类型</th>
+								<th data-column-id="phone">电话</th>
+								<th data-column-id="email">邮箱</th>
+								<th data-column-id="email">传真</th>
+								<th data-formatter="commands" data-css-class="command-column"
+									data-width="150px" data-sortable="false" data-align="center"
+									data-header-align="center">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						 	<tr>
+						 		<td></td>
+						 		<td></td>
+						 		<td></td>
+						 		<td></td>
+						 		<td></td>
+						 		<td></td>
+						 		<td></td>
+						 		<td></td>
+						 	</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	require(
+			[ "domReady", "fancytree","treegrid_bootstrap3" ],
+			function(domReady) {
+				domReady(function() {
+					activeMenu("center_org_list");
+					glyph_opts = {
+						    map: {
+						      doc: "glyphicon glyphicon-file",
+						      docOpen: "glyphicon glyphicon-file",
+						      checkbox: "glyphicon glyphicon-unchecked",
+						      checkboxSelected: "glyphicon glyphicon-check",
+						      checkboxUnknown: "glyphicon glyphicon-share",
+						      dragHelper: "glyphicon glyphicon-play",
+						      dropMarker: "glyphicon glyphicon-arrow-right",
+						      error: "glyphicon glyphicon-warning-sign",
+						      expanderClosed: "glyphicon glyphicon-menu-right",
+						      expanderLazy: "glyphicon glyphicon-menu-right",  // glyphicon-plus-sign
+						      expanderOpen: "glyphicon glyphicon-menu-down",  // glyphicon-collapse-down
+						      folder: "glyphicon glyphicon-folder-close",
+						      folderOpen: "glyphicon glyphicon-folder-open",
+						      loading: "glyphicon glyphicon-refresh glyphicon-spin"
+						    }
+					};
+					 
+						$("#grid-org").fancytree({
+							extensions : [ "edit", "glyph", "table" ],
+							checkbox : true,
+							glyph: glyph_opts,
+							source : {
+								url : "center/org/tree",
+								debugDelay : 1000
+							},
+							table : {					
+								 indentation: 20,      // indent 20px per node level
+							     nodeColumnIdx: 1,     // render the node title into the 2nd column
+							     checkboxColumnIdx: 0  // render the checkboxes into the 1st column
+							},
+
+							activate : function(event, data) {
+							},
+							renderColumns : function(event, data) {
+								var node = data.node, $tdList = $(node.tr).find(">td");
+								//$tdList.eq(0).html("<input type='checkbox' name='like' value='" + node.key + "'>"+"<span style='padding-left: 5px;'>"+node.getIndexHier()+"</span>");
+								/* $tdList.eq(1).text(node.getIndexHier()); */
+								$tdList.eq(2).text(node.data.code);
+								$tdList.eq(3).text(node.data.type=='company'?'公司':(node.data.type=='department'?'部门':'组'));
+								$tdList.eq(4).text(node.data.phone);
+								$tdList.eq(5).text(node.data.email);console.log(node.data);
+								$tdList.eq(6).text(node.data.fax);
+								var html ="\
+									<div class=\"btn-group btn-group-sm\" data-row-id=\""+node.data.id+"\">\
+									<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/center/org/edit/"+node.data.id+"\">\
+										<i class=\"glyphicon glyphicon-edit\"></i>\
+									</a>\
+									<a aria-expanded=\"false\" aria-haspopup=\"true\" data-toggle=\"dropdown\" \
+										class=\"btn btn-primary dropdown-toggle\" type=\"button\">\
+										<i class=\"fa fa-cog\"></i>\
+										<span class=\"ion-arrow-down-b\"></span>\
+									</a>\
+									<ul class=\"dropdown-menu pull-right\">\
+										<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i>移除</a></li>\
+									</ul>\
+								</div>";
+								
+								$tdList.eq(7).html(html);
+							}
+						});
+					$tree=	$("#grid-org").fancytree("getTree");
+					/* Handle custom checkbox clicks */
+				    $("#grid-org").delegate("input[name=like]", "click", function(e){
+				      var node = $.ui.fancytree.getNode(e),
+				         $input = $(e.target);
+				      e.stopPropagation();  // prevent fancytree activate for this row
+				      if($input.is(":checked")){
+				        //alert("like " + $input.val());
+				      }else{
+				        //alert("dislike " + $input.val());
+				      }
+				    });
+				    $("#grid-org").delegate(".command-delete", "click", function(e){
+				    	var app_id = $(this).closest(".btn-group").data("row-id");
+
+						deleteRow($("#grid-org"), [ app_id ]);
+					    });
+				    /* $table.find(".command-delete").on("click", function(e) {
+						var app_id = $(this).closest(".btn-group").data("row-id");
+
+						deleteRow($table, [ app_id ]);
+					}); */
+					var refreshGrid = function() {
+						$("#grid-org").fancytree("getTree").reload();
+					}
+
+					var actionWithSelectedRows = function(action) {
+						var selectedRows= $tree.getSelectedNodes();
+						/* var selectedRows = grid.bootgrid("getSelectedRows"); */
+						if (selectedRows && selectedRows.length > 0) {
+							var rowid = new Array();
+							$(selectedRows).each(function(){
+								rowid.push(this.data.id);
+							});							
+							action($tree, rowid);
+						} else {
+							$.alert({
+								title : false,
+								content : "请至少选择一个",
+								confirmButton : "关闭"
+							});
+						}
+					}
+
+					var deleteRow = function(grid, ids) {
+						$.confirm({
+							title : "提示",
+							content : "确定删除组织架构?",
+							confirmButton : "确定",
+							cancelButton : "关闭",
+							icon : 'fa fa-warning',
+							confirmButtonClass : 'btn-warning',
+							animation : 'zoom',
+							confirm : function() {
+								$.post(base + "/center/org/delete", {
+									ids : ids
+								}, function(resp) {
+									if (resp.success) {
+										$.alert({
+											title : false,
+											content : "操作成功",
+											confirmButton : "关闭"
+										});
+										refreshGrid();
+									} else {
+										$.alert({
+											title : false,
+											content : resp.msg,
+											confirmButton : "关闭"
+										});
+									}
+								}, "json");
+							}
+						});
+					};
+
+					var modifyMenu = function(grid, ids) {
+						$.confirm({
+							title : "推送应用锁定",
+							content : "url:" + base
+									+ "/center/dialog/deviceList",
+							columnClass : "col-md-8 col-md-offset-2",
+							confirmButton : "确定",
+							cancelButton : "取消",
+							confirmButtonClass : 'btn-primary',
+							cancelButtonClass : 'btn-danger',
+							confirm : function() {
+								var me = this;
+								var $table = me.$b.find("table");
+
+								var selectedRows = $table
+										.bootgrid("getSelectedRows");
+								if (selectedRows && selectedRows.length > 0) {
+									$.post(base + "/mdmcommand/installAppLock",
+											{
+												appLockIds : ids.join(),
+												deviceIds : selectedRows.join()
+											}, function(resp) {
+												if (resp.success) {
+													$.alert({
+														title : false,
+														content : "操作成功",
+														confirmButton : "关闭"
+													});
+												} else {
+													$.alert({
+														title : false,
+														content : resp.msg,
+														confirmButton : "关闭"
+													});
+												}
+											}, "json");
+
+									return true;
+								} else {
+									$.alert({
+										title : false,
+										content : "请至少选择一个设备",
+										confirmButton : "关闭"
+									});
+								}
+
+								return false;
+							}
+						});
+					}
+
+					var removeToDevice = function(grid, ids) {
+						$.confirm({
+							title : "移除应用锁定",
+							content : "url:" + base
+									+ "/center/dialog/deviceList",
+							columnClass : "col-md-8 col-md-offset-2",
+							confirmButton : "确定",
+							cancelButton : "取消",
+							confirmButtonClass : 'btn-primary',
+							cancelButtonClass : 'btn-danger',
+							confirm : function() {
+								var me = this;
+								var $table = me.$b.find("table");
+
+								var selectedRows = $table
+										.bootgrid("getSelectedRows");
+								if (selectedRows && selectedRows.length > 0) {
+									$.post(base + "/mdmcommand/removeAppLock",
+											{
+												appLockIds : ids.join(),
+												ids : selectedRows.join()
+											}, function(resp) {
+												if (resp.success) {
+													$.alert({
+														title : false,
+														content : "操作成功",
+														confirmButton : "关闭"
+													});
+												} else {
+													$.alert({
+														title : false,
+														content : resp.msg,
+														confirmButton : "关闭"
+													});
+												}
+											}, "json");
+
+									return true;
+								} else {
+									$.alert({
+										title : false,
+										content : "请至少选择一个设备",
+										confirmButton : "关闭"
+									});
+								}
+
+								return false;
+							}
+						});
+					}
+
+					/* grid.on("loaded.rs.jquery.bootgrid", function() {
+						var $table = $(this);
+						$table.find(".dropdown-toggle").dropdown();
+
+						$table.find(".command-modifyMenu").on(
+								"click",
+								function() {
+									var appLock_id = $(this).closest(
+											".btn-group").data("row-id");
+
+									modifyMenu($table, [ appLock_id ]);
+								});
+
+						$table.find(".command-removeAppLock").on(
+								"click",
+								function() {
+									var appLock_id = $(this).closest(
+											".btn-group").data("row-id");
+
+									removeToDevice($table, [ appLock_id ]);
+								});
+
+						$table.find(".command-delete").on(
+								"click",
+								function(e) {
+									var app_id = $(this).closest(".btn-group")
+											.data("row-id");
+
+									deleteRow($table, [ app_id ]);
+								});
+					}); */
+
+					$("#batchDeleteButton").on("click", function() {
+						actionWithSelectedRows(function(grid, selectedRows) {
+							deleteRow(grid, selectedRows);
+						});
+					});
+
+					$("#batchInstallButton").on("click", function() {
+						actionWithSelectedRows(function(grid, selectedRows) {
+							installToDevice(grid, selectedRows);
+						});
+					});
+
+					$("#batchRemoveButton").on("click", function() {
+						actionWithSelectedRows(function(grid, selectedRows) {
+							removeToDevice(grid, selectedRows);
+						});
+					});
+
+					$("#refreshButton").on("click", function() {
+						refreshGrid();
+					});
+					$("#searchButton").on("click", function() {
+						grid.bootgrid("search", $("#searchInput").val());
+					});
+
+				});
+			});
+</script>

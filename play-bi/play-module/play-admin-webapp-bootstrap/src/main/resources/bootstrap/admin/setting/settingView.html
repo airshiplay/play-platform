@@ -1,0 +1,132 @@
+<section class="content-header">
+	<h1>
+		系统配置 <small>系统配置</small>
+		<input type="hidden" value="" id="settingIdInput" th:value="${setting==null?'':setting.id}" />
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/main/setting/settingList"><i class="glyphicon glyphicon-list"></i> 系统配置列表</a></li>
+		<li class="active" >查看系统配置</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content" th:inline="text">
+	<div class="mailbox-controls">
+		<div class="btn-group btn-group-sm">
+			<button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+				操作
+				<span class="ion-arrow-down-b"></span>
+			</button>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="javascript:;" id="deleteButton">
+						<i class="glyphicon glyphicon-remove"></i>移除
+					</a></li>
+			</ul>
+		</div>
+		<!-- /.btn-group -->
+		<button type="button" class="btn btn-warning btn-sm" onclick="history.back(-1)">
+			<i class="fa fa-reply"></i>
+		</button>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+
+			<!-- Profile Image -->
+			<div class="box box-primary">
+				<div class="box-body box-profile">
+					<h3 class="profile-username text-center">系统配置</h3>
+					<dl>
+						<dt>siteName</dt>
+						<dd th:text="${setting==null?'':setting.siteName}"></dd>
+						<dt>shortSiteName</dt>
+						<dd th:text="${setting==null?'':setting.shortSiteName}"></dd>
+						<dt>logo</dt>
+						<dd th:text="${setting==null?'':setting.logo}"></dd>
+						<dt>adminLoginBanner</dt>
+						<dd th:text="${setting==null?'':setting.adminLoginBanner}"></dd>
+						<dt>introduction</dt>
+						<dd th:text="${setting==null?'':setting.introduction}"></dd>
+						<dt>hotSearch</dt>
+						<dd th:text="${setting==null?'':setting.hotSearch}"></dd>
+						<dt>address</dt>
+						<dd th:text="${setting==null?'':setting.address}"></dd>
+						<dt>contact</dt>
+						<dd th:text="${setting==null?'':setting.contact}"></dd>
+						<dt>phone1</dt>
+						<dd th:text="${setting==null?'':setting.phone1}"></dd>
+						<dt>phone2</dt>
+						<dd th:text="${setting==null?'':setting.phone2}"></dd>
+						<dt>zipCode</dt>
+						<dd th:text="${setting==null?'':setting.zipCode}"></dd>
+						<dt>email</dt>
+						<dd th:text="${setting==null?'':setting.email}"></dd>
+						<dt>certtext</dt>
+						<dd th:text="${setting==null?'':setting.certtext}"></dd>
+						<dt>siteCloseMessage</dt>
+						<dd th:text="${setting==null?'':setting.siteCloseMessage}"></dd>
+					</dl>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+		<div class="col-md-8">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">内容描述</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body" style="min-height: 300px;">系统配置</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady" ], function(domReady) {
+		domReady(function() {
+			activeMenu("main_setting_list");
+
+			var settingId = $("#settingIdInput").val();
+
+			//删除
+			$("#deleteButton").on("click", function() {
+				$.confirm({
+					title : "提示",
+					content : "确定删除系统配置?",
+					confirmButton : "确定",
+					cancelButton : "关闭",
+					icon : 'fa fa-warning',
+					confirmButtonClass : 'btn-warning',
+					animation : 'zoom',
+					confirm : function() {
+						$.post(base + "/center/setting/delete", {
+							ids : [ [[setting]]Id ]
+						}, function(resp) {
+							if (resp.success) {
+								$.alert({
+									title : false,
+									content : "操作成功",
+									confirmButton : "关闭"
+								});
+								location.href = "#page/main/setting/settingList";
+							} else {
+								$.alert({
+									title : false,
+									content : resp.msg,
+									confirmButton : "关闭"
+								});
+							}
+						}, "json");
+					}
+				});
+			});
+
+		});
+	});
+</script>
