@@ -1,5 +1,0 @@
-package com.airshiplay.play.wechat.entity;
-
-public enum CardCouponType {
-	MEMBER_CARD, GROUPON, DISCOUNT, GIFT, CASH, GENERAL_COUPON, SCENIC_TICKET, MOVIE_TICKET, BOARDING_PASS, MEETING_TICKET, BUS_TICKET
-}
