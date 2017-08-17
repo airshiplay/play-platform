@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <groupId>com.airshiplay</groupId>
-	<artifactId>play-application</artifactId>
+	<artifactId>play-bi</artifactId>
 	<packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 	<properties>
@@ -20,15 +20,18 @@
 		<module>play-website</module>
 		<module>play-website-business</module>
 		<module>play-website-webapp-bootstrap</module>
-		<module>play-wechat-website</module>
-		<module>play-obd-business</module>
-		<module>play-obd-website</module>
-		<module>play-obd-webapp-bootstrap</module>
-		<module>play-wechat-business</module>
-		<module>play-wechat-webapp-bootstrap</module>
+		<module>play-admin-api</module>
+		<module>play-admin-business</module>
+		<module>play-admin-webapp</module>
+		<module>play-admin-webapp-bootstrap</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-admin-api</artifactId>
+				<version>${play.module.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-admin-business</artifactId>
@@ -54,6 +57,11 @@
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-http-client</artifactId>
 				<version>${play.module.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-repo</artifactId>
+				<version>${play.framework.version} </version>
 			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
@@ -101,7 +109,21 @@
 				<artifactId>play-template-freemarker</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-web-common</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-security-shiro</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-util</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.airshiplay</groupId>
 				<artifactId>play-template-tiles</artifactId>
@@ -129,7 +151,11 @@
 				</exclusions>
 			</dependency>
 
-
+			<dependency>
+				<groupId>com.airshiplay</groupId>
+				<artifactId>play-repo-mybatis</artifactId>
+				<version>${play.framework.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
