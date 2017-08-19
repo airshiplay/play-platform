@@ -7,6 +7,12 @@
 		<version>1.0.0.RELEASE</version>
 	</parent>
 	<artifactId>play-repo-jpa</artifactId>
+	<properties>
+		<!-- database config -->
+		<mybatis.version>3.4.1</mybatis.version>
+		<pagehelper.version>4.0.0</pagehelper.version>
+		<mysql.version>5.1.39</mysql.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -22,13 +28,9 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.39</version>
+			<version>${mysql.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.jolbox</groupId>
-			<artifactId>bonecp</artifactId>
-			<version>0.8.0.RELEASE</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>

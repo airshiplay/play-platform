@@ -71,6 +71,7 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 		String filterString = webRequest.getParameter("filter");
 		if (!Strings.isNullOrEmpty(filterString)) {
 			filterString = URLDecoder.decode(filterString, "UTF-8");
+			@SuppressWarnings("deprecation")
 			List<Map<String, Object>> filters = objectMapper.readValue(filterString,
 					CollectionType.construct(List.class, MapType.construct(Map.class, SimpleType.construct(String.class), SimpleType.construct(Object.class))));
 			for (Map<String, Object> filter : filters) {
@@ -85,8 +86,27 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 			for (Entry<String, String[]> entry : webRequest.getParameterMap().entrySet()) {
 				parameters.put(entry.getKey(), Arrays.asList(entry.getValue()));
 			}
-		}
+			String searchPhraseString = webRequest.getParameter("searchPhrase");
+			if(!Strings.isNullOrEmpty(searchPhraseString)){
+				searchPhraseString = URLDecoder.decode(searchPhraseString, "UTF-8");
+				try {
+					@SuppressWarnings("deprecation")
+					List<Map<String, Object>> filters = objectMapper.readValue(searchPhraseString,
+							CollectionType.construct(List.class, MapType.construct(Map.class, SimpleType.construct(String.class), SimpleType.construct(Object.class))));
+					for (Map<String, Object> filter : filters) {
+						String property = (String) filter.get("property");
+						Object value = filter.get("value");
 
+						Object convertedValue = conversionService.convert(value, TypeDescriptor.forObject(value),
+								TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(String.class)));
+						parameters.put(property, (List<String>) convertedValue);
+					}
+				} catch (Exception e) {
+					parameters.put("name", Arrays.asList(searchPhraseString));
+				}
+			}
+		}
+		parameters.remove("_");
 		QuerydslPredicate annotation = parameter.getParameterAnnotation(QuerydslPredicate.class);
 		TypeInformation<?> domainType = extractTypeInfo(parameter).getActualType();
 

@@ -16,6 +16,7 @@ import org.springframework.util.ClassUtils;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.airshiplay.play.repo.LockedableException;
 import com.airshiplay.play.repo.domain.Lockedable;
 import com.airshiplay.play.repo.domain.LogicDeleteable;
 
@@ -33,7 +34,7 @@ public class BaseJpaRepositoryImpl<T, I extends Serializable> extends QueryDslJp
 	public void delete(T entity) {
 		if (entity instanceof Lockedable) {
 			if (((Lockedable) entity).isLocked()) {
-				throw new RuntimeException("cannot delete the locked entity.");
+				throw new LockedableException("cannot delete the locked entity.");
 			}
 		}
 

@@ -28,6 +28,7 @@ public class NodeSerializer<N extends Node<T>, T extends Hierarchical<T>> extend
 
 		if (value.getText() != null) {
 			gen.writeStringField("text", value.getText());
+			gen.writeStringField("title", value.getText());
 		}
 
 		if (value.getIconCls() != null) {
@@ -40,6 +41,8 @@ public class NodeSerializer<N extends Node<T>, T extends Hierarchical<T>> extend
 		}
 
 		gen.writeBooleanField("leaf", value.getLeaf());
+        
+        gen.writeBooleanField("folder", !value.getLeaf());
 
 		if (value.getChecked() != null) {
 			gen.writeBooleanField("checked", value.getChecked());

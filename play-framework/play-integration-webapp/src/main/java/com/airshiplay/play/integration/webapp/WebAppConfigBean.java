@@ -39,10 +39,10 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.airshiplay.play.integration.webapp.querydsl.FilterPredicateArgumentResolver;
 import com.airshiplay.play.repo.domain.PageRequestProxy;
 import com.airshiplay.play.web.ServletSupport;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ServletSupport
 @Configuration
@@ -76,8 +76,14 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 		MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter(
 				objectMapper.getObject());
 		converters.add(jackson2HttpMessageConverter);
+//		httpMessageConverters().addAll(converters);
 	}
-
+//
+//	@Bean(name="httpMessageConverters")
+//	public List<HttpMessageConverter<?>> httpMessageConverters(){
+//		return new ArrayList<HttpMessageConverter<?>>();
+//	}
+	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addFormatter(DistanceFormatter.INSTANCE);

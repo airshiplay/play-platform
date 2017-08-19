@@ -18,10 +18,10 @@ import com.google.common.io.Files;
 @Component
 public class LocalFileStorageService implements FileStorageService {
 
-	@Value("${file.server_host?:mdm.whenling.com}")
+	@Value("${file.server_host?:127.0.0.1:8080}")
 	private String fileServerHost;
 
-	@Value("${file.upload_dir?:/home/mdmwebsite/upload}")
+	@Value("${file.upload_dir?:/home/website/upload}")
 	private String uploadDir;
 
 	@Override
@@ -87,6 +87,11 @@ public class LocalFileStorageService implements FileStorageService {
 		}
 
 		return currentPathFile.listFiles();
+	}
+
+	@Override
+	public String getUploadDir() {
+		return uploadDir;
 	}
 
 }

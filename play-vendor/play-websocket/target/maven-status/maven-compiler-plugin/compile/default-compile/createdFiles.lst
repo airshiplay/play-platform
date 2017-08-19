@@ -1,0 +1,4 @@
+com/airshiplay/play/websocket/HandshakeHandler.class
+com/airshiplay/play/websocket/HandshakeInterceptor.class
+com/airshiplay/play/websocket/GreetingController.class
+com/airshiplay/play/websocket/WebSocketConfigBean.class

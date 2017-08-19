@@ -6,35 +6,51 @@ import java.util.Map;
 public class Result {
 
 	public static Result success() {
-		return new Result().code(ResultCode.success).message(ResultCode.success.getMessage());
+		return new Result().code(ResultCode.success).message(
+				ResultCode.success.getMessage());
 	}
 
 	public static Result failure() {
-		return new Result().code(ResultCode.failure).message(ResultCode.failure.getMessage());
+		return new Result().code(ResultCode.failure).message(
+				ResultCode.failure.getMessage());
 	}
 
+	public static Result error() {
+		return new Result().code(ResultCode.error).message(
+				ResultCode.error.getMessage());
+	}
+	
 	public static Result validateError() {
-		return new Result().code(ResultCode.validateError).message(ResultCode.validateError.getMessage());
+		return new Result().code(ResultCode.validateError).message(
+				ResultCode.validateError.getMessage());
 	}
 
 	public static Result accessDenide() {
-		return new Result().code(ResultCode.accessDenide).message(ResultCode.accessDenide.getMessage());
+		return new Result().code(ResultCode.accessDenide).message(
+				ResultCode.accessDenide.getMessage());
 	}
 
 	public static Result notLogin() {
-		return new Result().code(ResultCode.notLogin).message(ResultCode.notLogin.getMessage());
+		return new Result().code(ResultCode.notLogin).message(
+				ResultCode.notLogin.getMessage());
 	}
 
 	public static Result exception() {
-		return new Result().code(ResultCode.exception).message(ResultCode.exception.getMessage());
+		return new Result().code(ResultCode.exception).message(
+				ResultCode.exception.getMessage());
 	}
-
+	public static Result locked() {
+		return new Result().code(ResultCode.locked).message(
+				ResultCode.locked.getMessage());
+	}
 	public static Result unknown() {
-		return new Result().code(ResultCode.unknown).message(ResultCode.unknown.getMessage());
+		return new Result().code(ResultCode.unknown).message(
+				ResultCode.unknown.getMessage());
 	}
 
 	public static Result captchaError() {
-		return new Result().code(ResultCode.captchaError).message(ResultCode.captchaError.getMessage());
+		return new Result().code(ResultCode.captchaError).message(
+				ResultCode.captchaError.getMessage());
 	}
 
 	private ResultCode code;
@@ -64,6 +80,11 @@ public class Result {
 		return extraProperties;
 	}
 
+	public Result addContent(Object value) {
+		this.extraProperties.put("content", value);
+		return this;
+	}
+
 	public Result addProperties(String key, Object value) {
 		this.extraProperties.put(key, value);
 		return this;
@@ -75,8 +96,9 @@ public class Result {
 	}
 
 	public enum ResultCode {
-		success("操作成功"), failure("操作失败"), validateError("验证错误"), accessDenide("无权限访问"), notLogin("未登录"), captchaError(
-				"验证码错误"), exception("系统异常"), unknown("未知情况");
+		success("操作成功"), failure("操作失败"), validateError("验证错误"), accessDenide(
+				"无权限访问"), notLogin("未登录"), captchaError("验证码错误"), exception(
+				"系统异常"), locked("数据锁定"),error("错误"), unknown("未知情况");
 
 		private final String message;
 
