@@ -4,6 +4,7 @@
     <groupId>com.airshiplay</groupId>
     <artifactId>play-parent</artifactId>
     <version>1.0.0.RELEASE</version>
+	  <relativePath>./play-parent/pom.xml</relativePath>
   </parent>
   <artifactId>play-framework</artifactId>
   <packaging>pom</packaging>
