@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.airshiplay</groupId>
+		<groupId>com.airlenet</groupId>
 		<artifactId>play-framework</artifactId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
@@ -10,14 +10,14 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-web</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<!-- <dependency> <groupId>com.airshiplay</groupId> <artifactId>play-security</artifactId> 
 			<version>${project.version}</version> </dependency> -->
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-repo</artifactId>
 			<version>${project.version}</version>
 		</dependency>
