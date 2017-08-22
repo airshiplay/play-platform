@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.security;
 
 import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.security.CustomUserDetails;
+import com.airlenet.play.security.CustomUserDetails;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.data.domain.AuditorAware;

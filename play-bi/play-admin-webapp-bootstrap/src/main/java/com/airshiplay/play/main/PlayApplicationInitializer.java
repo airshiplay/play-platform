@@ -1,6 +1,6 @@
 package com.airshiplay.play.main;
 
-import com.airshiplay.play.integration.ApplicationInitializer;
+import com.airlenet.play.integration.ApplicationInitializer;
 import com.airshiplay.play.main.entity.*;
 import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.OrganizationEntity.OrgType;
@@ -9,7 +9,7 @@ import com.airshiplay.play.main.service.AuthorityEntityService;
 import com.airshiplay.play.main.service.OrganizationEntityService;
 import com.airshiplay.play.main.service.RoleEntityService;
 import com.airshiplay.play.main.service.UserEntityService;
-import com.airshiplay.play.security.PlayPasswordService;
+import com.airlenet.play.security.PlayPasswordService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;

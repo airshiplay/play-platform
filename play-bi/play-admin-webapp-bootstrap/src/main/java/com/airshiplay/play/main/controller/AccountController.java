@@ -2,10 +2,10 @@ package com.airshiplay.play.main.controller;
 
 import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.service.UserEntityService;
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.security.CurrentUser;
-import com.airshiplay.play.security.CustomUserDetails;
-import com.airshiplay.play.security.PlayPasswordService;
+import com.airlenet.play.repo.domain.Result;
+import com.airlenet.play.security.CurrentUser;
+import com.airlenet.play.security.CustomUserDetails;
+import com.airlenet.play.security.PlayPasswordService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

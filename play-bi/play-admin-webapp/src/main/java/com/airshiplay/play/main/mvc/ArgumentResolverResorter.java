@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.mvc;
 
 import com.airshiplay.play.main.service.ServiceSelector;
-import com.airshiplay.play.web.ServletSupport;
+import com.airlenet.play.web.ServletSupport;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;

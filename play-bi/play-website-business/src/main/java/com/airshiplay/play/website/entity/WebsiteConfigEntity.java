@@ -1,7 +1,7 @@
 package com.airshiplay.play.website.entity;
 
 import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.repo.jpa.DataEntity;
+import com.airlenet.play.repo.jpa.DataEntity;
 import lombok.Getter;
 import lombok.Setter;
 

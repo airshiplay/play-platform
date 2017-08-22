@@ -2,7 +2,7 @@ package com.airshiplay.play.main.controller;
 
 import com.airshiplay.play.main.entity.SettingEntity;
 import com.airshiplay.play.main.service.SettingEntityService;
-import com.airshiplay.play.repo.domain.Result;
+import com.airlenet.play.repo.domain.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.security;
 
-import com.airshiplay.play.security.CustomUserDetails;
-import com.airshiplay.play.security.CustomUserDetails.Type;
+import com.airlenet.play.security.CustomUserDetails;
+import com.airlenet.play.security.CustomUserDetails.Type;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.springframework.beans.factory.InitializingBean;

@@ -5,7 +5,7 @@ import com.airshiplay.play.main.entity.MemberUserEntity;
 import com.airshiplay.play.main.entity.QMemberUserEntity;
 import com.airshiplay.play.main.service.MemberRankEntityService;
 import com.airshiplay.play.main.service.MemberUserEntityService;
-import com.airshiplay.play.repo.domain.Result;
+import com.airlenet.play.repo.domain.Result;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

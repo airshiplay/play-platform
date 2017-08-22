@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.airshiplay</groupId>
-		<artifactId>play-application</artifactId>
+		<artifactId>play-bi</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
@@ -16,20 +16,20 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-integration-webapp</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-i18n</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-template-thymeleaf</artifactId>
 			<exclusions>
 				<exclusion>
 					<artifactId>play-cache</artifactId>
-					<groupId>com.airshiplay</groupId>
+					<groupId>com.airlenet</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -37,32 +37,12 @@
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-admin-webapp-bootstrap</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.airshiplay</groupId>-->
-			<!--<artifactId>play-cms-webapp-bootstrap</artifactId>-->
-			<!--<version>${play.module.version}</version>-->
-		<!--</dependency>-->
-		<!-- <dependency>
-			<groupId>com.airshiplay</groupId>
-			<artifactId>play-app-webapp-bootstrap</artifactId>
-			<version>${play.module.version}</version>
-		</dependency> -->
-		<!--<dependency>-->
-			<!--<groupId>com.airshiplay</groupId>-->
-			<!--<artifactId>play-wechat-webapp-bootstrap</artifactId>-->
-			<!--<version>${project.version}</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-website-webapp-bootstrap</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.airshiplay</groupId>-->
-			<!--<artifactId>play-obd-webapp-bootstrap</artifactId>-->
-			<!--<version>${project.version}</version>-->
-		<!--</dependency>-->
-		
+
 	</dependencies>
 
 	<build>

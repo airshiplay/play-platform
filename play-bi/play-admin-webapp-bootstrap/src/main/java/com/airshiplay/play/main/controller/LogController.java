@@ -3,7 +3,7 @@ package com.airshiplay.play.main.controller;
 import com.airshiplay.play.main.entity.LogEntity;
 import com.airshiplay.play.main.entity.QLogEntity;
 import com.airshiplay.play.main.service.LogEntityService;
-import com.airshiplay.play.repo.domain.Result;
+import com.airlenet.play.repo.domain.Result;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

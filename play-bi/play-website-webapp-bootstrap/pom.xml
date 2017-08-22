@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.airshiplay</groupId>
-		<artifactId>play-application</artifactId>
+		<artifactId>play-bi</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>play-website-webapp-bootstrap</artifactId>

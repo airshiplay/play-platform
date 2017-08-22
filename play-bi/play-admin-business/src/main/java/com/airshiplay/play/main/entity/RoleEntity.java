@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.entity;
 
 import com.airlenet.play.repo.jpa.DataEntity;
-import com.airshiplay.play.repo.domain.Lockedable;
+import com.airlenet.play.repo.domain.Lockedable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

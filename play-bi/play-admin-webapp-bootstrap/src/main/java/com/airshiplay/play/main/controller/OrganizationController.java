@@ -2,9 +2,9 @@ package com.airshiplay.play.main.controller;
 
 import com.airshiplay.play.main.entity.OrganizationEntity;
 import com.airshiplay.play.main.service.OrganizationEntityService;
-import com.airshiplay.play.repo.domain.Node;
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.repo.domain.Tree;
+import com.airlenet.play.repo.domain.Node;
+import com.airlenet.play.repo.domain.Result;
+import com.airlenet.play.repo.domain.Tree;
 import com.google.common.base.Strings;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;

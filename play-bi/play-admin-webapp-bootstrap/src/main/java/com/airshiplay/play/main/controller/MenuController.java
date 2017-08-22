@@ -3,7 +3,7 @@ package com.airshiplay.play.main.controller;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.service.MenuEntityService;
 import com.airshiplay.play.main.service.RoleEntityService;
-import com.airshiplay.play.repo.domain.Tree;
+import com.airlenet.play.repo.domain.Tree;
 import com.querydsl.core.types.Predicate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;

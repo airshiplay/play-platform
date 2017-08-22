@@ -1,5 +1,6 @@
 package com.airshiplay.play.main.service;
 
+import com.airlenet.play.repo.domain.Tree;
 import com.airlenet.play.repo.jpa.HierarchicalEntity;
 import com.airlenet.play.repo.jpa.HierarchicalJpaRepository;
 import com.querydsl.core.types.Predicate;

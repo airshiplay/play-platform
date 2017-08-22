@@ -1,6 +1,6 @@
 package com.airshiplay.play.main.controller;
 
-import com.airshiplay.play.filestorage.FileStorageService;
+import com.airlenet.play.filestorage.FileStorageService;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

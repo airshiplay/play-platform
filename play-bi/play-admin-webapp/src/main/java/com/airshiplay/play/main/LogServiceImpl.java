@@ -2,9 +2,9 @@ package com.airshiplay.play.main;
 
 import com.airshiplay.play.main.api.LogService;
 import com.airshiplay.play.main.service.LogEntityService;
-import com.airshiplay.play.util.BrowserUtil;
-import com.airshiplay.play.util.IpUtil;
-import com.airshiplay.play.util.LogUtil;
+import com.airlenet.play.util.BrowserUtil;
+import com.airlenet.play.util.IpUtil;
+import com.airlenet.play.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;

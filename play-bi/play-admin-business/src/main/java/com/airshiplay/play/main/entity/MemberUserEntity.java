@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.entity;
 
 import com.airlenet.play.repo.jpa.DataEntity;
-import com.airshiplay.play.core.helper.Patterns;
+import com.airlenet.play.core.helper.Patterns;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

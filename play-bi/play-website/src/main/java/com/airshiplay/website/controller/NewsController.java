@@ -1,6 +1,6 @@
 package com.airshiplay.website.controller;
 
-import com.airshiplay.play.web.bind.BinderDateFormatter;
+import com.airlenet.play.web.bind.BinderDateFormatter;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;

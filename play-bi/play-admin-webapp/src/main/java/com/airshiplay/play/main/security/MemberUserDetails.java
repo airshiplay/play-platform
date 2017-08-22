@@ -1,9 +1,9 @@
 package com.airshiplay.play.main.security;
 
-import com.airshiplay.play.core.SpringContext;
+import com.airlenet.play.core.SpringContext;
 import com.airshiplay.play.main.entity.MemberUserEntity;
 import com.airshiplay.play.main.repo.MemberUserEntityRepository;
-import com.airshiplay.play.security.CustomUserDetails;
+import com.airlenet.play.security.CustomUserDetails;
 
 public class MemberUserDetails extends CustomUserDetails<Long, MemberUserEntity> {
 	private static final long serialVersionUID = 8220061317304759492L;

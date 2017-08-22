@@ -1,7 +1,7 @@
 package com.airshiplay.website.controller;
 
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.security.shiro.authc.MemberUserToken;
+import com.airlenet.play.repo.domain.Result;
+import com.airlenet.play.security.shiro.authc.MemberUserToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;

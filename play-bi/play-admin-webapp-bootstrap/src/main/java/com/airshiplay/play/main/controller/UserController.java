@@ -2,8 +2,8 @@ package com.airshiplay.play.main.controller;
 
 import com.airshiplay.play.main.entity.AdminUserEntity;
 import com.airshiplay.play.main.service.UserEntityService;
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.security.PlayPasswordService;
+import com.airlenet.play.repo.domain.Result;
+import com.airlenet.play.security.PlayPasswordService;
 import com.google.common.base.Strings;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;

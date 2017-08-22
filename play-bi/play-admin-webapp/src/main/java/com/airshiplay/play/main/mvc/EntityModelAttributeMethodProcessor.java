@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.mvc;
 
 import com.airshiplay.play.main.service.ServiceSelector;
-import com.airshiplay.play.repo.jpa.BaseEntity;
+import com.airlenet.play.repo.jpa.BaseEntity;
 import com.google.common.base.Strings;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.convert.ConversionService;

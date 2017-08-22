@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.entity;
 
 import com.airlenet.play.repo.jpa.HierarchicalEntity;
-import com.airshiplay.play.core.helper.Patterns;
+import com.airlenet.play.core.helper.Patterns;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

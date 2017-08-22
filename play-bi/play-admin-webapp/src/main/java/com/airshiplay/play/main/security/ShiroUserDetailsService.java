@@ -5,7 +5,7 @@ import com.airshiplay.play.main.repo.AdminUserEntityRepository;
 import com.airshiplay.play.main.repo.AuthorityEntityRespository;
 import com.airshiplay.play.main.repo.MemberUserEntityRepository;
 import com.airshiplay.play.main.repo.RoleEntityRepository;
-import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
+import com.airlenet.play.security.shiro.PlayShiroUserDetailsService;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +16,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
-//package com.airshiplay.play.main.security;
-//
-//import java.util.Collection;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.AuthorityUtils;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.stereotype.Service;
-//
-//import com.airshiplay.play.security.CustomUserDetails;
-//
 
 @Service
 public class ShiroUserDetailsService implements PlayShiroUserDetailsService {
