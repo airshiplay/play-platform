@@ -19,10 +19,7 @@ import org.springframework.util.StringValueResolver;
 
 /**
  * 使用apache configuration作为spring的placeholder
- * 
- * @作者 
- * @博客 http://ken.whenling.com
- * @创建时间 2016年3月1日 下午4:47:18
+ *
  */
 public class ConfigurationPropertyResourceConfigurer extends PlaceholderConfigurerSupport
 		implements EnvironmentAware {

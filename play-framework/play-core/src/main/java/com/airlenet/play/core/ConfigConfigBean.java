@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 配置项配置
- * 
- * @作者 
- * @博客 http://ken.whenling.com
- * @创建时间 2016年3月1日 下午4:47:03
+ *
  */
 @Configuration
 public class ConfigConfigBean {

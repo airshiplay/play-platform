@@ -19,10 +19,9 @@ import com.google.common.base.Preconditions;
 
 /**
  * 静态配置，可覆盖，可引入xml、plist、properties类型的配置文件
- * 
- * @作者 
- * @博客 http://ken.whenling.com
- * @创建时间 2016年3月1日 下午4:47:40
+ *
+ *
+ * 2016年3月1日 下午4:47:40
  */
 public class StaticConfigSupplier {
 	private static CombinedConfiguration CONFIGURATION;
