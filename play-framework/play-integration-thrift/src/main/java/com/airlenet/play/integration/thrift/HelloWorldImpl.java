@@ -1,0 +1,15 @@
+package com.airlenet.play.integration.thrift;
+
+import org.apache.thrift.TException;
+
+public class HelloWorldImpl implements HelloWorldService.Iface {
+
+	public HelloWorldImpl() {
+	}
+
+	@Override
+	public String sayHello(String username) throws TException {
+		return "print1333: " + username;
+	}
+
+}

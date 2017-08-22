@@ -19,10 +19,10 @@
         </plugin>
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
-        <plugin type="com.airshiplay.play.plugins.mybatis.MySQLLimitPlugin"></plugin>
+        <plugin type="com.airlenet.play.plugins.mybatis.MySQLLimitPlugin"></plugin>
 
         <!-- 不去除自动生成的注释 否则每次加字段都要删掉4个相关文件后重新生成 -->
-        <commentGenerator type="com.airshiplay.play.plugins.mybatis.PlayCommentGenerator">
+        <commentGenerator type="com.airlenet.play.plugins.mybatis.PlayCommentGenerator">
             <!-- 是否取消注释 -->
             <property name="suppressAllComments" value="false"/>
             <!-- 是否生成注释代时间戳 -->
