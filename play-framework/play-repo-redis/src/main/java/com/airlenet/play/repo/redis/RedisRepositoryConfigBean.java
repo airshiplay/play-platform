@@ -10,7 +10,7 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
-@EnableRedisRepositories(basePackages = "com.airshiplay")
+@EnableRedisRepositories(basePackages = {"com.airshiplay","com.airlenet"})
 public class RedisRepositoryConfigBean {
 
 	@Value("${redis.host?:120.25.241.144}")

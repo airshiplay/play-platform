@@ -21,7 +21,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.mongodb.MongoClient;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.airshiplay", includeFilters = {
+@EnableMongoRepositories(basePackages = {"com.airshiplay","com.airlenet"}, includeFilters = {
 		@Filter(value = MongoRepository.class, type = FilterType.ASSIGNABLE_TYPE) }, repositoryImplementationPostfix = "Impl", repositoryFactoryBeanClass = CustomMongoRepositoryFactoryBean.class)
 @EnableMongoAuditing
 public class MongoRepositoryConfigBean {
@@ -29,7 +29,7 @@ public class MongoRepositoryConfigBean {
 	@Value("${mongo.host?:localhost}")
 	private String host;
 
-	@Value("${mongo.database?:whenling}")
+	@Value("${mongo.database?:play}")
 	private String database;
 
 	@Bean

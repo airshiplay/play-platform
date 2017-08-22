@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.airshiplay", includeFilters = {
+@EnableJpaRepositories(basePackages = {"com.airshiplay","com.airlenet"}, includeFilters = {
 		@Filter(value = BaseJpaRepository.class, type = FilterType.ASSIGNABLE_TYPE) }, repositoryImplementationPostfix = "Impl", repositoryFactoryBeanClass = CustomJpaRepositoryFactoryBean.class)
 @EnableJpaAuditing
 public class JpaRepositoryConfigBean {
@@ -28,7 +28,7 @@ public class JpaRepositoryConfigBean {
 	@Value("${jdbc.driver_class?:com.mysql.jdbc.Driver}")
 	private String jdbcDriverClass;
 
-	@Value("${jdbc.url?:jdbc:mysql://localhost:3306/mdm?useUnicode=true&characterEncoding=utf-8&useSSL=false}")
+	@Value("${jdbc.url?:jdbc:mysql://localhost:3306/play?useUnicode=true&characterEncoding=utf-8&useSSL=false}")
 	private String jdbcUrl;
 
 	@Value("${jdbc.username?:root}")
@@ -100,7 +100,7 @@ public class JpaRepositoryConfigBean {
 
 		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("com.airshiplay");
+		factory.setPackagesToScan("com.airshiplay","com.airlenet");
 		factory.setJpaDialect(new HibernateJpaDialect());
 
 		Properties jpaProperties = new Properties();

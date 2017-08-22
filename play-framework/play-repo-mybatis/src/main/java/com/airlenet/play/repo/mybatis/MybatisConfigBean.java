@@ -14,7 +14,7 @@ import java.util.Properties;
 
 
 @Configuration
-@MapperScan("com.airshiplay.play.*.mapper")
+@MapperScan({"com.airshiplay.play.*.mapper","com.airlenet.play.*.mapper"})
 public class MybatisConfigBean {
     @Autowired
     private DataSource dataSource;
@@ -27,9 +27,9 @@ public class MybatisConfigBean {
         FileSystemXmlApplicationContext loader = new FileSystemXmlApplicationContext();
         // new Resource[] { new ClassPathResource("mapper/*.xml"), new
         // ClassPathResource("mapper/custom/*.xml") }
-        factory.setMapperLocations(loader.getResources("classpath*:com.airshiplay.play.*.mapper/*.xml,classpath*:mapper/*.xml"));
+        factory.setMapperLocations(loader.getResources("classpath*:com.airlenet.play.*.mapper/*.xml,classpath*:com.airshiplay.play.*.mapper/*.xml,classpath*:mapper/*.xml"));
         //factory.setTypeAliasesPackage("com.airshiplay.play.*.model,com.airshiplay.play.*.entity,com.airshiplay.play.*.domain");// bean
-        factory.setTypeAliasesPackage("com.airshiplay.play.*.model");
+        factory.setTypeAliasesPackage("com.airshiplay.play.*.model,com.airlenet.play.*.model");
         com.github.pagehelper.PageHelper pageHelper = new com.github.pagehelper.PageHelper();
         Properties properties = new Properties();
         properties.setProperty("dialect", "mysql");

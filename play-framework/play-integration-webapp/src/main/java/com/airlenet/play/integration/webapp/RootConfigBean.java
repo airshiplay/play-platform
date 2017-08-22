@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.airlenet.play.web.ServletSupport;
 
 @Configuration
-@ComponentScan(basePackages = { "com.airshiplay" }, excludeFilters = {
+@ComponentScan(basePackages = { "com.airshiplay","com.airlenet" }, excludeFilters = {
 		@ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION),
 		@ComponentScan.Filter(value = EnableWebMvc.class, type = FilterType.ANNOTATION),
 		@ComponentScan.Filter(value = ServletSupport.class, type = FilterType.ANNOTATION) })

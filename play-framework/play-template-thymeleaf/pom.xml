@@ -14,11 +14,6 @@
 			<artifactId>play-web</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.airshiplay</groupId>
-			<artifactId>play-security</artifactId>
-			<version>${project.version}</version>
-		</dependency> -->
 		<dependency>
 			<groupId>com.airlenet</groupId>
 			<artifactId>play-repo</artifactId>

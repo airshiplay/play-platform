@@ -25,7 +25,11 @@
             <artifactId>play-json</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.airlenet</groupId>
+            <artifactId>play-security-shiro</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!--Mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -68,11 +72,7 @@
             <version>1.3.5</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.airshiplay</groupId>
-            <artifactId>play-security-shiro</artifactId>
-            <version>1.0.0.RELEASE</version>
-        </dependency>
+
     </dependencies>
     <build>
         <pluginManagement>
@@ -95,9 +95,9 @@
                             <version>5.1.29</version>
                         </dependency>
                         <dependency>
-                            <groupId>com.airshiplay</groupId>
+                            <groupId>com.airlenet</groupId>
                             <artifactId>play-repo-mybatis</artifactId>
-                            <version>1.0.0.RELEASE</version>
+                            <version>${project.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>

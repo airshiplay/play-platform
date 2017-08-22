@@ -4,7 +4,7 @@ import com.airlenet.play.plugins.mybatis.annotation.CreatedBy;
 import com.airlenet.play.plugins.mybatis.annotation.CreatedDate;
 import com.airlenet.play.plugins.mybatis.annotation.LastModifiedBy;
 import com.airlenet.play.plugins.mybatis.annotation.LastModifiedDate;
-import com.airshiplay.play.security.CustomUserDetails;
+import com.airlenet.play.security.CustomUserDetails;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;

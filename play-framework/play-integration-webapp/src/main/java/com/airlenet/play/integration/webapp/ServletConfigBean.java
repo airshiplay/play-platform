@@ -14,7 +14,7 @@ import com.airlenet.play.core.StaticConfigSupplier;
 import com.airlenet.play.web.ServletSupport;
 
 @Configuration
-@ComponentScan(basePackages = { "com.airshiplay" }, useDefaultFilters = false, includeFilters = {
+@ComponentScan(basePackages = { "com.airshiplay","com.airlenet" }, useDefaultFilters = false, includeFilters = {
 		@Filter({ Controller.class }), @Filter({ ServletSupport.class }) }, nameGenerator = FullBeanNameGenerator.class)
 @EnableWebMvc
 @EnableAspectJAutoProxy(proxyTargetClass=true)
