@@ -1,9 +1,5 @@
 package com.airshiplay.play.main.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.QRoleEntity;
 import com.airshiplay.play.main.entity.RoleEntity;
@@ -11,6 +7,9 @@ import com.airshiplay.play.main.repo.MenuEntityRepository;
 import com.airshiplay.play.main.repo.RoleEntityRepository;
 import com.airshiplay.play.repo.domain.Tree;
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MenuEntityService extends HierarchicalEntityService<MenuEntity, Long> {

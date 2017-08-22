@@ -1,10 +1,8 @@
 package com.airshiplay.play.main.mvc;
 
-import java.util.Collections;
-import java.util.Map;
-
-import javax.servlet.ServletRequest;
-
+import com.airshiplay.play.main.service.ServiceSelector;
+import com.airshiplay.play.repo.jpa.BaseEntity;
+import com.google.common.base.Strings;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
@@ -19,9 +17,9 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.annotation.ModelAttributeMethodProcessor;
 import org.springframework.web.servlet.HandlerMapping;
 
-import com.google.common.base.Strings;
-import com.airshiplay.play.main.service.ServiceSelector;
-import com.airshiplay.play.repo.jpa.BaseEntity;
+import javax.servlet.ServletRequest;
+import java.util.Collections;
+import java.util.Map;
 
 public class EntityModelAttributeMethodProcessor extends ModelAttributeMethodProcessor {
 

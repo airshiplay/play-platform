@@ -1,7 +1,7 @@
 package com.airshiplay.play.main.repo;
 
+import com.airlenet.play.repo.jpa.BaseJpaRepository;
 import com.airshiplay.play.main.entity.AuthorityEntity;
-import com.airshiplay.play.repo.jpa.BaseJpaRepository;
 
 public interface AuthorityEntityRespository extends
 		BaseJpaRepository<AuthorityEntity, Long> {

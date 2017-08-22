@@ -1,17 +1,12 @@
 package com.airshiplay.play.main.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.airlenet.play.repo.jpa.HierarchicalEntity;
+import com.airshiplay.play.core.helper.Patterns;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import com.airshiplay.play.core.helper.Patterns;
-import com.airshiplay.play.repo.jpa.HierarchicalEntity;
 
 @Entity
 @Table(name = "sys_organization")

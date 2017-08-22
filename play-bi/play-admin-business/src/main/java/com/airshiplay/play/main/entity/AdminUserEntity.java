@@ -1,26 +1,17 @@
 package com.airshiplay.play.main.entity;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import com.airlenet.play.repo.jpa.DataEntity;
+import com.airshiplay.play.core.helper.Patterns;
+import com.airshiplay.play.repo.domain.Lockedable;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.airshiplay.play.core.helper.Patterns;
-import com.airshiplay.play.repo.domain.Lockedable;
-import com.airshiplay.play.repo.jpa.DataEntity;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 管理员、内部员工

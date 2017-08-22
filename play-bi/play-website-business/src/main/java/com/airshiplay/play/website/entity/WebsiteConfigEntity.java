@@ -1,14 +1,13 @@
 package com.airshiplay.play.website.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.repo.jpa.DataEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.repo.jpa.DataEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * 网站配置

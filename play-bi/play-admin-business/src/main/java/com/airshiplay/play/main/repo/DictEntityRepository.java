@@ -1,9 +1,9 @@
 package com.airshiplay.play.main.repo;
 
-import java.util.List;
-
+import com.airlenet.play.repo.jpa.HierarchicalJpaRepository;
 import com.airshiplay.play.main.entity.DictEntity;
-import com.airshiplay.play.repo.jpa.HierarchicalJpaRepository;
+
+import java.util.List;
 
 public interface DictEntityRepository extends
 		HierarchicalJpaRepository<DictEntity, Long> {

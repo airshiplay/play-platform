@@ -10,15 +10,15 @@
 	<version>1.0-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-repo-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-repo-mybatis</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-json</artifactId>
 		</dependency>
 		<dependency>
@@ -26,7 +26,7 @@
 			<artifactId>validation-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-integration</artifactId>
 		</dependency>
 		<dependency>

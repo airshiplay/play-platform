@@ -1,5 +1,10 @@
 package com.airshiplay.play.main.controller;
 
+import com.airshiplay.play.main.entity.MenuEntity;
+import com.airshiplay.play.main.service.MenuEntityService;
+import com.airshiplay.play.main.service.RoleEntityService;
+import com.airshiplay.play.repo.domain.Tree;
+import com.querydsl.core.types.Predicate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.airshiplay.play.main.entity.MenuEntity;
-import com.airshiplay.play.main.service.MenuEntityService;
-import com.airshiplay.play.main.service.RoleEntityService;
-import com.airshiplay.play.repo.domain.Tree;
-import com.querydsl.core.types.Predicate;
 
 @Controller
 @RequestMapping("/center/menu")

@@ -1,7 +1,6 @@
 package com.airshiplay.website.controller;
 
-import java.util.Date;
-
+import com.airshiplay.play.web.bind.BinderDateFormatter;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.airshiplay.play.web.bind.BinderDateFormatter;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/news")

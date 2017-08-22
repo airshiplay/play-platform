@@ -1,10 +1,5 @@
 package com.airshiplay.play.main.security;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.Filter;
-
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+
+import javax.servlet.Filter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)

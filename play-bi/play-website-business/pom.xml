@@ -10,11 +10,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-repo-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-json</artifactId>
 		</dependency>
 		<dependency>
@@ -23,11 +23,11 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-integration</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-admin-business</artifactId>
 		</dependency>
 	</dependencies>

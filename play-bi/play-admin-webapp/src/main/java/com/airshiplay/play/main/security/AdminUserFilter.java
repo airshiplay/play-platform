@@ -1,14 +1,13 @@
 package com.airshiplay.play.main.security;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
+import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.CustomUserDetails.Type;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.airshiplay.play.security.CustomUserDetails;
-import com.airshiplay.play.security.CustomUserDetails.Type;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 public class AdminUserFilter extends UserFilter implements InitializingBean {
 

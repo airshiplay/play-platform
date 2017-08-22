@@ -1,12 +1,11 @@
 package com.airshiplay.play.main.service;
 
+import com.airlenet.play.repo.jpa.HierarchicalEntity;
+import com.airlenet.play.repo.jpa.HierarchicalJpaRepository;
+import com.querydsl.core.types.Predicate;
+
 import java.io.Serializable;
 import java.util.List;
-
-import com.querydsl.core.types.Predicate;
-import com.airshiplay.play.repo.domain.Tree;
-import com.airshiplay.play.repo.jpa.HierarchicalEntity;
-import com.airshiplay.play.repo.jpa.HierarchicalJpaRepository;
 
 public abstract class HierarchicalEntityService<T extends HierarchicalEntity<?, I, T>, I extends Serializable>
 		extends EntityService<T, I> {

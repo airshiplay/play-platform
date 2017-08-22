@@ -1,10 +1,9 @@
 package com.airshiplay.play.main.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.airshiplay.play.main.entity.SettingEntity;
 import com.airshiplay.play.main.repo.SettingEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SettingEntityService extends EntityService<SettingEntity, Long> {

@@ -1,11 +1,10 @@
 package com.airshiplay.play.app;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.airshiplay.play.integration.ApplicationInitializer;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.init.InitDataTools;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class AppApplicationInitializer extends ApplicationInitializer {

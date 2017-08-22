@@ -1,11 +1,11 @@
 package com.airshiplay.play.main.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
-import javax.validation.Valid;
-
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.service.UserEntityService;
+import com.airshiplay.play.repo.domain.Result;
+import com.airshiplay.play.security.CurrentUser;
+import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.PlayPasswordService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -13,22 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.main.service.UserEntityService;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
 //import com.airshiplay.play.plugin.oauth.model.OauthPlugin;
 //import com.airshiplay.play.plugin.oauth.model.OauthUserEntity;
 //import com.airshiplay.play.plugin.oauth.service.OauthPluginService;
 //import com.airshiplay.play.plugin.oauth.service.OauthUserService;
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.security.CurrentUser;
-import com.airshiplay.play.security.CustomUserDetails;
-import com.airshiplay.play.security.PlayPasswordService;
 
 @Controller
 @RequestMapping("/center/account")

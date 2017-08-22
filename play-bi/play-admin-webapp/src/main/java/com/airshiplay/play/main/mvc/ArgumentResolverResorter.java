@@ -1,8 +1,7 @@
 package com.airshiplay.play.main.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.airshiplay.play.main.service.ServiceSelector;
+import com.airshiplay.play.web.ServletSupport;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,8 @@ import org.springframework.web.method.annotation.ModelAttributeMethodProcessor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
-import com.airshiplay.play.main.service.ServiceSelector;
-import com.airshiplay.play.web.ServletSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 @ServletSupport
 @Component

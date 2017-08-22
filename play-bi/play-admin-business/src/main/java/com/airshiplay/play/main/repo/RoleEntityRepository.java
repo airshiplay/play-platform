@@ -1,11 +1,10 @@
 package com.airshiplay.play.main.repo;
 
-import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
-import org.springframework.data.querydsl.binding.QuerydslBindings;
-
+import com.airlenet.play.repo.jpa.BaseJpaRepository;
 import com.airshiplay.play.main.entity.QRoleEntity;
 import com.airshiplay.play.main.entity.RoleEntity;
-import com.airshiplay.play.repo.jpa.BaseJpaRepository;
+import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
+import org.springframework.data.querydsl.binding.QuerydslBindings;
 
 public interface RoleEntityRepository extends BaseJpaRepository<RoleEntity, Long>, QuerydslBinderCustomizer<QRoleEntity> {
 	@Override

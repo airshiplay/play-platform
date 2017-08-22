@@ -9,7 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
-		<play.framework.version>1.0.0.RELEASE</play.framework.version>
+		<play.framework.version>1.0.0-SNAPSHOT</play.framework.version>
         <play.module.version>1.0-SNAPSHOT</play.module.version>
 		<validator-api.version>1.1.0.Final</validator-api.version>
 		<querydsl.version>4.1.1</querydsl.version>
@@ -59,23 +59,23 @@
 				<version>${play.module.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-repo</artifactId>
 				<version>${play.framework.version} </version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-integration-webapp</artifactId>
 				<version>${play.framework.version} </version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-repo-jpa</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-json</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
@@ -85,52 +85,52 @@
 				<version>${validator-api.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-i18n</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-integration</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-template-groovy</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-template-velocity</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-template-freemarker</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-web-common</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-security-shiro</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-util</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-template-tiles</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-security</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>
@@ -140,19 +140,19 @@
 				<version>${hibernate-validator.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-template-thymeleaf</artifactId>
 				<version>${play.framework.version}</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>play-cache</artifactId>
-						<groupId>com.airshiplay</groupId>
+						<groupId>com.airlenet</groupId>
 					</exclusion>
 				</exclusions>
 			</dependency>
 
 			<dependency>
-				<groupId>com.airshiplay</groupId>
+				<groupId>com.airlenet</groupId>
 				<artifactId>play-repo-mybatis</artifactId>
 				<version>${play.framework.version}</version>
 			</dependency>

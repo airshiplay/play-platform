@@ -1,16 +1,15 @@
 package com.airshiplay.play.main.service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.airshiplay.play.main.entity.DictEntity;
+import com.airshiplay.play.main.repo.DictEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.airshiplay.play.main.entity.DictEntity;
-import com.airshiplay.play.main.repo.DictEntityRepository;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DictEntityService extends EntityService<DictEntity, Long> {

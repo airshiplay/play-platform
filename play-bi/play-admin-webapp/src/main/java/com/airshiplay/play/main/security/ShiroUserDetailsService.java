@@ -1,16 +1,21 @@
 package com.airshiplay.play.main.security;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-
+import com.airshiplay.play.main.entity.*;
+import com.airshiplay.play.main.repo.AdminUserEntityRepository;
+import com.airshiplay.play.main.repo.AuthorityEntityRespository;
+import com.airshiplay.play.main.repo.MemberUserEntityRepository;
+import com.airshiplay.play.main.repo.RoleEntityRepository;
+import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 //package com.airshiplay.play.main.security;
 //
@@ -24,20 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 //import org.springframework.stereotype.Service;
 //
-import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.main.entity.AuthorityEntity;
-import com.airshiplay.play.main.entity.MemberUserEntity;
-import com.airshiplay.play.main.entity.QAuthorityEntity;
-import com.airshiplay.play.main.entity.QRoleEntity;
-import com.airshiplay.play.main.entity.RoleEntity;
-import com.airshiplay.play.main.repo.AdminUserEntityRepository;
-import com.airshiplay.play.main.repo.AuthorityEntityRespository;
-import com.airshiplay.play.main.repo.MemberUserEntityRepository;
-import com.airshiplay.play.main.repo.RoleEntityRepository;
-import com.airshiplay.play.security.shiro.PlayShiroUserDetailsService;
 //import com.airshiplay.play.security.CustomUserDetails;
 //
-import com.google.common.collect.Sets;
 
 @Service
 public class ShiroUserDetailsService implements PlayShiroUserDetailsService {

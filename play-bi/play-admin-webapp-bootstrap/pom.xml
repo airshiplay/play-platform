@@ -21,7 +21,7 @@
 			<!--<version>${project.version}</version>-->
 		<!--</dependency>-->
 		<dependency>
-			<groupId>com.airshiplay</groupId>
+			<groupId>com.airlenet</groupId>
 			<artifactId>play-template-thymeleaf</artifactId>
 		</dependency>
 		<dependency>

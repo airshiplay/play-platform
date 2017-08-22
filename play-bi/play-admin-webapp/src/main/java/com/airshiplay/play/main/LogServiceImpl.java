@@ -1,17 +1,16 @@
 package com.airshiplay.play.main;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import com.airshiplay.play.main.api.LogService;
 import com.airshiplay.play.main.service.LogEntityService;
 import com.airshiplay.play.util.BrowserUtil;
 import com.airshiplay.play.util.IpUtil;
 import com.airshiplay.play.util.LogUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class LogServiceImpl implements LogService {

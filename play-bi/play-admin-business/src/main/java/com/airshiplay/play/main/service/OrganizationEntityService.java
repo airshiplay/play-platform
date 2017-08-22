@@ -1,8 +1,7 @@
 package com.airshiplay.play.main.service;
 
-import org.springframework.stereotype.Service;
-
 import com.airshiplay.play.main.entity.OrganizationEntity;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OrganizationEntityService extends HierarchicalEntityService<OrganizationEntity, Long> {

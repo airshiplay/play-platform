@@ -1,23 +1,15 @@
 package com.airshiplay.play.main.entity;
 
+import com.airlenet.play.repo.jpa.DataEntity;
+import com.airshiplay.play.repo.domain.Lockedable;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import com.airshiplay.play.repo.domain.Lockedable;
-import com.airshiplay.play.repo.jpa.DataEntity;
 
 @Entity
 @Table(name = "sys_role")

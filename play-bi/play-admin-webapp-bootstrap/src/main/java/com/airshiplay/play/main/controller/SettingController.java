@@ -1,7 +1,8 @@
 package com.airshiplay.play.main.controller;
 
-import javax.validation.Valid;
-
+import com.airshiplay.play.main.entity.SettingEntity;
+import com.airshiplay.play.main.service.SettingEntityService;
+import com.airshiplay.play.repo.domain.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.airshiplay.play.main.entity.SettingEntity;
-import com.airshiplay.play.main.service.SettingEntityService;
-import com.airshiplay.play.repo.domain.Result;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/center/setting")

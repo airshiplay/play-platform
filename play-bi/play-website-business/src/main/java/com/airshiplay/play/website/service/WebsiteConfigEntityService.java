@@ -1,12 +1,11 @@
 package com.airshiplay.play.website.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.airshiplay.play.main.service.EntityService;
 import com.airshiplay.play.website.entity.WebsiteConfigEntity;
 import com.airshiplay.play.website.repo.WebsiteConfigEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  * 网站配置

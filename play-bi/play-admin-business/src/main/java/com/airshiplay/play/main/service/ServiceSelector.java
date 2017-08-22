@@ -1,11 +1,10 @@
 package com.airshiplay.play.main.service;
 
-import java.util.List;
-
+import com.google.common.base.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.base.Objects;
+import java.util.List;
 
 @Component
 public class ServiceSelector {

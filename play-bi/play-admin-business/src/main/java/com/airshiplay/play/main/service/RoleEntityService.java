@@ -1,20 +1,18 @@
 package com.airshiplay.play.main.service;
 
-import javax.persistence.EntityManager;
-
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.entity.QAdminUserEntity;
+import com.airshiplay.play.main.entity.RoleEntity;
+import com.airshiplay.play.main.repo.AdminUserEntityRepository;
+import com.airshiplay.play.main.repo.RoleEntityRepository;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.main.entity.QAdminUserEntity;
-import com.airshiplay.play.main.entity.QRoleEntity;
-import com.airshiplay.play.main.entity.RoleEntity;
-import com.airshiplay.play.main.repo.AdminUserEntityRepository;
-import com.airshiplay.play.main.repo.RoleEntityRepository;
-import com.querydsl.core.types.Predicate;
+import javax.persistence.EntityManager;
 
 @Service
 public class RoleEntityService extends EntityService<RoleEntity, Long> {

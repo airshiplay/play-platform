@@ -1,7 +1,7 @@
 package com.airshiplay.website.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.airshiplay.play.repo.domain.Result;
+import com.airshiplay.play.security.shiro.authc.MemberUserToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.security.shiro.authc.MemberUserToken;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class SigninController extends BaseController {

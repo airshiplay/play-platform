@@ -1,8 +1,9 @@
 package com.airshiplay.play.main.service;
 
-import java.io.Serializable;
-import java.util.List;
-
+import com.airlenet.play.repo.jpa.BaseEntity;
+import com.airlenet.play.repo.jpa.BaseJpaRepository;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.domain.Page;
@@ -10,10 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Predicate;
-import com.airshiplay.play.repo.jpa.BaseEntity;
-import com.airshiplay.play.repo.jpa.BaseJpaRepository;
+import java.io.Serializable;
+import java.util.List;
 
 public abstract class EntityService<T extends BaseEntity<I>, I extends Serializable> {
 

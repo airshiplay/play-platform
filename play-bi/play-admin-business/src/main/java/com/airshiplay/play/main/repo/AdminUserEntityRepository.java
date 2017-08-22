@@ -1,11 +1,10 @@
 package com.airshiplay.play.main.repo;
 
+import com.airlenet.play.repo.jpa.BaseJpaRepository;
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.entity.QAdminUserEntity;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
-
-import com.airshiplay.play.main.entity.QAdminUserEntity;
-import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.repo.jpa.BaseJpaRepository;
 
 public interface AdminUserEntityRepository extends BaseJpaRepository<AdminUserEntity, Long>, QuerydslBinderCustomizer<QAdminUserEntity> {
 

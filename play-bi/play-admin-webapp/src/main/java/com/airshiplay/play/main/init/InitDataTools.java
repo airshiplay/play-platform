@@ -1,24 +1,19 @@
 package com.airshiplay.play.main.init;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.airshiplay.play.main.entity.AreaEntity;
 import com.airshiplay.play.main.entity.AreaEntity.AreaType;
 import com.airshiplay.play.main.entity.AuthorityEntity;
 import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.entity.SettingEntity;
-import com.airshiplay.play.main.service.AreaEntityService;
-import com.airshiplay.play.main.service.AuthorityEntityService;
-import com.airshiplay.play.main.service.DictEntityService;
-import com.airshiplay.play.main.service.MenuEntityService;
-import com.airshiplay.play.main.service.SettingEntityService;
+import com.airshiplay.play.main.service.*;
 import com.google.common.base.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Component
 public class InitDataTools {

@@ -1,11 +1,20 @@
 package com.airshiplay.play.main.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import com.airshiplay.play.main.api.LogService;
+import com.airshiplay.play.main.api.LogService.LogLevel;
+import com.airshiplay.play.main.api.LogService.OperateType;
+import com.airshiplay.play.main.entity.AdminUserEntity;
+import com.airshiplay.play.main.entity.MenuEntity;
+import com.airshiplay.play.main.service.MenuEntityService;
+import com.airshiplay.play.main.service.SettingEntityService;
+import com.airshiplay.play.repo.domain.Result;
+import com.airshiplay.play.repo.domain.Tree;
+import com.airshiplay.play.security.CurrentUser;
+import com.airshiplay.play.security.CustomUserDetails;
+import com.airshiplay.play.security.PlayPasswordService;
+import com.airshiplay.play.security.shiro.authc.AdminUserToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.octo.captcha.service.CaptchaService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,23 +28,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.airshiplay.play.main.api.LogService;
-import com.airshiplay.play.main.api.LogService.LogLevel;
-import com.airshiplay.play.main.api.LogService.OperateType;
-import com.airshiplay.play.main.entity.AdminUserEntity;
-import com.airshiplay.play.main.entity.MenuEntity;
-import com.airshiplay.play.main.service.MenuEntityService;
-import com.airshiplay.play.main.service.SettingEntityService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+
 //import com.airshiplay.play.plugin.oauth.model.OauthPlugin;
 //import com.airshiplay.play.plugin.oauth.service.OauthPluginService;
-import com.airshiplay.play.repo.domain.Result;
-import com.airshiplay.play.repo.domain.Tree;
-import com.airshiplay.play.security.CurrentUser;
-import com.airshiplay.play.security.CustomUserDetails;
-import com.airshiplay.play.security.PlayPasswordService;
-import com.airshiplay.play.security.shiro.authc.AdminUserToken;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.octo.captcha.service.CaptchaService;
 
 @Controller
 @RequestMapping

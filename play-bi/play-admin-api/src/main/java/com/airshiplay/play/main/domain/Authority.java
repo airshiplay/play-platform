@@ -1,12 +1,11 @@
 package com.airshiplay.play.main.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter

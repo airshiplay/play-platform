@@ -1,13 +1,9 @@
 package com.airshiplay.play.main.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import com.airlenet.play.repo.jpa.BaseEntity;
 
-import com.airshiplay.play.repo.jpa.BaseEntity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "sys_user_credentials")

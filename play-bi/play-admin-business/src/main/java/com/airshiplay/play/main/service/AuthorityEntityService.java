@@ -1,15 +1,14 @@
 package com.airshiplay.play.main.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.airshiplay.play.main.entity.AuthorityEntity;
 import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.QAuthorityEntity;
 import com.airshiplay.play.main.repo.AuthorityEntityRespository;
 import com.airshiplay.play.main.repo.RoleEntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AuthorityEntityService extends
