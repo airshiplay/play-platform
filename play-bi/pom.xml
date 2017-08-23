@@ -9,8 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <servlet-api.version>3.1.0</servlet-api.version>
-        <play.framework.version>1.0.0-SNAPSHOT</play.framework.version>
-        <play.module.version>1.0-SNAPSHOT</play.module.version>
+        <play.framework.version>1.0.0.RELEASE</play.framework.version>
         <validator-api.version>1.1.0.Final</validator-api.version>
         <querydsl.version>4.1.1</querydsl.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
@@ -30,27 +29,27 @@
             <dependency>
                 <groupId>com.airshiplay</groupId>
                 <artifactId>play-admin-api</artifactId>
-                <version>${play.module.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.airshiplay</groupId>
                 <artifactId>play-admin-business</artifactId>
-                <version>${play.module.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.airshiplay</groupId>
                 <artifactId>play-admin-webapp-bootstrap</artifactId>
-                <version>${play.module.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.airshiplay</groupId>
                 <artifactId>play-admin-webapp-bootstrap</artifactId>
-                <version>${play.module.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.airshiplay</groupId>
                 <artifactId>play-http-client</artifactId>
-                <version>${play.module.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.airlenet</groupId>
@@ -186,4 +185,14 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>ossrh</id>
+            <name>ossrh</name>
+            <url>https://oss.sonatype.org/service/local/repositories/releases/content/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
 </project>
