@@ -5,7 +5,9 @@
     <artifactId>play-parent</artifactId>
     <version>1.0.0.RELEASE</version>
     <packaging>pom</packaging>
-
+    <name>play-parent</name>
+    <url>https://github.com/airshiplay/play-platform</url>
+    <description>play-parent</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -347,6 +349,16 @@
         <name>airlenet</name>
         <url>airlenet.com</url>
     </organization>
+    <scm>
+        <connection>
+            scm:git:https://github.com/airshiplay/play-platform.git
+        </connection>
+        <developerConnection>
+            https://github.com/airshiplay/play-platform.git
+        </developerConnection>
+        <url>https://github.com/airshiplay/play-platform</url>
+        <tag>1.0.0.RELEASE</tag>
+    </scm>
     <profiles>
         <profile>
             <id>release</id>
