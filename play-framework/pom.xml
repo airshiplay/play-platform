@@ -38,6 +38,7 @@
         <module>play-file-storage</module>
         <module>play-websocket</module>
         <module>play-web-common</module>
+        <module>play-xml</module>
     </modules>
     <scm>
         <connection>

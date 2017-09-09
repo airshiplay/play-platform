@@ -7,6 +7,8 @@ import javax.xml.transform.Source;
 import com.airlenet.play.integration.webapp.querydsl.FilterPredicateArgumentResolver;
 import com.airlenet.play.repo.domain.PageRequestProxy;
 import com.airlenet.play.web.ServletSupport;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -54,6 +59,9 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 
 	@Autowired
 	private ObjectFactory<ObjectMapper> objectMapper;
+
+	@Autowired
+	private ObjectFactory<XmlMapper> xmlMapper;
 
 	private ApplicationContext applicationContext;
 
@@ -76,7 +84,10 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 		MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter(
 				objectMapper.getObject());
 		converters.add(jackson2HttpMessageConverter);
-//		httpMessageConverters().addAll(converters);
+		MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter = new MappingJackson2XmlHttpMessageConverter(
+				xmlMapper.getObject());
+		converters.add(mappingJackson2XmlHttpMessageConverter);
+		//		httpMessageConverters().addAll(converters);
 	}
 //
 //	@Bean(name="httpMessageConverters")
