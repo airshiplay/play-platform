@@ -17,17 +17,12 @@
     <dependencies>
         <dependency>
             <groupId>com.airlenet</groupId>
-            <artifactId>play-repo</artifactId>
+            <artifactId>play-repo-datasource</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.airlenet</groupId>
             <artifactId>play-json</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.airlenet</groupId>
-            <artifactId>play-security-shiro</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!--Mybatis -->

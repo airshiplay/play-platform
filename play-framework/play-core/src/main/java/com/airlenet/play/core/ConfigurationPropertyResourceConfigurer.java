@@ -20,6 +20,8 @@ import org.springframework.util.StringValueResolver;
 /**
  * 使用apache configuration作为spring的placeholder
  *
+ * @author airlenet
+ * @version 2016年3月1日 下午4:47:03
  */
 public class ConfigurationPropertyResourceConfigurer extends PlaceholderConfigurerSupport
 		implements EnvironmentAware {

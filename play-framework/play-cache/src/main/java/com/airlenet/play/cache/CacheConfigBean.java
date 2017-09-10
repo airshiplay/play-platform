@@ -10,12 +10,15 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.cache.interceptor.SimpleCacheErrorHandler;
 import org.springframework.cache.interceptor.SimpleCacheResolver;
 import org.springframework.cache.interceptor.SimpleKeyGenerator;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
-import com.airlenet.play.cache.infinispan.provider.SpringEmbeddedCacheManagerFactoryBean;
-
+/**
+ * 缓存配置
+ * 
+ * @author kongxiangxi
+ * @date 2017年4月23日 下午8:32:53
+ */
 @Configuration
 @EnableCaching
 public class CacheConfigBean implements CachingConfigurer {
@@ -25,20 +28,22 @@ public class CacheConfigBean implements CachingConfigurer {
 	@Value("${cacheConfigFile?:" + INFINISPAN_CONFIG + "}")
 	private String cacheConfigFileLocation;
 
-	@Bean
-	public SpringEmbeddedCacheManagerFactoryBean springEmbeddedCacheManagerFactoryBean() {
-		SpringEmbeddedCacheManagerFactoryBean cacheManagerFactoryBean = new SpringEmbeddedCacheManagerFactoryBean();
-		cacheManagerFactoryBean.setConfigurationFileLocation(new ClassPathResource(cacheConfigFileLocation));
-		return cacheManagerFactoryBean;
-	}
+//	@Bean
+//	public SpringEmbeddedCacheManagerFactoryBean springEmbeddedCacheManagerFactoryBean() {
+//		SpringEmbeddedCacheManagerFactoryBean cacheManagerFactoryBean = new SpringEmbeddedCacheManagerFactoryBean();
+//		cacheManagerFactoryBean.setConfigurationFileLocation(new ClassPathResource(cacheConfigFileLocation));
+//		return cacheManagerFactoryBean;
+//	}
 
 	@Override
 	public CacheManager cacheManager() {
-		try {
-			return springEmbeddedCacheManagerFactoryBean().getObject();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		 SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
+		 return simpleCacheManager;
+//		try {
+//			return springEmbeddedCacheManagerFactoryBean().getObject();
+//		} catch (Exception e) {
+//			throw new RuntimeException(e);
+//		}
 	}
 
 	@Override

@@ -13,12 +13,12 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import com.airlenet.play.repo.domain.Hierarchical;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.airlenet.play.repo.domain.Hierarchical;
 
 @MappedSuperclass
 @EntityListeners(value = { HierarchicalEntityListener.class })
-public class HierarchicalEntity<U, I extends Serializable, T> extends SortEntity<U, I>implements Hierarchical<T> {
+public class HierarchicalEntity<U, I extends Serializable, T> extends SortEntity<U, I> implements Hierarchical<T> {
 
 	private static final long serialVersionUID = 4795899175741576611L;
 
@@ -62,6 +62,14 @@ public class HierarchicalEntity<U, I extends Serializable, T> extends SortEntity
 
 	public void setTreePath(String treePath) {
 		this.treePath = treePath;
+	}
+
+	public boolean isLeaf() {
+		return children == null || children.size() == 0;
+	}
+
+	public boolean isRoot() {
+		return parent == null;
 	}
 
 }

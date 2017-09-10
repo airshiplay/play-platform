@@ -6,12 +6,12 @@ import java.util.HashMap;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import com.airlenet.play.core.SpringContext;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.SimpleType;
 import com.google.common.base.Strings;
+import com.airlenet.play.core.SpringContext;
 
 @Converter
 public class MapToJsonConverter implements AttributeConverter<Object, String> {

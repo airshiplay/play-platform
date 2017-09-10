@@ -2,7 +2,6 @@ package com.airlenet.play.integration.webapp.json;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.airlenet.play.repo.domain.Tree;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.AbstractMappingJack
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.google.common.base.Strings;
+import com.airlenet.play.repo.domain.Tree;
 
 import ch.mfrey.jackson.antpathfilter.AntPathPropertyFilter;
 
@@ -26,25 +26,29 @@ import ch.mfrey.jackson.antpathfilter.AntPathPropertyFilter;
 public class JsonResponseBodyAdvice extends AbstractMappingJacksonResponseBodyAdvice {
 
 	@Override
-	protected void beforeBodyWriteInternal(MappingJacksonValue bodyContainer, MediaType contentType, MethodParameter returnType, ServerHttpRequest request, ServerHttpResponse response) {
+	protected void beforeBodyWriteInternal(MappingJacksonValue bodyContainer, MediaType contentType, MethodParameter returnType, ServerHttpRequest request,
+			ServerHttpResponse response) {
 		Object value = bodyContainer.getValue();
 		if (value != null) {
 			HttpServletRequest httpRequest = ((ServletServerHttpRequest) request).getServletRequest();
 
 			// antpathfilter
 			FilterProvider filterProvider = null;
-			String pathFilter = httpRequest.getParameter("path_filter");
+
+			String pathFilter = returnType.hasMethodAnnotation(PathFilter.class) ? returnType.getMethodAnnotation(PathFilter.class).value()
+					: httpRequest.getParameter("path_filter");
 			if (!Strings.isNullOrEmpty(pathFilter)) {
 				filterProvider = new SimpleFilterProvider().addFilter("antPathFilter", new AntPathPropertyFilter(pathFilter.split(",")));
 			} else {
 				if (value instanceof Tree) {
-					filterProvider = new SimpleFilterProvider().addFilter("antPathFilter", new AntPathPropertyFilter(new String[] { "*", "*.*", "*.*.id", "*.*.name", "*.*.username", "*.*.nickname",
-							"*.*.title" }));
+					filterProvider = new SimpleFilterProvider().addFilter("antPathFilter",
+							new AntPathPropertyFilter(new String[] { "*", "*.*", "*.*.id", "*.*.name", "*.*.title", "*.*.fullName" }));
 				} else if (value instanceof Page) {
-					filterProvider = new SimpleFilterProvider().addFilter("antPathFilter", new AntPathPropertyFilter(new String[] { "*", "*.*", "*.*.id", "*.*.name", "*.*.username", "*.*.nickname",
-							"*.*.title" }));
+					filterProvider = new SimpleFilterProvider().addFilter("antPathFilter",
+							new AntPathPropertyFilter(new String[] { "*", "*.*", "*.*.id", "*.*.name", "*.*.title", "*.*.fullName" }));
 				} else {
-					filterProvider = new SimpleFilterProvider().addFilter("antPathFilter", new AntPathPropertyFilter(new String[] { "*", "*.*" }));
+					filterProvider = new SimpleFilterProvider().addFilter("antPathFilter",
+							new AntPathPropertyFilter(new String[] { "*", "*.id", "*.name", "*.title", "*.fullName" }));
 				}
 			}
 

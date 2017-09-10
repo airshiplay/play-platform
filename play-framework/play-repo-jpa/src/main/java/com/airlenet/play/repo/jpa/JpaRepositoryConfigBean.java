@@ -1,26 +1,31 @@
 package com.airlenet.play.repo.jpa;
 
-import com.airlenet.play.cache.CacheConfigBean;
-import com.airlenet.play.repo.jpa.json.JpaModule;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 import org.springframework.orm.hibernate5.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import javax.sql.DataSource;
-import java.util.Properties;
+import com.jolbox.bonecp.BoneCPDataSource;
+import com.airlenet.play.cache.CacheConfigBean;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.airshiplay","com.airlenet"}, includeFilters = {
+@EnableJpaRepositories(basePackages = { "com.airlenet" }, includeFilters = {
 		@Filter(value = BaseJpaRepository.class, type = FilterType.ASSIGNABLE_TYPE) }, repositoryImplementationPostfix = "Impl", repositoryFactoryBeanClass = CustomJpaRepositoryFactoryBean.class)
 @EnableJpaAuditing
 public class JpaRepositoryConfigBean {
@@ -28,7 +33,7 @@ public class JpaRepositoryConfigBean {
 	@Value("${jdbc.driver_class?:com.mysql.jdbc.Driver}")
 	private String jdbcDriverClass;
 
-	@Value("${jdbc.url?:jdbc:mysql://localhost:3306/play?useUnicode=true&characterEncoding=utf-8&useSSL=false}")
+	@Value("${jdbc.url?:jdbc:mysql://127.0.0.1:3306/play?useUnicode=true&characterEncoding=utf-8&useSSL=false}")
 	private String jdbcUrl;
 
 	@Value("${jdbc.username?:root}")
@@ -36,6 +41,8 @@ public class JpaRepositoryConfigBean {
 
 	@Value("${jdbc.password?:123456}")
 	private String jdbcPassword;
+
+
 
 	@Value("${hibernate.hbm2ddl.auto?:update}")
 	private String hibernateHbm2ddlAuto;
@@ -88,6 +95,9 @@ public class JpaRepositoryConfigBean {
 	@Value("${hibernate.cache.use_query_cache?:false}")
 	private String hibernateCacheUseQueryCache;
 
+	@Value("${jpa.packages_scan?:default}")
+	private String packageScan;
+
 	@Autowired
 	private DataSource dataSource;
 	@Bean
@@ -100,7 +110,7 @@ public class JpaRepositoryConfigBean {
 
 		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("com.airshiplay","com.airlenet");
+		factory.setPackagesToScan("com.airlenet", packageScan);
 		factory.setJpaDialect(new HibernateJpaDialect());
 
 		Properties jpaProperties = new Properties();
@@ -136,17 +146,20 @@ public class JpaRepositoryConfigBean {
 		return new HibernateExceptionTranslator();
 	}
 
-
-
-	@Bean
-	@Lazy
-	public JpaModule jpaModule() {
-		return new JpaModule();
-	}
-
 //	@Bean
 //	public DataSource dataSource() {
-//		return new LazyConnectionDataSourceProxy(mainDataSource());
+//		DataSource mainDataSource = mainDataSource();
+//		if (multipleDataSource) {
+//			Map<Object, Object> targetDataSources = new HashMap<>();
+//			targetDataSources.put("main", mainDataSource);
+//
+//			ThreadLocalDynamicDataSource dynamicDataSource = new ThreadLocalDynamicDataSource();
+//			dynamicDataSource.setTargetDataSources(targetDataSources);
+//			dynamicDataSource.setDefaultTargetDataSource(mainDataSource);
+//
+//			return dynamicDataSource;
+//		}
+//		return new LazyConnectionDataSourceProxy(mainDataSource);
 //	}
 //
 //	@Bean(destroyMethod = "close")
@@ -165,4 +178,5 @@ public class JpaRepositoryConfigBean {
 //		dataSource.setStatementsCacheSize(50);
 //		return dataSource;
 //	}
+
 }

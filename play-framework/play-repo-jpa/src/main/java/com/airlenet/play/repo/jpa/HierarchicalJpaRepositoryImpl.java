@@ -1,25 +1,20 @@
 package com.airlenet.play.repo.jpa;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import javax.persistence.EntityManager;
 
-import com.airlenet.play.repo.domain.Node;
-import com.airlenet.play.repo.domain.SortNoComparator;
-import com.airlenet.play.repo.domain.Tree;
-import com.airlenet.play.repo.domain.TreeImpl;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 
-import com.google.common.base.Objects;
 import com.querydsl.core.types.Predicate;
+import com.airlenet.play.repo.domain.Node;
+import com.airlenet.play.repo.domain.Tree;
+import com.airlenet.play.repo.domain.TreeHelper;
 
-public class HierarchicalJpaRepositoryImpl<T extends HierarchicalEntity<?, I, T>, I extends Serializable>
-		extends BaseJpaRepositoryImpl<T, I>implements HierarchicalJpaRepository<T, I> {
+public class HierarchicalJpaRepositoryImpl<T extends HierarchicalEntity<?, I, T>, I extends Serializable> extends BaseJpaRepositoryImpl<T, I>
+		implements HierarchicalJpaRepository<T, I> {
 
 	public HierarchicalJpaRepositoryImpl(JpaEntityInformation<T, I> entityInformation, EntityManager entityManager) {
 		super(entityInformation, entityManager);
@@ -37,54 +32,44 @@ public class HierarchicalJpaRepositoryImpl<T extends HierarchicalEntity<?, I, T>
 
 	@Override
 	public Tree<T> findTree(Predicate predicate) {
-		List<T> allChildren = findAll(predicate);
-		return toTree(null, allChildren);
+		return findTree(predicate, null);
 	}
 
 	@Override
 	public Tree<T> findByRoot(T root) {
 		List<T> allChildren = root == null ? findAll() : findAllChildren(root);
-		return toTree(root, allChildren);
+		return TreeHelper.toTree(root, allChildren);
 	}
 
 	@Override
-	public Tree<T> toTree(T current, List<T> nodes) {
-		Collections.sort(nodes, SortNoComparator.COMPARATOR);
-		List<Node<T>> directSubordinates = findDirectSubordinates(current, nodes);
-		if (current != null) {
-			Node<T> root = toNode(current, directSubordinates);
-			directSubordinates = new ArrayList<>();
-			directSubordinates.add(root);
-		}
-
-		Tree<T> tree = new TreeImpl<>(directSubordinates);
-		return tree;
+	public Tree<T> findTree(Predicate predicate, Node<T> singleRoot) {
+		List<T> allChildren = findAll(predicate);
+		return TreeHelper.toTree(null, allChildren, singleRoot);
 	}
 
-	protected void visitNodes(List<? extends Node<T>> nodes, Consumer<Node<T>> consumer) {
-		if (nodes != null) {
-			nodes.forEach((node) -> {
-				consumer.accept(node);
-				visitNodes(node.getChildren(), consumer);
-			});
-		}
-	}
+	@Override
+	public T sort(T source, T target, String action) {
+		switch (action) {
+		case "over":
+			source.setParent(target);
+			return save(source);
+		case "before":
+		case "after":
+			Integer sourceSortNo = source.getSortNo();
+			Integer targetSortNo = target.getSortNo();
 
-	protected List<Node<T>> findDirectSubordinates(T root, List<T> allChildren) {
-		List<Node<T>> nodes = new ArrayList<>();
-		for (T entity : allChildren) {
-			if (Objects.equal(entity.getParent(), root)) {
-				nodes.add(toNode(entity, findDirectSubordinates(entity, allChildren)));
-			}
-		}
-		return nodes;
-	}
+			T parent = target.getParent();
 
-	protected Node<T> toNode(T entity, List<Node<T>> children) {
-		Node<T> node = new Node<>();
-		node.setData(entity);
-		node.setChildren(children);
-		return node;
+			source.setSortNo(targetSortNo);
+			source.setParent(parent);
+			target.setSortNo(sourceSortNo);
+			save(target);
+			return save(source);
+		default:
+			break;
+		}
+
+		return source;
 	}
 
 }

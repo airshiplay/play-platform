@@ -16,6 +16,4 @@ public interface FileStorageService {
 	String convertToPath(String url);
 
 	File[] list(String dir, String path, String sorter);
-	
-	String getUploadDir();
 }

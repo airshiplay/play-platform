@@ -4,15 +4,12 @@ import java.util.List;
 
 import javax.xml.transform.Source;
 
-import com.airlenet.play.integration.webapp.querydsl.FilterPredicateArgumentResolver;
-import com.airlenet.play.repo.domain.PageRequestProxy;
-import com.airlenet.play.web.ServletSupport;
-import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -37,9 +34,7 @@ import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
-import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -48,6 +43,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.airlenet.play.core.PlayConstants;
+import com.airlenet.play.integration.webapp.mvc.RangeMethodArgumentResolver;
+import com.airlenet.play.integration.webapp.mvc.StringToDateConverter;
+import com.airlenet.play.integration.webapp.querydsl.FilterPredicateArgumentResolver;
+import com.airlenet.play.repo.domain.PageRequestProxy;
+import com.airlenet.play.web.ServletSupport;
 
 @ServletSupport
 @Configuration
@@ -63,6 +64,15 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 	@Autowired
 	private ObjectFactory<XmlMapper> xmlMapper;
 
+	@Value("${mvc.pageParameter?:page}")
+	private String pageParameterName;
+
+	@Value("${mvc.sizeParameter?:limit}")
+	private String sizeParameterName;
+
+	@Value("${mvc.oneIndexed?:true}")
+	private Boolean oneIndexed;
+
 	private ApplicationContext applicationContext;
 
 	@Override
@@ -70,7 +80,8 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 		super.configureMessageConverters(converters);
 
 		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-		stringConverter.setWriteAcceptCharset(false);
+		stringConverter.setWriteAcceptCharset(true);
+		stringConverter.setDefaultCharset(PlayConstants.charset);
 
 		converters.add(new ByteArrayHttpMessageConverter());
 		converters.add(stringConverter);
@@ -81,24 +92,18 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-		MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter(
-				objectMapper.getObject());
+		MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter(objectMapper.getObject());
 		converters.add(jackson2HttpMessageConverter);
 		MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter = new MappingJackson2XmlHttpMessageConverter(
 				xmlMapper.getObject());
 		converters.add(mappingJackson2XmlHttpMessageConverter);
-		//		httpMessageConverters().addAll(converters);
 	}
-//
-//	@Bean(name="httpMessageConverters")
-//	public List<HttpMessageConverter<?>> httpMessageConverters(){
-//		return new ArrayList<HttpMessageConverter<?>>();
-//	}
-	
+
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addFormatter(DistanceFormatter.INSTANCE);
 		registry.addFormatter(PointFormatter.INSTANCE);
+		registry.addConverter(new StringToDateConverter());
 
 		if (!(registry instanceof FormattingConversionService)) {
 			return;
@@ -106,8 +111,7 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 
 		FormattingConversionService conversionService = (FormattingConversionService) registry;
 
-		DomainClassConverter<FormattingConversionService> converter = new DomainClassConverter<FormattingConversionService>(
-				conversionService);
+		DomainClassConverter<FormattingConversionService> converter = new DomainClassConverter<FormattingConversionService>(conversionService);
 		converter.setApplicationContext(applicationContext);
 	}
 
@@ -116,30 +120,30 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 		argumentResolvers.add(sortResolver());
 		argumentResolvers.add(pageableResolver());
 
-		ProxyingHandlerMethodArgumentResolver resolver = new ProxyingHandlerMethodArgumentResolver(
-				conversionService.getObject());
+		ProxyingHandlerMethodArgumentResolver resolver = new ProxyingHandlerMethodArgumentResolver(conversionService.getObject());
 		resolver.setBeanFactory(applicationContext);
 		resolver.setBeanClassLoader(applicationContext.getClassLoader());
 
 		argumentResolvers.add(resolver);
 
 		argumentResolvers.add(0, querydslPredicateArgumentResolver());
+
+		RangeMethodArgumentResolver<?> rangeArgumentResolver = new RangeMethodArgumentResolver<>(conversionService.getObject());
+		argumentResolvers.add(rangeArgumentResolver);
 	}
 
 	@Bean
 	public PageableHandlerMethodArgumentResolver pageableResolver() {
-		PageableHandlerMethodArgumentResolver pageableHandlerMethodArgumentResolver = new PageableHandlerMethodArgumentResolver(
-				sortResolver()) {
+		PageableHandlerMethodArgumentResolver pageableHandlerMethodArgumentResolver = new PageableHandlerMethodArgumentResolver(sortResolver()) {
 			@Override
-			public Pageable resolveArgument(MethodParameter methodParameter, ModelAndViewContainer mavContainer,
-					NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
+			public Pageable resolveArgument(MethodParameter methodParameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
 				Pageable pageable = super.resolveArgument(methodParameter, mavContainer, webRequest, binderFactory);
 				return new PageRequestProxy(pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort());
 			}
 		};
-		pageableHandlerMethodArgumentResolver.setPageParameterName("page");
-		pageableHandlerMethodArgumentResolver.setOneIndexedParameters(true);
-		pageableHandlerMethodArgumentResolver.setSizeParameterName("limit");
+		pageableHandlerMethodArgumentResolver.setPageParameterName(pageParameterName);
+		pageableHandlerMethodArgumentResolver.setOneIndexedParameters(oneIndexed);
+		pageableHandlerMethodArgumentResolver.setSizeParameterName(sizeParameterName);
 		return pageableHandlerMethodArgumentResolver;
 	}
 
@@ -150,15 +154,13 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 
 	@Bean
 	public FilterPredicateArgumentResolver querydslPredicateArgumentResolver() {
-		return new FilterPredicateArgumentResolver(querydslBindingsFactory(), conversionService.getObject(),
-				objectMapper.getObject());
+		return new FilterPredicateArgumentResolver(querydslBindingsFactory(), conversionService.getObject(), objectMapper.getObject());
 	}
 
 	@Lazy
 	@Bean
 	public QuerydslBindingsFactory querydslBindingsFactory() {
-		QuerydslBindingsFactory querydslBindingsFactory = new QuerydslBindingsFactory(
-				SimpleEntityPathResolver.INSTANCE);
+		QuerydslBindingsFactory querydslBindingsFactory = new QuerydslBindingsFactory(SimpleEntityPathResolver.INSTANCE);
 		querydslBindingsFactory.setApplicationContext(applicationContext);
 		return querydslBindingsFactory;
 	}
@@ -167,5 +169,5 @@ public class WebAppConfigBean extends WebMvcConfigurerAdapter implements Applica
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}
-
+	
 }

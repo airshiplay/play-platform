@@ -17,18 +17,20 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>4.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>4.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.octo.captcha</groupId>
 			<artifactId>jcaptcha</artifactId>
 			<version>1.0</version>
 			<exclusions>
+				<exclusion>
+					<groupId>com.jhlabs</groupId>
+		    		<artifactId>imaging</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>

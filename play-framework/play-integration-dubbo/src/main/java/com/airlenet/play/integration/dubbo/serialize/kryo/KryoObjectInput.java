@@ -19,11 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 
-import com.airlenet.play.integration.dubbo.serialize.Cleanable;
 import com.alibaba.dubbo.common.serialize.ObjectInput;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.KryoException;
 import com.esotericsoftware.kryo.io.Input;
+import com.airlenet.play.integration.dubbo.serialize.Cleanable;
 
 /**
  * @author lishen
@@ -109,7 +109,6 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     }
 
     public String readUTF() throws IOException {
-        // TODO
         try {
 //            return kryo.readObject(input, String.class);
             return input.readString();
@@ -119,7 +118,6 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
     }
 
     public Object readObject() throws IOException, ClassNotFoundException {
-        // TODO
 //        throw new UnsupportedOperationException();
         try {
             return kryo.readClassAndObject(input);
@@ -131,7 +129,6 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
 
     @SuppressWarnings("unchecked")
     public <T> T readObject(Class<T> clazz) throws IOException, ClassNotFoundException {
-        // TODO optimization
 //            try {
 //                return (T) kryo.readClassAndObject(input);
 //            } catch (KryoException e) {
@@ -146,7 +143,6 @@ public class KryoObjectInput implements ObjectInput, Cleanable {
 //            } catch (KryoException e) {
 //                throw new IOException(e);
 //            }
-        // TODO optimization
         return (T) readObject(clazz);
     }
 

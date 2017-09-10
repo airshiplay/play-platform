@@ -1,62 +1,56 @@
 package com.airlenet.play.repo.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 public class Result {
 
+	private static Result init() {
+		return new Result();
+	}
+
 	public static Result success() {
-		return new Result().code(ResultCode.success).message(
-				ResultCode.success.getMessage());
+		return init().code(ResultCode.success).message(ResultCode.success.getMessage());
 	}
 
 	public static Result failure() {
-		return new Result().code(ResultCode.failure).message(
-				ResultCode.failure.getMessage());
+		return init().code(ResultCode.failure).message(ResultCode.failure.getMessage());
 	}
 
-	public static Result error() {
-		return new Result().code(ResultCode.error).message(
-				ResultCode.error.getMessage());
-	}
-	
 	public static Result validateError() {
-		return new Result().code(ResultCode.validateError).message(
-				ResultCode.validateError.getMessage());
+		return init().code(ResultCode.validateError).message(ResultCode.validateError.getMessage());
 	}
 
 	public static Result accessDenide() {
-		return new Result().code(ResultCode.accessDenide).message(
-				ResultCode.accessDenide.getMessage());
+		return init().code(ResultCode.accessDenide).message(ResultCode.accessDenide.getMessage());
 	}
 
 	public static Result notLogin() {
-		return new Result().code(ResultCode.notLogin).message(
-				ResultCode.notLogin.getMessage());
+		return init().code(ResultCode.notLogin).message(ResultCode.notLogin.getMessage());
 	}
 
 	public static Result exception() {
-		return new Result().code(ResultCode.exception).message(
-				ResultCode.exception.getMessage());
+		return init().code(ResultCode.exception).message(ResultCode.exception.getMessage());
 	}
-	public static Result locked() {
-		return new Result().code(ResultCode.locked).message(
-				ResultCode.locked.getMessage());
-	}
+
 	public static Result unknown() {
-		return new Result().code(ResultCode.unknown).message(
-				ResultCode.unknown.getMessage());
+		return init().code(ResultCode.unknown).message(ResultCode.unknown.getMessage());
 	}
 
 	public static Result captchaError() {
-		return new Result().code(ResultCode.captchaError).message(
-				ResultCode.captchaError.getMessage());
+		return init().code(ResultCode.captchaError).message(ResultCode.captchaError.getMessage());
 	}
 
 	private ResultCode code;
 	private String message;
 
 	private Map<String, Object> extraProperties = new HashMap<>();
+	private List<ObjectError> errors = new ArrayList<>();
 
 	public ResultCode getCode() {
 		return code;
@@ -79,10 +73,12 @@ public class Result {
 	public Map<String, Object> getExtraProperties() {
 		return extraProperties;
 	}
-
 	public Result addContent(Object value) {
 		this.extraProperties.put("content", value);
 		return this;
+	}
+	public List<ObjectError> getErrors() {
+		return errors;
 	}
 
 	public Result addProperties(String key, Object value) {
@@ -92,6 +88,21 @@ public class Result {
 
 	public Result extraProperties(Map<String, Object> extraProperties) {
 		this.extraProperties = extraProperties;
+		return this;
+	}
+
+	public Result error(List<ObjectError> errors) {
+		this.errors = errors;
+		return this;
+	}
+
+	public Result error(String objectName, String defaultMessage) {
+		this.errors.add(new ObjectError(objectName, defaultMessage));
+		return this;
+	}
+
+	public Result error(String objectName, String field, String defaultMessage) {
+		this.errors.add(new FieldError(objectName, field, defaultMessage));
 		return this;
 	}
 

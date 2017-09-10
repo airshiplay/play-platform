@@ -64,11 +64,7 @@ public class Node<T extends Hierarchical<T>> {
 	}
 
 	public void setExpanded(Boolean expanded) {
-		if(!getLeaf()){
-			this.expanded = expanded;
-		}else{
-			this.expanded = false;
-		}		
+		this.expanded = expanded;
 	}
 
 }

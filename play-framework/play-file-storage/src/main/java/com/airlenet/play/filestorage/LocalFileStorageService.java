@@ -18,9 +18,9 @@ import com.google.common.io.Files;
 @Component
 public class LocalFileStorageService implements FileStorageService {
 
-	@Value("${file.server_host?:127.0.0.1:8080}")
+	@Value("${file.server_host?:http://127.0.0.1:8080}")
 	private String fileServerHost;
-
+ 
 	@Value("${file.upload_dir?:/home/website/upload}")
 	private String uploadDir;
 
@@ -65,15 +65,15 @@ public class LocalFileStorageService implements FileStorageService {
 	@Override
 	public String convertToUrl(String path) {
 		path = StringUtils.removeStart(path, uploadDir);
-		if (!path.endsWith("/")) {
+		if (!path.startsWith("/")) {
 			path = "/" + path;
 		}
-		return "http://" + fileServerHost + "/upload" + path;
+		return fileServerHost + "/upload" + path;
 	}
 
 	@Override
 	public String convertToPath(String url) {
-		url = StringUtils.removeStart(url, "http://" + fileServerHost + "/upload");
+		url = StringUtils.removeStart(url, fileServerHost + "/upload");
 		return uploadDir + url;
 	}
 
@@ -87,11 +87,6 @@ public class LocalFileStorageService implements FileStorageService {
 		}
 
 		return currentPathFile.listFiles();
-	}
-
-	@Override
-	public String getUploadDir() {
-		return uploadDir;
 	}
 
 }

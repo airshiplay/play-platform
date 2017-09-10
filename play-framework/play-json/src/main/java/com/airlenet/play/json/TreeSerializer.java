@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import com.airlenet.play.repo.domain.Node;
-import com.airlenet.play.repo.domain.Tree;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.google.common.base.Objects;
+import com.airlenet.play.repo.domain.Node;
+import com.airlenet.play.repo.domain.Tree;
 
 public class TreeSerializer<T extends Tree<?>> extends JsonSerializer<T> {
 

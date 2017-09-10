@@ -25,7 +25,6 @@ import com.alibaba.dubbo.common.serialize.ObjectOutput;
 import com.airlenet.play.integration.dubbo.serialize.OptimizedSerialization;
 
 /**
- * TODO for now kryo serialization doesn't deny classes that don't implement the serializable interface
  *
  * @author lishen
  */

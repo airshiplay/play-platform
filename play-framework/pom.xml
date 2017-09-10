@@ -3,11 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.airlenet</groupId>
-        <artifactId>play-parent</artifactId>
-        <version>1.0.0.RELEASE</version>
-        <relativePath>./play-parent/pom.xml</relativePath>
+        <artifactId>play-platform</artifactId>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
-    <version>1.1.0-SNAPSHOT</version>
     <artifactId>play-framework</artifactId>
     <packaging>pom</packaging>
     <modules>
@@ -31,14 +29,12 @@
         <module>play-template-tiles</module>
         <module>play-template-velocity</module>
         <module>play-web</module>
-        <module>play-web-extjs</module>
-        <module>play-web-requirejs</module>
         <module>play-repo-redis</module>
         <module>play-util</module>
         <module>play-file-storage</module>
-        <module>play-websocket</module>
         <module>play-web-common</module>
         <module>play-xml</module>
+        <module>play-repo-datasource</module>
     </modules>
     <scm>
         <connection>

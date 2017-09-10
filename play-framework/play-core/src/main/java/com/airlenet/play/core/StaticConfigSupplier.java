@@ -19,7 +19,7 @@ import com.google.common.base.Preconditions;
 
 /**
  * 静态配置，可覆盖，可引入xml、plist、properties类型的配置文件
- *
+ * 
  *
  * 2016年3月1日 下午4:47:40
  */
@@ -55,20 +55,28 @@ public class StaticConfigSupplier {
 				for (String configLocation : _configLocations) {
 					AbstractConfiguration subConfig = null;
 
+					String path = "";
+					
+					if(StringUtils.startsWith(configLocation, "file:")) {
+						path = StringUtils.removeStart(configLocation, "file:");
+					} else {
+						path = new ClassPathResource(configLocation).getPath();
+					}
+					
 					if (StringUtils.endsWith(configLocation, ".xml")) {
-						subConfig = new XMLConfiguration(new ClassPathResource(configLocation).getPath());
+						subConfig = new XMLConfiguration(path);
 
 					} else if (StringUtils.endsWith(configLocation, ".plist")) {
-						subConfig = new PropertyListConfiguration(new ClassPathResource(configLocation).getPath());
+						subConfig = new PropertyListConfiguration(path);
 
 					} else if (StringUtils.endsWith(configLocation, ".properties")) {
-						subConfig = new PropertiesConfiguration(new ClassPathResource(configLocation).getPath());
+						subConfig = new PropertiesConfiguration(path);
 
 					} else {
 						throw new IllegalStateException("unsupport configuration file type '"
 								+ FilenameUtils.getExtension(configLocation) + '"');
 					}
-
+					
 					if (subConfig instanceof FileConfiguration) {
 						((FileConfiguration) subConfig).setAutoSave(false);
 					}

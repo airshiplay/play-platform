@@ -33,10 +33,10 @@ import com.octo.captcha.service.multitype.GenericManageableCaptchaService;
 public class CaptchaConfigBean {
 
 	public static final String CAPTCHA_FILTER_NAME = "captchaFilter";
-
+	
 	@Bean(name = CAPTCHA_FILTER_NAME)
 	public CaptchaFilter captchaFilter(ObjectMapper objectMapper) {
-		return new CaptchaFilter(captchaService(), "captcha", objectMapper);
+		return new CaptchaFilter(captchaService(), "captcha", objectMapper, true);
 	}
 
 	@Bean

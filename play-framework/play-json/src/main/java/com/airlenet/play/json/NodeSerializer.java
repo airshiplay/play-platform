@@ -4,18 +4,32 @@ import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.util.List;
 
-import com.airlenet.play.repo.domain.Hierarchical;
-import com.airlenet.play.repo.domain.Node;
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.ClassUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.airlenet.play.core.StaticConfigSupplier;
+import com.airlenet.play.repo.domain.Hierarchical;
+import com.airlenet.play.repo.domain.Node;
 
 public class NodeSerializer<N extends Node<T>, T extends Hierarchical<T>> extends JsonSerializer<N> {
+
+	private String textPropertyName;
+	private String checkedPropertyName;
+	private String childrenPropertyName;
+
+	public NodeSerializer() {
+		Configuration configuration = StaticConfigSupplier.getConfiguration();
+		textPropertyName = configuration.getString("tree.node.text_property", "text");
+		checkedPropertyName = configuration.getString("tree.node.checked_property", "checked");
+		childrenPropertyName = configuration.getString("tree.node.children_property", "children");
+	}
 
 	@Override
 	public void serialize(N value, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
@@ -27,8 +41,7 @@ public class NodeSerializer<N extends Node<T>, T extends Hierarchical<T>> extend
 		gen.writeStartObject();
 
 		if (value.getText() != null) {
-			gen.writeStringField("text", value.getText());
-			gen.writeStringField("title", value.getText());
+			gen.writeStringField(textPropertyName, value.getText());
 		}
 
 		if (value.getIconCls() != null) {
@@ -36,32 +49,37 @@ public class NodeSerializer<N extends Node<T>, T extends Hierarchical<T>> extend
 		}
 
 		if (value.getChildren() != null && value.getChildren().size() > 0) {
-			gen.writeFieldName("children");
+			gen.writeFieldName(childrenPropertyName);
 			serializers.findValueSerializer(List.class, null).serialize(value.getChildren(), gen, serializers);
 		}
 
 		gen.writeBooleanField("leaf", value.getLeaf());
-        
-        gen.writeBooleanField("folder", !value.getLeaf());
+
+		T data = value.getData();
 
 		if (value.getChecked() != null) {
-			gen.writeBooleanField("checked", value.getChecked());
+			if (data instanceof Persistable) {
+				if (((Persistable<?>) data).getId() != null) {
+					gen.writeBooleanField(checkedPropertyName, value.getChecked());
+				}
+			} else {
+				gen.writeBooleanField(checkedPropertyName, value.getChecked());
+			}
 		}
 
 		if (value.getExpanded() != null) {
 			gen.writeBooleanField("expanded", value.getExpanded());
 		}
 
-		T data = value.getData();
 		if (data != null) {
 			BeanWrapperImpl beanWrapperImpl = new BeanWrapperImpl(data);
 
 			for (PropertyDescriptor propertyDescriptor : beanWrapperImpl.getPropertyDescriptors()) {
 				String propertyName = propertyDescriptor.getName();
 				Class<?> propertyType = propertyDescriptor.getPropertyType();
-				if (!ClassUtils.isAssignable(Iterable.class, propertyType) && !ArrayUtils.contains(
-						new String[] { "class", "new", "children", "parent", "leaf", "checked", "iconCls", "expanded", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate" },
-						propertyName)) {
+				if (!ClassUtils.isAssignable(Iterable.class, propertyType)
+						&& !ArrayUtils.contains(new String[] { "class", "new", "children", "parent", "leaf", "checked", "iconCls", "expanded",
+								"createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate" }, propertyName)) {
 					Object propertyValue = beanWrapperImpl.getPropertyValue(propertyName);
 
 					if (propertyValue != null) {
