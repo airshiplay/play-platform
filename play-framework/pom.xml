@@ -18,6 +18,7 @@
         <module>play-integration-webapp</module>
         <module>play-json</module>
         <module>play-repo</module>
+        <module>play-repo-datasource</module>
         <module>play-repo-jpa</module>
         <module>play-repo-mongo</module>
         <module>play-repo-mybatis</module>
@@ -32,9 +33,7 @@
         <module>play-repo-redis</module>
         <module>play-util</module>
         <module>play-file-storage</module>
-        <module>play-web-common</module>
         <module>play-xml</module>
-        <module>play-repo-datasource</module>
     </modules>
     <scm>
         <connection>
