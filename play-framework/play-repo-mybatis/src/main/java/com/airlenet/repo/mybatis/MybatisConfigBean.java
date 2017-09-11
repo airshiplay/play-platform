@@ -16,12 +16,12 @@ import java.util.Properties;
 
 @Configuration
 //@MapperScan({"com.airshiplay.play.*.mapper","com.airlenet.play.*.mapper"})
-@MapperScanner(basePackages ={"${mybatis.mapperScanner.basePackage?:com.airlenet.play.*.mapper}"}, sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScanner(basePackages ={"${mybatis.mapperScanner.basePackage?:com.airlenet.**.mapper}"}, sqlSessionFactoryRef = "sqlSessionFactory")
 public class MybatisConfigBean {
-    @Value("${mybatis.packages_scan?:default}")
+    @Value("${mybatis.packages_scan?:com.airlenet.**.model}")
     private String packageScan;
 
-    @Value("${mybatis.packages_mapper?:default}")
+    @Value("${mybatis.packages_mapper?:classpath*:com.airlenet.**.mapper/*.xml,classpath*:mapper/*.xml}")
     private String mapperScan;
 
     @Autowired
@@ -32,8 +32,8 @@ public class MybatisConfigBean {
         org.mybatis.spring.SqlSessionFactoryBean factory = new org.mybatis.spring.SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
         FileSystemXmlApplicationContext loader = new FileSystemXmlApplicationContext();
-        factory.setMapperLocations(loader.getResources("classpath*:com.airlenet.play.*.mapper/*.xml,classpath*:mapper/*.xml,"+mapperScan));
-        factory.setTypeAliasesPackage("com.airlenet.play.*.model,"+packageScan);
+        factory.setMapperLocations(loader.getResources(mapperScan));
+        factory.setTypeAliasesPackage(packageScan);
         com.github.pagehelper.PageHelper pageHelper = new com.github.pagehelper.PageHelper();
         Properties properties = new Properties();
         properties.setProperty("dialect", "mysql");
