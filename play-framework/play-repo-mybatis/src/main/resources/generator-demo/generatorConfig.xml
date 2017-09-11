@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- 各项目特定表生成实体 -->
+<generatorConfiguration>
+    <!-- <classPathEntry location=""/> -->
+    <properties resource="generator/generatorConfig.properties"/>
+    <!-- need classPathEntry when using eclipse plugin generator -->
+    <!-- <classPathEntry location="${jdbc.driver.jar}" /> MyBatis3Simple-->
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="autoDelimitKeywords" value="true"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="suppressJavaInterface" value="false"/>
+        </plugin>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+        <plugin type="com.airlenet.plugins.mybatis.MySQLLimitPlugin"></plugin>
+
+        <!-- 不去除自动生成的注释 否则每次加字段都要删掉4个相关文件后重新生成 -->
+        <commentGenerator type="com.airlenet.plugins.mybatis.PlayCommentGenerator">
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="false"/>
+            <!-- 是否生成注释代时间戳 -->
+            <property name="suppressDate" value="true"/>
+            <property name="columnRemarks" value="true"/>
+            <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}"/>
+
+        <!-- parameter configuration -->
+        <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <!-- 是否使用BigDecimal，false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+        <javaModelGenerator targetPackage="${targetPackage}.model"
+                            targetProject="src/main/java">
+            <!-- 是否在当前路径下新加一层schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否针对String类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--对应的xml mapper文件 -->
+        <sqlMapGenerator targetPackage="${targetPackage}.mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 对应的dao接口 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${targetPackage}.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 实体名请严格按照表名来，按表名排序 -->
+        <table schema="${jdbc.username}" tableName="%">
+            <!-- <property name="ignoreQualifiersAtRuntime" value="true" /> -->
+            <property name="useActualColumnNames" value="true"/>
+            <property name="delimitAllColumns" value="true"/>
+            <property name="delimitIdentifiers" value="true"/>
+            <generatedKey column="id" sqlStatement="mysql" identity="true"/>
+        </table>
+        <!-- <table schema="media" tableName="%"> <property name="useActualColumnNames"
+            value="true" /> <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"
+            identity="true" /> </table> -->
+        <!-- <table schema="media" tableName="da_ocs_class" domainObjectName="OcsClass">
+            <property name="useActualColumnNames" value="true" /> <generatedKey column="id"
+            sqlStatement="SELECT LAST_INSERT_ID()" identity="true" /> </table> -->
+    </context>
+</generatorConfiguration>
