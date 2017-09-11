@@ -1,8 +1,8 @@
 package com.airlenet.xml;
 
-import com.airlenet.play.repo.domain.Node;
-import com.airlenet.play.repo.domain.Result;
-import com.airlenet.play.repo.domain.Tree;
+import com.airlenet.repo.domain.Node;
+import com.airlenet.repo.domain.Result;
+import com.airlenet.repo.domain.Tree;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;

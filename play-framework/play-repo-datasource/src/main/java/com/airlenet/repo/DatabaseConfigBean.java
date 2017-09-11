@@ -27,8 +27,10 @@ public class DatabaseConfigBean {
 
     @Value("${jdbc.password?:123456}")
     private String jdbcPassword;
+
     @Value("${jdbc.multiple?:false}")
     private Boolean multipleDataSource;
+
     @Bean
     public DataSource dataSource() {
         DataSource mainDataSource = mainDataSource();

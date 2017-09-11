@@ -35,10 +35,12 @@
 		<module>play-repo</module>
 		<module>play-repo-datasource</module>
 		<module>play-security</module>
+		<module>play-security-shiro</module>
 		<module>play-web</module>
 		<module>play-cache</module>
-		<module>play-repo-jpa</module>
 		<module>play-template-thymeleaf</module>
+		<module>play-repo-jpa</module>
+		<module>play-repo-mybatis</module>
 		<module>play-repo-mongo</module>
 		<module>play-repo-redis</module>
 	</modules>

@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -27,21 +28,6 @@ import com.jolbox.bonecp.BoneCPDataSource;
 		@Filter(value = EntityRepository.class, type = FilterType.ASSIGNABLE_TYPE) }, repositoryImplementationPostfix = "Impl", repositoryFactoryBeanClass = EntityRepositoryFactoryBean.class)
 @EnableJpaAuditing
 public class JpaRepositoryConfigBean {
-
-	@Value("${jdbc.driver_class?:com.mysql.jdbc.Driver}")
-	private String jdbcDriverClass;
-
-	@Value("${jdbc.url?:jdbc:mysql://127.0.0.1:3306/mdm?useUnicode=true&characterEncoding=utf-8&useSSL=false}")
-	private String jdbcUrl;
-
-	@Value("${jdbc.username?:root}")
-	private String jdbcUsername;
-
-	@Value("${jdbc.password?:M_sql5535y19}")
-	private String jdbcPassword;
-
-	@Value("${jdbc.multiple?:false}")
-	private Boolean multipleDataSource;
 
 	@Value("${hibernate.hbm2ddl.auto?:update}")
 	private String hibernateHbm2ddlAuto;
@@ -91,6 +77,8 @@ public class JpaRepositoryConfigBean {
 	@Value("${jpa.packages_scan?:com.airlenet}")
 	private String packageScan;
 
+	@Autowired
+	private DataSource dataSource;
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -99,7 +87,7 @@ public class JpaRepositoryConfigBean {
 		vendorAdapter.setGenerateDdl(Boolean.TRUE);
 		vendorAdapter.setShowSql(Boolean.TRUE);
 
-		factory.setDataSource(dataSource());
+		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan(packageScan.split(","));
 		factory.setJpaDialect(new HibernateJpaDialect());
@@ -138,37 +126,37 @@ public class JpaRepositoryConfigBean {
 		return new HibernateExceptionTranslator();
 	}
 
-	@Bean
-	public DataSource dataSource() {
-		DataSource mainDataSource = mainDataSource();
-		if (multipleDataSource) {
-			Map<Object, Object> targetDataSources = new HashMap<>();
-			targetDataSources.put("main", mainDataSource);
-
-			ThreadLocalDynamicDataSource dynamicDataSource = new ThreadLocalDynamicDataSource();
-			dynamicDataSource.setTargetDataSources(targetDataSources);
-			dynamicDataSource.setDefaultTargetDataSource(mainDataSource);
-
-			return dynamicDataSource;
-		}
-		return new LazyConnectionDataSourceProxy(mainDataSource);
-	}
-
-	@Bean(destroyMethod = "close")
-	public DataSource mainDataSource() {
-		BoneCPDataSource dataSource = new BoneCPDataSource();
-		dataSource.setDriverClass(jdbcDriverClass);
-		dataSource.setJdbcUrl(jdbcUrl);
-		dataSource.setUsername(jdbcUsername);
-		dataSource.setPassword(jdbcPassword);
-		dataSource.setIdleConnectionTestPeriodInMinutes(2);
-		dataSource.setIdleMaxAge(2, TimeUnit.HOURS);
-		dataSource.setMaxConnectionsPerPartition(20);
-		dataSource.setMinConnectionsPerPartition(2);
-		dataSource.setPartitionCount(3);
-		dataSource.setAcquireIncrement(3);
-		dataSource.setStatementsCacheSize(10);
-		return dataSource;
-	}
+//	@Bean
+//	public DataSource dataSource() {
+//		DataSource mainDataSource = mainDataSource();
+//		if (multipleDataSource) {
+//			Map<Object, Object> targetDataSources = new HashMap<>();
+//			targetDataSources.put("main", mainDataSource);
+//
+//			ThreadLocalDynamicDataSource dynamicDataSource = new ThreadLocalDynamicDataSource();
+//			dynamicDataSource.setTargetDataSources(targetDataSources);
+//			dynamicDataSource.setDefaultTargetDataSource(mainDataSource);
+//
+//			return dynamicDataSource;
+//		}
+//		return new LazyConnectionDataSourceProxy(mainDataSource);
+//	}
+//
+//	@Bean(destroyMethod = "close")
+//	public DataSource mainDataSource() {
+//		BoneCPDataSource dataSource = new BoneCPDataSource();
+//		dataSource.setDriverClass(jdbcDriverClass);
+//		dataSource.setJdbcUrl(jdbcUrl);
+//		dataSource.setUsername(jdbcUsername);
+//		dataSource.setPassword(jdbcPassword);
+//		dataSource.setIdleConnectionTestPeriodInMinutes(2);
+//		dataSource.setIdleMaxAge(2, TimeUnit.HOURS);
+//		dataSource.setMaxConnectionsPerPartition(20);
+//		dataSource.setMinConnectionsPerPartition(2);
+//		dataSource.setPartitionCount(3);
+//		dataSource.setAcquireIncrement(3);
+//		dataSource.setStatementsCacheSize(10);
+//		return dataSource;
+//	}
 
 }
