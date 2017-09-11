@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 	<name>The Play Platform</name>
 	<description>A java framework with spring, spring-mvc, spring-data.</description>
-
+	<url>https://github.com/airshiplay/play-platform</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
@@ -32,11 +32,23 @@
 		<httpmime.version>4.5.3</httpmime.version>
 		<querydsl.version>4.1.4</querydsl.version>
 		<junit.version>4.12</junit.version>
+        <lombok.version>1.16.10</lombok.version>
 	</properties>
-
+	<modules>
+		<module>play-framework</module>
+		<module>play-integration</module>
+		<module>play-themes</module>
+		<module>play-plugins</module>
+		<module>play-thirdparty</module>
+	</modules>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${servlet-api.version}</version>
@@ -288,22 +300,151 @@
 		</plugins>
 	</build>
 
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <name>Spring</name>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+        <repository>
+            <id>repo2</id>
+            <name>Human Readable Name for this Mirror.</name>
+            <url>http://repo2.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>io.spring.repo.maven.release</id>
+            <url>http://repo.spring.io/release/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 	<developers>
 		<developer>
-			<id>ken</id>
-			<name>airlenet</name>
-			<email>ken@whenling.com</email>
+            <id>airshiplay</id>
+            <name>airshiplay</name>
+            <email>airshiplay@126.com</email>
 		</developer>
 	</developers>
 	<organization>
-		<name>广州当凌信息科技有限公司</name>
-		<url>www.whenling.com</url>
+        <name>airlenet</name>
+        <url>http://www.airlenet.com</url>
 	</organization>
-	<modules>
-		<module>play-framework</module>
-		<module>play-integration</module>
-		<module>play-themes</module>
-		<module>play-plugins</module>
-		<module>play-thirdparty</module>
-	</modules>
+    <scm>
+        <connection>
+            scm:git:https://github.com/airshiplay/play-platform.git
+        </connection>
+        <developerConnection>
+            https://github.com/airshiplay/play-platform.git
+        </developerConnection>
+        <url>https://github.com/airshiplay/play-platform</url>
+        <tag>2.0.0-SNAPSHOT</tag>
+    </scm>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <additionalparam>-Xdoclint:none</additionalparam>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
