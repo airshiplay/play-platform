@@ -31,7 +31,9 @@
 		<module>play-core</module>
 		<module>play-config</module>
 		<module>play-json</module>
+		<module>play-xml</module>
 		<module>play-repo</module>
+		<module>play-repo-datasource</module>
 		<module>play-security</module>
 		<module>play-web</module>
 		<module>play-cache</module>
