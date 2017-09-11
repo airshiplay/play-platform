@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.airlenet</groupId>
-			<artifactId>play-repo</artifactId>
+			<artifactId>play-repo-datasource</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

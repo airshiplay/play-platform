@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import com.airlenet.repo.LockedableException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -109,7 +110,7 @@ public class EntityRepositoryImpl<T, I extends Serializable> extends QueryDslJpa
 	public void delete(T entity) {
 		if (entity instanceof Lockedable) {
 			if (((Lockedable) entity).isLocked()) {
-				throw new RuntimeException("cannot delete the locked entity.");
+				throw new LockedableException("cannot delete the locked entity.");
 			}
 		}
 
