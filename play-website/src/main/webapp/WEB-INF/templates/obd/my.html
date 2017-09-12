@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>WeUI</title>
+
+<link rel="stylesheet" th:href="@{/assets/plugins/mui/css/mui.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/plugins/weui/style/weui.css}" />
+<link rel="stylesheet" th:href="@{/assets/plugins/mzui/css/mzui.min.css}">
+
+<style type="text/css">
+.mui-slider {
+	height: 10.0rem;
+	background-color: black;
+}
+
+.mui-slider-indicator {
+	bottom: 0rem
+}
+
+.mui-slider-indicator .mui-indicator {
+	background: #ffffff;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: 0.5;
+	width: 0.6rem;
+	height: 0.6rem;
+	margin: 1px 2px;
+}
+
+.mui-slider-indicator .mui-active.mui-indicator {
+	background: #e84c3d;
+	opacity: 1;
+}
+.profile-haeder {position: relative; overflow: hidden; min-height: 8rem;z-index:0}
+.profile-haeder > .back {top: -2rem; left: -2rem; right: -2rem; bottom: -2rem; background-position: center; background-size: cover}
+.profile-haeder > .front {background: rgba(0,0,0,.1); text-align: center; padding: 1.5rem}
+.heading.affix{background: rgba(0,0,0,0);}
+
+img.weui-tabbar__icon{
+	margin-bottom:0;
+}
+
+</style>
+</head>
+<body>
+	<div class="profile-haeder space shadow">
+
+		<div class="red dock blur-lg back" style="background-image: url(../../assets/img/img2.jpg)"></div>
+		<div class="front dock text-white">
+			<div class="avatar avatar-xl circle space-sm">
+				<img th:src="@{/assets/img/avatar.png}" alt="">
+			</div>
+			<h4 class="lead text-shadow-black">Catouse</h4>
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="list with-divider">
+			<a class="item with-avatar">
+				<div class="avatar text-gray">
+					<i class="icon-list-ul"></i>
+				</div>
+				<div class="title">订单列表</div> <i class="icon icon-chevron-right muted"></i>
+			</a> <a class="item with-avatar">
+				<div class="avatar text-gray">
+					<i class="icon icon-comments"></i>
+				</div>
+				<div class="title">我的消息</div> <i class="icon icon-chevron-right muted"></i>
+			</a> <a class="item with-avatar">
+				<div class="avatar text-gray">
+					<i class="icon icon-lock"></i>
+				</div>
+				<div class="title">安全中心</div> <i class="icon icon-chevron-right muted"></i>
+			</a> <a class="item with-avatar">
+				<div class="avatar text-gray">
+					<i class="icon-cog"></i>
+				</div>
+				<div class="title">个人设置</div> <i class="icon icon-chevron-right muted"></i>
+			</a> <a class="item with-avatar">
+				<div class="avatar text-gray">
+					<i class="icon-qrcode"></i>
+				</div>
+				<div class="title">我的二维码</div> <i class="icon icon-chevron-right muted"></i>
+			</a>
+		</div>
+	</div>
+	<div class="weui-tabbar">
+		<a th:href="@{/obdsite}" class="weui-tabbar__item"> <img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt=""
+			class="weui-tabbar__icon">
+			<p class="weui-tabbar__label">首页</p>
+		</a> <a th:href="@{/obdsite/store4s}" class="weui-tabbar__item"> <img th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt=""
+			class="weui-tabbar__icon">
+			<p class="weui-tabbar__label">4S店</p>
+		</a> <a th:href="@{/obdsite/account/my}" class="weui-tabbar__item weui-bar__item_on"> <span style="display: inline-block; position: relative;"> <img
+				th:src="@{/assets/plugins/weui/images/icon_tabbar.png}" alt="" class="weui-tabbar__icon">
+		</span>
+			<p class="weui-tabbar__label">我</p>
+		</a>
+	</div>
+
+
+	<script th:src="@{/assets/plugins/weui/style/zepto.min.js}"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script th:src="@{/assets/plugins/weui/style/weui.min.js}"></script>
+	<script th:src="@{/assets/plugins/mui/js/mui.min.js}"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+	</script>
+</body>
+</html>
