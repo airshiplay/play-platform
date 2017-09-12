@@ -1,0 +1,119 @@
+2017-04-15 13:48:16,671 INFO  api.NutchServer - Starting NutchServer on port: 8081 with logging level: INFO ...
+2017-04-15 13:48:16,729 INFO  api.NutchServer - Started NutchServer on port 8081
+2017-04-15 13:48:41,184 WARN  util.NativeCodeLoader - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2017-04-15 13:48:41,424 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:48:41,425 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:48:41,701 INFO  crawl.InjectorJob - InjectorJob: Using class org.apache.gora.memory.store.MemStore as the Gora storage class.
+2017-04-15 13:48:42,221 WARN  mapreduce.JobSubmitter - Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2017-04-15 13:48:42,598 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/staging/lig1086697911/.staging/job_local1086697911_0001/job.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.retry.interval;  Ignoring.
+2017-04-15 13:48:42,607 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/staging/lig1086697911/.staging/job_local1086697911_0001/job.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.attempts;  Ignoring.
+2017-04-15 13:48:42,732 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/local/localRunner/lig/job_local1086697911_0001/job_local1086697911_0001.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.retry.interval;  Ignoring.
+2017-04-15 13:48:42,736 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/local/localRunner/lig/job_local1086697911_0001/job_local1086697911_0001.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.attempts;  Ignoring.
+2017-04-15 13:48:42,888 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:48:42,891 INFO  mapreduce.GoraRecordWriter - gora.buffer.write.limit = 10000
+2017-04-15 13:48:43,394 WARN  plugin.PluginRepository - Error while loading plugin `/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/parse-replace/plugin.xml` java.io.FileNotFoundException: /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/parse-replace/plugin.xml (No such file or directory)
+2017-04-15 13:48:43,440 WARN  plugin.PluginRepository - Error while loading plugin `/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/plugin/plugin.xml` java.io.FileNotFoundException: /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/plugin/plugin.xml (No such file or directory)
+2017-04-15 13:48:43,503 WARN  plugin.PluginRepository - Error while loading plugin `/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/publish-rabitmq/plugin.xml` java.io.FileNotFoundException: /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/publish-rabitmq/plugin.xml (No such file or directory)
+2017-04-15 13:48:43,790 INFO  regex.RegexURLNormalizer - can't find rules for scope 'inject', using default
+2017-04-15 13:48:44,037 WARN  mapred.LocalJobRunner - job_local1086697911_0001
+java.lang.Exception: java.lang.AbstractMethodError: org.apache.nutch.scoring.opic.OPICScoringFilter.injectedScore(Ljava/lang/String;Lorg/apache/nutch/storage/WebPage;)V
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.runTasks(LocalJobRunner.java:462)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.run(LocalJobRunner.java:522)
+Caused by: java.lang.AbstractMethodError: org.apache.nutch.scoring.opic.OPICScoringFilter.injectedScore(Ljava/lang/String;Lorg/apache/nutch/storage/WebPage;)V
+	at org.apache.nutch.scoring.ScoringFilters.injectedScore(ScoringFilters.java:115)
+	at org.apache.nutch.crawl.InjectorJob$UrlMapper.map(InjectorJob.java:177)
+	at org.apache.nutch.crawl.InjectorJob$UrlMapper.map(InjectorJob.java:82)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:340)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job$MapTaskRunnable.run(LocalJobRunner.java:243)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-04-15 13:48:44,759 ERROR impl.JobWorker - Cannot run job worker!
+java.lang.RuntimeException: job failed: name=nutch-2.3.1.jar, jobid=job_local1086697911_0001
+	at org.apache.nutch.util.NutchJob.waitForCompletion(NutchJob.java:119)
+	at org.apache.nutch.crawl.InjectorJob.run(InjectorJob.java:231)
+	at org.apache.nutch.api.impl.JobWorker.run(JobWorker.java:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-04-15 13:49:38,547 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:49:38,548 INFO  crawl.InjectorJob - InjectorJob: Using class org.apache.gora.memory.store.MemStore as the Gora storage class.
+2017-04-15 13:49:38,567 WARN  mapreduce.JobSubmitter - Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2017-04-15 13:49:38,781 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/staging/lig126377516/.staging/job_local126377516_0002/job.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.retry.interval;  Ignoring.
+2017-04-15 13:49:38,783 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/staging/lig126377516/.staging/job_local126377516_0002/job.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.attempts;  Ignoring.
+2017-04-15 13:49:38,958 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/local/localRunner/lig/job_local126377516_0002/job_local126377516_0002.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.retry.interval;  Ignoring.
+2017-04-15 13:49:38,961 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/local/localRunner/lig/job_local126377516_0002/job_local126377516_0002.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.attempts;  Ignoring.
+2017-04-15 13:49:38,967 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:49:38,967 INFO  mapreduce.GoraRecordWriter - gora.buffer.write.limit = 10000
+2017-04-15 13:49:38,974 INFO  regex.RegexURLNormalizer - can't find rules for scope 'inject', using default
+2017-04-15 13:49:38,975 WARN  mapred.LocalJobRunner - job_local126377516_0002
+java.lang.Exception: java.lang.AbstractMethodError: org.apache.nutch.scoring.opic.OPICScoringFilter.injectedScore(Ljava/lang/String;Lorg/apache/nutch/storage/WebPage;)V
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.runTasks(LocalJobRunner.java:462)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.run(LocalJobRunner.java:522)
+Caused by: java.lang.AbstractMethodError: org.apache.nutch.scoring.opic.OPICScoringFilter.injectedScore(Ljava/lang/String;Lorg/apache/nutch/storage/WebPage;)V
+	at org.apache.nutch.scoring.ScoringFilters.injectedScore(ScoringFilters.java:115)
+	at org.apache.nutch.crawl.InjectorJob$UrlMapper.map(InjectorJob.java:177)
+	at org.apache.nutch.crawl.InjectorJob$UrlMapper.map(InjectorJob.java:82)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:340)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job$MapTaskRunnable.run(LocalJobRunner.java:243)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-04-15 13:49:39,968 ERROR impl.JobWorker - Cannot run job worker!
+java.lang.RuntimeException: job failed: name=nutch-2.3.1.jar, jobid=job_local126377516_0002
+	at org.apache.nutch.util.NutchJob.waitForCompletion(NutchJob.java:119)
+	at org.apache.nutch.crawl.InjectorJob.run(InjectorJob.java:231)
+	at org.apache.nutch.api.impl.JobWorker.run(JobWorker.java:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-04-15 13:50:01,124 INFO  api.NutchServer - Starting NutchServer on port: 8081 with logging level: INFO ...
+2017-04-15 13:50:01,191 INFO  api.NutchServer - Started NutchServer on port 8081
+2017-04-15 13:50:33,493 WARN  util.NativeCodeLoader - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2017-04-15 13:50:33,743 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:50:33,744 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:50:34,098 INFO  crawl.InjectorJob - InjectorJob: Using class org.apache.gora.memory.store.MemStore as the Gora storage class.
+2017-04-15 13:50:34,346 WARN  mapreduce.JobSubmitter - Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+2017-04-15 13:50:34,695 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/staging/lig2097795546/.staging/job_local2097795546_0001/job.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.retry.interval;  Ignoring.
+2017-04-15 13:50:34,700 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/staging/lig2097795546/.staging/job_local2097795546_0001/job.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.attempts;  Ignoring.
+2017-04-15 13:50:34,834 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/local/localRunner/lig/job_local2097795546_0001/job_local2097795546_0001.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.retry.interval;  Ignoring.
+2017-04-15 13:50:34,838 WARN  conf.Configuration - file:/tmp/hadoop-lig/mapred/local/localRunner/lig/job_local2097795546_0001/job_local2097795546_0001.xml:an attempt to override final parameter: mapreduce.job.end-notification.max.attempts;  Ignoring.
+2017-04-15 13:50:34,991 WARN  store.DataStoreFactory - gora.properties not found, properties will be empty.
+2017-04-15 13:50:34,996 INFO  mapreduce.GoraRecordWriter - gora.buffer.write.limit = 10000
+2017-04-15 13:50:35,176 WARN  plugin.PluginRepository - Error while loading plugin `/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/parse-replace/plugin.xml` java.io.FileNotFoundException: /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/parse-replace/plugin.xml (No such file or directory)
+2017-04-15 13:50:35,197 WARN  plugin.PluginRepository - Error while loading plugin `/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/plugin/plugin.xml` java.io.FileNotFoundException: /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/plugin/plugin.xml (No such file or directory)
+2017-04-15 13:50:35,219 WARN  plugin.PluginRepository - Error while loading plugin `/Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/publish-rabitmq/plugin.xml` java.io.FileNotFoundException: /Users/lig/Documents/workspace/play-platform/play-application/play-module/play-nutch/target/classes/plugins/publish-rabitmq/plugin.xml (No such file or directory)
+2017-04-15 13:50:35,312 INFO  regex.RegexURLNormalizer - can't find rules for scope 'inject', using default
+2017-04-15 13:50:35,382 WARN  mapred.LocalJobRunner - job_local2097795546_0001
+java.lang.Exception: java.lang.AbstractMethodError: org.apache.nutch.scoring.opic.OPICScoringFilter.injectedScore(Ljava/lang/String;Lorg/apache/nutch/storage/WebPage;)V
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.runTasks(LocalJobRunner.java:462)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.run(LocalJobRunner.java:522)
+Caused by: java.lang.AbstractMethodError: org.apache.nutch.scoring.opic.OPICScoringFilter.injectedScore(Ljava/lang/String;Lorg/apache/nutch/storage/WebPage;)V
+	at org.apache.nutch.scoring.ScoringFilters.injectedScore(ScoringFilters.java:115)
+	at org.apache.nutch.crawl.InjectorJob$UrlMapper.map(InjectorJob.java:177)
+	at org.apache.nutch.crawl.InjectorJob$UrlMapper.map(InjectorJob.java:82)
+	at org.apache.hadoop.mapreduce.Mapper.run(Mapper.java:145)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:764)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:340)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job$MapTaskRunnable.run(LocalJobRunner.java:243)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-04-15 13:50:35,869 ERROR impl.JobWorker - Cannot run job worker!
+java.lang.RuntimeException: job failed: name=nutch-2.3.1.jar, jobid=job_local2097795546_0001
+	at org.apache.nutch.util.NutchJob.waitForCompletion(NutchJob.java:119)
+	at org.apache.nutch.crawl.InjectorJob.run(InjectorJob.java:231)
+	at org.apache.nutch.api.impl.JobWorker.run(JobWorker.java:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
