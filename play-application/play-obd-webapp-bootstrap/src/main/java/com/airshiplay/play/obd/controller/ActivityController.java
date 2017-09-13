@@ -29,24 +29,24 @@ public class ActivityController {
 
 	@RequestMapping(value = "/activityList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/obd/activity/activityList";
+		return "classpath:/obd/activity/activityList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/obd/activity/activityForm";
+		return "classpath:/obd/activity/activityForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("activity", activityEntityService.findOne(id));
-		return "/bootstrap/obd/activity/activityForm";
+		return "classpath:/obd/activity/activityForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("activity", activityEntityService.findOne(id));
-		return "/bootstrap/obd/activity/activityView";
+		return "classpath:/obd/activity/activityView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

@@ -29,24 +29,24 @@ public class ${shortClassName}Controller {
 
 	@RequestMapping(value = "/${'${shortClassName}'?uncap_first}List.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}List";
+		return "classpath:/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}List";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}Form";
+		return "classpath:/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}Form";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("${'${shortClassName}'?uncap_first}", ${'${shortClassName}'?uncap_first}EntityService.findOne(id));
-		return "/bootstrap/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}Form";
+		return "classpath:/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}Form";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("${'${shortClassName}'?uncap_first}", ${'${shortClassName}'?uncap_first}EntityService.findOne(id));
-		return "/bootstrap/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}View";
+		return "classpath:/${module}/${'${shortClassName}'?uncap_first}/${'${shortClassName}'?uncap_first}View";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

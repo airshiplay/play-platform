@@ -35,24 +35,24 @@ public class AttentionUserController {
 
 	@RequestMapping(value = "/attentionUserList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/wechat/attentionUser/attentionUserList";
+		return "classpath:/wechat/attentionUser/attentionUserList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/attentionUser/attentionUserForm";
+		return "classpath:/wechat/attentionUser/attentionUserForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("attentionUser", attentionUserEntityService.findOne(id));
-		return "/bootstrap/wechat/attentionUser/attentionUserForm";
+		return "classpath:/wechat/attentionUser/attentionUserForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("attentionUser", attentionUserEntityService.findOne(id));
-		return "/bootstrap/wechat/attentionUser/attentionUserView";
+		return "classpath:/wechat/attentionUser/attentionUserView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

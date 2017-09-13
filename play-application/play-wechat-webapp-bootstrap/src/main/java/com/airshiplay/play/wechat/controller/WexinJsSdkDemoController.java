@@ -71,6 +71,6 @@ public class WexinJsSdkDemoController {
 
 	@RequestMapping(value = { "", "/" })
 	public String demo(Model model) {
-		return "/bootstrap/wechat/jsdkdemo/demo";
+		return "classpath:/wechat/jsdkdemo/demo";
 	}
 }

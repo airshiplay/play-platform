@@ -1,12 +1,11 @@
 package com.airshiplay.play.cms;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.airlenet.integration.core.ApplicationInitializer;
 import com.airshiplay.play.main.entity.AuthorityEntity.PermissionType;
 import com.airshiplay.play.main.entity.MenuEntity;
 import com.airshiplay.play.main.init.InitDataTools;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class CmsApplicationInitializer extends ApplicationInitializer {

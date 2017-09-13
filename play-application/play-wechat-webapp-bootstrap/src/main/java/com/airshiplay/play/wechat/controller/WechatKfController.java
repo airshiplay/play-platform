@@ -45,20 +45,20 @@ public class WechatKfController {
 	@RequestMapping(value = "/wechatKfList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询微信客服列表");
-		return "/bootstrap/wechat/wechatKf/wechatKfList";
+		return "classpath:/wechat/wechatKf/wechatKfList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/wechatKf/wechatKfForm";
+		return "classpath:/wechat/wechatKf/wechatKfForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatKf", wechatKfEntityService.findOne(id));
-		return "/bootstrap/wechat/wechatKf/wechatKfForm";
+		return "classpath:/wechat/wechatKf/wechatKfForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -66,7 +66,7 @@ public class WechatKfController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatKf", wechatKfEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询微信客服信息");
-		return "/bootstrap/wechat/wechatKf/wechatKfView";
+		return "classpath:/wechat/wechatKf/wechatKfView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

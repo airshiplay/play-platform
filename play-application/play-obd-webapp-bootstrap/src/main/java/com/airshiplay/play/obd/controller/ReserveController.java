@@ -29,24 +29,24 @@ public class ReserveController {
 
 	@RequestMapping(value = "/reserveList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/obd/reserve/reserveList";
+		return "classpath:/obd/reserve/reserveList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/obd/reserve/reserveForm";
+		return "classpath:/obd/reserve/reserveForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("reserve", reserveEntityService.findOne(id));
-		return "/bootstrap/obd/reserve/reserveForm";
+		return "classpath:/obd/reserve/reserveForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("reserve", reserveEntityService.findOne(id));
-		return "/bootstrap/obd/reserve/reserveView";
+		return "classpath:/obd/reserve/reserveView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

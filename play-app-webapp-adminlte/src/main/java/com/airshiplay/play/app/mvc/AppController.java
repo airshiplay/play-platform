@@ -28,33 +28,33 @@ public class AppController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/app/app/list";
+		return "classpath:/app/app/list";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAdd() {
-		return "/bootstrap/app/app/add";
+		return "classpath:/app/app/add";
 	}
 	@RequestMapping(value = "/addstore", method = RequestMethod.GET)
 	public String getAddstore() {
-		return "/bootstrap/app/app/addstore";
+		return "classpath:/app/app/addstore";
 	}
 	
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String getView(@PathVariable Long id,Model model) {
 		model.addAttribute("app", appService.findOne(id));
-		return "/bootstrap/app/app/view";
+		return "classpath:/app/app/view";
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getEdit(@PathVariable Long id,Model model) {
 		model.addAttribute("app", appService.findOne(id));
-		return "/bootstrap/app/app/edit";
+		return "classpath:/app/app/edit";
 	}
 	
 	@RequestMapping(value = "/dialog/storeAppList", method = RequestMethod.GET)
 	public String getDialogStoreAppList() {
-		return "/bootstrap/app/app/dialog/storeAppList";
+		return "classpath:/app/app/dialog/storeAppList";
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)

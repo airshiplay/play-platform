@@ -29,24 +29,24 @@ public class ObdMemberRankController {
 
 	@RequestMapping(value = "/memberRankList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/obd/memberRank/memberRankList";
+		return "classpath:/obd/memberRank/memberRankList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/obd/memberRank/memberRankForm";
+		return "classpath:/obd/memberRank/memberRankForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("memberRank", memberRankEntityService.findOne(id));
-		return "/bootstrap/obd/memberRank/memberRankForm";
+		return "classpath:/obd/memberRank/memberRankForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("memberRank", memberRankEntityService.findOne(id));
-		return "/bootstrap/obd/memberRank/memberRankView";
+		return "classpath:/obd/memberRank/memberRankView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

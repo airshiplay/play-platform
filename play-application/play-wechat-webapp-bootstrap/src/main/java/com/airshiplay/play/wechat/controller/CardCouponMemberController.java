@@ -55,20 +55,20 @@ public class CardCouponMemberController {
 	@RequestMapping(value = "/cardCouponMemberList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询会员卡券列表");
-		return "/bootstrap/wechat/cardCouponMember/cardCouponMemberList";
+		return "classpath:/wechat/cardCouponMember/cardCouponMemberList";
 	}
 
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/cardCouponMember/cardCouponMemberForm";
+		return "classpath:/wechat/cardCouponMember/cardCouponMemberForm";
 	}
 
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("cardCouponMember", cardCouponMemberEntityService.findOne(id));
-		return "/bootstrap/wechat/cardCouponMember/cardCouponMemberForm";
+		return "classpath:/wechat/cardCouponMember/cardCouponMemberForm";
 	}
 
 	@RequiresRoles("admin")
@@ -76,7 +76,7 @@ public class CardCouponMemberController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("cardCouponMember", cardCouponMemberEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询会员卡券信息");
-		return "/bootstrap/wechat/cardCouponMember/cardCouponMemberView";
+		return "classpath:/wechat/cardCouponMember/cardCouponMemberView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

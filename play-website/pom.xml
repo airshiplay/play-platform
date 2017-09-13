@@ -19,10 +19,6 @@
 			<groupId>com.airlenet</groupId>
 			<artifactId>play-integration-webapp</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>com.airlenet</groupId>-->
-			<!--<artifactId>play-i18n</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>com.airlenet</groupId>
 			<artifactId>play-security-shiro</artifactId>
@@ -40,6 +36,21 @@
 		<dependency>
 			<groupId>com.airshiplay</groupId>
 			<artifactId>play-admin-webapp-adminlte</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-shop-webapp</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-cms-webapp-adminlte</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-app-webapp-adminlte</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

@@ -40,20 +40,20 @@ public class ImageTextTemplateController {
 	@RequestMapping(value = "/imageTextTemplateList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询图文消息列表");
-		return "/bootstrap/wechat/imageTextTemplate/imageTextTemplateList";
+		return "classpath:/wechat/imageTextTemplate/imageTextTemplateList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/imageTextTemplate/imageTextTemplateForm";
+		return "classpath:/wechat/imageTextTemplate/imageTextTemplateForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("imageTextTemplate", imageTextTemplateEntityService.findOne(id));
-		return "/bootstrap/wechat/imageTextTemplate/imageTextTemplateForm";
+		return "classpath:/wechat/imageTextTemplate/imageTextTemplateForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -61,7 +61,7 @@ public class ImageTextTemplateController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("imageTextTemplate", imageTextTemplateEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询图文消息信息");
-		return "/bootstrap/wechat/imageTextTemplate/imageTextTemplateView";
+		return "classpath:/wechat/imageTextTemplate/imageTextTemplateView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

@@ -45,20 +45,20 @@ public class WechatMemberController {
 	@RequestMapping(value = "/wechatMemberList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询微信会员列表");
-		return "/bootstrap/wechat/wechatMember/wechatMemberList";
+		return "classpath:/wechat/wechatMember/wechatMemberList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/wechatMember/wechatMemberForm";
+		return "classpath:/wechat/wechatMember/wechatMemberForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatMember", wechatMemberEntityService.findOne(id));
-		return "/bootstrap/wechat/wechatMember/wechatMemberForm";
+		return "classpath:/wechat/wechatMember/wechatMemberForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -66,7 +66,7 @@ public class WechatMemberController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatMember", wechatMemberEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询微信会员信息");
-		return "/bootstrap/wechat/wechatMember/wechatMemberView";
+		return "classpath:/wechat/wechatMember/wechatMemberView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

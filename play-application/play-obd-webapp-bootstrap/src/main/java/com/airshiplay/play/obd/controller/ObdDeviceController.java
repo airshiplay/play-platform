@@ -29,24 +29,24 @@ public class ObdDeviceController {
 
 	@RequestMapping(value = "/obdDeviceList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/obd/obdDevice/obdDeviceList";
+		return "classpath:/obd/obdDevice/obdDeviceList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/obd/obdDevice/obdDeviceForm";
+		return "classpath:/obd/obdDevice/obdDeviceForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("obdDevice", obdDeviceEntityService.findOne(id));
-		return "/bootstrap/obd/obdDevice/obdDeviceForm";
+		return "classpath:/obd/obdDevice/obdDeviceForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("obdDevice", obdDeviceEntityService.findOne(id));
-		return "/bootstrap/obd/obdDevice/obdDeviceView";
+		return "classpath:/obd/obdDevice/obdDeviceView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

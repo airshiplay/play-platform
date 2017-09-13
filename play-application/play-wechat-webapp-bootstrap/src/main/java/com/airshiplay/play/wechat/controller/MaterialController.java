@@ -40,20 +40,20 @@ public class MaterialController {
 	@RequestMapping(value = "/materialList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询素材列表");
-		return "/bootstrap/wechat/material/materialList";
+		return "classpath:/wechat/material/materialList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/material/materialForm";
+		return "classpath:/wechat/material/materialForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("material", materialEntityService.findOne(id));
-		return "/bootstrap/wechat/material/materialForm";
+		return "classpath:/wechat/material/materialForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -61,7 +61,7 @@ public class MaterialController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("material", materialEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询素材信息");
-		return "/bootstrap/wechat/material/materialView";
+		return "classpath:/wechat/material/materialView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

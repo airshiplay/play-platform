@@ -4,13 +4,11 @@
 
 	<groupId>com.airshiplay.play.maven</groupId>
 	<artifactId>play-maven-plugin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
-	<name>play-maven-plugin Maven Plugin</name>
-
-	<!-- FIXME change it to the project's website -->
-	<url>http://maven.apache.org</url>
+	<name>Play Maven Plugin</name>
+	<url>http://www.airlenet.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -103,20 +101,6 @@
 					<goalPrefix>play</goalPrefix>
 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
 				</configuration>
-				<executions>
-					<execution>
-						<id>mojo-descriptor</id>
-						<goals>
-							<goal>descriptor</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>generated-helpmojo</id>
-						<goals>
-							<goal>helpmojo</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

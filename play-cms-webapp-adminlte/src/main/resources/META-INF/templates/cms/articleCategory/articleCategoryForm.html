@@ -1,0 +1,119 @@
+<section class="content-header">
+	<h1>
+		栏目列表 <small>开始管理栏目信息</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/cms/articleCategory/articleCategoryList"><i class="fa fa-home"></i> 栏目列表</a></li>
+		<li class="active" th:text="${articleCategory==null?'新建栏目':'编辑栏目'}">新建栏目</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${articleCategory==null?'新建栏目':'编辑栏目'}">新建栏目</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="book-form" action="/cms/articleCategory/save">
+					<input type="hidden" name="id" th:value="${articleCategory==null?'':articleCategory.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="nameInput">名称</label>
+							<input type="text" name="name" class="form-control" id="nameInput" placeholder="请填写名称" data-bv-notempty="true"
+								data-bv-notempty-message="请填写名称"
+								data-bv-stringlength="true"
+				                data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${articleCategory==null?'':articleCategory.name}">
+						</div>
+						<div class="form-group">
+							<label for="sortNoInput">排序号</label>
+							<input type="text" name="sortNo" class="form-control" id="sortNoInput" placeholder="请填写排序号"
+								data-bv-regexp="true"
+                				data-bv-regexp-regexp="^-?\d+$"
+                				data-bv-regexp-message="必须是整数"  th:value="${articleCategory==null?'':articleCategory.sortNo}">
+						</div>
+						<div class="form-group">
+							<label for="seoTitleInput">SEO标题</label>
+							<input type="text" name="seoTitle" class="form-control" id="seoTitleInput" placeholder="请填写SEO标题" 
+								data-bv-stringlength="true"
+				                data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${articleCategory==null?'':articleCategory.seoTitle}">
+						</div>
+						<div class="form-group">
+							<label for="seoKeywordsInput">SEO关键字</label>
+							<input type="text" name="seoKeywords" class="form-control" id="seoKeywordsInput" placeholder="请填写SEO关键字"
+								data-bv-stringlength="true"
+				                data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间" th:value="${articleCategory==null?'':articleCategory.seoKeywords}">
+						</div>
+						<div class="form-group">
+							<label for="seoDescriptionInput">SEO描述</label>
+							<input type="text" name="seoDescription" class="form-control" id="seoDescriptionInput" placeholder="请填写SEO描述" 
+								data-bv-stringlength="true"
+				                data-bv-stringlength-min="0"
+				                data-bv-stringlength-max="200"
+				                data-bv-stringlength-message="个数必须在0和200之间"
+				                 th:value="${articleCategory==null?'':articleCategory.seoDescription}">
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/cms/articleCategory/articleCategoryList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh" ], function(domReady) {
+		domReady(function() {
+			activeMenu("cms_adposition_list");
+			var $form = $(".book-form");
+		    //Date picker
+		   
+			$(".book-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var $form = $(e.target);
+
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/cms/articleCategory/articleCategoryList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							
+							
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

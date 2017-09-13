@@ -35,14 +35,16 @@
         <module>play-cms-business</module>
         <module>play-cms-webapp-adminlte</module>
         <module>play-shop-business</module>
-        <module>play-shop-webapp-adminlte</module>
+        <module>play-shop-webapp</module>
+        <module>play-maven-plugin</module>
+        <module>play-cms-webapp</module>
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->
         <!--<module>play-plugin-business</module>-->
         <!--<module>play-plugin-webapp</module>-->
-        <!--<module>play-plugin-business-oauth</module>-->
+        <module>play-plugin-oauth</module>
         <!--<module>play-plugin-webapp-bootstrap-oauth</module>-->
-        <!--<module>play-maven-plugin</module>-->
+
         <!--<module>play-plugin-business-pay</module>-->
         <!--<module>play-plugin-webapp-bootstrap-pay</module>-->
 

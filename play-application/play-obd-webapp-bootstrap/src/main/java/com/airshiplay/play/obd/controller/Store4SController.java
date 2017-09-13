@@ -30,24 +30,24 @@ public class Store4SController {
 
 	@RequestMapping(value = "/store4SList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/obd/store4S/store4SList";
+		return "classpath:/obd/store4S/store4SList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/obd/store4S/store4SForm";
+		return "classpath:/obd/store4S/store4SForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("store4S", store4SEntityService.findOne(id));
-		return "/bootstrap/obd/store4S/store4SForm";
+		return "classpath:/obd/store4S/store4SForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("store4S", store4SEntityService.findOne(id));
-		return "/bootstrap/obd/store4S/store4SView";
+		return "classpath:/obd/store4S/store4SView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

@@ -37,25 +37,25 @@ public class WechatConfigController {
 	@RequestMapping(value = "/wechatConfigList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询公众号列表");
-		return "/bootstrap/wechat/wechatConfig/wechatConfigList";
+		return "classpath:/wechat/wechatConfig/wechatConfigList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/wechatConfig/wechatConfigForm";
+		return "classpath:/wechat/wechatConfig/wechatConfigForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatConfig", wechatConfigEntityService.findOne(id));
-		return "/bootstrap/wechat/wechatConfig/wechatConfigForm";
+		return "classpath:/wechat/wechatConfig/wechatConfigForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatConfig", wechatConfigEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询公众号");
-		return "/bootstrap/wechat/wechatConfig/wechatConfigView";
+		return "classpath:/wechat/wechatConfig/wechatConfigView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

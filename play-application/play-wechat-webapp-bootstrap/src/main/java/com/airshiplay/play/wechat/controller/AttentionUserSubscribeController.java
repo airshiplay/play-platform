@@ -45,20 +45,20 @@ public class AttentionUserSubscribeController {
 	@RequestMapping(value = "/attentionUserSubscribeList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询关注用户 时间列表");
-		return "/bootstrap/wechat/attentionUserSubscribe/attentionUserSubscribeList";
+		return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/attentionUserSubscribe/attentionUserSubscribeForm";
+		return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("attentionUserSubscribe", attentionUserSubscribeEntityService.findOne(id));
-		return "/bootstrap/wechat/attentionUserSubscribe/attentionUserSubscribeForm";
+		return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -66,7 +66,7 @@ public class AttentionUserSubscribeController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("attentionUserSubscribe", attentionUserSubscribeEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询关注用户 时间信息");
-		return "/bootstrap/wechat/attentionUserSubscribe/attentionUserSubscribeView";
+		return "classpath:/wechat/attentionUserSubscribe/attentionUserSubscribeView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

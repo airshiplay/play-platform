@@ -26,26 +26,26 @@ public class AdminPlugOauthController {
 	private OauthUserService oauthUserService;
 	@RequestMapping("/list")
 	public String list() {
-		return "/bootstrap/plugin/oauth/list";
+		return "classpath:/plugin/oauth/list";
 	}
 	@RequestMapping("/view/{oauthPluginId}")
 	public String view(Model model,@PathVariable String oauthPluginId) {
 		OauthPlugin plugin=	oauthService.getOauthPlugin(oauthPluginId);
 		model.addAttribute("plugin", plugin);
 		model.addAttribute("plugin_config", plugin.getPluginConfig());
-		return "/bootstrap/plugin/oauth/view";
+		return "classpath:/plugin/oauth/view";
 	}
 	@RequestMapping("/setting/{oauthPluginId}")
 	public String install(Model model,@PathVariable String oauthPluginId) {
 		OauthPlugin plugin=	oauthService.getOauthPlugin(oauthPluginId);
 		model.addAttribute("plugin", plugin);
 		model.addAttribute("plugin_config", plugin.getPluginConfig());
-		return "/bootstrap/plugin/oauth/setting";
+		return "classpath:/plugin/oauth/setting";
 	}
 	
 	@RequestMapping(value="/user/list",method = RequestMethod.GET)
 	public String getUsrList(){
-		return "/bootstrap/plugin/oauth/user/userList";
+		return "classpath:/plugin/oauth/user/userList";
 	}
 	@RequestMapping(value = "/user/page", method = RequestMethod.POST)
 	@ResponseBody

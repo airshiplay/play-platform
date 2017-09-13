@@ -45,20 +45,20 @@ public class WechatMessageController {
 	@RequestMapping(value = "/wechatMessageList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询消息管理列表");
-		return "/bootstrap/wechat/wechatMessage/wechatMessageList";
+		return "classpath:/wechat/wechatMessage/wechatMessageList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/wechatMessage/wechatMessageForm";
+		return "classpath:/wechat/wechatMessage/wechatMessageForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatMessage", wechatMessageEntityService.findOne(id));
-		return "/bootstrap/wechat/wechatMessage/wechatMessageForm";
+		return "classpath:/wechat/wechatMessage/wechatMessageForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -66,7 +66,7 @@ public class WechatMessageController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("wechatMessage", wechatMessageEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询消息管理信息");
-		return "/bootstrap/wechat/wechatMessage/wechatMessageView";
+		return "classpath:/wechat/wechatMessage/wechatMessageView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

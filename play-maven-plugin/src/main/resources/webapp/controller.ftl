@@ -45,20 +45,20 @@ public class ${shortSimpleName}Controller {
 	@RequestMapping(value = "/${'${shortSimpleName}'?uncap_first}List.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询${functionShowName}列表");
-		return "/bootstrap/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}List";
+		return "classpath:/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}List";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}Form";
+		return "classpath:/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}Form";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("${'${shortSimpleName}'?uncap_first}", ${'${shortSimpleName}'?uncap_first}EntityService.findOne(id));
-		return "/bootstrap/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}Form";
+		return "classpath:/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}Form";
 	}
 	
 	@RequiresRoles("admin")
@@ -66,7 +66,7 @@ public class ${shortSimpleName}Controller {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("${'${shortSimpleName}'?uncap_first}", ${'${shortSimpleName}'?uncap_first}EntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询${functionShowName}信息");
-		return "/bootstrap/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}View";
+		return "classpath:/${moduleName}/${'${shortSimpleName}'?uncap_first}/${'${shortSimpleName}'?uncap_first}View";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

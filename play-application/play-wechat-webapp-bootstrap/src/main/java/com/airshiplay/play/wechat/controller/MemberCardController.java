@@ -45,20 +45,20 @@ public class MemberCardController {
 	@RequestMapping(value = "/memberCardList.view", method = RequestMethod.GET)
 	public String getList() {
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询会员卡列表");
-		return "/bootstrap/wechat/memberCard/memberCardList";
+		return "classpath:/wechat/memberCard/memberCardList";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/wechat/memberCard/memberCardForm";
+		return "classpath:/wechat/memberCard/memberCardForm";
 	}
 	
 	@RequiresRoles("admin")
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("memberCard", memberCardEntityService.findOne(id));
-		return "/bootstrap/wechat/memberCard/memberCardForm";
+		return "classpath:/wechat/memberCard/memberCardForm";
 	}
 	
 	@RequiresRoles("admin")
@@ -66,7 +66,7 @@ public class MemberCardController {
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("memberCard", memberCardEntityService.findOne(id));
 		logService.addLog(OperateType.VIEW, LogLevel.INFO, "查询会员卡信息");
-		return "/bootstrap/wechat/memberCard/memberCardView";
+		return "classpath:/wechat/memberCard/memberCardView";
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.POST)

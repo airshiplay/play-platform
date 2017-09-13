@@ -32,24 +32,24 @@ public class ObdUserController {
 
 	@RequestMapping(value = "/userList.view", method = RequestMethod.GET)
 	public String getList() {
-		return "/bootstrap/obd/user/userList";
+		return "classpath:/obd/user/userList";
 	}
 
 	@RequestMapping(value = { "/create.view" }, method = RequestMethod.GET)
 	public String create(Model model) {
-		return "/bootstrap/obd/user/userForm";
+		return "classpath:/obd/user/userForm";
 	}
 
 	@RequestMapping(value = { "/edit/{id}.view" }, method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable Long id) {
 		model.addAttribute("user", obdUserEntityService.findOne(id));
-		return "/bootstrap/obd/user/userForm";
+		return "classpath:/obd/user/userForm";
 	}
 
 	@RequestMapping(value = { "/view/{id}.view" }, method = RequestMethod.GET)
 	public String view(Model model, @PathVariable Long id) {
 		model.addAttribute("user", obdUserEntityService.findOne(id));
-		return "/bootstrap/obd/user/userView";
+		return "classpath:/obd/user/userView";
 	}
 
 	
