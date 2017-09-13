@@ -4,6 +4,7 @@ import com.airlenet.plugins.mybatis.CameHumpInterceptor;
 import com.airlenet.repo.mybatis.scanner.MapperScanner;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -25,12 +26,12 @@ public class MybatisConfigBean {
     private String mapperScan;
 
     @Autowired
-    private DataSource dataSource;
+    private ObjectFactory<DataSource> dataSource;
 
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         org.mybatis.spring.SqlSessionFactoryBean factory = new org.mybatis.spring.SqlSessionFactoryBean();
-        factory.setDataSource(dataSource);
+        factory.setDataSource(dataSource.getObject());
         FileSystemXmlApplicationContext loader = new FileSystemXmlApplicationContext();
         factory.setMapperLocations(loader.getResources(mapperScan));
         factory.setTypeAliasesPackage(packageScan);

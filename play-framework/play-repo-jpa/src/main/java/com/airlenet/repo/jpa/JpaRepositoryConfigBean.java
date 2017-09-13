@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -78,7 +79,7 @@ public class JpaRepositoryConfigBean {
 	private String packageScan;
 
 	@Autowired
-	private DataSource dataSource;
+	private ObjectFactory<DataSource> dataSource;
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -87,7 +88,7 @@ public class JpaRepositoryConfigBean {
 		vendorAdapter.setGenerateDdl(Boolean.TRUE);
 		vendorAdapter.setShowSql(Boolean.TRUE);
 
-		factory.setDataSource(dataSource);
+		factory.setDataSource(dataSource.getObject());
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan(packageScan.split(","));
 		factory.setJpaDialect(new HibernateJpaDialect());

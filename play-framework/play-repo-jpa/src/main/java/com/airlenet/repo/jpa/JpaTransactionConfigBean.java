@@ -2,6 +2,7 @@ package com.airlenet.repo.jpa;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +15,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JpaTransactionConfigBean {
 
 	@Autowired
-	private EntityManagerFactory entityManagerFactory;
+	private ObjectFactory<EntityManagerFactory> entityManagerFactory;
 
 	@Bean
 	public PlatformTransactionManager transactionManager() {
-		return new JpaTransactionManager(entityManagerFactory);
+		return new JpaTransactionManager(entityManagerFactory.getObject());
 	}
 
 }
