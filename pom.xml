@@ -33,11 +33,11 @@
         <module>play-app-business</module>
         <module>play-app-webapp-adminlte</module>
         <module>play-cms-business</module>
+        <module>play-cms-webapp</module>
         <module>play-cms-webapp-adminlte</module>
         <module>play-shop-business</module>
         <module>play-shop-webapp</module>
         <module>play-maven-plugin</module>
-        <module>play-cms-webapp</module>
         <!--<module>play-oauth2-business</module>-->
         <!--<module>play-oauth2-webapp-bootstrap</module>-->
         <!--<module>play-plugin-business</module>-->
@@ -179,6 +179,11 @@
                     <verbose>false</verbose>
                     <optimize>false</optimize>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.airshiplay.play.maven</groupId>
+                <artifactId>play-maven-plugin</artifactId>
+                <version>${project.version}</version>
             </plugin>
         </plugins>
     </build>

@@ -53,6 +53,11 @@
 			<artifactId>play-app-webapp-adminlte</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.airshiplay</groupId>
+			<artifactId>play-plugin-oauth</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
