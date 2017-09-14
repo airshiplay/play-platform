@@ -16,6 +16,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.airshiplay</groupId>
+            <artifactId>play-plugin-oauth</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.airlenet</groupId>
             <artifactId>play-theme-adminlte</artifactId>
             <version>${play.framework.version}</version>

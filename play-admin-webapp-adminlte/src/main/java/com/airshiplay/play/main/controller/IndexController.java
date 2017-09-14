@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.airlenet.plugin.core.Plugin;
+import com.airlenet.plugin.core.PluginService;
+import com.airshiplay.play.plugin.oauth.model.OauthPlugin;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -55,8 +58,9 @@ public class IndexController {
 	private PlayPasswordService passwordService;
 	@Autowired
 	private CaptchaService captchaService;
-//	@Autowired
-//	private OauthPluginService oauthPluginService;
+
+    @Autowired
+	PluginService pluginService;
 
 	@Autowired
 	private LogService logService;
@@ -79,12 +83,18 @@ public class IndexController {
 
 	@RequestMapping(value = { "${path.admin}/login" }, method = RequestMethod.GET)
 	public String getLogin(Model model, HttpServletRequest request) {
-//		List<OauthPlugin> oauthPlugins = oauthPluginService.getAvailableOauthPlugins();
-//		List<String> oauthPluginIds = new ArrayList<String>();
-//		oauthPlugins.forEach((node) -> {
-//			oauthPluginIds.add(node.getId());
-//		});
-//		model.addAttribute("oauthPluginIds", oauthPluginIds);
+        try {
+            Class<Plugin> oauthPluginCls =  ( Class<Plugin>) Class.forName("com.airshiplay.play.plugin.oauth.model.OauthPlugin");
+            List<Plugin> oauthPlugins = pluginService.getPlugins(oauthPluginCls);
+            List<String> oauthPluginIds = new ArrayList<String>();
+            oauthPlugins.forEach((node) -> {
+                oauthPluginIds.add(node.getId());
+            });
+            model.addAttribute("oauthPluginIds", oauthPluginIds);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
 		model.addAttribute("adminPath",adminPath);
 		return "classpath:/admin/login";
 	}

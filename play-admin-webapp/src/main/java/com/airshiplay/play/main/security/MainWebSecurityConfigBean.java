@@ -2,6 +2,7 @@ package com.airshiplay.play.main.security;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.WebSecurityManager;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class MainWebSecurityConfigBean {
 	// private final HashMap<String, String> filterChain = new HashMap<String,
 	// String>();
 	@Autowired
-	WebSecurityManager securityManager;
+	ObjectFactory<WebSecurityManager> securityManager;
 
 
 	@Value("${path.admin}")
@@ -37,7 +38,7 @@ public class MainWebSecurityConfigBean {
 	@Bean(name = "shiroFilter")
 	public ShiroFilterFactoryBean shiroFilter() {
 		ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-		shiroFilter.setSecurityManager(securityManager);
+		shiroFilter.setSecurityManager(securityManager.getObject());
 		shiroFilter.setLoginUrl("/signin");
 		// shiroFilter.setSuccessUrl("/admin");
 		// shiroFilter.setUnauthorizedUrl("login");
@@ -46,6 +47,7 @@ public class MainWebSecurityConfigBean {
 		filterChainDefinitionMap.put("/requirejs/**", "anon");
         filterChainDefinitionMap.put("captcha**", "anon");
 		filterChainDefinitionMap.put("/captcha**", "anon");
+		filterChainDefinitionMap.put("/assets/**", "anon");
 		filterChainDefinitionMap.put("/oauth/**", "anon");
 		filterChainDefinitionMap.put(adminPath.startsWith("/")?adminPath:"/"+adminPath, "admin");
 		filterChainDefinitionMap.put(adminPath.startsWith("/")?adminPath+"/**":"/"+adminPath+"/**", "admin");

@@ -1,0 +1,16 @@
+com/airshiplay/play/main/bootstrap/BootstrapConfigBean.class
+com/airshiplay/play/main/controller/SettingController.class
+com/airshiplay/play/main/controller/LogController.class
+com/airshiplay/play/main/controller/UserController.class
+com/airshiplay/play/main/PlayApplicationInitializer.class
+com/airshiplay/play/main/controller/MemberRankController.class
+com/airshiplay/play/main/controller/MenuController.class
+com/airshiplay/play/main/controller/RoleController.class
+com/airshiplay/play/main/controller/AreaController.class
+com/airshiplay/play/main/controller/OrganizationController.class
+com/airshiplay/play/main/controller/MemberController.class
+com/airshiplay/play/main/WebServletConfigBean.class
+com/airshiplay/play/main/controller/DictController.class
+com/airshiplay/play/main/WebRootConfigBean.class
+com/airshiplay/play/main/controller/AccountController.class
+com/airshiplay/play/main/controller/IndexController.class

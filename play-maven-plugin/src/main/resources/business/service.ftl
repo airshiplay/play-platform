@@ -3,7 +3,7 @@ package ${modulePackage}.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.airshiplay.play.main.service.EntityService;
+import com.airlenet.repo.jpa.EntityService;
 import ${className};
 import ${modulePackage}.repo.${simpleName}Repository;
 /**

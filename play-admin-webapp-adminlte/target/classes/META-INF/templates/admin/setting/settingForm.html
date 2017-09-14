@@ -1,0 +1,166 @@
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="bootstrap/vendor/plugins/select2/select2.min.css">
+<link type="text/css" rel="stylesheet" href="//cdn.bootcss.com/bootstrap-fileinput/4.3.3/css/fileinput.min.css">
+
+<section class="content-header">
+	<h1>
+		系统配置列表 <small>开始管理系统配置</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/main/setting/settingList"><i class="glyphicon glyphicon-list"></i> 系统配置列表</a></li>
+		<li class="active" th:text="${setting==null?'新建系统配置':'编辑系统配置'}">新建系统配置</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${setting==null?'新建系统配置':'编辑系统配置'}">新建系统配置</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="setting-form" action="/main/setting/save">
+					<input type="hidden" name="id" th:value="${setting==null?'':setting.id}" />
+					<div class="box-body">
+						<div class="form-group">
+							<label for="siteNameInput">siteName</label>
+							<input type="text" name="siteName" class="form-control" id="siteNameInput" placeholder="请填写siteName"
+								data-bv-stringlength="true" data-bv-stringlength-min="2" data-bv-stringlength-max="50" data-bv-stringlength-message="个数必须在2和50之间"
+								
+		                  		th:value="${setting==null?'':setting.siteName}"/>
+						</div>
+						<div class="form-group">
+							<label for="shortSiteNameInput">shortSiteName</label>
+							<input type="text" name="shortSiteName" class="form-control" id="shortSiteNameInput" placeholder="请填写shortSiteName"
+								data-bv-stringlength="true" data-bv-stringlength-min="2" data-bv-stringlength-max="20" data-bv-stringlength-message="个数必须在2和20之间"
+								
+		                  		th:value="${setting==null?'':setting.shortSiteName}"/>
+						</div>
+						<div class="form-group">
+							<label for="logoInput">logo</label>
+							<input type="text" name="logo" class="form-control" id="logoInput" placeholder="请填写logo"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="200" data-bv-stringlength-message="个数必须在0和200之间"
+		                  		th:value="${setting==null?'':setting.logo}"/>
+						</div>
+						<div class="form-group">
+							<label for="adminLoginBannerInput">adminLoginBanner</label>
+							<input type="text" name="adminLoginBanner" class="form-control" id="adminLoginBannerInput" placeholder="请填写adminLoginBanner"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="200" data-bv-stringlength-message="个数必须在0和200之间"
+		                  		th:value="${setting==null?'':setting.adminLoginBanner}"/>
+						</div>
+						<div class="form-group">
+							<label for="introductionInput">introduction</label>
+							<input type="text" name="introduction" class="form-control" id="introductionInput" placeholder="请填写introduction"
+								
+		                  		th:value="${setting==null?'':setting.introduction}"/>
+						</div>
+						<div class="form-group">
+							<label for="hotSearchInput">hotSearch</label>
+							<input type="text" name="hotSearch" class="form-control" id="hotSearchInput" placeholder="请填写hotSearch"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="200" data-bv-stringlength-message="个数必须在0和200之间"
+		                  		th:value="${setting==null?'':setting.hotSearch}"/>
+						</div>
+						<div class="form-group">
+							<label for="addressInput">address</label>
+							<input type="text" name="address" class="form-control" id="addressInput" placeholder="请填写address"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="500" data-bv-stringlength-message="个数必须在0和500之间"
+		                  		th:value="${setting==null?'':setting.address}"/>
+						</div>
+						<div class="form-group">
+							<label for="contactInput">contact</label>
+							<input type="text" name="contact" class="form-control" id="contactInput" placeholder="请填写contact"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="100" data-bv-stringlength-message="个数必须在0和100之间"
+		                  		th:value="${setting==null?'':setting.contact}"/>
+						</div>
+						<div class="form-group">
+							<label for="phone1Input">phone1</label>
+							<input type="text" name="phone1" class="form-control" id="phone1Input" placeholder="请填写phone1"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="50" data-bv-stringlength-message="个数必须在0和50之间"
+		                  		th:value="${setting==null?'':setting.phone1}"/>
+						</div>
+						<div class="form-group">
+							<label for="phone2Input">phone2</label>
+							<input type="text" name="phone2" class="form-control" id="phone2Input" placeholder="请填写phone2"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="50" data-bv-stringlength-message="个数必须在0和50之间"
+		                  		th:value="${setting==null?'':setting.phone2}"/>
+						</div>
+						<div class="form-group">
+							<label for="zipCodeInput">zipCode</label>
+							<input type="text" name="zipCode" class="form-control" id="zipCodeInput" placeholder="请填写zipCode"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="50" data-bv-stringlength-message="个数必须在0和50之间"
+		                  		th:value="${setting==null?'':setting.zipCode}"/>
+						</div>
+						<div class="form-group">
+							<label for="emailInput">email</label>
+							<input type="text" name="email" class="form-control" id="emailInput" placeholder="请填写email"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="50" data-bv-stringlength-message="个数必须在0和50之间"
+		                  		th:value="${setting==null?'':setting.email}"/>
+						</div>
+						<div class="form-group">
+							<label for="certtextInput">certtext</label>
+							<input type="text" name="certtext" class="form-control" id="certtextInput" placeholder="请填写certtext"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="100" data-bv-stringlength-message="个数必须在0和100之间"
+		                  		th:value="${setting==null?'':setting.certtext}"/>
+						</div>
+						<div class="form-group">
+							<label for="siteCloseMessageInput">siteCloseMessage</label>
+							<input type="text" name="siteCloseMessage" class="form-control" id="siteCloseMessageInput" placeholder="请填写siteCloseMessage"
+								data-bv-stringlength="true" data-bv-stringlength-min="0" data-bv-stringlength-max="500" data-bv-stringlength-message="个数必须在0和500之间"
+		                  		th:value="${setting==null?'':setting.siteCloseMessage}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/main/setting/settingList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("main_setting_list");
+			
+
+			var $form = $(".setting-form");		  
+			$(".setting-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/main/setting/settingList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

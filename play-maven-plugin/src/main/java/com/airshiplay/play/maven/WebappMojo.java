@@ -41,9 +41,6 @@ public class WebappMojo extends AbstractPlayMojo {
 			Configuration cfg = getConfiguration();
 			for (Map<String, Object> map : list) {
 				controller(cfg, map);
-				htmlList(cfg, map);
-				htmlForm(cfg, map);
-				htmlView(cfg, map);
 			}
 		} catch (TemplateNotFoundException e) {
 			throw new MojoFailureException(e.getMessage());
@@ -62,7 +59,7 @@ public class WebappMojo extends AbstractPlayMojo {
 	public void controller(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
 
 		String shortSimpleName = map.get("shortSimpleName").toString();
-		String filepath = pkg2path(map.get("modulePackage").toString()) + "/controller/" + shortSimpleName + "Controller.java";
+		String filepath = pkg2path(map.get("modulePackage").toString()) + "/rest/" + shortSimpleName + "RestController.java";
 		File file = new File(sourceDirectory, filepath);
 		if (file.exists()) {
 			getLog().info("exists file=" + filepath);
@@ -76,63 +73,9 @@ public class WebappMojo extends AbstractPlayMojo {
 		getLog().info("new file=" + filepath);
 	}
 
-	private void htmlList(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
-		String shortSimpleName = map.get("shortSimpleName").toString();
-
-		String lowerShortClassName = shortSimpleName.substring(0, 1).toLowerCase() + shortSimpleName.substring(1, shortSimpleName.length());
-		String filepath = "/bootstrap/" + map.get("moduleName").toString() + "/" + lowerShortClassName + "/" + lowerShortClassName + "List.html";
-		File file = new File(resourceDirectory, filepath);
-		if (file.exists()) {
-			getLog().info("exists file=" + filepath);
-			return;
-		}
-		file.getParentFile().mkdirs();
-		freemarker.template.Template template = cfg.getTemplate("webapp/list.ftl");
-		Writer out = new FileWriter(file);
-		template.process(map, out);
-		out.flush();
-		getLog().info("new file=" + filepath);
-	}
-
-	private void htmlForm(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
-		String shortSimpleName = map.get("shortSimpleName").toString();
-		String lowerShortClassName = shortSimpleName.substring(0, 1).toLowerCase() + shortSimpleName.substring(1, shortSimpleName.length());
-
-		String filepath = "/bootstrap/" + map.get("moduleName").toString() + "/" + lowerShortClassName + "/" + lowerShortClassName + "Form.html";
-		File file = new File(resourceDirectory, filepath);
-		if (file.exists()) {
-			getLog().info("exists file=" + filepath);
-			return;
-		}
-		file.getParentFile().mkdirs();
-		freemarker.template.Template template = cfg.getTemplate("webapp/form.ftl");
-		Writer out = new FileWriter(file);
-		template.process(map, out);
-		out.flush();
-		getLog().info("new file=" + filepath);
-	}
-
-	private void htmlView(Configuration cfg, Map<String, Object> map) throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
-		String shortSimpleName = map.get("shortSimpleName").toString();
-		String lowerShortClassName = shortSimpleName.substring(0, 1).toLowerCase() + shortSimpleName.substring(1, shortSimpleName.length());
-
-		String filepath = "/bootstrap/" + map.get("moduleName").toString() + "/" + lowerShortClassName + "/" + lowerShortClassName + "View.html";
-		File file = new File(resourceDirectory, filepath);
-		if (file.exists()) {
-			getLog().info("exists file=" + filepath);
-			return;
-		}
-		file.getParentFile().mkdirs();
-		freemarker.template.Template template = cfg.getTemplate("webapp/view.ftl");
-
-		Writer out = new FileWriter(file);
-		template.process(map, out);
-		out.flush();
-		getLog().info("new file=" + filepath);
-	}
 
 	public File getSourceDirectory() {
-		return new File(sourceDirectory.getAbsolutePath().replace("webapp-bootstrap", "business"));
+		return new File(sourceDirectory.getAbsolutePath().replace("webapp", "business"));
 	}
 
 	@Override
