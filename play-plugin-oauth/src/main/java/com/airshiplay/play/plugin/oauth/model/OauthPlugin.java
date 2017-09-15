@@ -67,6 +67,7 @@ public abstract class OauthPlugin extends Plugin {
 		return pluginConfig != null ? pluginConfig.getAttribute(ICON_ATTRIBUTE_NAME) : null;
 	}
 
+	public abstract String getEnterUrl();
 	/**
 	 * 获取描述
 	 * 

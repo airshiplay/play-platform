@@ -118,7 +118,7 @@ public class QQOauthPlugin extends OauthPlugin {
 
 	@Override
 	public String getName() {
-		return "QQ";
+		return "qq";
 	}
 
 	@Override
@@ -135,6 +135,8 @@ public class QQOauthPlugin extends OauthPlugin {
 	public String getSiteUrl() {
 		return siteUrl;
 	}
+
+	public String getEnterUrl(){return "oauth/authorization/admin/qqOauthPlugin";}
 
 	@Override
 	public String getInstallUrl() {

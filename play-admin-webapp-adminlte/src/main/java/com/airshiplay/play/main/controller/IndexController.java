@@ -85,16 +85,12 @@ public class IndexController {
 	public String getLogin(Model model, HttpServletRequest request) {
         try {
             Class<Plugin> oauthPluginCls =  ( Class<Plugin>) Class.forName("com.airshiplay.play.plugin.oauth.model.OauthPlugin");
-            List<Plugin> oauthPlugins = pluginService.getPlugins(oauthPluginCls);
+            List<Plugin> oauthPlugins = pluginService.getEnabledPlugins(oauthPluginCls);
             List<String> oauthPluginIds = new ArrayList<String>();
-            oauthPlugins.forEach((node) -> {
-                oauthPluginIds.add(node.getId());
-            });
-            model.addAttribute("oauthPluginIds", oauthPluginIds);
+            model.addAttribute("oauthPlugins", oauthPlugins);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.warn("not support oauth login");
         }
-
 		model.addAttribute("adminPath",adminPath);
 		return "classpath:/admin/login";
 	}

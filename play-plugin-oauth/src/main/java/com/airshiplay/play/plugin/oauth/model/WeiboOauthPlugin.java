@@ -36,6 +36,11 @@ public class WeiboOauthPlugin extends OauthPlugin {
 	private String siteUrl;
 
 	@Override
+	public String getEnterUrl() {
+		return "/oauth/authorization/admin/weiboOauthPlugin";
+	}
+
+	@Override
 	public String getAuthorizationUrl() {
 		return "https://api.weibo.com/oauth2/authorize";
 	}
@@ -111,7 +116,7 @@ public class WeiboOauthPlugin extends OauthPlugin {
 
 	@Override
 	public String getName() {
-		return "Weibo";
+		return "weibo";
 	}
 
 	@Override

@@ -34,6 +34,11 @@ public class WeChatMpOauthPlugin extends OauthPlugin {
 	private ObjectMapper objectMapper;
 
 	@Override
+	public String getEnterUrl() {
+		return "/oauth/authorization/admin/wechatMpOauthPlugin";
+	}
+
+	@Override
 	public String getAuthorizationUrl() {
 		return "https://open.weixin.qq.com/connect/oauth2/authorize";
 	}

@@ -95,16 +95,13 @@
 				</div>
 			</form>
 
-			<div th:if="${not #lists.isEmpty(oauthPluginIds)}" class="social-auth-links text-center">
+			<div th:if="${not #lists.isEmpty(oauthPlugins)}" class="social-auth-links text-center">
 				<p>- OR -</p>
-				<a th:if="${#lists.contains(oauthPluginIds, 'qqOauthPlugin')}" th:href="@{/oauth/authorization/admin/qqOauthPlugin}"
-					class="btn btn-block btn-social btn-qq btn-flat"><i class="fa fa-qq"></i>使用QQ登录</a> <a
-					th:if="${#lists.contains(oauthPluginIds, 'weiboOauthPlugin')}" th:href="@{/oauth/authorization/admin/weiboOauthPlugin}"
-					class="btn btn-block btn-social btn-weibo btn-flat"><i class="fa fa-weibo"></i> 使用微博登录</a> <a
-					th:if="${#lists.contains(oauthPluginIds, 'githubOauthPlugin')}" th:href="@{/oauth/authorization/admin/githubOauthPlugin}"
-					class="btn btn-block btn-social btn-github btn-flat"><i class="fa fa-github"></i> 使用Github登录</a> <a
-					th:if="${#lists.contains(oauthPluginIds, 'wechatOpenOauthPlugin')}" th:href="@{/oauth/authorization/admin/wechatOpenOauthPlugin}"
-					class="btn btn-block btn-social btn-wechat btn-flat"><i class="fa fa-wechat"></i> 使用微信登录</a>
+				<a th:each="oauthPlugin,iterStat : ${oauthPlugins}"  th:href="@{${oauthPlugin.enterUrl}}"
+                   th:class="'btn btn-block btn-social btn-'+${oauthPlugin.name}+ ' btn-flat'"
+					class="btn btn-block btn-social btn-qq btn-flat">
+                    <i class="fa fa-qq" th:class="'fa fa-'+${oauthPlugin.name}"></i>[[#{oauthLoginTip(#{${oauthPlugin.name}})}]]
+                </a>
 			</div>
 			<!-- /.social-auth-links -->
 			<div style="display: none;">

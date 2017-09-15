@@ -35,6 +35,11 @@ public class WeChatOpenOauthPlugin extends OauthPlugin {
 	private ObjectMapper objectMapper;
 
 	@Override
+	public String getEnterUrl() {
+		return "/oauth/authorization/admin/wechatOpenOauthPlugin";
+	}
+
+	@Override
 	public String getAuthorizationUrl() {
 		return "https://open.weixin.qq.com/connect/qrconnect";
 	}
@@ -101,7 +106,7 @@ public class WeChatOpenOauthPlugin extends OauthPlugin {
 
 	@Override
 	public String getName() {
-		return "WeChat-OPEN";
+		return "wechat";
 	}
 
 	@Override

@@ -37,6 +37,11 @@ public class GithubOauthPlugin extends OauthPlugin {
 	private ObjectMapper objectMapper;
 
 	@Override
+	public String getEnterUrl() {
+		return "/oauth/authorization/admin/githubOauthPlugin";
+	}
+
+	@Override
 	public String getAuthorizationUrl() {
 		return "https://github.com/login/oauth/authorize";
 	}
@@ -92,7 +97,7 @@ public class GithubOauthPlugin extends OauthPlugin {
 
 	@Override
 	public String getName() {
-		return "Github";
+		return "github";
 	}
 
 	@Override
