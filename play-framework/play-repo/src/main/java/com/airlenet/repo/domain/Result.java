@@ -83,6 +83,10 @@ public class Result {
 		return this;
 	}
 
+	public Result setContent(Object value){
+        this.extraProperties.put("content",value);
+		return this;
+	}
 	public Result extraProperties(Map<String, Object> extraProperties) {
 		this.extraProperties = extraProperties;
 		return this;
