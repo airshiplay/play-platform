@@ -10,7 +10,7 @@ import org.springframework.validation.ObjectError;
 
 public class Result {
 
-	private static Result init() {
+    private static Result init() {
 		return new Result();
 	}
 
@@ -38,6 +38,10 @@ public class Result {
 		return init().code(ResultCode.exception).message(ResultCode.exception.getMessage());
 	}
 
+	public static Result notFound() {
+		return init().code(ResultCode.notFound).message(ResultCode.notFound.getMessage());
+	}
+
 	public static Result unknown() {
 		return init().code(ResultCode.unknown).message(ResultCode.unknown.getMessage());
 	}
@@ -46,8 +50,19 @@ public class Result {
 		return init().code(ResultCode.captchaError).message(ResultCode.captchaError.getMessage());
 	}
 
+    public static Result langError(String code,String defaultMsg,Object[] args) {
+        return init().code(ResultCode.lng.lang(code,args)).message(defaultMsg);
+    }
+
+    public static Result langError(String code,String defaultMsg) {
+        return init().code(ResultCode.lng.lang(code,null)).message(defaultMsg);
+    }
+    public static Result langError(String code) {
+        return init().code(ResultCode.lng.lang(code,null)).message(null);
+    }
 	private ResultCode code;
-	private String message;
+
+    private String message;
 
 	private Map<String, Object> extraProperties = new HashMap<>();
 	private List<ObjectError> errors = new ArrayList<>();
@@ -107,11 +122,15 @@ public class Result {
 		return this;
 	}
 
-	public enum ResultCode {
-		success("操作成功"), failure("操作失败"), validateError("验证错误"), accessDenide("无权限访问"), notLogin("未登录"), captchaError("验证码错误"), exception(
-				"系统异常"), unknown("未知情况");
+
+
+    public enum ResultCode {
+		success("操作成功"), failure("操作失败"), validateError("验证错误"), accessDenide("无权限访问"),notFound("404"), notLogin("未登录"), captchaError("验证码错误"), exception(
+				"系统异常"), unknown("未知情况"), lng("");
 
 		private final String message;
+		private String lang;
+        private Object[] args;
 
 		ResultCode(final String message) {
 			this.message = message;
@@ -120,5 +139,18 @@ public class Result {
 		public String getMessage() {
 			return message;
 		}
+
+        public ResultCode lang(String lang,Object[] args){
+		    this.lang = lang;
+		    this.args = args;
+		    return this;
+        }
+
+        public Object[] getArgs() {
+            return args;
+        }
+        public String getLang(){
+            return  this.lang;
+        }
 	}
 }

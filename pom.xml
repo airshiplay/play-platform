@@ -44,6 +44,7 @@
         <module>play-themes</module>
         <module>play-plugins</module>
         <module>play-thirdparty</module>
+        <module>play-bom</module>
     </modules>
     <dependencyManagement>
         <dependencies>

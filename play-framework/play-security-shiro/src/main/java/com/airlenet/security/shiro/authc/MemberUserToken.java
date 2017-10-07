@@ -11,6 +11,14 @@ public class MemberUserToken extends UsernamePasswordToken {
 	private String mobile;
 	private String email;
 
+	public MemberUserToken(String username, String password) {
+		super(username, password);
+	}
+
+	public MemberUserToken(String username,  String password, boolean rememberMe, String host) {
+		super(username, password, rememberMe, host);
+	}
+
 	public MemberUserToken(String username, String mobile, String email, String password, boolean rememberMe, String host) {
 		super(username, password, rememberMe, host);
 		this.mobile = mobile;

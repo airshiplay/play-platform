@@ -11,6 +11,13 @@ public class AdminUserToken extends UsernamePasswordToken {
 	private String mobile;
 	private String email;
 
+	public AdminUserToken(String username, String password) {
+		super(username, password);
+	}
+	public AdminUserToken(String username, String password, boolean rememberMe, String host) {
+		super(username, password, rememberMe, host);
+	}
+
 	public AdminUserToken(String username, String mobile, String email, String password, boolean rememberMe, String host) {
 		super(username, password, rememberMe, host);
 		this.mobile = mobile;

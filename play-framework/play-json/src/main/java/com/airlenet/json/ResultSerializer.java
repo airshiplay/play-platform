@@ -34,7 +34,7 @@ public class ResultSerializer extends JsonSerializer<Result> {
 		gen.writeStartObject();
 
 		gen.writeBooleanField(FIELD_SUCCESS, Objects.equal(value.getCode(), ResultCode.success));
-		gen.writeStringField(FIELD_CODE, value.getCode().name());
+		gen.writeStringField(FIELD_CODE,value.getCode() == ResultCode.lng ? value.getCode().getLang() : value.getCode().name());
 		if (Objects.equal(ResultCode.validateError, value.getCode())) {
 			List<ObjectError> objectErrors = value.getErrors();
 			if (objectErrors != null) {

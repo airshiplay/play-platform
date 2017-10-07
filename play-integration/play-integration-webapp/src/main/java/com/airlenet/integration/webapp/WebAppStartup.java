@@ -25,7 +25,6 @@ public class WebAppStartup extends AbstractAnnotationConfigDispatcherServletInit
 		final Configuration config = StaticConfigSupplier.getConfiguration();
 		String[] rootConfigBeanClassNames = config.getStringArray("integration.root_config_bean_classes");
 		String[] servletConfigBeanClassNames = config.getStringArray("integration.servlet_config_bean_classes");
-
 		if (rootConfigBeanClassNames == null) {
 			rootConfigClasses = new Class<?>[] { RootConfigBean.class };
 		} else {

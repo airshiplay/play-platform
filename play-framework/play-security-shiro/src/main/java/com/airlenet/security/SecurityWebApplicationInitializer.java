@@ -25,20 +25,25 @@ public class SecurityWebApplicationInitializer implements WebApplicationInitiali
 	@Override
 	public void onStartup(ServletContext servletContext)
 			throws ServletException {
-		String[] urlPatterns = StaticConfigSupplier.getConfiguration().getStringArray("captcha.urlPatterns");
-		if (urlPatterns == null || urlPatterns.length == 0) {
-			urlPatterns = new String[] { "/login", "/forgotPassword" };
+		Boolean captchaEnabled = StaticConfigSupplier.getConfiguration().getBoolean("captcha.enabled", true);
+		if (captchaEnabled) {
+			String[] urlPatterns = StaticConfigSupplier.getConfiguration().getStringArray("captcha.urlPatterns");
+			if (urlPatterns == null || urlPatterns.length == 0) {
+				urlPatterns = new String[] { "/login", "/forgotPassword" };
+			}
+
+			DelegatingFilterProxy captchaFilter = new DelegatingFilterProxy(CaptchaConfigBean.CAPTCHA_FILTER_NAME);
+			Dynamic captchaRegistration = servletContext.addFilter(CaptchaConfigBean.CAPTCHA_FILTER_NAME,
+					captchaFilter);
+			captchaRegistration.setAsyncSupported(isAsyncSecuritySupported());
+			captchaRegistration.addMappingForUrlPatterns(getSecurityDispatcherTypes(), false, urlPatterns);
 		}
-		DelegatingFilterProxy captchaFilter = new DelegatingFilterProxy(CaptchaConfigBean.CAPTCHA_FILTER_NAME);
-		Dynamic captchaRegistration = servletContext.addFilter(CaptchaConfigBean.CAPTCHA_FILTER_NAME, captchaFilter);
-		captchaRegistration.setAsyncSupported(isAsyncSecuritySupported());
-		captchaRegistration.addMappingForUrlPatterns(getSecurityDispatcherTypes(), false, urlPatterns);
 
 		Dynamic shiroRegistration=	servletContext.addFilter("shiroFilter", new DelegatingFilterProxy("shiroFilter"));
 		shiroRegistration.setAsyncSupported(isAsyncSecuritySupported());
 		shiroRegistration.addMappingForUrlPatterns(getSecurityDispatcherTypes(), false, "/*");
 		shiroRegistration.setInitParameter("targetFilterLifecycle", "true");
-		
+
 		Dynamic holderRegistration = servletContext.addFilter("RequestContextFilter", new RequestContextFilter());
 		holderRegistration.setAsyncSupported(isAsyncSecuritySupported());
 		holderRegistration.addMappingForUrlPatterns(getSecurityDispatcherTypes(), false, "/*");

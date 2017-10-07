@@ -43,5 +43,4 @@ public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplic
 		super.afterSpringSecurityFilterChain(servletContext);
 
 	}
-
 }
