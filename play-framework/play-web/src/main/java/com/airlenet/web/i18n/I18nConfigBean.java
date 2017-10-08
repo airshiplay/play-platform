@@ -1,7 +1,10 @@
 package com.airlenet.web.i18n;
 
+import java.nio.charset.Charset;
 import java.util.Locale;
 
+import com.airlenet.core.PlayConstants;
+import org.apache.commons.lang3.CharSet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +25,13 @@ public class I18nConfigBean extends WebMvcConfigurerAdapter {
 	@Value("${i18n.default_locale?:zh_CN}")
 	private String defaultLocale;
 
+	@Value("${i18n.default_encoding?:"+PlayConstants.characterEncoding+"}")
+	private String defaultEncoding;
+
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
+		bundleMessageSource.setDefaultEncoding(defaultEncoding);
 		bundleMessageSource.setUseCodeAsDefaultMessage(true);
 		bundleMessageSource.setBasenames(i18nMessages.split(","));
 		return bundleMessageSource;
