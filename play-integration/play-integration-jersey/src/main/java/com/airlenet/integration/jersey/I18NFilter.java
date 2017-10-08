@@ -1,5 +1,6 @@
 package com.airlenet.integration.jersey;
 
+import com.airlenet.repo.domain.PlayResult;
 import com.airlenet.repo.domain.Result;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.util.StringUtils;
@@ -47,7 +48,28 @@ public class I18NFilter implements ContainerResponseFilter, ContainerRequestFilt
                 //lng.sys.error
                 String msg=messageSource.getMessage(result.getCode().getLang(), result.getCode().getArgs(), defaultMessage, locale);
                 if(StringUtils.isEmpty(msg)){
-                    msg=messageSource.getMessage("lng.sys.error", null, "sys.error", locale);
+                    msg=messageSource.getMessage("lang.sys.error", null, "sys.error", locale);
+                }
+                result.message(msg);
+            }
+        }else if(entity instanceof PlayResult){
+            List<Locale> list = containerRequestContext.getAcceptableLanguages();
+            PlayResult result = ((PlayResult) entity);
+            if (result.getLang()!=null) {
+                Locale locale;
+                if (list.isEmpty()) {
+                    locale = Locale.getDefault();
+                } else {
+                    locale = list.get(0);
+                }
+                String defaultMessage = result.getMessage();
+                if (StringUtils.isEmpty(defaultMessage)) {
+                    defaultMessage = result.getMessage();
+                }
+                //lng.sys.error
+                String msg=messageSource.getMessage(result.getLang().getTemplate(), result.getLang().getArgs(), defaultMessage, locale);
+                if(StringUtils.isEmpty(msg)){
+                    msg=messageSource.getMessage("lang.sys.error", null, "sys.error", locale);
                 }
                 result.message(msg);
             }

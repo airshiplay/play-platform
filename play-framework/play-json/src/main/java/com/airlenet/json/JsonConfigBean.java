@@ -1,5 +1,6 @@
 package com.airlenet.json;
 
+import com.airlenet.repo.domain.PlayResult;
 import org.joda.time.DateTime;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +45,7 @@ public class JsonConfigBean {
 		simpleModule.addSerializer(Node.class, new NodeSerializer<>());
 		simpleModule.addSerializer(Result.class, new ResultSerializer());
 		simpleModule.addSerializer(ObjectError.class, new ObjectErrorSerializer());
+		simpleModule.addSerializer(PlayResult.class, new PlayResultSerializer());
 		return simpleModule;
 	}
 
