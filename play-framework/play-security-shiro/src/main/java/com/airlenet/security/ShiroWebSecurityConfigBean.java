@@ -21,20 +21,16 @@ import java.util.*;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ShiroWebSecurityConfigBean {
 
-    @Value("${path.admin}")
-    private  String adminPath;
-
-
     @Value("${loginUrl?:/signin}")
     private String loginUrl;
 
     @Value("${security.skip_auth_urls?:/assets/**,/oauth/**,/requirejs/**,/captcha**,captcha**}")
     private String[] skipAuthUrls;
 
-    @Autowired
+    @Autowired(required = false)
     protected Map<String, Filter> filters = new HashMap<String, Filter>();
 
-    @Autowired
+    @Autowired(required = false)
     private List<FilterChainDefinition> chainDefinitionList =new ArrayList<>();
 
     @Autowired
@@ -47,7 +43,6 @@ public class ShiroWebSecurityConfigBean {
         // shiroFilter.setSuccessUrl("/admin");
         // shiroFilter.setUnauthorizedUrl("login");
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put(adminPath.startsWith("/")||adminPath.equals("")?adminPath+"/login":("/"+adminPath+"/login"), "anon");
         for(String anon:skipAuthUrls){
             filterChainDefinitionMap.put(anon, "anon");
         }
