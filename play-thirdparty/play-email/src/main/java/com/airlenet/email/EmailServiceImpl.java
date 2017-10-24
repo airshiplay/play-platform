@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +20,7 @@ import org.springframework.util.Assert;
 
 @Component
 public class EmailServiceImpl implements EmailService {
+	private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 	@Autowired
 	private JavaMailSender javaMailSender;
 
@@ -46,7 +49,7 @@ public class EmailServiceImpl implements EmailService {
 				}
 			});
 		} catch (Exception e) {
-			e.printStackTrace();
+            logger.error("EmailService",e);
 		}
 	}
 
