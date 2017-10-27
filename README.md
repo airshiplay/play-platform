@@ -14,12 +14,12 @@ Download [the latest JAR][latestjar] or grab via Maven:
 <dependency>
   <groupId>com.airlenet</groupId>
   <artifactId>play-core</artifactId>
-  <version>1.0.0.RELEASE</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'om.airlenet:play-core:1.0.0.RELEASE'
+compile 'om.airlenet:play-core:2.0.0'
 ```
 
 Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
