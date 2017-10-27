@@ -10,7 +10,7 @@ import org.springframework.validation.ObjectError;
 
 public class Result {
 
-    private static Result init() {
+	private static Result init() {
 		return new Result();
 	}
 
@@ -61,8 +61,7 @@ public class Result {
         return init().code(ResultCode.lng.lang(code,null)).message(null);
     }
 	private ResultCode code;
-
-    private String message;
+	private String message;
 
 	private Map<String, Object> extraProperties = new HashMap<>();
 	private List<ObjectError> errors = new ArrayList<>();
@@ -122,9 +121,7 @@ public class Result {
 		return this;
 	}
 
-
-
-    public enum ResultCode {
+	public enum ResultCode {
 		success("操作成功"), failure("操作失败"), validateError("验证错误"), accessDenide("无权限访问"),notFound("404"), notLogin("未登录"), captchaError("验证码错误"), exception(
 				"系统异常"), unknown("未知情况"), lng("");
 

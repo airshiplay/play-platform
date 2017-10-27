@@ -1,7 +1,9 @@
 package com.airlenet.plugin.storage.support;
 
+import java.io.InputStream;
 import java.util.List;
 
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
@@ -51,6 +53,12 @@ public interface FileService {
 	 * @return 路径
 	 */
 	String uploadLocal(MultipartFile multipartFile);
+	
+	String uploadLocal(MultipartFile multipartFile, Visitor visitor);
+
+	String uploadLocal(InputStream inputStream, String filename);
+	
+	String uploadLocal(InputStream inputStream, String filename, Visitor visitor);
 
 	/**
 	 * 文件浏览
@@ -64,5 +72,7 @@ public interface FileService {
 	 * @return 文件信息
 	 */
 	List<FileInfo> browser(String path, String orderProperty);
+
+	Resource toResource(String path);
 
 }

@@ -1,7 +1,10 @@
 package com.airlenet.plugin.storage.support;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,9 +17,17 @@ import javax.servlet.ServletContext;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.base.Strings;
@@ -27,6 +38,9 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 
 	@Value("${file.upload.path?:upload}")
 	private String localFileUploadPath;
+
+	@Value("${file.tmp.path?:upload/tmp}")
+	private String tmpFilePath;
 
 	@Value("${file.url?:}")
 	private String fileUrl;
@@ -50,14 +64,34 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 
 	@Override
 	public String uploadLocal(MultipartFile multipartFile) {
+		return uploadLocal(multipartFile, null);
+	}
+
+	@Override
+	public String uploadLocal(InputStream inputStream, String filename) {
+		return uploadLocal(inputStream, filename, null);
+	}
+
+	@Override
+	public String uploadLocal(MultipartFile multipartFile, Visitor visitor) {
 		if (multipartFile == null) {
 			return null;
 		}
 
+		try {
+			return uploadLocal(multipartFile.getInputStream(), multipartFile.getOriginalFilename(), visitor);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public String uploadLocal(InputStream inputStream, String filename, Visitor visitor) {
+
 		String uuid = UUID.randomUUID().toString();
 		uuid = uuid.replaceAll("-", "");
 
-		String path = uuid + "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+		String path = uuid + "." + FilenameUtils.getExtension(filename);
 		String destPath = fixUrl(localFileUploadPath, path);
 
 		boolean relative = !StringUtils.startsWith(destPath, "/");
@@ -66,7 +100,11 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 			if (!destFile.getParentFile().exists()) {
 				destFile.getParentFile().mkdirs();
 			}
-			Files.write(IOUtils.toByteArray(multipartFile.getInputStream()), destFile);
+			Files.write(IOUtils.toByteArray(inputStream), destFile);
+
+			if (visitor != null) {
+				visitor.visit(destFile);
+			}
 
 			return fixUrl(relative && Strings.isNullOrEmpty(fileUrl) ? (servletContext.getContextPath() + "/upload") : fileUrl, path);
 		} catch (IOException e) {
@@ -174,4 +212,64 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 			}
 		}
 	}
+
+	@Override
+	public Resource toResource(String path) {
+		if (StringUtils.startsWithAny(path, "http://", "https://")) {
+
+			String uuid = UUID.randomUUID().toString();
+			uuid = uuid.replaceAll("-", "");
+			String targetPath = uuid + "." + FilenameUtils.getExtension(path);
+			String destPath = fixUrl(tmpFilePath, targetPath);
+
+			boolean relative = !StringUtils.startsWith(destPath, "/");
+			File destFile = new File(relative ? servletContext.getRealPath(destPath) : destPath);
+			if (!destFile.getParentFile().exists()) {
+				destFile.getParentFile().mkdirs();
+			}
+
+			httpDownloadFile(path, destFile.getPath());
+			return new ServletContextResource(servletContext, destPath);
+		} else {
+			path = StringUtils.removeStart(path, servletContext.getContextPath());
+			return new ServletContextResource(servletContext, path);
+		}
+
+	}
+
+	private void httpDownloadFile(String url, String filePath) {
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		try {
+			HttpGet httpGet = new HttpGet(url);
+			CloseableHttpResponse response1 = httpclient.execute(httpGet);
+			try {
+				HttpEntity httpEntity = response1.getEntity();
+				InputStream is = httpEntity.getContent();
+				// 根据InputStream 下载文件
+				ByteArrayOutputStream output = new ByteArrayOutputStream();
+				byte[] buffer = new byte[4096];
+				int r = 0;
+				while ((r = is.read(buffer)) > 0) {
+					output.write(buffer, 0, r);
+				}
+				FileOutputStream fos = new FileOutputStream(filePath);
+				output.writeTo(fos);
+				output.flush();
+				output.close();
+				fos.close();
+				EntityUtils.consume(httpEntity);
+			} finally {
+				response1.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				httpclient.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

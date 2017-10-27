@@ -80,7 +80,7 @@
 		- [ui:tree] trigger `check subdirs()` if necessary of change targets
 		- [cmd:netmount] Fixed #1925 allow selection of multi-level hierarchy
 		- [ui,cmd] Fixed #1931 cmd.disabled is not working in multi-volume search
-		- [VD:GoogleDrive] Fixed #1932 support to filterName type "JSON service account credentials"
+		- [VD:GoogleDrive] Fixed #1932 support to auth type "JSON service account credentials"
 		- [VD:GoogleDrive] Fixed #1933 sometimes infinite loop if root path is other than root on GoogleDrive
 		- [js:core,ui:cwd,tree] add core method fm.getIconStyle() and use
 		- [cmd:quicklook,info] Fixed #1926 support i18 name, file.icon

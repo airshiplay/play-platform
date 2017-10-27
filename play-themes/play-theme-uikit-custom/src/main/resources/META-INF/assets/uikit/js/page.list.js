@@ -57,53 +57,71 @@
 				formatters = {};
 			}
 			formatters["commands"] = function(column, row) {
-				var content = "";
+				var links = [];
+				if (that.options.rowViewable) {
+					links.push("<li><a uk-icon=\"icon: info\" href=\"" + that.options.baseUrl + "/view/" + row.id + "\"></a></li>");
+				}
 				if (that.options.rowEditable) {
-					content += "<li><a uk-icon=\"icon: file-edit\" href=\"" + that.options.baseUrl + "/edit/" + row.id + "\"></a></li>";
+					links.push("<li><a uk-icon=\"icon: file-edit\" href=\"" + that.options.baseUrl + "/edit/" + row.id + "\"></a></li>");
 				}
 				if (that.options.rowDeleteable) {
-					content += "<li><a uk-icon=\"icon: trash\" class=\"command-delete\" href=\"javascript:;\"></a></li>";
+					links.push("<li><a uk-icon=\"icon: trash\" class=\"command-delete\" href=\"javascript:;\"></a></li>");
 				}
-				return "<ul data-row-id=\"" + row.id + "\" class=\"uk-iconnav\">" + content + "</ul>";
+				return "<ul data-row-id=\"" + row.id + "\" class=\"uk-iconnav\">" + that.options.customOperatingColumn(links, column, row) + "</ul>";
 			};
 		}
 
 		var tableOptions = $.extend(true, {
-			url : that.options.baseUrl + "/page",
+			url : that.options.pageUrl,
 			post : function() {
+				var ret = that.options.data;
+				if (that.options.dataFun) {
+					if (!ret) {
+						ret = {};
+					}
+					ret = $.extend(true, ret, that.options.dataFun());
+				}
 				if (that.$searchForm) {
 					var property = that.$searchForm.find(".uk-select").val();
 					if (property && property != "") {
 						var searchValue = that.$searchForm.find(".uk-search-input").val();
 						if (searchValue && searchValue != "") {
-							var ret = {};
+							if (!ret) {
+								ret = {}
+							}
 							ret[property] = searchValue;
-							return ret;
 						}
 					}
 				}
-				return null;
+				return ret;
 			},
 			formatters : formatters
 		}, that.options.tableOptions);
 		that.$table.bootgrid(tableOptions);
 		that.$table.on("loaded.rs.jquery.bootgrid", function() {
+			var $table = $(this);
 			if (that.options.rowDeleteable) {
-				that.$table.find(".command-delete").on("click", function(e) {
+				$table.find(".command-delete").on("click", function(e) {
 					var entity_id = $(this).closest("ul").data("row-id");
-					UIkit.modal.confirm("确定要删除吗？").then(function() {
-						$.post(that.options.baseUrl + "/delete", {
-							ids : [ entity_id ]
-						}, function(resp) {
-							if (resp.success) {
-								UIkit.notification("操作成功");
-								that.$table.bootgrid("reload");
-							} else {
-								UIkit.notification(resp.msg);
-							}
-						}, "json");
-					});
+					if(that.options.onBeforeDelete($table, entity_id)) {
+						UIkit.modal.confirm("确定要删除吗？").then(function() {
+							$.post(that.options.baseUrl + "/delete", {
+								ids : [ entity_id ]
+							}, function(resp) {
+								if (resp.success) {
+									UIkit.notification("操作成功");
+									that.$table.bootgrid("reload");
+								} else {
+									UIkit.notification(resp.msg);
+								}
+							}, "json");
+						});
+					}
 				});
+			}
+
+			if (that.options.onLoaded) {
+				that.options.onLoaded($table);
 			}
 		});
 	}
@@ -125,20 +143,36 @@
 
 	var PageList = function(element, options) {
 		this.element = $(element);
-		this.options = $.extend(true, {}, PageList.defaults, this.element.data(), options);
+		this.options = $.extend(true, {
+			pageUrl : options.baseUrl + "/page"
+		}, PageList.defaults, this.element.data(), options);
 	};
 
 	PageList.defaults = {
 		tableId : "main_table",
 		tableOptions : {},
 		showOperatingColumn : true,
+		customOperatingColumn : function(links, column, row) {
+			return links.join("");
+		},
 		rowDeleteable : true,
 		rowEditable : true,
 		rowViewable : false,
 		searchFormId : "search-form",
 		searchButtonId : "search-button",
 		refreshButtonId : "refresh-button",
-		batchDeleteButtonId : "delete-button"
+		batchDeleteButtonId : "delete-button",
+		onBeforeDelete : function($table, entity_id) {
+			return true;
+		}
+	};
+	
+	PageList.prototype.getGrid = function() {
+		return this.$table;
+	};
+
+	PageList.prototype.reload = function() {
+		return this.$table.bootgrid("reload");
 	};
 
 	$.fn.pagelist = function(option) {

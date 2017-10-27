@@ -2,8 +2,8 @@ package com.airlenet.repo;
 
 /**
  * 
- * @author lig
- *
+ * @author airlenet
+ * @version 2017-10-10
  */
 public class LockedableException extends RuntimeException {
 

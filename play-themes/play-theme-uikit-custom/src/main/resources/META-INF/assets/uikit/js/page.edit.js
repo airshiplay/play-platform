@@ -23,7 +23,7 @@
 
 		if (that.options.onFormSubmit) {
 			that.$parsleyForm.on('form:submit', function(source) {
-				that.options.onFormSubmit(source, that.$form);
+				return that.options.onFormSubmit(source, that.$form);
 			});
 		} else {
 			that.$parsleyForm.on('form:submit', function() {
@@ -48,7 +48,7 @@
 			});
 		}
 	}
-
+	
 	var PageEdit = function(element, options) {
 		this.element = $(element);
 		this.options = $.extend(true, {}, PageEdit.defaults, this.element.data(), options);
