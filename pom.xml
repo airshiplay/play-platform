@@ -396,7 +396,7 @@
             https://github.com/airshiplay/play-platform.git
         </developerConnection>
         <url>https://github.com/airshiplay/play-platform</url>
-        <tag>2.0.0-SNAPSHOT</tag>
+        <tag>2.x</tag>
     </scm>
     <profiles>
         <profile>
