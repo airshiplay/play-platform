@@ -15,5 +15,6 @@
   	<module>play-integration-dubbo</module>
         <module>play-integration-eureka</module>
         <module>play-integration-jersey</module>
+      <module>play-integration-swagger</module>
   </modules>
 </project>

@@ -1,6 +1,7 @@
 package com.airlenet.theme.adminlte;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 public class AdminLTEConfigBean extends WebMvcConfigurerAdapter implements InitializingBean {
 
 	@Autowired
-	private ObjectMapper objectMapper;
+	private ObjectFactory<ObjectMapper> objectMapper;
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -29,7 +30,7 @@ public class AdminLTEConfigBean extends WebMvcConfigurerAdapter implements Initi
 		SimpleModule simpleModule = new SimpleModule();
 		simpleModule.addSerializer(ZTreeNode.class, new ZTreeNodeSerializer<>());
 		simpleModule.addSerializer(ZTreeLazyList.class, new ZTreeLazyListSerializer<>());
-		objectMapper.registerModule(simpleModule);
+		objectMapper.getObject().registerModule(simpleModule);
 	}
 
 }
