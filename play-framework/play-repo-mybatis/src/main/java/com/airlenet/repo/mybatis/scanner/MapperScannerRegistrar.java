@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.airlenet.config.StaticConfigSupplier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
@@ -33,7 +34,6 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
 
     private ResourceLoader resourceLoader;
     private Environment env;
-
     protected final Log logger = LogFactory.getLog(getClass());
 
     @Override
@@ -86,7 +86,20 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
 
     private String parsePlaceHolder(String pro) {
         if (pro != null && pro.contains(PropertySourcesPlaceholderConfigurer.DEFAULT_PLACEHOLDER_PREFIX)) {
-            String value = env.getProperty(pro.substring(2, pro.length() - 1));
+            String value;
+            int i=pro.indexOf("?:");
+            if(i!=-1){
+                String key = pro.substring(2, i);
+                value = StaticConfigSupplier.getConfiguration().getString(key);
+                if(value==null){
+                    value = env.getProperty(key);
+                }
+                if(value==null){
+                    value = pro.substring(i+2,pro.length() - 1);
+                }
+            }else{
+                value = env.getProperty(pro.substring(2, pro.length() - 1));
+            }
 
             if (logger.isDebugEnabled()) {
                 logger.debug("find placeholder value " + value + " for key " + pro);

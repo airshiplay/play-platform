@@ -36,7 +36,7 @@ public class JerseyWebApplicationInitializer implements WebApplicationInitialize
         ServletRegistration.Dynamic dynamic = servletContext.addServlet(SERVLET_NAME, servletContainer);
         dynamic.setInitParameter("javax.ws.rs.Application",resourceConfig);
         dynamic.setLoadOnStartup(1);
-        dynamic.addMapping("/api/*");
+        dynamic.addMapping(config.getString("integration.jersey.base-path","/api")+"/*");
 
     }
     protected EnumSet<DispatcherType> getSecurityDispatcherTypes() {
