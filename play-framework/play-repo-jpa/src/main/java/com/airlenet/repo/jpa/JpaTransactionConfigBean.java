@@ -17,7 +17,7 @@ public class JpaTransactionConfigBean {
 	@Autowired
 	private ObjectFactory<EntityManagerFactory> entityManagerFactory;
 
-	@Bean
+	@Bean("jpaTransactionManager")
 	public PlatformTransactionManager transactionManager() {
 		return new JpaTransactionManager(entityManagerFactory.getObject());
 	}
