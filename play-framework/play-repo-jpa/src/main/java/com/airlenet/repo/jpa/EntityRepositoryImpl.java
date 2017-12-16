@@ -69,7 +69,7 @@ public class EntityRepositoryImpl<T, I extends Serializable> extends QueryDslJpa
 		this.querydsl = new Querydsl(entityManager, builder);
 	}
 
-	@Transactional("jpaTransactionManager")
+	@Transactional("transactionManager")
 	@Override
 	public <S extends T> S save(S entity) {
 		if (multiTenant) {
@@ -105,7 +105,7 @@ public class EntityRepositoryImpl<T, I extends Serializable> extends QueryDslJpa
 		return super.save(entity);
 	}
 
-	@Transactional("jpaTransactionManager")
+	@Transactional()
 	@Override
 	public void delete(T entity) {
 		if (entity instanceof Lockedable) {

@@ -82,10 +82,14 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 
 				Object convertedValue = conversionService.convert(value, TypeDescriptor.forObject(value),
 						TypeDescriptor.collection(List.class, TypeDescriptor.valueOf(String.class)));
+				if("_".equals(property))
+					continue;
 				parameters.put(property, (List<String>) convertedValue);
 			}
 		} else {
 			for (Entry<String, String[]> entry : webRequest.getParameterMap().entrySet()) {
+				if("_".equals(entry.getKey()))
+					continue;
 				parameters.put(entry.getKey(), Arrays.asList(entry.getValue()));
 			}
 		}

@@ -25,9 +25,9 @@
 		<spring-data.version>Ingalls-SR4</spring-data.version>
 		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 		<freemarker.version>2.3.26-incubating</freemarker.version>
-		<hibernate-entitymanager.verison>5.2.10.Final</hibernate-entitymanager.verison>
+		<hibernate-entitymanager.verison>5.2.12.Final</hibernate-entitymanager.verison>
 		<validator-api.version>1.1.0.Final</validator-api.version>
-		<hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
+		<hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
 		<guava.version>22.0</guava.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>

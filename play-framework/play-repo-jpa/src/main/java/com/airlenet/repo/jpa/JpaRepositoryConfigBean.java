@@ -33,7 +33,7 @@ public class JpaRepositoryConfigBean {
 	@Value("${hibernate.hbm2ddl.auto?:update}")
 	private String hibernateHbm2ddlAuto;
 
-	@Value("${hibernate.dialect?:org.hibernate.dialect.MySQL5Dialect}")
+	@Value("${hibernate.dialect?:org.hibernate.dialect.MySQL55Dialect}")
 	private String hibernateDialect;
 
 	@Value("${hibernate.show_sql?:true}")

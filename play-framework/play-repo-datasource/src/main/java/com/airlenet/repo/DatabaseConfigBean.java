@@ -19,7 +19,7 @@ public class DatabaseConfigBean {
     @Value("${jdbc.driver_class?:com.mysql.jdbc.Driver}")
     private String jdbcDriverClass;
 
-    @Value("${jdbc.url?:jdbc:mysql://localhost:3306/play?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false}")
+    @Value("${jdbc.url?:jdbc:mysql://localhost:3306/play?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&useSSL=false}")
     private String jdbcUrl;
 
     @Value("${jdbc.username?:root}")
