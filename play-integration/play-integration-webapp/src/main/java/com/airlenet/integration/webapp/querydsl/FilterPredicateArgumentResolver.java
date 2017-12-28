@@ -70,6 +70,9 @@ public class FilterPredicateArgumentResolver implements HandlerMethodArgumentRes
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 
 		String filterString = webRequest.getParameter("filter");
+		if(filterString==null){
+			filterString = webRequest.getParameter("searchPhrase");
+		}
 		if (!Strings.isNullOrEmpty(filterString)) {
 			filterString = URLDecoder.decode(filterString, "UTF-8");
 

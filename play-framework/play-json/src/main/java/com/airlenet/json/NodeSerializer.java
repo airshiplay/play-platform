@@ -3,6 +3,7 @@ package com.airlenet.json;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.lang3.ArrayUtils;
@@ -78,6 +79,16 @@ public class NodeSerializer<N extends Node<T>, T extends Hierarchical<T>> extend
 
 		if (value.getExpanded() != null) {
 			gen.writeBooleanField("expanded", value.getExpanded());
+		}
+		if (value.getExtraProperties() != null){
+			for (Map.Entry<String, Object> entry : value.getExtraProperties().entrySet()) {
+				Object propertyValue = entry.getValue();
+				if (propertyValue != null) {
+					gen.writeFieldName(entry.getKey());
+					serializers.findValueSerializer(propertyValue.getClass(), null).serialize(propertyValue, gen,
+							serializers);
+				}
+			}
 		}
 
 		if (data != null) {

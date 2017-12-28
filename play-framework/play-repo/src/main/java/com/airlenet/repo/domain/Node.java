@@ -1,6 +1,10 @@
 package com.airlenet.repo.domain;
 
+import org.apache.commons.collections.map.HashedMap;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Node<T extends Hierarchical<T>> {
 
@@ -13,6 +17,8 @@ public class Node<T extends Hierarchical<T>> {
 	private String text;
 
 	private String iconCls;
+
+	private Map<String,Object> extraProperties;
 
 	public boolean getLeaf() {
 		List<Node<T>> children = getChildren();
@@ -67,4 +73,18 @@ public class Node<T extends Hierarchical<T>> {
 		this.expanded = expanded;
 	}
 
+    public Map<String, Object> getExtraProperties() {
+        return extraProperties;
+    }
+
+    public void setExtraProperties(Map<String, Object> extraProperties) {
+        this.extraProperties = extraProperties;
+    }
+
+    public void addExtraProperties(String key, Object value) {
+	    if(this.extraProperties==null){
+            this.extraProperties = new HashMap();
+        }
+        this.extraProperties.put(key,value);
+    }
 }

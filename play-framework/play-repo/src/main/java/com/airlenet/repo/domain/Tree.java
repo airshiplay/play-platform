@@ -24,6 +24,8 @@ public interface Tree<T extends Hierarchical<T>> {
 
 	Tree<T> setIconClsProperty(String iconClsProperty);
 
+	Tree<T> setExtraProperty(String propertyName);
+
 	static void visitNodes(List<? extends Node<?>> nodes, Consumer<Node<?>> consumer) {
 		if (nodes != null) {
 			nodes.forEach((node) -> {

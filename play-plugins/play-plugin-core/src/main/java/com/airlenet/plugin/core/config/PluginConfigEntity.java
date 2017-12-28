@@ -31,6 +31,7 @@ public class PluginConfigEntity extends BaseEntity<Long>
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "tbl_plugin_config_attribute")
 	@MapKeyColumn(name = "name", length = 100)
+	@Column(length = 1024)
 	private Map<String, String> attributes = new HashMap<>();
 
 	private Integer sortNo;

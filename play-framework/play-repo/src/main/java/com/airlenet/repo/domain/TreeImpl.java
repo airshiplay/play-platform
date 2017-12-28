@@ -81,4 +81,17 @@ public class TreeImpl<T extends Hierarchical<T>> implements Tree<T> {
 		return this;
 	}
 
+	@Override
+	public Tree<T> setExtraProperty(String propertyName) {
+		if (!Strings.isNullOrEmpty(propertyName)) {
+			Tree.visitNodes(roots, node -> {
+				try {
+					node.addExtraProperties(propertyName,PropertyUtils.getProperty(node.getData(), propertyName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
+		return this;
+	}
 }
