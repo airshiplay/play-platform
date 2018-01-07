@@ -71,7 +71,11 @@
                     <groupId>javax.servlet</groupId>
                     <artifactId>servlet-api</artifactId>
                 </exclusion>
-            </exclusions>
+                <exclusion>
+                    <groupId>com.jhlabs</groupId>
+                    <artifactId>imaging</artifactId>
+                </exclusion>
+             </exclusions>
         </dependency>
     </dependencies>
 </project>
