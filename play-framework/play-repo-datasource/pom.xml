@@ -10,7 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>play-repo-datasource</artifactId>
-
+    <properties>
+        <druid-version>1.1.6</druid-version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.airlenet</groupId>
@@ -21,10 +23,15 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.jolbox</groupId>-->
+            <!--<artifactId>bonecp</artifactId>-->
+            <!--<version>0.8.0.RELEASE</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>com.jolbox</groupId>
-            <artifactId>bonecp</artifactId>
-            <version>0.8.0.RELEASE</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid-version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
