@@ -18,10 +18,10 @@ public class XmlConfigBean {
 
 
     @Bean
-    public XmlMapper objectMapper() {
+    public XmlMapper xmlMapper() {
         XmlMapper xmlMapper  = new XmlMapper();
         xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        xmlMapper.registerModule(simpleModule());
+        xmlMapper.registerModule(xmlSimpleModule());
 //        // objectMapper.setAnnotationIntrospector(ai)
 //
 //        objectMapper.addMixIn(Persistable.class, AntPathFilterMixin.class);
@@ -35,7 +35,7 @@ public class XmlConfigBean {
     }
 
     @Bean
-    public JacksonXmlModule simpleModule() {
+    public JacksonXmlModule xmlSimpleModule() {
         JacksonXmlModule simpleModule = new JacksonXmlModule();
 //        simpleModule.addSerializer(DateTime.class, new JodaDateTimeSerializer());
 //        simpleModule.addSerializer(Page.class, new PageSerializer<>());
