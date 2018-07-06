@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.airlenet.security.shiro.realm.UserRealm;
 import com.airlenet.security.spring.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -15,6 +16,7 @@ import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +31,12 @@ import com.airlenet.security.shiro.realm.OauthRealm;
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ShiroConfigBean {
+
+    @Value("${shiro.algorithm_name?:"+ Md5Hash.ALGORITHM_NAME+"}")
+    private String hashAlgorithmName;
+
+    @Value("${shiro.password_retry?:-1}")
+    private int passwordRetry;
 
 	@Bean
 	public EhCacheManager getEhCacheManager() {
@@ -63,14 +71,19 @@ public class ShiroConfigBean {
 	@Bean
 	public Realm userRealm() {
 		UserRealm realm = new UserRealm();
-		realm.setCredentialsMatcher(new PlayHashedCredentialsMatcher());
+//        PlayHashedCredentialsMatcher playHashedCredentialsMatcher = new PlayHashedCredentialsMatcher(hashAlgorithmName);
+        realm.setCredentialsMatcher(credentialsMatcher());
 		return realm;
 	}
 
 	@Bean(name = "credentialsMatcher")
 	public PlayHashedCredentialsMatcher credentialsMatcher() {
-		final PlayHashedCredentialsMatcher credentialsMatcher = new PlayHashedCredentialsMatcher();
+	    if(hashAlgorithmName == null){
+            hashAlgorithmName = Md5Hash.ALGORITHM_NAME;
+        }
+		final PlayHashedCredentialsMatcher credentialsMatcher = new PlayHashedCredentialsMatcher(hashAlgorithmName);
 //		credentialsMatcher.setPasswordService(passwordService());
+        credentialsMatcher.setRetryCount(passwordRetry);
 		return credentialsMatcher;
 	}
 

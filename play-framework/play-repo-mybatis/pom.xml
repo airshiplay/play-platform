@@ -12,7 +12,6 @@
     <properties>
         <!-- database config -->
         <mybatis.version>3.4.1</mybatis.version>
-        <pagehelper.version>4.0.0</pagehelper.version>
         <mysql.version>5.1.39</mysql.version>
     </properties>
 

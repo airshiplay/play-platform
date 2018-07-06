@@ -41,8 +41,14 @@ public interface FileService {
 	 *            上传文件
 	 * @return 访问URL
 	 */
-	String upload(MultipartFile multipartFile);
+	String upload(MultipartFile multipartFile,String dir);
 
+    /**
+     *
+     * @param multipartFile
+     * @return
+     */
+    String upload(MultipartFile multipartFile);
 	/**
 	 * 文件上传至本地
 	 * 
@@ -52,13 +58,13 @@ public interface FileService {
 	 *            上传文件
 	 * @return 路径
 	 */
-	String uploadLocal(MultipartFile multipartFile);
+	String uploadLocal(MultipartFile multipartFile,String dir);
 	
-	String uploadLocal(MultipartFile multipartFile, Visitor visitor);
+	String uploadLocal(MultipartFile multipartFile,String dir, Visitor visitor);
 
-	String uploadLocal(InputStream inputStream, String filename);
+	String uploadLocal(InputStream inputStream,String dir, String filename);
 	
-	String uploadLocal(InputStream inputStream, String filename, Visitor visitor);
+	String uploadLocal(InputStream inputStream,String dir, String filename, Visitor visitor);
 
 	/**
 	 * 文件浏览

@@ -59,40 +59,43 @@ public class FileServiceImpl implements FileService, ServletContextAware {
 
 	@Override
 	public String upload(MultipartFile multipartFile) {
-		return uploadLocal(multipartFile);
+		return uploadLocal(multipartFile,null);
+	}
+    @Override
+    public String upload(MultipartFile multipartFile,String dir) {
+        return uploadLocal(multipartFile,dir);
+    }
+	@Override
+	public String uploadLocal(MultipartFile multipartFile,String dir) {
+		return uploadLocal(multipartFile, dir,null);
 	}
 
 	@Override
-	public String uploadLocal(MultipartFile multipartFile) {
-		return uploadLocal(multipartFile, null);
+	public String uploadLocal(InputStream inputStream,String dir, String filename) {
+		return uploadLocal(inputStream, filename, null,null);
 	}
 
 	@Override
-	public String uploadLocal(InputStream inputStream, String filename) {
-		return uploadLocal(inputStream, filename, null);
-	}
-
-	@Override
-	public String uploadLocal(MultipartFile multipartFile, Visitor visitor) {
+	public String uploadLocal(MultipartFile multipartFile,String dir, Visitor visitor) {
 		if (multipartFile == null) {
 			return null;
 		}
 
 		try {
-			return uploadLocal(multipartFile.getInputStream(), multipartFile.getOriginalFilename(), visitor);
+			return uploadLocal(multipartFile.getInputStream(),dir, multipartFile.getOriginalFilename(), visitor);
 		} catch (IOException e) {
 			return null;
 		}
 	}
 
 	@Override
-	public String uploadLocal(InputStream inputStream, String filename, Visitor visitor) {
+	public String uploadLocal(InputStream inputStream,String dir, String filename, Visitor visitor) {
 
 		String uuid = UUID.randomUUID().toString();
 		uuid = uuid.replaceAll("-", "");
 
 		String path = uuid + "." + FilenameUtils.getExtension(filename);
-		String destPath = fixUrl(localFileUploadPath, path);
+		String destPath = fixUrl(dir == null?localFileUploadPath:(localFileUploadPath+"/"+dir), path);
 
 		boolean relative = !StringUtils.startsWith(destPath, "/");
 		File destFile = new File(relative ? servletContext.getRealPath(destPath) : destPath);

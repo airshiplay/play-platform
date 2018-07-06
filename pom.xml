@@ -37,6 +37,9 @@
 		<querydsl.version>4.1.4</querydsl.version>
 		<junit.version>4.12</junit.version>
         <lombok.version>1.16.10</lombok.version>
+
+        <pagehelper.version>4.0.0</pagehelper.version>
+
 	</properties>
     <modules>
         <module>play-framework</module>

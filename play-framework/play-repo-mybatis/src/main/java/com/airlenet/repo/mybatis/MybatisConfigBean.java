@@ -9,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.Resource;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -22,8 +27,8 @@ public class MybatisConfigBean {
     @Value("${mybatis.packages_scan?:com.airlenet.**.model}")
     private String packageScan;
 
-    @Value("${mybatis.packages_mapper?:classpath*:com.airlenet.**.mapper/*.xml,classpath*:mapper/*.xml}")
-    private String mapperScan;
+    @Value("${mybatis.packages_mapper?:classpath*:com/airlenet/**/mapper/*.xml,classpath*:mapper/*.xml}")
+    private String[] mapperScan;
 
     @Autowired
     private ObjectFactory<DataSource> dataSource;
@@ -32,8 +37,13 @@ public class MybatisConfigBean {
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         org.mybatis.spring.SqlSessionFactoryBean factory = new org.mybatis.spring.SqlSessionFactoryBean();
         factory.setDataSource(dataSource.getObject());
-        FileSystemXmlApplicationContext loader = new FileSystemXmlApplicationContext();
-        factory.setMapperLocations(loader.getResources(mapperScan));
+        ClassPathXmlApplicationContext loader = new ClassPathXmlApplicationContext();
+        List<Resource> resources = new ArrayList<Resource>();
+         for(String mapper:mapperScan){
+             Resource[] resource = loader.getResources(mapper);
+             resources.addAll(Arrays.asList(resource));
+         }
+        factory.setMapperLocations(resources.toArray(new Resource[0]));
         factory.setTypeAliasesPackage(packageScan);
         com.github.pagehelper.PageHelper pageHelper = new com.github.pagehelper.PageHelper();
         Properties properties = new Properties();

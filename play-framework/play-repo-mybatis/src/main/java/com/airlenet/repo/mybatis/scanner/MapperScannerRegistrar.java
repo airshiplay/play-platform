@@ -73,7 +73,11 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
         }
         for (String pkg : annoAttrs.getStringArray("basePackages")) {
             if (StringUtils.hasText(pkg)) {
-                basePackages.add(parsePlaceHolder(pkg));
+                String placeHolder = parsePlaceHolder(pkg);
+                String[] listToStringArray = StringUtils.delimitedListToStringArray(placeHolder, ",");
+                for (String p:listToStringArray){
+                    basePackages.add(p);
+                }
             }
         }
         for (Class<?> clazz : annoAttrs.getClassArray("basePackageClasses")) {
