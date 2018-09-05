@@ -1,0 +1,6 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.airlenet.web.starter.PlayAutoConfiguration,\
+  com.airlenet.web.starter.CorsAutoConfiguration
+org.springframework.context.ApplicationListener=\
+  com.airlenet.web.SpringBootLifeCyclePostProcessor

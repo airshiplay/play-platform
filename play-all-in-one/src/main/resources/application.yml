@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: play-admin-provider
+  datasource:
+      url : jdbc:h2:mem:example
+      username : sa
+      password :
+      driver-class-name : org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true

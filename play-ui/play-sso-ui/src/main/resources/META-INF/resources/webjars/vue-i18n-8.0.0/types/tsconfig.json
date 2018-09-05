@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noEmit": true,
+    "lib": ["esnext", "dom"]
+  },
+  "include": [
+    "**/*.d.ts"
+  ]
+}

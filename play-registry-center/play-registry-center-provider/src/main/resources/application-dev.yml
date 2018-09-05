@@ -1,0 +1,5 @@
+eureka:
+  server:
+    enable-self-preservation: false
+#    renewal-threshold-update-interval-ms: 2
+  environment: development
