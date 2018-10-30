@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.19.201.251:3306/example?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 50
+      pool-name: blah
+  data:
+    jpa:
+      repositories:
+        enabled: false
+  thymeleaf:
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  messages:
+    basename: default
+security:
+  basic:
+    enabled: false

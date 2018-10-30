@@ -1,0 +1,20 @@
+server:
+  port: 9000
+management:
+  security:
+    enabled: false
+spring:
+  application:
+    name: play-gateway-zuul
+  cloud:
+    config:
+      username: root
+      password: qwe123
+      discovery:
+        enabled: true
+        service-id: play-config-server
+      profile: dev   # play-gateway-zuul-dev.yml
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

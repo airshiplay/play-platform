@@ -1,0 +1,25 @@
+server:
+  port: 8899
+spring:
+  application:
+    name: play-config-server
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xiangxik/cloud-config
+        health:
+          enabled: false
+security:
+  user:
+    name: root
+    password: qwe123
+management:
+  security:
+    enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

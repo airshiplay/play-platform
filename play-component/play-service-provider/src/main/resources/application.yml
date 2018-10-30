@@ -1,0 +1,12 @@
+server:
+  port: 9101
+spring:
+  application:
+    name: play-service-provider
+management:
+  security:
+    enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
